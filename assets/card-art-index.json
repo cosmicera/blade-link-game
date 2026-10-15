@@ -1,0 +1,148 @@
+{
+  "project": "블레이드 링크",
+  "generatedAt": "2026-10-15",
+  "leaders": [
+    {
+      "card": "ria",
+      "image": "cards/ria.png",
+      "seed": "1566391587789165",
+      "selection": "선택 대표 일러스트",
+      "source": "Ria_seed_1566391587789165_face_detailer.png"
+    },
+    {
+      "card": "arca",
+      "image": "cards/arca.png",
+      "seed": "6424778036880785",
+      "selection": "선택 대표 일러스트",
+      "source": "Arca_seed_6424778036880785_face_detailer.png"
+    },
+    {
+      "card": "cheongyeon",
+      "image": "cards/cheongyeon.png",
+      "seed": "8426524219450097",
+      "selection": "선택 대표 일러스트",
+      "source": "Cheongyeon_seed_8426524219450097_face_detailer.png"
+    },
+    {
+      "card": "noa",
+      "image": "cards/noa.png",
+      "seed": "8899084558523978",
+      "selection": "선택 대표 일러스트",
+      "source": "Noa_seed_8899084558523978_face_detailer.png"
+    }
+  ],
+  "followers": [
+    {
+      "card": "nia",
+      "image": "cards/nia.png",
+      "seed": "3830636596340106",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Nia_01_seed_3830636596340106.png"
+    },
+    {
+      "card": "lea",
+      "image": "cards/lea.png",
+      "seed": "6368332127497987",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Lea_01_seed_6368332127497987.png"
+    },
+    {
+      "card": "rook",
+      "image": "cards/rook.png",
+      "seed": "36688852601639",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Rook_01_seed_36688852601639.png"
+    },
+    {
+      "card": "mora",
+      "image": "cards/mora.png",
+      "seed": "1166536359809026",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Mora_01_seed_1166536359809026.png"
+    },
+    {
+      "card": "verda",
+      "image": "cards/verda.png",
+      "seed": "6155868119575495",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Verda_01_seed_6155868119575495.png"
+    },
+    {
+      "card": "veil",
+      "image": "cards/veil.png",
+      "seed": "6356542998253242",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Veil_01_seed_6356542998253242_00001_.png"
+    },
+    {
+      "card": "vector",
+      "image": "cards/vector.png",
+      "seed": "6169256393462217",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Vector_01_seed_6169256393462217.png"
+    },
+    {
+      "card": "seolha",
+      "image": "cards/seolha.png",
+      "seed": "5055147255926520",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Seolha_01_seed_5055147255926520.png"
+    },
+    {
+      "card": "serin",
+      "image": "cards/serin.png",
+      "seed": "2120461513044252",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Serin_01_seed_2120461513044252.png"
+    },
+    {
+      "card": "soun",
+      "image": "cards/soun.png",
+      "seed": "7785836849691659",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Soun_01_seed_7785836849691659.png"
+    },
+    {
+      "card": "sion",
+      "image": "cards/sion.png",
+      "seed": "8636559757080557",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Sion_01_seed_8636559757080557.png"
+    },
+    {
+      "card": "ash",
+      "image": "cards/ash.png",
+      "seed": "1737601682837601",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Ash_01_seed_1737601682837601.png"
+    },
+    {
+      "card": "wolbaek",
+      "image": "cards/wolbaek.png",
+      "seed": "2062650613166138",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Wolbaek_01_seed_2062650613166138.png"
+    },
+    {
+      "card": "yuran",
+      "image": "cards/yuran.png",
+      "seed": "1120091834453628",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Yuran_01_seed_1120091834453628_00001_.png"
+    },
+    {
+      "card": "eve",
+      "image": "cards/eve.png",
+      "seed": "1505280436019269",
+      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
+      "source": "Eve_01_seed_1505280436019269.png"
+    },
+    {
+      "card": "ferrum",
+      "image": "cards/ferrum.png",
+      "seed": "7997616779099543",
+      "selection": "추종자 최신 통합본의 세 번째 FaceDetailer 결과",
+      "source": "Ferrum_03_seed_7997616779099543_00001_.png"
+    }
+  ]
+}

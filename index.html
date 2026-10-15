@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#131519">
+  <title>블레이드 링크 — 이음시 검술 리그</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <button class="brand" id="nav-home" aria-label="로비로 이동">
+      <span class="brand-mark">BL</span>
+      <span class="brand-copy"><strong>BLADE LINK</strong><small>이음시 검술 리그</small></span>
+    </button>
+    <nav class="main-nav" aria-label="주 메뉴">
+      <button class="nav-link active" id="nav-lobby">리그 로비</button>
+      <button class="nav-link" id="nav-codex">카드 도감 <span class="nav-count">36</span></button>
+      <button class="nav-link" id="nav-rules">시범 규칙</button>
+    </nav>
+    <div class="profile-chip"><span class="online-dot"></span><span>연습 계정</span><b>Lv. 01</b></div>
+  </header>
+
+  <main id="home-screen" class="screen home-screen">
+    <div class="home-kicker"><span class="kicker-line"></span> SEASON 01 <i>·</i> THE CITY THAT CONNECTS</div>
+    <section class="home-hero">
+      <div class="hero-copy">
+        <p class="eyebrow">도시의 검술 리그에 오신 것을 환영합니다</p>
+        <h1>이음시<br><em>검술 리그</em></h1>
+        <p class="home-lede">네 기업의 대표 캐릭터와 동료를 모아<br>첫 번째 훈련 대전을 시작하세요.</p>
+        <div class="hero-quote"><span class="quote-rule"></span><span id="home-quote">“같이 가자. 네가 쉴 자리도 만들어 둘게.”</span></div>
+        <div class="home-actions">
+          <button class="button button-primary" id="start-match"><span>훈련 대전 시작</span><b>↗</b></button>
+          <button class="button button-quiet" id="open-deck">덱 구성 보기 <span>→</span></button>
+        </div>
+        <div class="prototype-note"><span>i</span> 현재 규칙과 카드 수치는 플레이 테스트용 초안입니다.</div>
+      </div>
+      <div class="hero-art-shell">
+        <div class="hero-art-orbit orbit-one"></div><div class="hero-art-orbit orbit-two"></div>
+        <div class="hero-art-glow"></div>
+        <img id="home-leader-art" class="home-leader-art" src="assets/cards/ria.png" alt="선택한 대표 캐릭터">
+        <div class="hero-art-caption"><span id="home-leader-faction">OUTPR / 녹관도시</span><strong id="home-leader-title">새순의 기사 리아</strong><small id="home-leader-epithet">이음시의 길잡이</small></div>
+        <div class="art-index">01 <span>/ 04</span></div>
+      </div>
+    </section>
+
+    <section class="faction-select-section">
+      <div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR SIDE</p><h2>어느 도시의 이야기를 이을까요?</h2></div><span class="section-aside">대표 캐릭터 1명 · 24장 덱</span></div>
+      <div id="faction-picker" class="faction-picker"></div>
+    </section>
+    <footer class="home-footer"><span>BLADE LINK <i>©</i> PLAYTEST BUILD</span><span>캐릭터 일러스트와 세계관 설정을 사용한 개인 프로토타입</span></footer>
+  </main>
+
+  <main id="battle-screen" class="screen battle-screen hidden">
+    <div class="battle-topline">
+      <div class="match-title"><span class="league-mark">✦</span><span><small>TRAINING MATCH</small><strong>이음시 검술 리그</strong></span></div>
+      <div class="round-chip"><span class="round-dot"></span><span id="round-label">라운드 1 · 배치</span><span class="round-separator">/</span><span>클래식</span></div>
+      <button class="text-button" id="leave-match">로비로 나가기 <span>↗</span></button>
+    </div>
+
+    <div class="battle-layout">
+      <section class="table-area" aria-label="대전 전장">
+        <div id="opponent-banner" class="player-banner opponent-banner"></div>
+        <div id="opponent-field" class="unit-row opponent-row" aria-label="상대 전장"></div>
+        <div class="field-divider"><span></span><b>공명 전장</b><span></span><i>◇</i></div>
+        <div id="player-field" class="unit-row player-row" aria-label="내 전장"></div>
+        <div id="player-banner" class="player-banner own-banner"></div>
+        <div id="combat-stage" class="combat-stage hidden" aria-live="polite"></div>
+        <div class="turn-control-bar">
+          <div id="size-display" class="size-display"></div>
+          <div class="turn-instruction" id="turn-instruction">카드를 선택해 전장에 배치하세요.</div>
+          <button class="button button-skill" id="leader-skill" disabled><span class="skill-sigil">✧</span><span><small>라운드 시작</small><strong>능력 자동 발동</strong></span></button>
+          <button class="button button-end" id="end-turn"><span>전투 시작</span><small class="deploy-clock hidden" id="deploy-clock">30초</small><b>→</b></button>
+        </div>
+      </section>
+
+      <section class="hand-dock">
+        <div class="hand-heading"><div><span class="eyebrow">YOUR HAND</span><strong>손패 <i id="hand-count">0 / 5</i></strong></div><span class="hand-round-note">이번 라운드 배치 · 총 사이즈 한도 10</span></div>
+        <div class="hand-play-area">
+          <div class="card-pile discard-pile" data-discard-pile="player" aria-label="카드 무덤">
+            <span class="pile-caption">CARD GRAVE</span><div class="pile-art"><i></i><i></i><b>†</b></div><strong id="player-discard-count">0</strong><small>카드 무덤</small>
+          </div>
+          <div id="player-hand" class="hand-cards" aria-label="내 손패"></div>
+          <div class="card-pile deck-pile" aria-label="아직 꺼내지 않은 카드 덱">
+            <span class="pile-caption">DRAW DECK</span><div class="pile-art"><i></i><i></i><b>◇</b></div><strong id="player-deck-count">24</strong><small>남은 덱</small>
+          </div>
+        </div>
+        <div class="hand-action-row"><button id="reset-hand" class="button button-hand-reset" type="button" title="판당 2회, 현재 손패를 덱에 섞고 같은 장수만큼 다시 뽑습니다."><span>손패 리셋</span><small id="hand-reset-count">2회 남음</small></button><button id="play-card" class="button button-play" disabled>카드 배치 <span>↗</span></button></div>
+      </section>
+
+      <aside class="match-aside">
+        <section class="aside-panel card-inspector">
+          <div class="aside-heading"><span>카드 정보</span><span class="aside-label">INSPECT</span></div>
+          <div id="inspector-content" class="inspector-content"><div class="inspect-empty"><span>◇</span><p>손패나 전장의 카드를<br>선택하면 정보가 표시됩니다.</p></div></div>
+        </section>
+        <section class="aside-panel battle-log-panel">
+          <div class="aside-heading"><span>전투 기록</span><span class="aside-label">MATCH LOG</span><button id="toggle-log" class="log-toggle" aria-expanded="false">펼치기</button></div>
+          <ol id="battle-log" class="battle-log"></ol>
+        </section>
+        <div class="aside-tip"><span>✦</span><p>검식은 필드에 배치한 뒤 전투에서 추종자보다 먼저 발동합니다.<br>카드가 파괴되면 사이즈만큼 소유자의 라이프가 줄어듭니다.</p></div>
+      </aside>
+    </div>
+    <div id="game-result" class="result-overlay hidden"></div>
+  </main>
+
+  <div id="modal-root"></div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="data.js"></script>
+  <script src="engine.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
