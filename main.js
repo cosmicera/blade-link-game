@@ -186,9 +186,10 @@
     stage.classList.remove('counterattack', 'global-effect-stage', 'hidden');
   }
 
-  async function showInitiativeCoinFlip(initiativeSide) {
+  async function showInitiativeCoinFlip(coinFace) {
     const stage = $('#combat-stage');
     if (!stage) return;
+    const initiativeSide = coinFace === 'front' ? 'player' : 'opponent';
     const scene = document.createElement('div');
     scene.className = 'combat-stage-scene coin-flip-scene';
     const heading = document.createElement('div');
@@ -196,7 +197,7 @@
     const title = document.createElement('strong');
     title.textContent = '선공 결정';
     const subtitle = document.createElement('small');
-    subtitle.textContent = '코인 플립';
+    subtitle.textContent = '앞면: 플레이어 선공 · 뒷면: 상대 선공';
     heading.append(title, subtitle);
 
     const perspective = document.createElement('div');
@@ -205,10 +206,10 @@
     coin.className = 'initiative-coin';
     const playerFace = document.createElement('div');
     playerFace.className = 'coin-face coin-face-player';
-    playerFace.innerHTML = '<svg class="coin-emblem coin-emblem-link" viewBox="0 0 100 100" aria-hidden="true"><circle class="coin-engrave" cx="50" cy="50" r="31"/><circle class="coin-engrave" cx="50" cy="50" r="23"/><path class="coin-engrave" d="M50 24v52M24 50h52M32 32l36 36M68 32 32 68"/><path class="coin-emblem-fill" d="M50 34c-8 0-14 7-14 16 0 8 6 15 14 19 8-4 14-11 14-19 0-9-6-16-14-16Z"/><circle class="coin-emblem-core" cx="50" cy="49" r="5"/></svg>';
+    playerFace.innerHTML = '<svg class="coin-emblem coin-emblem-link" viewBox="0 0 100 100" aria-hidden="true"><circle class="coin-engrave" cx="50" cy="50" r="31"/><circle class="coin-engrave" cx="50" cy="50" r="23"/><path class="coin-engrave" d="M50 24v52M24 50h52M32 32l36 36M68 32 32 68"/><path class="coin-emblem-fill" d="M50 34c-8 0-14 7-14 16 0 8 6 15 14 19 8-4 14-11 14-19 0-9-6-16-14-16Z"/><circle class="coin-emblem-core" cx="50" cy="49" r="5"/></svg><span class="coin-face-caption"><strong>앞면</strong><small>플레이어</small></span>';
     const opponentFace = document.createElement('div');
     opponentFace.className = 'coin-face coin-face-opponent';
-    opponentFace.innerHTML = '<svg class="coin-emblem coin-emblem-star" viewBox="0 0 100 100" aria-hidden="true"><circle class="coin-engrave" cx="50" cy="50" r="31"/><circle class="coin-engrave" cx="50" cy="50" r="23"/><path class="coin-emblem-fill" d="m50 23 7 20 20 7-20 7-7 20-7-20-20-7 20-7 7-20Z"/><path class="coin-engrave" d="M50 15v12m0 46v12M15 50h12m46 0h12M25 25l9 9m32 32 9 9m0-50-9 9m-32 32-9 9"/><circle class="coin-emblem-core" cx="50" cy="50" r="5"/></svg>';
+    opponentFace.innerHTML = '<svg class="coin-emblem coin-emblem-star" viewBox="0 0 100 100" aria-hidden="true"><circle class="coin-engrave" cx="50" cy="50" r="31"/><circle class="coin-engrave" cx="50" cy="50" r="23"/><path class="coin-emblem-fill" d="m50 23 7 20 20 7-20 7-7 20-7-20-20-7 20-7 7-20Z"/><path class="coin-engrave" d="M50 15v12m0 46v12M15 50h12m46 0h12M25 25l9 9m32 32 9 9m0-50-9 9m-32 32-9 9"/><circle class="coin-emblem-core" cx="50" cy="50" r="5"/></svg><span class="coin-face-caption"><strong>뒷면</strong><small>상대</small></span>';
     coin.append(playerFace, opponentFace);
     perspective.append(coin);
 
@@ -219,7 +220,7 @@
     stage.replaceChildren(scene);
     stage.classList.remove('counterattack', 'global-effect-stage', 'hidden');
 
-    const finalRotation = initiativeSide === 'player' ? 1800 : 1980;
+    const finalRotation = coinFace === 'front' ? 1800 : 1980;
     const animation = coin.animate?.([
       { transform: 'translateY(0) rotateY(0deg) rotateZ(0deg)' },
       { transform: 'translateY(-76px) rotateY(630deg) rotateZ(140deg)', offset: .3 },
@@ -231,7 +232,8 @@
       await wait(1250);
       coin.style.transform = `rotateY(${finalRotation}deg)`;
     }
-    result.textContent = initiativeSide === 'player' ? '내가 선공입니다' : '상대가 선공입니다';
+    result.dataset.side = initiativeSide;
+    result.textContent = coinFace === 'front' ? '앞면 · 플레이어 선공' : '뒷면 · 상대 선공';
     result.classList.add('revealed');
     await wait(620);
   }
@@ -253,8 +255,9 @@
     showVersusIntro();
     await wait(1050);
     hideCombatStage();
-    const initiativeSide = Math.random() < 0.5 ? 'player' : 'opponent';
-    await showInitiativeCoinFlip(initiativeSide);
+    const coinFace = Math.random() < 0.5 ? 'front' : 'back';
+    const initiativeSide = coinFace === 'front' ? 'player' : 'opponent';
+    await showInitiativeCoinFlip(coinFace);
     hideCombatStage();
     RULES.startFirstRound(match, initiativeSide);
     const openingVisuals = RULES.takeVisualEvents(match);
