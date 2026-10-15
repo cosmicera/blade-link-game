@@ -206,10 +206,10 @@
     coin.className = 'initiative-coin';
     const playerFace = document.createElement('div');
     playerFace.className = 'coin-face coin-face-player';
-    playerFace.innerHTML = '<svg class="coin-emblem coin-emblem-link" viewBox="0 0 100 100" aria-hidden="true"><circle class="coin-engrave" cx="50" cy="50" r="31"/><circle class="coin-engrave" cx="50" cy="50" r="23"/><path class="coin-engrave" d="M50 24v52M24 50h52M32 32l36 36M68 32 32 68"/><path class="coin-emblem-fill" d="M50 34c-8 0-14 7-14 16 0 8 6 15 14 19 8-4 14-11 14-19 0-9-6-16-14-16Z"/><circle class="coin-emblem-core" cx="50" cy="49" r="5"/></svg><span class="coin-face-caption"><strong>앞면</strong><small>플레이어</small></span>';
+    playerFace.innerHTML = '<svg class="coin-sword-mark" viewBox="0 0 100 100" aria-hidden="true"><path class="coin-sword-blade" d="M50 9 62 33 57 64 50 74 43 64 38 33Z"/><path class="coin-sword-edge" d="M50 15v55"/><path class="coin-sword-guard" d="M29 62q21 11 42 0l-3 8q-18 8-36 0Z"/><path class="coin-sword-grip" d="M46 69h8v18h-8z"/><path class="coin-sword-pommel" d="M42 87h16v6H42z"/></svg>';
     const opponentFace = document.createElement('div');
     opponentFace.className = 'coin-face coin-face-opponent';
-    opponentFace.innerHTML = '<svg class="coin-emblem coin-emblem-star" viewBox="0 0 100 100" aria-hidden="true"><circle class="coin-engrave" cx="50" cy="50" r="31"/><circle class="coin-engrave" cx="50" cy="50" r="23"/><path class="coin-emblem-fill" d="m50 23 7 20 20 7-20 7-7 20-7-20-20-7 20-7 7-20Z"/><path class="coin-engrave" d="M50 15v12m0 46v12M15 50h12m46 0h12M25 25l9 9m32 32 9 9m0-50-9 9m-32 32-9 9"/><circle class="coin-emblem-core" cx="50" cy="50" r="5"/></svg><span class="coin-face-caption"><strong>뒷면</strong><small>상대</small></span>';
+    opponentFace.innerHTML = '<span class="coin-wordmark">BLADE LINK</span>';
     coin.append(playerFace, opponentFace);
     perspective.append(coin);
 
