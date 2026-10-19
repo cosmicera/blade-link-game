@@ -1147,3 +1147,11 @@ html { overflow-y: scroll; scrollbar-gutter: stable; }
 .codex-entry .codex-copy strong { font-size: 15px; white-space: normal; }
 .codex-entry .codex-copy p { font-size: 12px; }
 .codex-entry .codex-copy em { font-size: 12px; }
+
+/* Four persistent company columns, with horizontal scrolling on narrow screens. */
+.codex-modal { width: min(1480px, 100%); }
+.codex-company-columns { display: grid; grid-template-columns: repeat(4, minmax(265px, 1fr)); align-items: start; gap: 14px; }
+.codex-company-column { min-width: 0; }
+.codex-company-column h3 { margin: 0 0 12px; padding: 12px 8px; border-bottom: 2px solid var(--faction-color); color: var(--faction-color); font: 600 16px 'Noto Sans KR', sans-serif; }
+.codex-company-cards { display: grid; gap: 12px; }
+.codex-company-column .codex-entry { grid-template-columns: 90px minmax(0, 1fr); }

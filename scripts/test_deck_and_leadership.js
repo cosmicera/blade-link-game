@@ -44,9 +44,12 @@ assert.equal(data.factions.nanguk.badge, 'NAM');
 assert.equal(rules.cardById.verda.effect.type, 'heal_wounded', 'Outpraware chairperson healing should focus on one ally');
 assert.equal(rules.cardById.outpr_spring.effect, 'heal_focus', 'Outpraware healing spell should focus on one ally');
 assert.equal(rules.cardById.seolha.effect.type, 'defense_weakest', 'Seolha should protect one vulnerable ally rather than the whole field');
-assert.equal(rules.cardById.seohwi.effect.amount, 1, 'Seohwi should not receive an oversized defense boost');
+assert.equal(rules.cardById.seohwi.effect, null, 'Seohwi relies on base defense and counterattack');
 assert.equal(rules.cardById.nanguk_echo_defense.effect, 'draw_reserve');
-assert.equal(rules.cardById.nanguk_mist.text.includes('방어력이 1 높아집니다'), true);
+assert.equal(rules.cardById.nanguk_mist.effect, 'defense_weakest');
+assert.equal(rules.cardById.eunju.defense, 2);
+assert.equal(rules.cardById.yuran.defenseEffect, undefined);
+assert.equal(rules.cardById.soun.effect.type, 'temp_buff_self');
 assert.match(data.leaders.ria.abilityText, /라이프를 1/);
 assert.match(data.leaders.cheongyeon.abilityText, /방어력을 1 높입니다/);
 
@@ -131,7 +134,7 @@ balanceMatch = matchWith('nanguk', [unit('wolbaek', 'cheongyeon-target', 0)]);
 assert.equal(balanceMatch.players.player.field[0].tempDefense, 1, 'Cheongyeon should distribute only one temporary defense');
 
 balanceMatch = matchWith('nanguk', [unit('seolha', 'seolha', 0), unit('wolbaek', 'seolha-target', 1, 2)]);
-assert.equal(balanceMatch.players.player.field.find(item => item.iid === 'seolha').tempDefense, 1, 'Seolha should not add a field-wide defense bonus');
+assert.equal(balanceMatch.players.player.field.find(item => item.iid === 'seolha').tempDefense, 0, 'Seolha should not add a field-wide defense bonus');
 assert.equal(balanceMatch.players.player.field.find(item => item.iid === 'seolha-target').tempDefense, 2, 'Seolha should add one point to the weakest ally alongside Cheongyeon’s one-point field bonus');
 
 let match = matchWith('outpr', [unit('verda', 'u1', 0), unit('lagyeong', 'u2', 1)]);
@@ -159,9 +162,26 @@ const seolhaDefenseWithoutSupport = match.players.player.field[0].tempDefense;
 match = matchWith('nanguk', [unit('seolha', 'u1', 0), unit('lagyeong', 'u2', 1)]);
 const supportedSeolha = match.players.player.field.find(item => item.cardId === 'seolha');
 assert.equal(supportedSeolha.tempAttack, 1, 'title support effects should recognize the South Pole corporate head');
-assert.equal(supportedSeolha.tempDefense, 2, 'Cheongyeon and the explicit support effect should each add one defense to Seolha');
+assert.equal(supportedSeolha.tempDefense, 1, 'only explicit support reaches Seolha when another ally is weaker');
 
 (async () => {
+  const defenseMatch = rules.createMatch('nanguk', 'selfas', { deferStart: true });
+  defenseMatch.players.player.field = [unit('wolbaek', 'weak-ally', 0), unit('seohwi', 'strong-ally', 1)];
+  rules.startFirstRound(defenseMatch, 'player');
+  defenseMatch.players.player.hand = [{ iid: 'mist', cardId: 'nanguk_mist', handOrder: 0 }];
+  rules.playCard(defenseMatch, 'player', 'mist');
+  defenseMatch.players.player.field.forEach(item => { item.ready = false; });
+  await rules.resolveRound(defenseMatch, step => {
+    if (step.type === 'roundStart') {
+      assert.deepEqual(defenseMatch.players.player.field.map(item => item.tempDefense), [1, 0]);
+    }
+    if (step.type === 'spell') {
+      const mist = step.visuals.find(event => event.sourceType === 'spell');
+      assert.equal(mist.targets.length, 1);
+      assert.equal(mist.targetStates[0].defenseTemp - mist.beforeStates[0].defenseTemp, 2);
+      assert.deepEqual(defenseMatch.players.player.field.map(item => item.tempDefense), [3, 0]);
+    }
+  });
   const focusedHealMatch = rules.createMatch('outpr', 'selfas', { deferStart: true });
   focusedHealMatch.players.player.leaderId = 'arca';
   const focusedTarget = unit('lagyeong', 'focused-heal-target', 0, 3);

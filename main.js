@@ -664,11 +664,13 @@
     const typeOrder = { leader: 0, unit: 1, spell: 2 };
     const cards = allCards.filter(card => filter === 'all' || card.faction === filter)
       .sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
-    return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name} <b>${allCards.filter(card => card.faction === id).length}</b></button>`).join('')}</div>
-      <div class="codex-grid">${cards.map(card => `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
+    const entry = card => `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
         <div class="codex-art">${card.type === 'spell' ? `<span>${escapeHTML(card.symbol || '◇')}</span>` : `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">`}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
         <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${cardOrganization(card) ? ` · ${cardOrganization(card)}` : ''}` : '검식')}</small><strong>${escapeHTML(card.name)}</strong><p>${escapeHTML(card.text || card.abilityText || '')}</p><em>${card.type === 'unit' ? `공 ${card.attack}　방 ${card.defense || 0}　체 ${card.health}` : card.type === 'leader' ? '라이프 30' : '전투 중 발동'}</em></div>
-      </button>`).join('')}</div>`;
+      </button>`;
+    const columns = factionKeys.filter(id => filter === 'all' || id === filter);
+    return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name}</button>`).join('')}</div>
+      <div class="codex-company-columns">${columns.map(id => `<section class="codex-company-column" style="--faction-color:${factionColor(id)}"><h3>${escapeHTML(DATA.factions[id].logo)} ${escapeHTML(DATA.factions[id].name)}</h3><div class="codex-company-cards">${cards.filter(card => card.faction === id).map(entry).join('')}</div></section>`).join('')}</div>`;
   }
 
   function openModal(kind, filter = 'all') {
@@ -1139,14 +1141,18 @@
     return { stage, card };
   }
 
-  function launchEffectMeteor(target, index, variant = 'positive') {
-    if (!target) return null;
+  function effectSourceElement(event) {
+    return event.sourceType === 'leader' ? leaderElement(event.side) : boardElement(event.side, event.sourceId);
+  }
+
+  function launchEffectMeteor(target, index, variant = 'positive', source = null) {
+    if (!target || !source || target === source) return null;
     const targetRect = target.getBoundingClientRect();
     const endX = targetRect.left + targetRect.width / 2;
     const endY = targetRect.top + targetRect.height * .34;
-    const drift = targetRect.width * .3 * (index % 2 ? -1 : 1);
-    const startX = Math.max(18, Math.min(window.innerWidth - 18, endX + drift));
-    const startY = Math.max(16, targetRect.top - Math.min(150, Math.max(90, targetRect.height * .72)));
+    const sourceRect = source.getBoundingClientRect();
+    const startX = sourceRect.left + sourceRect.width / 2;
+    const startY = sourceRect.top + sourceRect.height * .34;
     const dx = endX - startX;
     const dy = endY - startY;
     const meteor = document.createElement('i');
@@ -1165,11 +1171,12 @@
     return { meteor, finished };
   }
 
-  async function animateMeteorToTarget(target, state, index, beforeState = null) {
-    const flight = launchEffectMeteor(target, index, 'impact');
-    if (!flight) return;
-    await flight.finished;
-    flight.meteor.remove();
+  async function animateMeteorToTarget(target, state, index, beforeState = null, source = null) {
+    const flight = launchEffectMeteor(target, index, 'impact', source);
+    if (flight) {
+      await flight.finished;
+      flight.meteor.remove();
+    }
     target.classList.remove('effect-impact');
     void target.offsetWidth;
     target.classList.add('effect-impact');
@@ -1179,11 +1186,11 @@
     target.classList.remove('effect-impact');
   }
 
-  async function animateBeneficialTargets(states) {
+  async function animateBeneficialTargets(states, source) {
     const targets = states.map((state, index) => ({ state, index, element: boardElement(state.side, state.iid) }))
       .filter(item => item.element);
     if (!targets.length) return;
-    const flights = targets.map(item => launchEffectMeteor(item.element, item.index, 'positive')).filter(Boolean);
+    const flights = targets.map(item => launchEffectMeteor(item.element, item.index, 'positive', source)).filter(Boolean);
     await Promise.all(flights.map(flight => flight.finished));
     flights.forEach(flight => flight.meteor.remove());
     targets.forEach(({ state, element }) => {
@@ -1223,8 +1230,9 @@
     const states = event.targetStates || [];
     const targets = states.map(state => ({ state, element: boardElement(state.side, state.iid) }))
       .filter(item => item.element);
-    if (event.beneficial) {
-      const flights = targets.map(({ element }, index) => launchEffectMeteor(element, index, 'positive')).filter(Boolean);
+    {
+      const source = effectSourceElement(event);
+      const flights = targets.map(({ element }, index) => launchEffectMeteor(element, index, event.beneficial ? 'positive' : 'impact', source)).filter(Boolean);
       await Promise.all(flights.map(flight => flight.finished));
       flights.forEach(flight => flight.meteor.remove());
     }
@@ -1245,7 +1253,7 @@
     await wait(90);
     const states = event.targetStates || [];
     if (event.beneficial) {
-      await animateBeneficialTargets(states);
+      await animateBeneficialTargets(states, effectSourceElement(event));
       return;
     }
     for (let index = 0; index < states.length; index += 1) {
@@ -1253,7 +1261,7 @@
       const target = boardElement(state.side, state.iid);
       if (!target) continue;
       const beforeState = event.beforeStates?.find(item => item.side === state.side && item.iid === state.iid) || null;
-      await animateMeteorToTarget(target, state, index, beforeState);
+      await animateMeteorToTarget(target, state, index, beforeState, effectSourceElement(event));
       await wait(95);
     }
   }
@@ -1302,6 +1310,8 @@
         }
         continue;
       }
+      const flight = launchEffectMeteor(target, index, 'impact', source);
+      if (flight) { await flight.finished; flight.meteor.remove(); }
       const effects = [
         applyFxClass(source, 'effect-source', 560),
         applyFxClass(target, 'effect-target', 600)

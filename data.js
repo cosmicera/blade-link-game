@@ -25,7 +25,7 @@ window.GAME_DATA = {
   leaders: {
     ria: { id: 'ria', faction: 'outpr', name: '리아', epithet: '스타룬데르의 길잡이', image: 'assets/cards/ria.png', quote: '같이 가자. 이곳에 네가 쉴 자리도 만들게.', ability: '새순의 손길', abilityText: '라운드 시작 시 내 대표 라이프를 1, 가장 약한 아군 추종자의 체력을 1 회복합니다.', seed: '1566391587789165' },
     arca: { id: 'arca', faction: 'selfas', name: '아르카', epithet: '개척 현장 안전 AI', image: 'assets/cards/arca.png', quote: '경로를 다시 계산합니다. 현장의 선택을 반영했습니다.', ability: '장비 재배치', abilityText: '라운드 시작 시 이번 라운드 사이즈 한도를 1 높입니다.', seed: '6424778036880785' },
-    cheongyeon: { id: 'cheongyeon', faction: 'nanguk', name: '청연', epithet: '남극성 대표 검사', image: 'assets/cards/cheongyeon.png', quote: '다음 안전 구역은 내가 먼저 확인할게. 함께 갈래?', ability: '푸른 방어선', abilityText: '라운드 시작 시 아군 추종자의 이번 전투 방어력을 1 높입니다. 이 강화는 라운드 종료 시 사라집니다. 아군이 없으면 이번 라운드 사이즈 한도를 1 높입니다.', seed: '8426524219450097' },
+    cheongyeon: { id: 'cheongyeon', faction: 'nanguk', name: '청연', epithet: '남극성 대표 검사', image: 'assets/cards/cheongyeon.png', quote: '다음 안전 구역은 내가 먼저 확인할게. 함께 갈래?', ability: '푸른 방어선', abilityText: '라운드 시작 시 가장 약한 아군 추종자 1명의 이번 전투 방어력을 1 높입니다. 이 강화는 라운드 종료 시 사라집니다. 아군이 없으면 이번 라운드 사이즈 한도를 1 높입니다.', seed: '8426524219450097' },
     noa: { id: 'noa', faction: 'unbek', name: '노아', epithet: '거점 사이를 잇는 전령', image: 'assets/cards/noa.png', quote: '거점이 멀어도 필요한 물건은 꼭 도착해야지.', ability: '골목길 지름', abilityText: '라운드 시작 시 버림 더미에서 추종자 1장을 손으로 가져옵니다. 가져올 수 없으면 이번 라운드 사이즈 한도를 1 높입니다.', seed: '8899084558523978' }
   },
   cards: [
@@ -40,8 +40,8 @@ window.GAME_DATA = {
 
     { id: 'seolha', type: 'unit', faction: 'nanguk', name: '설하', role: '남극성 기업 대표·백좌 운영위원장', position: '기업 총수', department: null, deckLimit: 1, image: 'assets/cards/seolha.png', seed: '5055147255926520', cost: 4, attack: 2, defense: 3, health: 6, effect: { type: 'defense_weakest', amount: 1 }, text: '라운드 시작: 가장 약한 아군 추종자의 이번 전투 방어력 +1.', flavorText: '백좌의 대표 설하는 검술 리그의 규칙과 시민의 안전을 함께 책임진다. 그녀가 먼저 방어선을 세우면 남극성의 검객들은 망설임 없이 그 뒤에 선다.', symbol: '雪' },
     { id: 'wolbaek', type: 'unit', faction: 'nanguk', name: '월백', role: '공공 기록 연구자', department: '연구개발팀', image: 'assets/cards/wolbaek.png', seed: '2062650613166138', cost: 2, attack: 1, defense: 2, health: 4, effect: { type: 'size_limit', amount: 1 }, text: '라운드 시작: 이번 라운드 사이즈 한도 +1.', symbol: '✧' },
-    { id: 'yuran', type: 'unit', faction: 'nanguk', name: '유란', role: '객원 검술 교사', department: '대외협력팀', image: 'assets/cards/yuran.png', seed: '5497937762652395', cost: 3, attack: 3, defense: 2, health: 4, attackEffect: { type: 'temp_buff_self', amount: 1 }, defenseEffect: { type: 'defense_self', amount: 1 }, text: '공격전: 이번 전투 동안 공격력 +1. 방어전: 이번 전투 동안 방어력 +1.', symbol: '☯' },
-    { id: 'soun', type: 'unit', faction: 'nanguk', name: '소운', role: '음향 관측 견습생', department: '연구개발팀', image: 'assets/cards/soun.png', seed: '7785836849691659', cost: 1, attack: 1, defense: 1, health: 2, effect: { type: 'defense_self', amount: 1 }, text: '라운드 시작: 이번 전투 동안 자신의 방어력 +1.', symbol: '♪' },
+    { id: 'yuran', type: 'unit', faction: 'nanguk', name: '유란', role: '객원 검술 교사', department: '대외협력팀', image: 'assets/cards/yuran.png', seed: '5497937762652395', cost: 3, attack: 3, defense: 2, health: 4, attackEffect: { type: 'temp_buff_self', amount: 1 }, text: '공격전: 이번 전투 동안 공격력 +1.', symbol: '☯' },
+    { id: 'soun', type: 'unit', faction: 'nanguk', name: '소운', role: '음향 관측 견습생', department: '연구개발팀', image: 'assets/cards/soun.png', seed: '7785836849691659', cost: 1, attack: 1, defense: 1, health: 2, effect: { type: 'temp_buff_self', amount: 1 }, text: '라운드 시작: 이번 전투 동안 자신의 공격력 +1.', symbol: '♪' },
 
     { id: 'lea', type: 'unit', faction: 'unbek', name: '레아', role: '언벡 협동조합 대표·정착민 평의회 위원', position: '협동조합 대표', department: null, deckLimit: 1, image: 'assets/cards/lea.png', seed: '6368332127497987', cost: 3, attack: 3, defense: 4, health: 7, effect: { type: 'defense_all', amount: 1 }, text: '라운드 시작: 모든 아군 추종자의 이번 전투 방어력 +1.', flavorText: '돌아온 사람부터 챙기고 길을 묻는다. 레아가 전열에 서면 공방 마을 사람들은 누구도 혼자 버려지지 않는다는 걸 안다.', symbol: '⌂' },
     { id: 'ash', type: 'unit', faction: 'unbek', name: '애쉬', role: '분산 AI 통신 관리자', department: '정착지운영팀', image: 'assets/cards/ash.png', seed: '1737601682837601', cost: 2, attack: 1, defense: 2, health: 4, effect: { type: 'recover', amount: 1 }, text: '라운드 시작: 버림 더미에서 추종자 1장을 손으로 가져옵니다. 가져올 수 없으면 사이즈 한도 +1.', symbol: '⌁' },
@@ -53,7 +53,7 @@ window.GAME_DATA = {
     { id: 'outpr_vine', type: 'spell', faction: 'outpr', name: '덩굴 매듭', cost: 3, effect: 'buff_all', text: '모든 아군 추종자의 공격력과 체력을 1 높입니다.', symbol: '❋' },
     { id: 'selfas_repair', type: 'spell', faction: 'selfas', name: '긴급 정비', cost: 2, effect: 'repair', text: '가장 약한 아군 추종자를 3 회복하고 공격력을 1 높입니다.', symbol: '⚙' },
     { id: 'selfas_orbit', type: 'spell', faction: 'selfas', name: '궤도 차단', cost: 3, effect: 'damage_weakest', text: '상대의 가장 약한 추종자에게 3 피해를 줍니다. 추종자가 없으면 리더에게 줍니다.', symbol: '⦿' },
-    { id: 'nanguk_mist', type: 'spell', faction: 'nanguk', name: '청명한 결계', cost: 2, effect: 'defense_all', text: '모든 아군 추종자의 이번 전투 방어력이 1 높아집니다.', symbol: '❄' },
+    { id: 'nanguk_mist', type: 'spell', faction: 'nanguk', name: '청명한 결계', cost: 2, effect: 'defense_weakest', text: '가장 약한 아군 추종자 1명의 이번 전투 방어력이 2 높아집니다.', symbol: '❄' },
     { id: 'nanguk_echo', type: 'spell', faction: 'nanguk', name: '되돌림 검식', cost: 3, effect: 'damage_all', text: '상대 추종자 모두에게 2 피해를 줍니다.', symbol: '〰' },
     { id: 'unbek_recall', type: 'spell', faction: 'unbek', name: '회수 신호', cost: 2, effect: 'recover', text: '버림 더미에서 추종자를 손으로 가져옵니다. 가져올 수 없으면 다음 라운드 사이즈 한도 +1.', symbol: '↶' },
     { id: 'unbek_gap', type: 'spell', faction: 'unbek', name: '틈새 돌파', cost: 3, effect: 'damage_weakest', text: '상대의 가장 약한 추종자에게 3 피해를 줍니다. 추종자가 없으면 리더에게 줍니다.', symbol: '⟡' },

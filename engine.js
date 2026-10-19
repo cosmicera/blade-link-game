@@ -481,6 +481,10 @@
           removeDefeated(match, enemySide);
         } else applyDamageToLeader(match, enemySide, 3, card.name);
         break;
+      case 'defense_weakest':
+        target = weakestUnit(player);
+        if (target) target.tempDefense += 2;
+        break;
       case 'defense_all':
         player.field.forEach(unit => { unit.tempDefense += 1; });
         break;
@@ -571,8 +575,9 @@
         break;
       case 'cheongyeon':
         if (player.field.length) {
-          player.field.forEach(unit => { unit.tempDefense += 1; });
-          targets = player.field.map(unit => ({ side, iid: unit.iid }));
+          const target = weakestUnit(player);
+          target.tempDefense += 1;
+          targets = [{ side, iid: target.iid }];
         }
         else player.sizeLimit = Math.min(12, player.sizeLimit + 1);
         break;
@@ -595,7 +600,7 @@
       type: 'effect', side, sourceType: 'leader', sourceId: player.leaderId, targets,
       targetStates, beforeStates, beneficial: effectImprovesTargets(beforeStates, targetStates),
       label: data.leaders[player.leaderId].ability, timing: 'leader',
-      scope: targets.length && player.leaderId === 'cheongyeon' ? 'all' : 'single'
+      scope: 'single'
     });
     checkWinner(match);
   }
