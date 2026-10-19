@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#131519">
+  <title>추종자 후보 일러스트 선택 · Blade Link</title>
+  <style>
+    :root { color-scheme: dark; --bg:#131519; --panel:#1b1d22; --line:#34363d; --ink:#ece9e1; --muted:#a4a1a0; --gold:#d8c99d; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(ellipse at 50% -10%,#293037 0,transparent 44%),var(--bg); color:var(--ink); font-family:Inter,"Noto Sans KR",system-ui,sans-serif; }
+    a { color:inherit; }
+    .wrap { width:min(1500px,calc(100% - 36px)); margin:0 auto; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0 20px; border-bottom:1px solid var(--line); }
+    .brand { color:var(--gold); font:11px ui-monospace,monospace; letter-spacing:.16em; }
+    h1 { margin:7px 0 4px; font-size:clamp(25px,4vw,38px); font-weight:650; letter-spacing:-.04em; }
+    .lede { color:var(--muted); margin:0; font-size:14px; line-height:1.7; }
+    .head-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; }
+    button,.button-link { border:1px solid #505158; background:#22242a; color:var(--ink); min-height:39px; padding:9px 13px; font:inherit; font-size:12px; text-decoration:none; cursor:pointer; }
+    button:hover,.button-link:hover { border-color:var(--gold); color:#fff; }
+    .primary { border-color:#8e805a; background:#3a3428; }
+    .sticky { position:sticky; top:0; z-index:5; padding:12px 0; backdrop-filter:blur(16px); background:#131519e8; border-bottom:1px solid #34363d; }
+    .filters { display:flex; align-items:center; gap:8px; overflow-x:auto; }
+    .filter { white-space:nowrap; border-radius:99px; min-height:34px; padding:7px 13px; color:#bbb8b2; }
+    .filter.active { border-color:var(--faction,#d8c99d); color:var(--ink); background:color-mix(in srgb,var(--faction,#d8c99d) 13%,#22242a); }
+    .count { margin-left:auto; flex:0 0 auto; color:var(--muted); font-size:12px; }
+    main { padding:20px 0 70px; }
+    .character { --faction:#abb7bf; margin:0 0 28px; padding:20px; border:1px solid var(--line); background:linear-gradient(145deg,#1a1c21f5,#181a1ee8); }
+    .character-head { display:grid; grid-template-columns:minmax(220px,.85fr) minmax(280px,1.4fr); gap:24px; padding:4px 4px 20px; }
+    .faction-label { color:var(--faction); font:10px ui-monospace,monospace; letter-spacing:.15em; }
+    h2 { margin:5px 0 3px; font-size:23px; font-weight:600; letter-spacing:-.03em; }
+    .role { color:#c7c3b9; font-size:13px; }
+    .stats { margin-top:9px; color:#94929a; font-size:11px; line-height:1.7; }
+    .story { color:#c2c0bb; margin:0; font-size:13px; line-height:1.8; }
+    .personality { color:#e0d4b7; margin:10px 0 0; font-size:13px; line-height:1.8; }
+    .visual-direction { color:#a7b2ba; margin:7px 0 0; font-size:11px; line-height:1.7; }
+    .variant-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:11px; }
+    .variant { min-width:0; display:flex; flex-direction:column; border:1px solid #383a41; background:#111317; transition:border-color .15s,transform .15s; }
+    .variant.selected { border-color:var(--faction); box-shadow:0 0 0 1px color-mix(in srgb,var(--faction) 40%,transparent),0 8px 28px #0007; transform:translateY(-2px); }
+    .art { display:grid; place-items:center; aspect-ratio:832 / 1216; overflow:hidden; background:radial-gradient(ellipse,#272a2e,#101115 72%); }
+    .art img { display:block; width:100%; height:100%; object-fit:contain; }
+    .variant-copy { padding:10px 11px 7px; }
+    .variant-title { color:#e6e2d7; font-size:12px; font-weight:600; }
+    .composition { min-height:34px; margin-top:5px; color:#918f96; font-size:10px; line-height:1.5; }
+    .seed { color:#777780; font:9px ui-monospace,monospace; line-height:1.7; overflow-wrap:anywhere; }
+    .choose { width:100%; margin-top:auto; border:0; border-top:1px solid #303138; background:#1b1d22; color:#bdb9b1; }
+    .variant.selected .choose { background:color-mix(in srgb,var(--faction) 20%,#1b1d22); color:#fff; }
+    .empty { margin:45px 0; text-align:center; color:var(--muted); }
+    footer { padding:18px 0 30px; border-top:1px solid var(--line); color:#78767d; font-size:11px; line-height:1.8; }
+    @media(max-width:1000px) { .variant-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media(max-width:680px) { .wrap { width:calc(100% - 20px); } header { align-items:flex-start; flex-direction:column; } .head-actions { justify-content:flex-start; } .character { padding:13px; } .character-head { grid-template-columns:1fr; gap:10px; } .variant-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; } .variant-copy { padding:8px; } .composition { min-height:44px; } .count { display:none; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div><div class="brand">BLADE LINK / ART SELECTION</div><h1>시즌 1 추종자 일러스트</h1><p class="lede">확정한 18명의 일러스트와 장뤄안·천서휘의 최신 후보 5장을 확인할 수 있습니다. 후보를 선택하면 같은 브라우저의 게임 카드에 적용됩니다.</p></div>
+    <div class="head-actions"><button id="download" class="primary">내 선택 내려받기</button><a class="button-link" href="index.html">게임으로 돌아가기</a></div>
+  </header>
+  <div class="sticky"><div class="wrap filters" id="filters"></div></div>
+  <main class="wrap" id="gallery"></main>
+  <footer class="wrap">선택은 같은 브라우저의 로컬 저장소에 보관됩니다. 게임을 다시 열거나 새로고침하면 선택한 후보가 카드 일러스트로 표시됩니다. 시드도 카드 데이터와 후보 내보내기에 기록됩니다.</footer>
+  <script src="data.js"></script>
+  <script src="follower-expansion.js"></script>
+  <script>
+    (() => {
+      const profiles = window.FOLLOWER_EXPANSION || [];
+    const storageKey = window.FOLLOWER_ART_STORAGE_KEY || 'blade-link-follower-art-selections-20261016-identity-v2';
+      const factionOrder = ['outpr', 'selfas', 'nanguk', 'unbek'];
+      const colors = Object.fromEntries(factionOrder.map(id => [id, window.GAME_DATA.factions[id].color]));
+      const compositionKo = ['확정 일러스트', '새 후보 2', '새 후보 3', '새 후보 4', '새 후보 5'];
+      let selections = {};
+      let activeFaction = 'all';
+      try { selections = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch (_) {}
+      const filters = document.getElementById('filters');
+      const gallery = document.getElementById('gallery');
+      const render = () => {
+        filters.innerHTML = `<button class="filter ${activeFaction === 'all' ? 'active' : ''}" data-filter="all">전체 20</button>` + factionOrder.map(id => {
+          const label = window.GAME_DATA.factions[id].name;
+          const count = profiles.filter(p => p.faction === id).length;
+          return `<button class="filter ${activeFaction === id ? 'active' : ''}" data-filter="${id}" style="--faction:${colors[id]}">${label} ${count}</button>`;
+        }).join('') + `<span class="count">선택 ${Object.keys(selections).length} / ${profiles.length}</span>`;
+        const visible = activeFaction === 'all' ? profiles : profiles.filter(p => p.faction === activeFaction);
+        gallery.innerHTML = visible.length ? visible.map(profile => {
+          const selectedNumber = Number(selections[profile.id] || profile.defaultVariant || 1);
+          const stat = profile.stats;
+          return `<section class="character" id="${profile.id}" style="--faction:${colors[profile.faction]}">
+            <div class="character-head"><div><div class="faction-label">${profile.factionName} · ${profile.department}</div><h2>${profile.name}</h2><div class="role">${profile.role}</div><div class="stats">${profile.age}세 · 키 ${profile.height}cm · ${profile.measurements.bust}-${profile.measurements.waist}-${profile.measurements.hip}cm<br>사이즈 ${stat.cost} · 공격 ${stat.attack} · 방어 ${stat.defense} · 체력 ${stat.health}<br>${profile.departmentEffect}<br>의상 노출 연출 목표 ${profile.exposureTargetPercent ?? 15}%</div></div><div><p class="story">${profile.story}</p><p class="personality"><strong>성격 · </strong>${profile.personality || '성격 묘사 준비 중'}</p><p class="visual-direction"><strong>표정·포즈 방향 · </strong>${profile.visualPersonality || '인물의 성격을 표정과 손짓에 반영'}</p></div></div>
+            <div class="variant-grid">${profile.variants.map(v => `<article class="variant ${selectedNumber === v.number ? 'selected' : ''}" data-variant-card="${profile.id}-${v.number}">
+              <div class="art"><img src="${v.image}" alt="${profile.person} 후보 ${v.number}" loading="lazy"></div>
+              <div class="variant-copy"><div class="variant-title">후보 ${String(v.number).padStart(2,'0')}</div><div class="composition">${v.label || compositionKo[v.number - 1]}</div><div class="seed">시드 ${v.seed}${v.faceSeed ? `<br>얼굴 보정 ${v.faceSeed}` : ''}</div></div>
+              <button class="choose" data-select="${profile.id}" data-number="${v.number}">${selectedNumber === v.number ? '게임 카드에 적용 중' : '이 후보 선택'}</button>
+            </article>`).join('')}</div></section>`;
+        }).join('') : '<p class="empty">표시할 캐릭터가 없습니다.</p>';
+      };
+      filters.addEventListener('click', event => {
+        const button = event.target.closest('[data-filter]');
+        if (button) { activeFaction = button.dataset.filter; render(); }
+      });
+      gallery.addEventListener('click', event => {
+        const button = event.target.closest('[data-select]');
+        if (!button) return;
+        selections[button.dataset.select] = Number(button.dataset.number);
+        try { localStorage.setItem(storageKey, JSON.stringify(selections)); } catch (_) {}
+        render();
+      });
+      document.getElementById('download').addEventListener('click', () => {
+        const picked = profiles.filter(p => selections[p.id]).map(p => {
+          const variant = p.variants.find(v => v.number === Number(selections[p.id]));
+          return { id: p.id, name: p.name, faction: p.factionName, personality: p.personality, variant: variant.number, seed: variant.seed, faceSeed: variant.faceSeed, image: variant.image, positive: variant.positive, negative: variant.negative };
+        });
+        const blob = new Blob([JSON.stringify({ exportedAt: new Date().toISOString(), selections: picked }, null, 2)], { type: 'application/json' });
+        const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'blade-link-follower-art-selections.json'; link.click(); setTimeout(() => URL.revokeObjectURL(link.href), 1000);
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>

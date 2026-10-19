@@ -1,0 +1,2101 @@
+{
+  "run": "FollowerRedesign_20261019_v6",
+  "created": "2026-10-19",
+  "model": "oneObsession_v24.safetensors",
+  "checkpoint": "One Obsession v24 / Illustrious SDXL",
+  "prompt_profile": "One Obsession v24 / Illustrious SDXL; 18 selected images and seeds locked; v6 background-only regeneration for Zhang Ruoan and Cheon Seohwi, varied open landscapes, no lettering or smoking props",
+  "resolution": "832x1216 portrait for every candidate; fixed original card dimensions",
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "scheduler": "normal",
+  "controlnet": {
+    "model": "xinsir_openpose_sdxl_1.0.safetensors",
+    "strength": 0.74,
+    "end_percent": 0.88
+  },
+  "face_detailer": {
+    "steps": 20,
+    "cfg": 5.0,
+    "denoise": 0.2,
+    "bbox": "face_yolov8n.pt"
+  },
+  "scope": "18 user-confirmed images, seeds and metadata preserved exactly. Only 장뤄안 and 천서휘 receive five new candidates each; existing concepts, outfits and card effects remain unchanged while all ten backgrounds are replaced.",
+  "department_note": "한 플레이어 전장에 동일 부서 추종자 2명 이상이 있으면 라운드 시작에 실제 시너지가 발동한다. 비서실은 소속 공격·방어 +1, 연구개발팀은 소속 공격 +1, 도시운영팀은 이번 라운드 사이즈 한도 +1, 대외협력팀은 아군 공격 +1, 안전관리팀은 아군 방어 +1이다.",
+  "department_groups": {
+    "비서실": {
+      "name": "비서실",
+      "count": 4,
+      "members": [
+        "비비안 르클레르",
+        "베라 노박",
+        "조라 페트로비치",
+        "나디아 모로"
+      ]
+    },
+    "연구개발팀": {
+      "name": "연구개발팀",
+      "count": 5,
+      "members": [
+        "마리솔 베가",
+        "아마라 바우어",
+        "엘로디 뒤몽",
+        "문해원",
+        "장뤄안"
+      ]
+    },
+    "도시운영팀": {
+      "name": "도시운영팀",
+      "count": 6,
+      "members": [
+        "에블린 하트",
+        "에이다 라이트",
+        "아마노 나기",
+        "라레 사다트",
+        "이마니 카마우",
+        "사피야 하다드"
+      ]
+    },
+    "대외협력팀": {
+      "name": "대외협력팀",
+      "count": 2,
+      "members": [
+        "탈리아 애쉬포드",
+        "미나세 시오리"
+      ]
+    },
+    "안전관리팀": {
+      "name": "안전관리팀",
+      "count": 3,
+      "members": [
+        "다니카 뮐러",
+        "아이리스 모건",
+        "천서휘"
+      ]
+    }
+  },
+  "fixed_selections": {
+    "에블린 하트": 2,
+    "비비안 르클레르": 5,
+    "탈리아 애쉬포드": 3,
+    "에이다 라이트": 4,
+    "엘로디 뒤몽": 3,
+    "베라 노박": 4,
+    "아마노 나기": 5,
+    "마리솔 베가": 2,
+    "아마라 바우어": 5,
+    "다니카 뮐러": 4,
+    "아이리스 모건": 5,
+    "문해원": 5,
+    "미나세 시오리": 2,
+    "조라 페트로비치": 2,
+    "라레 사다트": 3,
+    "이마니 카마우": 2,
+    "사피야 하다드": 1,
+    "나디아 모로": 3
+  },
+  "success_count": 10,
+  "error_count": 0,
+  "metadata_verified_count": 21,
+  "output_dir": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6",
+  "project_candidate_dir": "assets/follower-candidates-v6",
+  "characters": [
+    {
+      "id": "yeoul",
+      "name": "에블린 하트",
+      "card_name": "급수망의 길잡이 에블린 하트",
+      "english": "Evelyn Hart",
+      "faction": "outpr",
+      "faction_name": "아웃프라웨어",
+      "age": 29,
+      "role": "온실 급수망 현장 정비사",
+      "personality": "현장의 작은 변화를 가장 먼저 알아차리고, 사람을 기술보다 앞세우는 실천가다. 낯선 사람에게도 먼저 손을 내미는 따뜻함과 위험 앞에서 망설이지 않는 결단력이 함께 있다.",
+      "department": "도시운영팀",
+      "department_detail": "시설운영본부 · 생태기반시설팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 2,
+          "label": "연잎의 물방울을 따라",
+          "status": "confirmed",
+          "selection": "user-confirmed",
+          "seed": 4175538467979892,
+          "image": "assets/follower-candidates-v3/에블린 하트/에블린 하트_02_seed_4175538467979892.png",
+          "source_run": "FollowerRedesign_20261016_v3",
+          "source_variant": 2,
+          "size": null,
+          "original_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/에블린 하트/original/에블린 하트_02_seed_4175538467979892.png",
+          "face_detailer_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/에블린 하트/face_detailer/에블린 하트_02_seed_4175538467979892.png"
+        }
+      ]
+    },
+    {
+      "id": "lagyeong",
+      "name": "비비안 르클레르",
+      "card_name": "동의 기록관 비비안 르클레르",
+      "english": "Vivienne Leclerc",
+      "faction": "outpr",
+      "faction_name": "아웃프라웨어",
+      "age": 34,
+      "role": "생체 장비 동의 기록 감사관",
+      "personality": "원칙을 지키되 규정이 사람을 가두지 않는지 끊임없이 되묻는 꼼꼼한 감사관이다. 말수는 적지만 핵심을 찌르는 건조한 농담을 즐긴다.",
+      "department": "비서실",
+      "department_detail": "준법감사실 · 생명동의감사팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 5,
+          "label": "마지막 대조",
+          "status": "confirmed",
+          "selection": "user-confirmed",
+          "seed": 5678707794495368,
+          "image": "assets/follower-candidates-v3/비비안 르클레르/비비안 르클레르_05_seed_5678707794495368.png",
+          "source_run": "FollowerRedesign_20261016_v3",
+          "source_variant": 5,
+          "size": null,
+          "original_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/비비안 르클레르/original/비비안 르클레르_05_seed_5678707794495368.png",
+          "face_detailer_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/비비안 르클레르/face_detailer/비비안 르클레르_05_seed_5678707794495368.png"
+        }
+      ]
+    },
+    {
+      "id": "haeon",
+      "name": "마리솔 베가",
+      "card_name": "꽃가루 항로사 마리솔 베가",
+      "english": "Marisol Vega",
+      "faction": "outpr",
+      "faction_name": "아웃프라웨어",
+      "age": 26,
+      "role": "수분 드론 항로 설계자",
+      "personality": "정밀한 계산을 즐기면서도 현장에서 떠오른 직감을 믿는 호기심 많은 항로 설계자다. 발견을 감추지 못하는 환한 표정과 즉흥적인 몸짓이 특징이다.",
+      "department": "연구개발팀",
+      "department_detail": "생체연구본부 · 수분항로설계팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 2,
+          "label": "벌의 비행을 따라가다",
+          "status": "confirmed",
+          "seed": 8558377083594134,
+          "detailer_seed": 6479003569758,
+          "composition": "close head-and-shoulders portrait, bright curious eyes following something above frame, one hand shading her eyes, curls moving in the breeze, garden canopy softly visible behind",
+          "scene": "an elevated landing deck with empty circular drone pads, pale glass canopy ribs and clouds over the biotech district",
+          "appearance": "adult woman, light peach skin, faint freckles, honey-blonde curly hair, high loose ponytail, golden-brown eyes, soft curvy build, non-muscular",
+          "outfit": "deep forest-green utility jumpsuit, one-piece coverall, cap sleeves, open collar, full-length straight-leg pants, long pants, low hip waist, smooth flat front, narrow leg line, matte cotton, plain fabric",
+          "exposure_target_percent": 60,
+          "pose_control": "FLP_v3_haeon_02.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((deep forest-green utility jumpsuit, one-piece coverall, cap sleeves, open collar, full-length straight-leg pants, long pants, low hip waist, smooth flat front, narrow leg line, matte cotton, plain fabric:1.25)), (adult woman, light peach skin, faint freckles, honey-blonde curly hair, high loose ponytail, golden-brown eyes, soft curvy build, non-muscular:1.15), (close head-and-shoulders portrait, bright curious eyes following something above frame, one hand shading her eyes, curls moving in the breeze, garden canopy softly visible behind:1.3), (an elevated landing deck with empty circular drone pads, pale glass canopy ribs and clouds over the biotech district, Outpraware living biotech city, muted sage and warm ivory accents, neutral daylight and restrained greens, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, no unlisted clothing layers, bright curiosity that turns into sudden concentration, playful and spontaneous, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, unprinted matte fabric, no weapon, no text, no extra person, no frame or UI",
+          "negative": "shorts, hot pants, bloomers, culottes, high-waist, high-waisted, high-rise, paperbag waist, balloon pants, harem pants, joggers, baggy pants, wide-leg pants, drawstring waist, elastic waistband, gathered waist, puffed legs, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, micro skirt, text, logo, watermark, inset image, white costume, white sleeves, cream costume, kimono, yukata, robe, poncho, bolero, puff sleeves, separate top, contrasting panel, decorative cuffs, chest emblem, gold motifs, ornamental trim, pattern, brocade, blouse, coat, text, symbol, logo",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult woman, light peach skin, faint freckles, honey-blonde curly hair, high loose ponytail, golden-brown eyes, soft curvy build, non-muscular, bright curiosity that turns into sudden concentration, playful and spontaneous, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/마리솔 베가/face_detailer/마리솔 베가_02_seed_8558377083594134.png",
+          "original_image": "assets/follower-candidates-v4/마리솔 베가/original/마리솔 베가_02_seed_8558377083594134.png",
+          "prompt_id": "3bd23469-a0f6-49c2-92ab-2b39e2a2b030",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 4,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:42",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 7921148108648434,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1400427,
+          "original_bytes": 1406680,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\마리솔 베가\\original\\마리솔 베가_02_seed_8558377083594134.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\마리솔 베가\\face_detailer\\마리솔 베가_02_seed_8558377083594134.png",
+          "completed_at": "2026-10-16 14:38:06",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 2,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "chaeyun",
+      "name": "아마라 바우어",
+      "card_name": "살아있는 아치의 설계자 아마라 바우어",
+      "english": "Amara Bauer",
+      "faction": "outpr",
+      "faction_name": "아웃프라웨어",
+      "age": 41,
+      "role": "생체 건축 설계 책임자",
+      "personality": "사람들의 의견을 설계에 끌어들이는 느긋하고 든든한 건축가다. 말보다 오래 듣고, 완성작보다 그 안에서 편하게 걷는 시민을 보며 만족한다.",
+      "department": "연구개발팀",
+      "department_detail": "도시생태설계본부 · 생체건축팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 5,
+          "label": "천천히 돌아보는 건축가",
+          "status": "confirmed",
+          "seed": 1354812645610612,
+          "detailer_seed": 1291380284459,
+          "composition": "high-angle medium shot, crouching beside a flowering public planter and examining a leaf, figure placed near one edge, broad plaza remains visible",
+          "scene": "a high open balcony beneath a huge living canopy, tree bridges and clear sky above the city",
+          "appearance": "adult woman, light warm-beige skin, espresso-brown hair, thick side braid, two silver temple streaks, dark hazel eyes, mature soft build, non-muscular",
+          "outfit": "teal denim jacket worn correctly with sleeves on both arms, open jacket, moss-green one-piece knit midi dress underneath, no waist seam, no belt, straight narrow silhouette, mid-calf hem visibly extending below jacket, one side slit to knee, V-neck, plain solid fabric",
+          "exposure_target_percent": 58,
+          "pose_control": "FLP_v3_chaeyun_05.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((teal denim jacket worn correctly with sleeves on both arms, open jacket, moss-green one-piece knit midi dress underneath, no waist seam, no belt, straight narrow silhouette, mid-calf hem visibly extending below jacket, one side slit to knee, V-neck, plain solid fabric:1.35)), (adult woman, light warm-beige skin, espresso-brown hair, thick side braid, two silver temple streaks, dark hazel eyes, mature soft build, non-muscular:1.15), (high-angle medium shot, crouching beside a flowering public planter and examining a leaf, figure placed near one edge, broad plaza remains visible:1.3), (a high open balcony beneath a huge living canopy, tree bridges and clear sky above the city, Outpraware living biotech city, muted sage and warm ivory accents, neutral daylight and restrained greens, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, patient listening, humble satisfaction, calm welcoming warmth, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays",
+          "negative": "balloon pants, harem pants, extremely baggy trousers, puffed legs, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, fake lettering, text on clothing, logo, watermark, inset image, split screen, collage, crown, tiara, headpiece, hair ornament, royal jewelry",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult woman, light warm-beige skin, espresso-brown hair, thick side braid, two silver temple streaks, dark hazel eyes, mature soft build, non-muscular, patient listening, humble satisfaction, calm welcoming warmth, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/아마라 바우어/face_detailer/아마라 바우어_05_seed_1354812645610612.png",
+          "original_image": "assets/follower-candidates-v4/아마라 바우어/original/아마라 바우어_05_seed_1354812645610612.png",
+          "prompt_id": "44f5525c-d4f2-4bfd-a311-233646d8b047",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 6,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:45",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 2987226297595253,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3242817998436072,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3065926247474824,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1271253,
+          "original_bytes": 1273987,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\아마라 바우어\\original\\아마라 바우어_05_seed_1354812645610612.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\아마라 바우어\\face_detailer\\아마라 바우어_05_seed_1354812645610612.png",
+          "completed_at": "2026-10-16 15:58:19",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 5,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "surim",
+      "name": "탈리아 애쉬포드",
+      "card_name": "물길의 산책 안내자 탈리아 애쉬포드",
+      "english": "Talia Ashford",
+      "faction": "outpr",
+      "faction_name": "아웃프라웨어",
+      "age": 23,
+      "role": "도시 생태 산책 안내자",
+      "personality": "도시의 숨은 풍경을 발견하는 일을 사랑하는 사교적 안내자다. 즉흥적이고 낙천적이며, 누구든 대화에 끌어들이는 장난기 어린 친화력이 있다.",
+      "department": "대외협력팀",
+      "department_detail": "대외협력본부 · 생태관광안내팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 3,
+          "label": "비 오는 날의 우회로",
+          "status": "confirmed",
+          "selection": "user-confirmed",
+          "seed": 2702242482793983,
+          "image": "assets/follower-candidates-v3/탈리아 애쉬포드/탈리아 애쉬포드_03_seed_2702242482793983.png",
+          "source_run": "FollowerRedesign_20261016_v3",
+          "source_variant": 3,
+          "size": null,
+          "original_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/탈리아 애쉬포드/original/탈리아 애쉬포드_03_seed_2702242482793983.png",
+          "face_detailer_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/탈리아 애쉬포드/face_detailer/탈리아 애쉬포드_03_seed_2702242482793983.png"
+        }
+      ]
+    },
+    {
+      "id": "minju",
+      "name": "에이다 라이트",
+      "card_name": "철휘선의 정비사 에이다 라이트",
+      "english": "Ada Wright",
+      "faction": "selfas",
+      "faction_name": "셀파스",
+      "age": 32,
+      "role": "도시 철도 현장 정비사",
+      "personality": "현장 장비는 현장 사람이 고칠 수 있어야 한다고 믿는 직설적이고 자립심 강한 정비사다. 위기 때는 침착하고, 평소에는 짧은 말과 무심한 농담으로 동료를 챙긴다.",
+      "department": "도시운영팀",
+      "department_detail": "교통관리본부 · 철도시설정비팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 4,
+          "label": "현장부터 확인하는 정비사",
+          "status": "confirmed",
+          "selection": "user-confirmed",
+          "seed": 8530239276257144,
+          "image": "assets/follower-candidates-v3/에이다 라이트/에이다 라이트_04_seed_8530239276257144.png",
+          "source_run": "FollowerRedesign_20261016_v3",
+          "source_variant": 4,
+          "size": null,
+          "original_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/에이다 라이트/original/에이다 라이트_04_seed_8530239276257144.png",
+          "face_detailer_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/에이다 라이트/face_detailer/에이다 라이트_04_seed_8530239276257144.png"
+        }
+      ]
+    },
+    {
+      "id": "chaerin",
+      "name": "엘로디 뒤몽",
+      "card_name": "맞춤 보조장비 설계자 엘로디 뒤몽",
+      "english": "Élodie Dumont",
+      "faction": "selfas",
+      "faction_name": "셀파스",
+      "age": 28,
+      "role": "시민 맞춤 보조장비 설계자",
+      "personality": "사용자의 생활 방식을 세심하게 관찰하고 맞춤 설계를 고집하는 다정한 발명가다. 조용하지만 새 아이디어를 설명할 때는 은근한 승부욕과 장난기가 드러난다.",
+      "department": "연구개발팀",
+      "department_detail": "시민기술본부 · 맞춤보조장비설계팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 3,
+          "label": "새 아이디어를 설명하는 순간",
+          "status": "confirmed",
+          "selection": "user-confirmed",
+          "seed": 3458570247602163,
+          "image": "assets/follower-candidates-v3/엘로디 뒤몽/엘로디 뒤몽_03_seed_3458570247602163.png",
+          "source_run": "FollowerRedesign_20261016_v3",
+          "source_variant": 3,
+          "size": null,
+          "original_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/엘로디 뒤몽/original/엘로디 뒤몽_03_seed_3458570247602163.png",
+          "face_detailer_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/엘로디 뒤몽/face_detailer/엘로디 뒤몽_03_seed_3458570247602163.png"
+        }
+      ]
+    },
+    {
+      "id": "ara",
+      "name": "다니카 뮐러",
+      "card_name": "광장 안전감독 다니카 뮐러",
+      "english": "Danica Müller",
+      "faction": "selfas",
+      "faction_name": "셀파스",
+      "age": 35,
+      "role": "공공 이동시설 안전감독",
+      "personality": "혼란스러운 순간에도 주변 사람을 안심시키는 단단한 안전 감독이다. 권위적으로 명령하기보다 먼저 움직여 길을 열며, 자신의 힘을 타인을 지키는 데 쓴다.",
+      "department": "안전관리팀",
+      "department_detail": "도시안전본부 · 공공안전감독팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 4,
+          "label": "안심시키는 짧은 미소",
+          "status": "confirmed",
+          "seed": 4440264444109079,
+          "detailer_seed": 5313965486362,
+          "composition": "rear view from a high skybridge, one hand resting on the rail as she surveys the empty routes below, figure small against the transit architecture",
+          "scene": "a vast transit concourse with no signs, long curved rooflines and an uninterrupted view of the skyline",
+          "appearance": "1girl, adult woman, medium chestnut-brown skin, short natural curly hair, warm brown eyes, mature face, soft curvy build, non-muscular",
+          "outfit": "orange shirt, long sleeves, rolled sleeves, open collar, untucked shirt, blue jeans, low-rise jeans, straight-leg jeans, long pants, slim fit, plain unmarked fabric",
+          "exposure_target_percent": 60,
+          "pose_control": "FLP_v3_ara_04.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((orange shirt, long sleeves, rolled sleeves, open collar, untucked shirt, blue jeans, low-rise jeans, straight-leg jeans, long pants, slim fit, plain unmarked fabric:1.25)), (1girl, adult woman, medium chestnut-brown skin, short natural curly hair, warm brown eyes, mature face, soft curvy build, non-muscular:1.15), (rear view from a high skybridge, one hand resting on the rail as she surveys the empty routes below, figure small against the transit architecture:1.3), (a vast transit concourse with no signs, long curved rooflines and an uninterrupted view of the skyline, Selfas advanced mechanic city, desaturated steel gray, graphite and muted copper accents, neutral white daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, no unlisted clothing layers, calm protective attention, a reassuring half-smile after everyone is safe, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, unprinted matte fabric, no weapon, no text, no extra person, no frame or UI, plain unprinted fabric",
+          "negative": "shorts, hot pants, bloomers, culottes, high-waist, high-waisted, high-rise, paperbag waist, balloon pants, harem pants, joggers, baggy pants, wide-leg pants, drawstring waist, elastic waistband, gathered waist, puffed legs, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, micro skirt, text, logo, watermark, inset image, very dark ebony skin, near-black skin, extremely dark chocolate skin",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, 1girl, adult woman, medium chestnut-brown skin, short natural curly hair, warm brown eyes, mature face, soft curvy build, non-muscular, calm protective attention, a reassuring half-smile after everyone is safe, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/다니카 뮐러/face_detailer/다니카 뮐러_04_seed_4440264444109079.png",
+          "original_image": "assets/follower-candidates-v4/다니카 뮐러/original/다니카 뮐러_04_seed_4440264444109079.png",
+          "prompt_id": "812a73be-9255-49ba-a7f9-981670e6ea83",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 5,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:47",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 8121780782859682,
+              "detections": [
+                {
+                  "text": "ASTILIION",
+                  "confidence": 0.6469,
+                  "box": [
+                    [
+                      456.0,
+                      877.0
+                    ],
+                    [
+                      580.0,
+                      879.0
+                    ],
+                    [
+                      580.0,
+                      902.0
+                    ],
+                    [
+                      456.0,
+                      900.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 7029714994938974,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1225532,
+          "original_bytes": 1228502,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\다니카 뮐러\\original\\다니카 뮐러_04_seed_4440264444109079.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\다니카 뮐러\\face_detailer\\다니카 뮐러_04_seed_4440264444109079.png",
+          "completed_at": "2026-10-16 14:43:38",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 4,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "rion",
+      "name": "아이리스 모건",
+      "card_name": "이동 안내 AI 아이리스 모건",
+      "english": "Iris Morgan",
+      "faction": "selfas",
+      "faction_name": "셀파스",
+      "age": 31,
+      "role": "철휘시 이동 안내 자율 AI",
+      "personality": "사용자에게 최적 경로를 강요하지 않고 선택지를 제시하는 사려 깊은 안내 AI다. 상대의 대답을 기다리는 습관이 있어 호기심 어린 고개 기울임과 부드러운 미소가 어울린다.",
+      "department": "안전관리팀",
+      "department_detail": "교통관리본부 · 이동안내시스템팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 5,
+          "label": "함께 고르는 길",
+          "status": "confirmed",
+          "seed": 7766280461904673,
+          "detailer_seed": 7796987441790,
+          "composition": "high-angle over-shoulder composition, she turns toward the viewer with a curious expression, empty paths and garden islands fill the background",
+          "scene": "an overlook where several empty routes meet above the city, pale clouds and long perspective lines",
+          "appearance": "adult woman, light peach skin, strawberry-blonde chin-length bob, faint lavender hair tips, pale-violet eyes, tall slender soft build, fully human",
+          "outfit": "cobalt-blue asymmetrical cropped T-shirt, one long sleeve, one bare shoulder, side cutout, sideboob, opaque front neckline, black low-rise slim straight trousers, full-length narrow legs, flat front, no belt, thin black choker, blank unprinted fabric",
+          "exposure_target_percent": 65,
+          "pose_control": "FLP_v3_rion_05.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((cobalt-blue asymmetrical cropped T-shirt, one long sleeve, one bare shoulder, side cutout, sideboob, opaque front neckline, black low-rise slim straight trousers, full-length narrow legs, flat front, no belt, thin black choker, blank unprinted fabric:1.35)), (adult woman, light peach skin, strawberry-blonde chin-length bob, faint lavender hair tips, pale-violet eyes, tall slender soft build, fully human:1.15), (high-angle over-shoulder composition, she turns toward the viewer with a curious expression, empty paths and garden islands fill the background:1.3), (an overlook where several empty routes meet above the city, pale clouds and long perspective lines, Selfas advanced mechanic city, desaturated steel gray, graphite and muted copper accents, neutral white daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, patient attentive curiosity, she waits for the other person to choose, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays, plain unmarked clothing",
+          "negative": "balloon pants, harem pants, extremely baggy trousers, puffed legs, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, fake lettering, text on clothing, logo, watermark, inset image, split screen, collage",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult woman, light peach skin, strawberry-blonde chin-length bob, faint lavender hair tips, pale-violet eyes, tall slender soft build, fully human, patient attentive curiosity, she waits for the other person to choose, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/아이리스 모건/face_detailer/아이리스 모건_05_seed_7766280461904673.png",
+          "original_image": "assets/follower-candidates-v4/아이리스 모건/original/아이리스 모건_05_seed_7766280461904673.png",
+          "prompt_id": "bc9ee185-bc35-4481-a754-d469dd0185c8",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 10,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:48",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 2106866876020282,
+              "detections": [
+                {
+                  "text": "She ohie",
+                  "confidence": 0.7786,
+                  "box": [
+                    [
+                      302.0,
+                      714.0
+                    ],
+                    [
+                      420.0,
+                      760.0
+                    ],
+                    [
+                      408.0,
+                      792.0
+                    ],
+                    [
+                      290.0,
+                      746.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 4830740204150207,
+              "detections": [
+                {
+                  "text": "不几復太",
+                  "confidence": 0.5492,
+                  "box": [
+                    [
+                      295.0,
+                      596.0
+                    ],
+                    [
+                      516.0,
+                      615.0
+                    ],
+                    [
+                      512.0,
+                      670.0
+                    ],
+                    [
+                      290.0,
+                      651.0
+                    ]
+                  ]
+                },
+                {
+                  "text": "Livcet",
+                  "confidence": 0.7612,
+                  "box": [
+                    [
+                      351.0,
+                      660.0
+                    ],
+                    [
+                      438.0,
+                      668.0
+                    ],
+                    [
+                      436.0,
+                      693.0
+                    ],
+                    [
+                      349.0,
+                      685.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 5463954528113724,
+              "detections": [
+                {
+                  "text": "Totem",
+                  "confidence": 0.8312,
+                  "box": [
+                    [
+                      299.0,
+                      611.0
+                    ],
+                    [
+                      453.0,
+                      686.0
+                    ],
+                    [
+                      430.0,
+                      735.0
+                    ],
+                    [
+                      275.0,
+                      660.0
+                    ]
+                  ]
+                },
+                {
+                  "text": "tileet",
+                  "confidence": 0.7815,
+                  "box": [
+                    [
+                      293.0,
+                      669.0
+                    ],
+                    [
+                      419.0,
+                      725.0
+                    ],
+                    [
+                      400.0,
+                      768.0
+                    ],
+                    [
+                      274.0,
+                      712.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 4983339380197445,
+              "detections": [
+                {
+                  "text": "THTAT",
+                  "confidence": 0.8213,
+                  "box": [
+                    [
+                      302.0,
+                      728.0
+                    ],
+                    [
+                      542.0,
+                      769.0
+                    ],
+                    [
+                      532.0,
+                      827.0
+                    ],
+                    [
+                      292.0,
+                      786.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 7880400138080529,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1734655127499993,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 8408151465170136,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1302605,
+          "original_bytes": 1308627,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\아이리스 모건\\original\\아이리스 모건_05_seed_7766280461904673.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\아이리스 모건\\face_detailer\\아이리스 모건_05_seed_7766280461904673.png",
+          "completed_at": "2026-10-16 16:00:44",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 5,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "somin",
+      "name": "베라 노박",
+      "card_name": "공개 규격 연구원 베라 노박",
+      "english": "Vera Novák",
+      "faction": "selfas",
+      "faction_name": "셀파스",
+      "age": 24,
+      "role": "생활 메카닉 공개 규격 연구원",
+      "personality": "기계 규격의 빈틈을 찾아내는 재빠르고 호기심 많은 연구원이다. 질문이 많고 고집도 있지만, 어려운 문제를 풀 때 안경 너머로 번지는 장난스러운 미소가 매력이다.",
+      "department": "비서실",
+      "department_detail": "경영지원본부 · 기술비서실 공개규격조정팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 4,
+          "label": "서로 맞는 부품",
+          "status": "confirmed",
+          "selection": "user-confirmed",
+          "seed": 996067656925801,
+          "image": "assets/follower-candidates-v3/베라 노박/베라 노박_04_seed_996067656925801.png",
+          "source_run": "FollowerRedesign_20261016_v3",
+          "source_variant": 4,
+          "size": null,
+          "original_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/베라 노박/original/베라 노박_04_seed_996067656925801.png",
+          "face_detailer_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/베라 노박/face_detailer/베라 노박_04_seed_996067656925801.png"
+        }
+      ]
+    },
+    {
+      "id": "eunju",
+      "name": "문해원",
+      "card_name": "청람 기록소의 이야기꾼 문해원",
+      "english": "Mun Haewon",
+      "faction": "nanguk",
+      "faction_name": "남극성",
+      "age": 36,
+      "role": "공공 검식 기록소 현장 해설사",
+      "personality": "복잡한 검식과 협약을 시민이 이해하는 이야기로 바꾸는 현장 해설사다. 직설적이고 재치가 있으며, 거창한 표현보다 누구나 알아들을 한 문장을 고집한다. 사람들 앞에서 설명할 때의 자신감과 기록을 지키려는 단호함이 공존한다.",
+      "department": "연구개발팀",
+      "department_detail": "공공문화처 · 검식기록해설팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 5,
+          "label": "끝까지 지키는 기록",
+          "status": "confirmed",
+          "seed": 7300252523953909,
+          "detailer_seed": 5081046096690,
+          "composition": "high-angle environmental shot, small figure crossing a broad public stair with a book held at her side, pale water and glass pavilion dominate",
+          "scene": "a high terrace over a contemporary city square, wind lifting leaves above a wide horizon",
+          "appearance": "adult Korean woman, light neutral-beige skin, auburn shag bob, one loose curl, amber eyes, faint freckles, soft full build, non-muscular",
+          "outfit": "modern Korean jeogori-inspired wrap blouse, cobalt blue, narrow goreum tie at right hip, crossing lapels, three-quarter sleeves, collarbones visible, untucked hip-length hem hiding waistband, midnight-navy pencil skirt, slim straight cut, below-knee hem, one side slit, plain fabric",
+          "exposure_target_percent": 62,
+          "pose_control": "FLP_v3_eunju_05.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((modern Korean jeogori-inspired wrap blouse, cobalt blue, narrow goreum tie at right hip, crossing lapels, three-quarter sleeves, collarbones visible, untucked hip-length hem hiding waistband, midnight-navy pencil skirt, slim straight cut, below-knee hem, one side slit, plain fabric:1.35)), (adult Korean woman, light neutral-beige skin, auburn shag bob, one loose curl, amber eyes, faint freckles, soft full build, non-muscular:1.15), (high-angle environmental shot, small figure crossing a broad public stair with a book held at her side, pale water and glass pavilion dominate:1.3), (a high terrace over a contemporary city square, wind lifting leaves above a wide horizon, Nanguk contemporary coastal city, pearl ivory, muted blue-gray and warm wood accents, neutral cloudy daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, witty directness, a dry sideways smile, open and inviting questions, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays, a contemporary blue-white coastal city with Korean, Japanese and Chinese residents, modern civic architecture",
+          "negative": "shorts, denim shorts, hot pants, bloomers, culottes, miniskirt, micro skirt, high-waist, high-waisted, high-rise, paperbag waist, balloon pants, harem pants, joggers, baggy pants, wide-leg pants, loose trousers, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, fake lettering, text on clothing, logo, watermark, inset image, split screen, collage, kimono, yukata, obi bow, hakama, Japanese wrap robe, Chinese hanfu, balloon sleeves, pleated trousers",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Korean woman, light neutral-beige skin, auburn shag bob, one loose curl, amber eyes, faint freckles, soft full build, non-muscular, witty directness, a dry sideways smile, open and inviting questions, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/문해원/face_detailer/문해원_05_seed_7300252523953909.png",
+          "original_image": "assets/follower-candidates-v4/문해원/original/문해원_05_seed_7300252523953909.png",
+          "prompt_id": "bec18810-f0ce-4ded-bb8c-600136fa65e4",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 6,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:49",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 5319579603302224,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 5493705894527836,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 2338004176100519,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1250075,
+          "original_bytes": 1256382,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\문해원\\original\\문해원_05_seed_7300252523953909.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\문해원\\face_detailer\\문해원_05_seed_7300252523953909.png",
+          "completed_at": "2026-10-16 15:35:18",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 5,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "nagyeong",
+      "name": "미나세 시오리",
+      "card_name": "청람선의 검식 안내자 미나세 시오리",
+      "english": "Minase Shiori",
+      "faction": "nanguk",
+      "faction_name": "남극성",
+      "age": 27,
+      "role": "도시 교류 검식 안내자",
+      "personality": "정해진 동작을 강요하기보다 상대의 속도에 맞춰 검식을 가르치는 활동적인 안내자다. 승부보다 함께 익히는 즐거움을 중시하고, 실패한 동작도 웃으며 다시 보여 준다.",
+      "department": "대외협력팀",
+      "department_detail": "도시교류국 · 검식교류안내팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 2,
+          "label": "실패한 동작도 웃으며 다시",
+          "status": "confirmed",
+          "seed": 7227851547226339,
+          "detailer_seed": 7899038853308,
+          "composition": "close portrait, laughing at her own small mistake, warm eyes and loose braid in focus, harbor softly blurred behind",
+          "scene": "a broad seaside boardwalk with modern Japanese coastal architecture, open water and wind",
+          "appearance": "adult Japanese woman, fair cool-neutral skin, glossy waist-length black hair, one long braid with cobalt cord, deep black-brown eyes, tall lean soft build",
+          "outfit": "Japanese yukata wrap top, deep indigo, broad sleeves, left lapel over right, cobalt obi, flat back bow, dark-indigo pleated wrap midi skirt, below-knee hem, clean plain textile",
+          "exposure_target_percent": 60,
+          "pose_control": "FLP_v3_nagyeong_02.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((Japanese yukata wrap top, deep indigo, broad sleeves, left lapel over right, cobalt obi, flat back bow, dark-indigo pleated wrap midi skirt, below-knee hem, clean plain textile:1.25)), (adult Japanese woman, fair cool-neutral skin, glossy waist-length black hair, one long braid with cobalt cord, deep black-brown eyes, tall lean soft build:1.15), (close portrait, laughing at her own small mistake, warm eyes and loose braid in focus, harbor softly blurred behind:1.3), (a broad seaside boardwalk with modern Japanese coastal architecture, open water and wind, Nanguk contemporary coastal city, pearl ivory, muted blue-gray and warm wood accents, neutral cloudy daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, no unlisted clothing layers, patient encouragement, a playful laugh at her own mistake, warm attentive focus, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, unprinted matte fabric, no weapon, no text, no extra person, no frame or UI, a contemporary blue-white coastal city with Korean, Japanese and Chinese residents; use modern civic architecture, not a historical temple, plain unprinted fabric",
+          "negative": "shorts, hot pants, bloomers, culottes, high-waist, high-waisted, high-rise, paperbag waist, balloon pants, harem pants, joggers, baggy pants, wide-leg pants, drawstring waist, elastic waistband, gathered waist, puffed legs, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, micro skirt, text, logo, watermark, inset image, hanbok, Korean jeogori, goreum tie, narrow dangling Korean ribbon, Chinese hanfu, qipao",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Japanese woman, fair cool-neutral skin, glossy waist-length black hair, one long braid with cobalt cord, deep black-brown eyes, tall lean soft build, patient encouragement, a playful laugh at her own mistake, warm attentive focus, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/미나세 시오리/face_detailer/미나세 시오리_02_seed_7227851547226339.png",
+          "original_image": "assets/follower-candidates-v4/미나세 시오리/original/미나세 시오리_02_seed_7227851547226339.png",
+          "prompt_id": "d2021202-4357-417f-aac2-222dc94b369f",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 4,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:50",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 3271632963118526,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1170852,
+          "original_bytes": 1173202,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\미나세 시오리\\original\\미나세 시오리_02_seed_7227851547226339.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\미나세 시오리\\face_detailer\\미나세 시오리_02_seed_7227851547226339.png",
+          "completed_at": "2026-10-16 14:49:49",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 2,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "boram",
+      "name": "장뤄안",
+      "card_name": "장뤄안 — 바람길 공명 설계자",
+      "english": "Zhang Ruoan",
+      "faction": "nanguk",
+      "faction_name": "남극성",
+      "age": 31,
+      "role": "남극성 연구개발팀 · 도시 바람길 공명 연구원",
+      "personality": "호기심과 재치가 넘치고, 즉흥적인 실험을 즐긴다. 실패해도 먼저 웃어 보이며 주변 사람을 실험에 끌어들이는 외향적인 분위기 메이커다. 평소에는 가볍고 장난스럽지만 도시의 공명 흐름이 흔들릴 때는 놀라울 만큼 빠르고 집중력 있게 판단한다.",
+      "department": "연구개발팀",
+      "department_detail": "도시 바람길·음향 공명 연구",
+      "confirmed": false,
+      "variants": [
+        {
+          "number": 1,
+          "label": "배경 후보 1",
+          "status": "complete",
+          "seed": 1862486444127324,
+          "detailer_seed": 2291348009941,
+          "composition": "((extreme wide panoramic composition:1.35)), a tiny solitary woman seated in knee-high wildflowers on the dry river ridge, back three-quarter view watching the sunrise delta, open sky and braided water dominate the vertical illustration, understated shoes are a tiny detail",
+          "scene": "a panoramic sunrise over a vast braided river delta, viewed from an elevated dry ridge scattered with dew-bright wildflowers, layered islands and winding waterways far below, tiny modern coastal skyline on the distant horizon, long peach-and-gold sky and river valley dominate, one tiny solitary woman sits in the flowers near the ridge edge",
+          "appearance": "adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular",
+          "outfit": "minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric",
+          "exposure_target_percent": 72,
+          "pose_control": "FLP_v5_zhang_wide.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, vertical cinematic environment illustration, ((the landscape is the main subject, background fills at least 80 percent of the image:1.38)), tiny distant solitary woman, ((extreme wide panoramic composition:1.35)), a tiny solitary woman seated in knee-high wildflowers on the dry river ridge, back three-quarter view watching the sunrise delta, open sky and braided water dominate the vertical illustration, understated shoes are a tiny detail, ((environment-led open landscape:1.27)), (a panoramic sunrise over a vast braided river delta, viewed from an elevated dry ridge scattered with dew-bright wildflowers, layered islands and winding waterways far below, tiny modern coastal skyline on the distant horizon, long peach-and-gold sky and river valley dominate, one tiny solitary woman sits in the flowers near the ridge edge:1.31), clearly layered foreground, middle distance and far horizon, full image painted edge to edge, natural atmospheric perspective, grounded contact shadows, shared light and color temperature, ((minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric:1.44)), ((adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular:1.18)), bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, exactly one adult woman, the character belongs naturally in this location, consistent scale and perspective, subtle ambient bounce light, plain unprinted fabric, empty hands, understated modern low-profile walking shoes in a dark matching color, footwear is incidental and never emphasized, natural jade green fabric, dark chestnut hair, amber eyes, soft neutral daylight, restrained natural color palette, accurate white balance",
+          "negative": "text on clothes, short pixie haircut, short hair, black hair, red hair, orange hair, silver hair, white hair, pigtails, denim miniskirt, shorts, trousers, balloon pants, harem pants, cropped denim jacket, hanbok, kimono, yukata, historical hanfu, historical costume, ornate embroidery, floral pattern, pagoda, temple, hanok, tiled roofs, ancient street, historic architecture, traditional village, gazebo, Chinese pavilion, red pavilion, roofed pavilion, traditional East Asian pavilion, carved wooden columns, historical garden structure, 2girls, multiple women, extra person, duo, twin women, duplicate figure, second woman, blonde hair, yellow hair, golden hair, buttons, decorative closures, floral motif, flower applique, geometric pattern, cape, veil, long train, floating cloth, flowing skirt, fabric blowing in wind, close-up, tight portrait, medium shot, crowded market, night club, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, extra person, second person, partial person, second silhouette, extra body, extra legs, person reflected in water, duplicate human reflection, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, duplicate reflection, second woman reflected in water, miniature person, foreground legs, first-person view, POV, extra body, extra legs, cropped second person, washed out, blown highlights, low contrast, watermark, ornate gold frame, decorative border, floating camera equipment, tripods, foreground body parts, barefoot, bare feet, barefoot woman, missing shoes, shoes removed, shoes off, high heels, feet close-up, wading, ankle-deep water, standing in water, feet submerged, picture frame, ornate frame, border frame, floating square, floating diamond, floating icon, decorative symbol in sky, geometric icon",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular, bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/장뤄안/face_detailer/장뤄안_01_seed_1862486444127324.png",
+          "original_image": "assets/follower-candidates-v6/장뤄안/original/장뤄안_01_seed_1862486444127324.png",
+          "prompt_id": "cea2b88e-678b-40dc-9fe7-d82e489be6f1",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 4,
+          "ocr_retry_history": [
+            {
+              "seed": 3187005691851979,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 5909267686645579,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 8616666789457033,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3758336595740308,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:35",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1482806,
+          "original_bytes": 1486163,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\original\\장뤄안_01_seed_1862486444127324.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\face_detailer\\장뤄안_01_seed_1862486444127324.png",
+          "completed_at": "2026-10-19 12:53:11"
+        },
+        {
+          "number": 2,
+          "label": "배경 후보 2",
+          "status": "complete",
+          "seed": 3488780383795357,
+          "detailer_seed": 1204893447904,
+          "composition": "((close side-profile portrait:1.25)), head and shoulders only, laughing softly as a breeze lifts loose strands, bright amber eyes, foreground iris leaves softly framing the image and flowered hillside behind",
+          "scene": "an immense open botanical wind garden on a gentle coastal hillside in late spring, foreground iris leaves and tiny flowers, rolling flowering grassland and scattered sculptural wind screens across the middle distance, far sea horizon and pale cloud banks, soft clean daylight, no enclosing walls",
+          "appearance": "adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular",
+          "outfit": "minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric",
+          "exposure_target_percent": 72,
+          "pose_control": "FLP_v5_portrait.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, one adult woman, solo, vertical cinematic illustration, ((minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric:1.35)), ((adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular:1.16)), (((close side-profile portrait:1.25)), head and shoulders only, laughing softly as a breeze lifts loose strands, bright amber eyes, foreground iris leaves softly framing the image and flowered hillside behind:1.24), ((environment-led open landscape:1.18)), (an immense open botanical wind garden on a gentle coastal hillside in late spring, foreground iris leaves and tiny flowers, rolling flowering grassland and scattered sculptural wind screens across the middle distance, far sea horizon and pale cloud banks, soft clean daylight, no enclosing walls:1.26), foreground, middle distance and far horizon all clearly visible, full image painted edge to edge, natural atmospheric perspective, environment and woman share the same light, contact shadows and color temperature, bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, the character belongs naturally in this location, feet and body grounded in the scene, consistent perspective and scale, subtle ambient bounce light, plain unprinted fabric, empty hands, natural jade green fabric, dark chestnut hair, amber eyes, soft neutral daylight, restrained natural color palette, accurate white balance",
+          "negative": "text on clothes, short pixie haircut, short hair, black hair, red hair, orange hair, silver hair, white hair, pigtails, denim miniskirt, shorts, trousers, balloon pants, harem pants, cropped denim jacket, hanbok, kimono, yukata, historical hanfu, historical costume, ornate embroidery, floral pattern, pagoda, temple, hanok, tiled roofs, ancient street, historic architecture, traditional village, 2girls, multiple women, extra person, duo, twin women, duplicate figure, second woman, blonde hair, yellow hair, golden hair, buttons, decorative closures, floral motif, flower applique, geometric pattern, cape, veil, long train, floating cloth, flowing skirt, fabric blowing in wind, close-up, tight portrait, medium shot, crowded market, night club, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, extra person, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, washed out, blown highlights, low contrast, watermark",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular, bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/장뤄안/face_detailer/장뤄안_02_seed_3488780383795357.png",
+          "original_image": "assets/follower-candidates-v6/장뤄안/original/장뤄안_02_seed_3488780383795357.png",
+          "prompt_id": "17f87a94-b921-42d0-842e-595bb4a07ca5",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 1,
+          "ocr_retry_history": [
+            {
+              "seed": 5513422874207779,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1320594,
+          "original_bytes": 1326451,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\original\\장뤄안_02_seed_3488780383795357.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\face_detailer\\장뤄안_02_seed_3488780383795357.png",
+          "completed_at": "2026-10-19 12:40:59",
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:35",
+            "detections": []
+          }
+        },
+        {
+          "number": 3,
+          "label": "배경 후보 3",
+          "status": "complete",
+          "seed": 4146326401077812,
+          "detailer_seed": 2448292903891,
+          "composition": "((wide environmental three-quarter view:1.25)), one woman standing on a dry grassy overlook, leaning forward with delighted curiosity and one hand open toward the distant river, river valley and far shore fill the rest of frame, understated dark walking shoes",
+          "scene": "a vast sloping field of violet and ivory cosmos flowers above the river city, thick flowers dominate the foreground and roll over several open hills toward the distant water, tiny modern skyline barely visible at the far horizon beneath a deep blue sky with broad white clouds, one tiny woman in the field, completely natural open landscape, no structure, no path, no pavilion",
+          "appearance": "adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular",
+          "outfit": "minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric",
+          "exposure_target_percent": 72,
+          "pose_control": "FLP_v5_walk.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, vertical cinematic environment illustration, ((open scenic environment remains clearly visible around the woman:1.28)), environmental portrait with generous background, ((wide environmental three-quarter view:1.25)), one woman standing on a dry grassy overlook, leaning forward with delighted curiosity and one hand open toward the distant river, river valley and far shore fill the rest of frame, understated dark walking shoes, ((environment-led open landscape:1.27)), (a vast sloping field of violet and ivory cosmos flowers above the river city, thick flowers dominate the foreground and roll over several open hills toward the distant water, tiny modern skyline barely visible at the far horizon beneath a deep blue sky with broad white clouds, one tiny woman in the field, completely natural open landscape, no structure, no path, no pavilion:1.31), clearly layered foreground, middle distance and far horizon, full image painted edge to edge, natural atmospheric perspective, grounded contact shadows, shared light and color temperature, ((minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric:1.44)), ((adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular:1.18)), bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, exactly one adult woman, the character belongs naturally in this location, consistent scale and perspective, subtle ambient bounce light, plain unprinted fabric, empty hands, understated modern low-profile walking shoes in a dark matching color, footwear is incidental and never emphasized, natural jade green fabric, dark chestnut hair, amber eyes, soft neutral daylight, restrained natural color palette, accurate white balance",
+          "negative": "text on clothes, short pixie haircut, short hair, black hair, red hair, orange hair, silver hair, white hair, pigtails, denim miniskirt, shorts, trousers, balloon pants, harem pants, cropped denim jacket, hanbok, kimono, yukata, historical hanfu, historical costume, ornate embroidery, floral pattern, pagoda, temple, hanok, tiled roofs, ancient street, historic architecture, traditional village, gazebo, Chinese pavilion, red pavilion, roofed pavilion, traditional East Asian pavilion, carved wooden columns, historical garden structure, 2girls, multiple women, extra person, duo, twin women, duplicate figure, second woman, blonde hair, yellow hair, golden hair, buttons, decorative closures, floral motif, flower applique, geometric pattern, cape, veil, long train, floating cloth, flowing skirt, fabric blowing in wind, close-up, tight portrait, medium shot, crowded market, night club, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, extra person, second person, partial person, second silhouette, extra body, extra legs, person reflected in water, duplicate human reflection, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, duplicate reflection, second woman reflected in water, miniature person, foreground legs, first-person view, POV, extra body, extra legs, cropped second person, washed out, blown highlights, low contrast, watermark, ornate gold frame, decorative border, floating camera equipment, tripods, foreground body parts, barefoot, bare feet, barefoot woman, missing shoes, shoes removed, shoes off, high heels, feet close-up, wading, ankle-deep water, standing in water, feet submerged, picture frame, ornate frame, border frame, floating square, floating diamond, floating icon, decorative symbol in sky, geometric icon",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular, bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/장뤄안/face_detailer/장뤄안_03_seed_4146326401077812.png",
+          "original_image": "assets/follower-candidates-v6/장뤄안/original/장뤄안_03_seed_4146326401077812.png",
+          "prompt_id": "2f56a9ef-da2f-4425-9290-8f385c5b765f",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 4,
+          "ocr_retry_history": [
+            {
+              "seed": 8888831196845146,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 8409903422495817,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 7215077122356086,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 8218296607490785,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:36",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1481805,
+          "original_bytes": 1488678,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\original\\장뤄안_03_seed_4146326401077812.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\face_detailer\\장뤄안_03_seed_4146326401077812.png",
+          "completed_at": "2026-10-19 12:53:36"
+        },
+        {
+          "number": 4,
+          "label": "배경 후보 4",
+          "status": "complete",
+          "seed": 5931142033997616,
+          "detailer_seed": 2129935042671,
+          "composition": "((distant rear view:1.30)), tiny solitary woman standing in a high meadow at sunset, both arms relaxed at her sides and empty hands visible, sunset landscape and estuary dominate, figure occupies under one fifth of image height",
+          "scene": "an open civic garden on a high ridge above the river delta at sunset, sweeping bands of pale grass and low flowering shrubs across the foreground, the broad river estuary and distant city far below, warm apricot clouds fill the sky, quiet natural overlook with no visible structures or objects",
+          "appearance": "adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular",
+          "outfit": "minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric",
+          "exposure_target_percent": 72,
+          "pose_control": "FLP_v5_seated.png",
+          "positive": "masterpiece, best quality, highres, refined 2d anime game illustration, polished cel shading, natural controlled colors, vertical cinematic art, 1girl, solo, exactly one adult woman, one woman only, no other people, preserve the specified face and hair, adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular, minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric, plain unprinted clothing, no jewelry in hand, empty hands, simple low-profile shoes, ((distant rear view:1.30)), tiny solitary woman standing in a high meadow at sunset, both arms relaxed at her sides and empty hands visible, sunset landscape and estuary dominate, figure occupies under one fifth of image height, an open civic garden on a high ridge above the river delta at sunset, sweeping bands of pale grass and low flowering shrubs across the foreground, the broad river estuary and distant city far below, warm apricot clouds fill the sky, quiet natural overlook with no visible structures or objects, wide open environment, foreground and distant landscape both visible, environment fills most of the vertical image, natural atmospheric depth, character shares the location's light and perspective, bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, natural jade green fabric, dark chestnut hair, amber eyes, soft neutral daylight, restrained natural color palette, accurate white balance",
+          "negative": "balloon pants, harem pants, text on clothes, 2girls, multiple girls, extra person, duplicate woman, crowd, multiple women, multiple people, extra person, duplicate, twin, second figure, partial person, reflection of a person, mirror image, collage, split screen, inset, picture frame, border, floating icon, square ornament, text, letters, logo, symbol, pattern, embroidery, badge, signage, watermark, weapon, sword, gun, cigarette, cigar, smoking, tobacco, pipe, vape, lighter, hookah, ashtray, matches, smoke, robot, mecha, child, teenager, male, muscular, nude, bare breasts, lingerie, transparent clothes, bad anatomy, extra limbs, extra fingers, malformed hands, low quality, blurry, barefoot, bare feet, missing shoes, handheld object, scarf, shawl, cape, veil, trailing cloth, paper charm, talisman, pixie haircut, short hair, denim skirt, shorts, pants, trousers, puffy sleeves, oversized jacket, coat, robe, hanfu costume, historical costume, ornamental embroidery, floral print, brocade, visible symbols, text, lettering, logo, belt pouch, black dress, second woman, twin woman, red hair, orange hair, silver hair, white hair, blonde hair, yellow hair, golden hair, black pixie haircut, twin tails, child, teenager, underage, muscular woman, broad bodybuilder shoulders",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular, bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/장뤄안/face_detailer/장뤄안_04_seed_5931142033997616.png",
+          "original_image": "assets/follower-candidates-v6/장뤄안/original/장뤄안_04_seed_5931142033997616.png",
+          "prompt_id": "711f675d-6e06-44de-a391-581879061c6c",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 3,
+          "ocr_retry_history": [
+            {
+              "seed": 3618192551610489,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1063556315340685,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3784484588674356,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:36",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1200048,
+          "original_bytes": 1200048,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\original\\장뤄안_04_seed_5931142033997616.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\face_detailer\\장뤄안_04_seed_5931142033997616.png",
+          "completed_at": "2026-10-19 12:59:51"
+        },
+        {
+          "number": 5,
+          "label": "배경 후보 5",
+          "status": "complete",
+          "seed": 4172511261931991,
+          "detailer_seed": 3219943194905,
+          "composition": "((eye-level environmental long shot:1.30)), a solitary woman seated in profile on a dry grassy hilltop, looking toward distant city lights, only one woman in the entire image, feet outside the lower crop, calm thoughtful half-smile, broad dark valley and starry sky fill the background, no first-person viewpoint",
+          "scene": "a quiet blue-hour hilltop meadow with tall dark jade grasses and pale violet flowers in the foreground, distant city lights sparkle far below beside a calm river, deep indigo sky with faint stars, a dry grassy knoll for one seated woman, broad uninterrupted night sky and valley dominate, no path, no close water, no neon, no buildings",
+          "appearance": "adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular",
+          "outfit": "minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric",
+          "exposure_target_percent": 72,
+          "pose_control": "FLP_v5_zhang_rear.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, vertical cinematic environment illustration, ((open scenic environment remains clearly visible around the woman:1.28)), environmental portrait with generous background, ((eye-level environmental long shot:1.30)), a solitary woman seated in profile on a dry grassy hilltop, looking toward distant city lights, only one woman in the entire image, feet outside the lower crop, calm thoughtful half-smile, broad dark valley and starry sky fill the background, no first-person viewpoint, ((environment-led open landscape:1.27)), (a quiet blue-hour hilltop meadow with tall dark jade grasses and pale violet flowers in the foreground, distant city lights sparkle far below beside a calm river, deep indigo sky with faint stars, a dry grassy knoll for one seated woman, broad uninterrupted night sky and valley dominate, no path, no close water, no neon, no buildings:1.31), clearly layered foreground, middle distance and far horizon, full image painted edge to edge, natural atmospheric perspective, grounded contact shadows, shared light and color temperature, ((minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric:1.44)), ((adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular:1.18)), bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, exactly one adult woman, the character belongs naturally in this location, consistent scale and perspective, subtle ambient bounce light, plain unprinted fabric, empty hands, understated modern low-profile walking shoes in a dark matching color, footwear is incidental and never emphasized, natural jade green fabric, dark chestnut hair, amber eyes, soft neutral daylight, restrained natural color palette, accurate white balance",
+          "negative": "text on clothes, short pixie haircut, short hair, black hair, red hair, orange hair, silver hair, white hair, pigtails, denim miniskirt, shorts, trousers, balloon pants, harem pants, cropped denim jacket, hanbok, kimono, yukata, historical hanfu, historical costume, ornate embroidery, floral pattern, pagoda, temple, hanok, tiled roofs, ancient street, historic architecture, traditional village, gazebo, Chinese pavilion, red pavilion, roofed pavilion, traditional East Asian pavilion, carved wooden columns, historical garden structure, 2girls, multiple women, extra person, duo, twin women, duplicate figure, second woman, blonde hair, yellow hair, golden hair, buttons, decorative closures, floral motif, flower applique, geometric pattern, cape, veil, long train, floating cloth, flowing skirt, fabric blowing in wind, close-up, tight portrait, medium shot, crowded market, night club, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, ((extra person:1.9)), ((second person:1.9)), partial person, second silhouette, extra body, extra legs, person reflected in water, duplicate human reflection, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, duplicate reflection, second woman reflected in water, miniature person, foreground legs, first-person view, POV, extra body, extra legs, cropped second person, washed out, blown highlights, low contrast, watermark, barefoot, bare feet, barefoot woman, missing shoes, shoes removed, shoes off, high heels, feet close-up, wading, ankle-deep water, standing in water, feet submerged, picture frame, ornate frame, border frame, floating square, floating diamond, floating icon, decorative symbol in sky, geometric icon",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular, bright mischievous confidence, quick delighted eyes, an impulsive grin that becomes intent concentration; breezy and expressive rather than careful or reserved, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/장뤄안/face_detailer/장뤄안_05_seed_4172511261931991.png",
+          "original_image": "assets/follower-candidates-v6/장뤄안/original/장뤄안_05_seed_4172511261931991.png",
+          "prompt_id": "5cfccdf4-fa10-43ab-8c13-20a5b0722f76",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 3,
+          "ocr_retry_history": [
+            {
+              "seed": 4793185721810079,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 5275957417328448,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 4851164844071830,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:36",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1334033,
+          "original_bytes": 1336245,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\original\\장뤄안_05_seed_4172511261931991.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\장뤄안\\face_detailer\\장뤄안_05_seed_4172511261931991.png",
+          "completed_at": "2026-10-19 12:50:21"
+        }
+      ]
+    },
+    {
+      "id": "haeryeong",
+      "name": "아마노 나기",
+      "card_name": "바다 관측대의 길잡이 아마노 나기",
+      "english": "Amano Nagi",
+      "faction": "nanguk",
+      "faction_name": "남극성",
+      "age": 29,
+      "role": "해안 관측·교통 안내사",
+      "personality": "바람과 물결을 읽는 데 익숙한 솔직하고 모험심 강한 해안 안내사다. 위험을 과장하지 않지만 필요한 경고는 단호하게 전하고, 힘든 길도 유머로 넘긴다.",
+      "department": "도시운영팀",
+      "department_detail": "해안교통국 · 관측항로안내팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 5,
+          "label": "해안의 신호를 듣다",
+          "status": "confirmed",
+          "selection": "user-confirmed",
+          "seed": 3599730492385079,
+          "image": "assets/follower-candidates-v3/아마노 나기/아마노 나기_05_seed_3599730492385079.png",
+          "source_run": "FollowerRedesign_20261016_v3",
+          "source_variant": 5,
+          "size": null,
+          "original_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/아마노 나기/original/아마노 나기_05_seed_3599730492385079.png",
+          "face_detailer_png": "/mnt/d/캐릭터 일러스트/FollowerRedesign_20261016_v3/아마노 나기/face_detailer/아마노 나기_05_seed_3599730492385079.png"
+        }
+      ]
+    },
+    {
+      "id": "seohwi",
+      "name": "천서휘",
+      "card_name": "천서휘 — 열린 대피로의 조율자",
+      "english": "Cheon Seohwi",
+      "faction": "nanguk",
+      "faction_name": "남극성",
+      "age": 45,
+      "role": "남극성 안전관리팀 · 시민 대피동선 설계자",
+      "personality": "사람의 표정과 걸음걸이를 먼저 살피는 노련한 관찰자다. 단정한 말투와 능청스러운 농담으로 긴장을 풀고, 지시보다 선택지를 건네 사람을 안심시킨다. 위급한 순간에는 망설임 없이 결정을 내리지만, 상황이 끝나면 가장 늦게까지 남아 누구도 놓치지 않았는지 확인한다.",
+      "department": "안전관리팀",
+      "department_detail": "시민 대피동선·공공 공간 안전 설계",
+      "confirmed": false,
+      "variants": [
+        {
+          "number": 1,
+          "label": "배경 후보 1",
+          "status": "complete",
+          "seed": 4509240348177319,
+          "detailer_seed": 3546696770831,
+          "composition": "((extreme wide coastal landscape:1.35)), tiny solitary woman sitting in tall grass on a dry coastal ridge near the lower left, seen from behind, ocean and sky occupy most of the image, no path, no railing, no boardwalk, no second person",
+          "scene": "an immense open sea cliff meadow at dawn, foreground filled with wind-combed grasses and pale wildflowers, layered coastal bluffs descending toward the bay in the middle distance, endless calm ocean horizon beneath a luminous apricot sky, one tiny rear-view woman sits on the grassy ridge, no bridge, boardwalk, path, railing or buildings",
+          "appearance": "mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular",
+          "outfit": "warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth",
+          "exposure_target_percent": 68,
+          "pose_control": "FLP_v5_seohwi_wide.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, vertical cinematic environment illustration, ((the landscape is the main subject, background fills at least 80 percent of the image:1.38)), tiny distant solitary woman, ((extreme wide coastal landscape:1.35)), tiny solitary woman sitting in tall grass on a dry coastal ridge near the lower left, seen from behind, ocean and sky occupy most of the image, no path, no railing, no boardwalk, no second person, ((environment-led open landscape:1.27)), (an immense open sea cliff meadow at dawn, foreground filled with wind-combed grasses and pale wildflowers, layered coastal bluffs descending toward the bay in the middle distance, endless calm ocean horizon beneath a luminous apricot sky, one tiny rear-view woman sits on the grassy ridge, no bridge, boardwalk, path, railing or buildings:1.31), clearly layered foreground, middle distance and far horizon, full image painted edge to edge, natural atmospheric perspective, grounded contact shadows, shared light and color temperature, ((warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth:1.44)), ((mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular:1.18)), wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, exactly one adult woman, the character belongs naturally in this location, consistent scale and perspective, subtle ambient bounce light, plain unprinted fabric, empty hands, understated modern low-profile walking shoes in a dark matching color, footwear is incidental and never emphasized, ((warm ivory blouse:1.5)), ((dark plum square-neck top:1.5)), ((dark navy wide-leg trousers:1.5)), accurate natural ivory skin, neutral daylight",
+          "negative": "text on clothes, 2girls, multiple girls, extra person, duplicate woman, crowd, golden-yellow shirt, plum slim trousers, ponytail, long hair, blonde hair, colorful hair, school uniform, teacher outfit, sports uniform, referee uniform, military uniform, martial arts uniform, full historical hanbok, huge bow, miniskirt, shorts, denim, balloon pants, harem pants, closed classroom, school interior, gymnasium, stadium, hanok, pagoda, tiled roofs, traditional pavilion, ancient street, black bodysuit, catsuit, leotard, latex, vinyl, jacket slipping off shoulders, coat draped over arms, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, ((extra person:1.9)), ((second person:1.9)), partial person, second silhouette, extra body, extra legs, person reflected in water, duplicate human reflection, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, duplicate reflection, second woman reflected in water, miniature person, foreground legs, first-person view, POV, extra body, extra legs, cropped second person, washed out, blown highlights, low contrast, watermark, barefoot, bare feet, barefoot woman, missing shoes, shoes removed, shoes off, high heels, feet close-up, wading, ankle-deep water, standing in water, feet submerged, picture frame, ornate frame, border frame, floating square, floating diamond, floating icon, decorative symbol in sky, geometric icon, close-up portrait, headshot, waist-up portrait, centered large woman, woman fills the image, oversized foreground figure, fashion catalog portrait, cropped landscape, reflection of woman, duplicate reflection, second human silhouette, object in foreground, camera, camera equipment, tripods, ((frame:2.0)), ((picture frame:2.0)), ornate gold frame, decorative border, foreground legs, foreground shoes, human reflection, miniature figure reflection",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular, wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/천서휘/face_detailer/천서휘_01_seed_4509240348177319.png",
+          "original_image": "assets/follower-candidates-v6/천서휘/original/천서휘_01_seed_4509240348177319.png",
+          "prompt_id": "31f82696-e43a-4df8-a25c-5366ca6bda01",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 3,
+          "ocr_retry_history": [
+            {
+              "seed": 6203382990012004,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 2628379650438169,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 2725618905490589,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:36",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1247055,
+          "original_bytes": 1249119,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\original\\천서휘_01_seed_4509240348177319.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\face_detailer\\천서휘_01_seed_4509240348177319.png",
+          "completed_at": "2026-10-19 12:50:53"
+        },
+        {
+          "number": 2,
+          "label": "배경 후보 2",
+          "status": "complete",
+          "seed": 2954303072313959,
+          "detailer_seed": 7660887987808,
+          "composition": "((intimate close portrait:1.25)), mature woman looking just off camera with a wry reassuring smile, shoulders relaxed, blue hydrangeas along one edge and a deep sunlit open water garden behind her, no enclosing frame",
+          "scene": "an open-air hydrangea arboretum in midsummer, blue and lilac flowers across the foreground and along one edge, a wide natural garden clearing and reflective pond visible behind the woman, layers of mature trees with bright sky between their canopies, intimate side portrait integrated into the open garden, no border or frame",
+          "appearance": "mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular",
+          "outfit": "warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth",
+          "exposure_target_percent": 68,
+          "pose_control": "FLP_v5_portrait.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, vertical cinematic environment illustration, ((open scenic environment remains clearly visible around the woman:1.28)), environmental portrait with generous background, ((intimate close portrait:1.25)), mature woman looking just off camera with a wry reassuring smile, shoulders relaxed, blue hydrangeas along one edge and a deep sunlit open water garden behind her, no enclosing frame, ((environment-led open landscape:1.30)), (an open-air hydrangea arboretum in midsummer, blue and lilac flowers across the foreground and along one edge, a wide natural garden clearing and reflective pond visible behind the woman, layers of mature trees with bright sky between their canopies, intimate side portrait integrated into the open garden, no border or frame:1.35), clearly layered foreground, middle distance and far horizon, full image painted edge to edge, natural atmospheric perspective, grounded contact shadows, shared light and color temperature, ((warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth:1.28)), ((mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular:1.10)), wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, exactly one adult woman, the character belongs naturally in this location, consistent scale and perspective, subtle ambient bounce light, plain unprinted fabric, empty hands, understated modern low-profile walking shoes in a dark matching color, footwear is incidental and never emphasized, ((warm ivory blouse:1.5)), ((dark plum square-neck top:1.5)), ((dark navy wide-leg trousers:1.5)), accurate natural ivory skin, neutral daylight",
+          "negative": "text on clothes, 2girls, multiple girls, extra person, duplicate woman, crowd, golden-yellow shirt, plum slim trousers, ponytail, long hair, blonde hair, colorful hair, school uniform, teacher outfit, sports uniform, referee uniform, military uniform, martial arts uniform, full historical hanbok, huge bow, miniskirt, shorts, denim, balloon pants, harem pants, closed classroom, school interior, gymnasium, stadium, hanok, pagoda, tiled roofs, traditional pavilion, ancient street, black bodysuit, catsuit, leotard, latex, vinyl, jacket slipping off shoulders, coat draped over arms, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, extra person, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, washed out, blown highlights, low contrast, watermark, barefoot, bare feet, barefoot woman, missing shoes, shoes removed, shoes off, high heels, feet close-up, wading, ankle-deep water, standing in water, feet submerged, picture frame, ornate frame, border frame, floating square, floating diamond, floating icon, decorative symbol in sky, geometric icon, second woman's legs, partial second body, extra body, extra legs, cropped person, image border, wooden frame",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular, wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/천서휘/face_detailer/천서휘_02_seed_2954303072313959.png",
+          "original_image": "assets/follower-candidates-v6/천서휘/original/천서휘_02_seed_2954303072313959.png",
+          "prompt_id": "4603a023-a973-4e27-8e56-a88ff7b14be4",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 2,
+          "ocr_retry_history": [
+            {
+              "seed": 3154600193608308,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3943333063694109,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:37",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1584626,
+          "original_bytes": 1586262,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\original\\천서휘_02_seed_2954303072313959.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\face_detailer\\천서휘_02_seed_2954303072313959.png",
+          "completed_at": "2026-10-19 12:47:18"
+        },
+        {
+          "number": 3,
+          "label": "배경 후보 3",
+          "status": "complete",
+          "seed": 8164682184502741,
+          "detailer_seed": 2281376978056,
+          "composition": "((medium-wide candid composition:1.25)), standing at the edge of a broad open civic square, she gently gestures with one empty hand to indicate several routes, warm attentive expression, fountain and trees remain clearly visible",
+          "scene": "a generous contemporary civic square with several broad curved routes picked out only by different stone colors, a low fountain and mature trees in the middle distance, open paved foreground, small people-free lawn edges and distant sea light, bright clear afternoon, no signs or buildings dominating",
+          "appearance": "mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular",
+          "outfit": "warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth",
+          "exposure_target_percent": 68,
+          "pose_control": "FLP_v5_crouch.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, one adult woman, solo, vertical cinematic illustration, ((warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth:1.35)), ((mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular:1.16)), (((medium-wide candid composition:1.25)), standing at the edge of a broad open civic square, she gently gestures with one empty hand to indicate several routes, warm attentive expression, fountain and trees remain clearly visible:1.24), ((environment-led open landscape:1.18)), (a generous contemporary civic square with several broad curved routes picked out only by different stone colors, a low fountain and mature trees in the middle distance, open paved foreground, small people-free lawn edges and distant sea light, bright clear afternoon, no signs or buildings dominating:1.26), foreground, middle distance and far horizon all clearly visible, full image painted edge to edge, natural atmospheric perspective, environment and woman share the same light, contact shadows and color temperature, wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, the character belongs naturally in this location, feet and body grounded in the scene, consistent perspective and scale, subtle ambient bounce light, plain unprinted fabric, empty hands, ((warm ivory blouse:1.5)), ((dark plum square-neck top:1.5)), ((dark navy wide-leg trousers:1.5)), accurate natural ivory skin, neutral daylight",
+          "negative": "text on clothes, 2girls, multiple girls, extra person, duplicate woman, crowd, golden-yellow shirt, plum slim trousers, ponytail, long hair, blonde hair, colorful hair, school uniform, teacher outfit, sports uniform, referee uniform, military uniform, martial arts uniform, full historical hanbok, huge bow, miniskirt, shorts, denim, balloon pants, harem pants, closed classroom, school interior, gymnasium, stadium, hanok, pagoda, tiled roofs, traditional pavilion, ancient street, black bodysuit, catsuit, leotard, latex, vinyl, jacket slipping off shoulders, coat draped over arms, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, extra person, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, washed out, blown highlights, low contrast, watermark",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular, wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/천서휘/face_detailer/천서휘_03_seed_8164682184502741.png",
+          "original_image": "assets/follower-candidates-v6/천서휘/original/천서휘_03_seed_8164682184502741.png",
+          "prompt_id": "64921334-c0e2-44ed-aeef-43aeb24943fd",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 1,
+          "ocr_retry_history": [
+            {
+              "seed": 1649654424242171,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1367312,
+          "original_bytes": 1371313,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\original\\천서휘_03_seed_8164682184502741.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\face_detailer\\천서휘_03_seed_8164682184502741.png",
+          "completed_at": "2026-10-19 12:43:15",
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:37",
+            "detections": []
+          }
+        },
+        {
+          "number": 4,
+          "label": "배경 후보 4",
+          "status": "complete",
+          "seed": 4168527036282113,
+          "detailer_seed": 2867705963120,
+          "composition": "((long-distance environmental view:1.30)), one small solitary woman seated in a flowered coastal meadow, seen in rear three-quarter profile with hands resting in her lap, layered hillside and blue coastline extend behind her, one person only",
+          "scene": "a broad spring meadow on a coastal hillside, soft pink and ivory wildflowers across the foreground, a few dark evergreen pines spaced far apart, blue bay and hazy mountains in the distance beneath a clear pale sky, one solitary woman sits quietly in the grass with empty hands, continuous natural scenery",
+          "appearance": "mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular",
+          "outfit": "warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth",
+          "exposure_target_percent": 68,
+          "pose_control": "FLP_v5_seohwi_rear.png",
+          "positive": "masterpiece, best quality, highres, refined 2d anime game illustration, polished cel shading, natural controlled colors, vertical cinematic art, 1girl, solo, exactly one adult woman, one woman only, no other people, preserve the specified face and hair, mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular, warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth, plain unprinted clothing, no jewelry in hand, empty hands, simple low-profile shoes, ((long-distance environmental view:1.30)), one small solitary woman seated in a flowered coastal meadow, seen in rear three-quarter profile with hands resting in her lap, layered hillside and blue coastline extend behind her, one person only, a broad spring meadow on a coastal hillside, soft pink and ivory wildflowers across the foreground, a few dark evergreen pines spaced far apart, blue bay and hazy mountains in the distance beneath a clear pale sky, one solitary woman sits quietly in the grass with empty hands, continuous natural scenery, wide open environment, foreground and distant landscape both visible, uninterrupted natural scenery extends to every edge of the image, environment fills most of the vertical image, natural atmospheric depth, character shares the location's light and perspective, wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, ((warm ivory blouse:1.5)), ((dark plum square-neck top:1.5)), ((dark navy wide-leg trousers:1.5)), accurate natural ivory skin, neutral daylight",
+          "negative": "balloon pants, harem pants, text on clothes, collage, 2girls, multiple girls, extra person, duplicate woman, crowd, multiple women, multiple people, extra person, duplicate, twin, second figure, partial person, reflection of a person, mirror image, text, letters, logo, symbol, pattern, embroidery, badge, signage, watermark, weapon, sword, gun, cigarette, cigar, smoking, tobacco, pipe, vape, lighter, hookah, ashtray, matches, smoke, robot, mecha, child, teenager, male, muscular, nude, bare breasts, lingerie, transparent clothes, bad anatomy, extra limbs, extra fingers, malformed hands, low quality, blurry, barefoot, bare feet, missing shoes, handheld object, scarf, shawl, cape, veil, trailing cloth, paper charm, talisman, high ponytail, golden-yellow blouse, purple slim trousers, miniskirt, shorts, denim, military uniform, referee uniform, sportswear, school uniform, teacher outfit, martial arts uniform, full hanbok, historical costume, giant ribbon, ornamental embroidery, floral print, visible symbols, text, lettering, logo, badge, high heels emphasized, black bodysuit, catsuit, leotard, vinyl, latex, jumpsuit, off-shoulder coat, jacket slipping off shoulders, jacket draped over arms, black jacket, black blouse, youthful face, adolescent, child, teenager, underage, blonde hair, colorful hair, long ponytail, muscular woman, broad bodybuilder shoulders, helmet, cap, visor",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular, wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/천서휘/face_detailer/천서휘_04_seed_4168527036282113.png",
+          "original_image": "assets/follower-candidates-v6/천서휘/original/천서휘_04_seed_4168527036282113.png",
+          "prompt_id": "575ee9b7-88e5-4d32-abbf-2c5c9e5ddf68",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 8,
+          "ocr_retry_history": [
+            {
+              "seed": 1372257728211976,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 8512801579416411,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1679017068665289,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 7071156862067248,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 6268473313239059,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 6489719586877108,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1881984133973707,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3765257243657249,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:37",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1303369,
+          "original_bytes": 1307193,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\original\\천서휘_04_seed_4168527036282113.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\face_detailer\\천서휘_04_seed_4168527036282113.png",
+          "completed_at": "2026-10-19 13:04:27"
+        },
+        {
+          "number": 5,
+          "label": "배경 후보 5",
+          "status": "complete",
+          "seed": 5814489434060021,
+          "detailer_seed": 5364297489287,
+          "composition": "((medium-wide seated profile:1.25)), mature woman resting on a dry grassy terrace above the bay, shoulders loose and a relieved smile, broad flowered hillside and sunset coast visible, her shoes remain dry",
+          "scene": "a grand open civic park above the coastline at sunset, broad crescent grass terraces and low pale-stone seating step across the dry hillside, flower beds and a few coastal pines, far beyond them a calm bay catches a long ribbon of orange light, one woman sits on a dry terrace as a small relaxed figure, no water touching her, no enclosed architecture",
+          "appearance": "mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular",
+          "outfit": "warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth",
+          "exposure_target_percent": 68,
+          "pose_control": "FLP_v5_seated.png",
+          "positive": "1girl, solo, adult woman, masterpiece, best quality, highres, polished 2d anime game illustration, expressive clean lineart, refined cel shading, natural balanced colors, vertical cinematic environment illustration, ((open scenic environment remains clearly visible around the woman:1.28)), environmental portrait with generous background, ((medium-wide seated profile:1.25)), mature woman resting on a dry grassy terrace above the bay, shoulders loose and a relieved smile, broad flowered hillside and sunset coast visible, her shoes remain dry, ((environment-led open landscape:1.27)), (a grand open civic park above the coastline at sunset, broad crescent grass terraces and low pale-stone seating step across the dry hillside, flower beds and a few coastal pines, far beyond them a calm bay catches a long ribbon of orange light, one woman sits on a dry terrace as a small relaxed figure, no water touching her, no enclosed architecture:1.31), clearly layered foreground, middle distance and far horizon, full image painted edge to edge, natural atmospheric perspective, grounded contact shadows, shared light and color temperature, ((warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth:1.44)), ((mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular:1.18)), wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, exactly one adult woman, the character belongs naturally in this location, consistent scale and perspective, subtle ambient bounce light, plain unprinted fabric, empty hands, understated modern low-profile walking shoes in a dark matching color, footwear is incidental and never emphasized, ((warm ivory blouse:1.5)), ((dark plum square-neck top:1.5)), ((dark navy wide-leg trousers:1.5)), accurate natural ivory skin, neutral daylight",
+          "negative": "text on clothes, 2girls, multiple girls, extra person, duplicate woman, crowd, golden-yellow shirt, plum slim trousers, ponytail, long hair, blonde hair, colorful hair, school uniform, teacher outfit, sports uniform, referee uniform, military uniform, martial arts uniform, full historical hanbok, huge bow, miniskirt, shorts, denim, balloon pants, harem pants, closed classroom, school interior, gymnasium, stadium, hanok, pagoda, tiled roofs, traditional pavilion, ancient street, black bodysuit, catsuit, leotard, latex, vinyl, jacket slipping off shoulders, coat draped over arms, ((text:1.7)), ((letters:1.7)), fake lettering, gibberish text, typography, logo, watermark, signage, pattern, embroidery, printed fabric, emblem, badge, labels, captions, poster, card frame, border, inset image, split screen, collage, second view, duplicate woman, multiple women, crowd, ((extra person:1.9)), ((second person:1.9)), partial person, second silhouette, extra body, extra legs, person reflected in water, duplicate human reflection, weapon, sword, blade, knife, dagger, gun, bow, armor, shield, held object, ((cigarette:1.8)), ((smoking:1.8)), tobacco, cigar, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch, airplane, aircraft, jet, spacecraft, rocket, drone, robot, mecha, child, teenager, underage, muscular woman, bodybuilder, male, nude, bare breasts, lingerie, transparent clothes, pornographic pose, low quality, blurry, bad anatomy, extra limbs, extra fingers, fused fingers, malformed hands, duplicate face, duplicate reflection, second woman reflected in water, miniature person, foreground legs, first-person view, POV, extra body, extra legs, cropped second person, washed out, blown highlights, low contrast, watermark, barefoot, bare feet, barefoot woman, missing shoes, shoes removed, shoes off, high heels, feet close-up, wading, ankle-deep water, standing in water, feet submerged, picture frame, ornate frame, border frame, floating square, floating diamond, floating icon, decorative symbol in sky, geometric icon",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular, wry reassuring half-smile, observant mature eyes, calm authority with a spark of humor; relaxed and humane, never stern or militaristic, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v6/천서휘/face_detailer/천서휘_05_seed_5814489434060021.png",
+          "original_image": "assets/follower-candidates-v6/천서휘/original/천서휘_05_seed_5814489434060021.png",
+          "prompt_id": "3c47dce4-f8c8-4ce5-8c51-260f31c2b6e9",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 3,
+          "ocr_retry_history": [
+            {
+              "seed": 3870783009616404,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1870728105960910,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 2464458741804677,
+              "reason": "visual QA"
+            }
+          ],
+          "control_strength": 0.0,
+          "control_end_percent": 0.96,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-19 13:04:37",
+            "detections": []
+          },
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1180657,
+          "original_bytes": 1184869,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\original\\천서휘_05_seed_5814489434060021.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261019_v6\\천서휘\\face_detailer\\천서휘_05_seed_5814489434060021.png",
+          "completed_at": "2026-10-19 12:51:41"
+        }
+      ]
+    },
+    {
+      "id": "jeongran",
+      "name": "조라 페트로비치",
+      "card_name": "묵로 장터의 살림꾼 조라 페트로비치",
+      "english": "Zora Petrović",
+      "faction": "unbek",
+      "faction_name": "언벡",
+      "age": 48,
+      "role": "공동 장터 물자 조정자",
+      "personality": "장터의 물자와 사람 사정을 함께 살피는 넉넉하고 현실적인 조정자다. 남의 이야기를 잘 기억하고, 거래의 빈틈을 알아차려도 상대를 망신주지 않는 능청스러움이 있다.",
+      "department": "비서실",
+      "department_detail": "묵로협동조합 · 생활물자조정실",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 2,
+          "label": "거래의 빈틈을 알아채다",
+          "status": "confirmed",
+          "seed": 2499408402904063,
+          "detailer_seed": 5760334358175,
+          "composition": "close portrait, warm laugh lines and knowing smile, one loose silver curl across her cheek, market awning softly visible behind",
+          "scene": "a rooftop produce terrace with plain baskets, low planters and a wide view of the neighborhood",
+          "appearance": "adult Slavic woman in her late forties, light beige skin, salt-and-pepper rope braid, loose silver curls, deep brown eyes, warm smile lines, mature soft full build",
+          "outfit": "brick-red sleeveless V-neck knit vest over ivory blouse, charcoal A-line midi skirt, smooth flat hip fit, mid-calf hem, clean narrow silhouette, no gathered waistband, visible knit texture, plain fabric",
+          "exposure_target_percent": 62,
+          "pose_control": "FLP_v3_jeongran_02.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((brick-red sleeveless V-neck knit vest over ivory blouse, charcoal A-line midi skirt, smooth flat hip fit, mid-calf hem, clean narrow silhouette, no gathered waistband, visible knit texture, plain fabric:1.35)), (adult Slavic woman in her late forties, light beige skin, salt-and-pepper rope braid, loose silver curls, deep brown eyes, warm smile lines, mature soft full build:1.15), (close portrait, warm laugh lines and knowing smile, one loose silver curl across her cheek, market awning softly visible behind:1.3), (a rooftop produce terrace with plain baskets, low planters and a wide view of the neighborhood, Unbek isolated settlement, weathered stone, charcoal, muted olive and a small warm amber accent, neutral daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, warm attentive listening, practical knowing humor, generous composure, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays",
+          "negative": "shorts, denim shorts, hot pants, bloomers, culottes, miniskirt, micro skirt, high-waist, high-waisted, high-rise, paperbag waist, balloon pants, harem pants, joggers, baggy pants, wide-leg pants, loose trousers, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, fake lettering, text on clothing, logo, watermark, inset image, split screen, collage",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Slavic woman in her late forties, light beige skin, salt-and-pepper rope braid, loose silver curls, deep brown eyes, warm smile lines, mature soft full build, warm attentive listening, practical knowing humor, generous composure, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/조라 페트로비치/face_detailer/조라 페트로비치_02_seed_2499408402904063.png",
+          "original_image": "assets/follower-candidates-v4/조라 페트로비치/original/조라 페트로비치_02_seed_2499408402904063.png",
+          "prompt_id": "5f3932ce-e745-4972-9d5e-2673ee20a5d2",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 7,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:55",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 5463031145895380,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 7602252491097774,
+              "detections": [
+                {
+                  "text": "Slvei",
+                  "confidence": 0.5388,
+                  "box": [
+                    [
+                      451.0,
+                      1189.0
+                    ],
+                    [
+                      541.0,
+                      1189.0
+                    ],
+                    [
+                      541.0,
+                      1210.0
+                    ],
+                    [
+                      451.0,
+                      1210.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 5206691755416185,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 8615363043006316,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1140267,
+          "original_bytes": 1143871,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\조라 페트로비치\\original\\조라 페트로비치_02_seed_2499408402904063.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\조라 페트로비치\\face_detailer\\조라 페트로비치_02_seed_2499408402904063.png",
+          "completed_at": "2026-10-16 15:41:17",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 2,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "sojeong",
+      "name": "라레 사다트",
+      "card_name": "지붕길의 전령 라레 사다트",
+      "english": "Laleh Sadat",
+      "faction": "unbek",
+      "faction_name": "언벡",
+      "age": 25,
+      "role": "옥상 통신 전령",
+      "personality": "전선이 끊겨도 직접 달려 길을 여는 대담하고 장난기 많은 전령이다. 속도와 즉흥성을 즐기지만, 전달해야 할 말은 한 글자도 놓치지 않는다.",
+      "department": "도시운영팀",
+      "department_detail": "지붕길통신망 · 전령운영팀",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 3,
+          "label": "수신자를 먼저 확인하다",
+          "status": "confirmed",
+          "seed": 2681945449466977,
+          "detailer_seed": 8646292218210,
+          "composition": "close profile portrait, daring smirk and alert amber eyes, coral hair swept by wind, rooftop lights softly behind",
+          "scene": "a rooftop stair landing overlooking a quiet doorway far below and a wide layered skyline",
+          "appearance": "adult Persian woman, medium-light warm olive skin, vivid coral-red asymmetrical wolf cut, long swept fringe, one tapered side, dark amber eyes, petite soft build, non-muscular",
+          "outfit": "solid coral-red short-sleeve cotton T-shirt tied once at one side, small lower side-seam cutout with a tasteful narrow sideboob glimpse, simple clean silhouette, charcoal low-rise denim shorts, mid-thigh length, fitted straight cut, no cargo pockets, solid matte fabric",
+          "exposure_target_percent": 70,
+          "pose_control": "FLP_v3_sojeong_03.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((solid coral-red short-sleeve cotton T-shirt tied once at one side, small lower side-seam cutout with a tasteful narrow sideboob glimpse, simple clean silhouette, charcoal low-rise denim shorts, mid-thigh length, fitted straight cut, no cargo pockets, solid matte fabric:1.35)), (adult Persian woman, medium-light warm olive skin, vivid coral-red asymmetrical wolf cut, long swept fringe, one tapered side, dark amber eyes, petite soft build, non-muscular:1.15), (close profile portrait, daring smirk and alert amber eyes, coral hair swept by wind, rooftop lights softly behind:1.3), (a rooftop stair landing overlooking a quiet doorway far below and a wide layered skyline, Unbek isolated settlement, weathered stone, charcoal, muted olive and a small warm amber accent, neutral daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, playful speed, daring motion, quick attentiveness to the person receiving a message, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays, plain unmarked clothing",
+          "negative": "balloon pants, harem pants, extremely baggy trousers, puffed legs, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, ((letters on clothing:2.0)), ((graphic print:2.0)), ((brand logo:2.0)), ((chest badge:1.8)), ((typography:1.8)), watermark, inset image, split screen, collage, second view of same woman, mirror image, very dark brown skin, deep ebony skin, near-black skin, extremely dark skin, draped coat, jacket hanging from elbows, coat slipping off shoulders, shawl, cape, ((letters on chest:2.1)), ((chest logo:2.1)), ((graphic t-shirt:2.0)), ((word on shirt:2.1)), ((shirt print:2.0)), ((brand logo:2.1)), ((symbol on shirt:2.0)), ((illustration on clothing:1.9)), ((letters on clothing:2.0)), slogan, typography, badge, emblem, name tag, label, patch",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Persian woman, medium-light warm olive skin, vivid coral-red asymmetrical wolf cut, long swept fringe, one tapered side, dark amber eyes, petite soft build, non-muscular, playful speed, daring motion, quick attentiveness to the person receiving a message, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/라레 사다트/face_detailer/라레 사다트_03_seed_2681945449466977.png",
+          "original_image": "assets/follower-candidates-v4/라레 사다트/original/라레 사다트_03_seed_2681945449466977.png",
+          "prompt_id": "069333a0-7c6f-4d1e-a1f7-8eda0458514f",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 11,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:57",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 2441943270710251,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3421392004624871,
+              "detections": [
+                {
+                  "text": "Oivid Ceel.",
+                  "confidence": 0.8515,
+                  "box": [
+                    [
+                      237.0,
+                      596.0
+                    ],
+                    [
+                      479.0,
+                      688.0
+                    ],
+                    [
+                      453.0,
+                      757.0
+                    ],
+                    [
+                      210.0,
+                      665.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 6108605723292574,
+              "detections": [
+                {
+                  "text": "Ceviel",
+                  "confidence": 0.8534,
+                  "box": [
+                    [
+                      270.0,
+                      554.0
+                    ],
+                    [
+                      413.0,
+                      562.0
+                    ],
+                    [
+                      410.0,
+                      618.0
+                    ],
+                    [
+                      267.0,
+                      610.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 1530815802096574,
+              "detections": [
+                {
+                  "text": "DAVID",
+                  "confidence": 0.7485,
+                  "box": [
+                    [
+                      312.0,
+                      527.0
+                    ],
+                    [
+                      462.0,
+                      508.0
+                    ],
+                    [
+                      468.0,
+                      550.0
+                    ],
+                    [
+                      318.0,
+                      569.0
+                    ]
+                  ]
+                },
+                {
+                  "text": "CEL.T",
+                  "confidence": 0.8099,
+                  "box": [
+                    [
+                      310.0,
+                      574.0
+                    ],
+                    [
+                      449.0,
+                      562.0
+                    ],
+                    [
+                      453.0,
+                      607.0
+                    ],
+                    [
+                      314.0,
+                      619.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 1141924329210983,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 4143676573279070,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1994025829935392,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 3921836565581814,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1366034,
+          "original_bytes": 1369157,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\라레 사다트\\original\\라레 사다트_03_seed_2681945449466977.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\라레 사다트\\face_detailer\\라레 사다트_03_seed_2681945449466977.png",
+          "completed_at": "2026-10-16 16:18:52",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 3,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "girim",
+      "name": "이마니 카마우",
+      "card_name": "강변 회수대의 안내자 이마니 카마우",
+      "english": "Imani Kamau",
+      "faction": "unbek",
+      "faction_name": "언벡",
+      "age": 34,
+      "role": "강변 구조·회수 안내자",
+      "personality": "쓸 수 있는 것을 버리지 않고 다시 살리는 침착하고 믿음직한 구조 안내자다. 말이 많지 않지만 사람과 자원을 모두 안전하게 옮기는 순간에는 묵직한 자신감이 드러난다.",
+      "department": "도시운영팀",
+      "department_detail": "강변공동체 · 구조회수대",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 2,
+          "label": "쓸 수 있는 재료를 고르다",
+          "status": "confirmed",
+          "seed": 3406927848976601,
+          "detailer_seed": 1968290403450,
+          "composition": "close portrait, calm reassuring smile and hazel eyes, copper braids gathered at one side, bright water softly blurred behind",
+          "scene": "an open floating recovery dock on calm water, simple timber platforms and a wide blue sky",
+          "appearance": "adult East African woman, medium warm golden-brown skin, copper microbraids in one sculptural side bun, hazel eyes, reassuring rounded build, non-muscular",
+          "outfit": "muted olive-gray fitted shirt dress, short sleeves, open collar, one-piece silhouette, gently shaped torso without belt or gathered waist, mid-calf hem, single side slit to knee, matte cotton, plain solid fabric",
+          "exposure_target_percent": 60,
+          "pose_control": "FLP_v3_girim_02.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((muted olive-gray fitted shirt dress, short sleeves, open collar, one-piece silhouette, gently shaped torso without belt or gathered waist, mid-calf hem, single side slit to knee, matte cotton, plain solid fabric:1.35)), (adult East African woman, medium warm golden-brown skin, copper microbraids in one sculptural side bun, hazel eyes, reassuring rounded build, non-muscular:1.15), (close portrait, calm reassuring smile and hazel eyes, copper braids gathered at one side, bright water softly blurred behind:1.3), (an open floating recovery dock on calm water, simple timber platforms and a wide blue sky, Unbek isolated settlement, weathered stone, charcoal, muted olive and a small warm amber accent, neutral daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, calm reassurance, grounded confidence, quietly checking that everyone is safe, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays",
+          "negative": "shorts, denim shorts, hot pants, bloomers, culottes, miniskirt, micro skirt, high-waist, high-waisted, high-rise, paperbag waist, balloon pants, harem pants, joggers, baggy pants, wide-leg pants, loose trousers, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, fake lettering, text on clothing, logo, watermark, inset image, split screen, collage",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult East African woman, medium warm golden-brown skin, copper microbraids in one sculptural side bun, hazel eyes, reassuring rounded build, non-muscular, calm reassurance, grounded confidence, quietly checking that everyone is safe, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/이마니 카마우/face_detailer/이마니 카마우_02_seed_3406927848976601.png",
+          "original_image": "assets/follower-candidates-v4/이마니 카마우/original/이마니 카마우_02_seed_3406927848976601.png",
+          "prompt_id": "b484818c-d012-432f-856c-545df5c9aba1",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 7,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:58",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 7175635742014199,
+              "detections": [
+                {
+                  "text": "clalm",
+                  "confidence": 0.7639,
+                  "box": [
+                    [
+                      366.0,
+                      668.0
+                    ],
+                    [
+                      458.0,
+                      668.0
+                    ],
+                    [
+                      458.0,
+                      695.0
+                    ],
+                    [
+                      366.0,
+                      695.0
+                    ]
+                  ]
+                },
+                {
+                  "text": "Mcilder",
+                  "confidence": 0.6477,
+                  "box": [
+                    [
+                      286.0,
+                      1166.0
+                    ],
+                    [
+                      393.0,
+                      1166.0
+                    ],
+                    [
+                      393.0,
+                      1186.0
+                    ],
+                    [
+                      286.0,
+                      1186.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 5111188951366482,
+              "detections": [
+                {
+                  "text": "leperdIallrator",
+                  "confidence": 0.7907,
+                  "box": [
+                    [
+                      249.0,
+                      303.0
+                    ],
+                    [
+                      526.0,
+                      303.0
+                    ],
+                    [
+                      526.0,
+                      326.0
+                    ],
+                    [
+                      249.0,
+                      326.0
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "seed": 1120446275430585,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 2790115014094781,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1142456,
+          "original_bytes": 1151530,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\이마니 카마우\\original\\이마니 카마우_02_seed_3406927848976601.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\이마니 카마우\\face_detailer\\이마니 카마우_02_seed_3406927848976601.png",
+          "completed_at": "2026-10-16 15:46:01",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 2,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "onjae",
+      "name": "사피야 하다드",
+      "card_name": "골목 공용공방의 수리사 사피야 하다드",
+      "english": "Safiya Haddad",
+      "faction": "unbek",
+      "faction_name": "언벡",
+      "age": 30,
+      "role": "공용 생활기기 수리사",
+      "personality": "고장 난 물건의 반복되는 징후를 조용히 관찰하고 그림으로 설명하는 인내심 많은 수리사다. 잠이 부족해도 작은 발견을 놓치지 않으며, 친절한 설명 뒤에 소소한 엉뚱함이 있다.",
+      "department": "도시운영팀",
+      "department_detail": "골목공용공방 · 생활기기수리실",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 1,
+          "label": "반복되는 고장을 관찰하다",
+          "status": "confirmed",
+          "seed": 1295927064088712,
+          "detailer_seed": 6438552421632,
+          "composition": "close portrait, sleepy thoughtful eyes sharpening into a tiny delighted smile, silver curls in focus, open repair arcade softly behind",
+          "scene": "an open-sided neighborhood repair arcade with patched awnings, sunlit brick lane and distant water towers",
+          "appearance": "adult Arab woman, light warm olive-beige skin, clearly silver-white cloud curls, short nape undercut, one forehead curl, reddish-brown eyes, tall slender build, sleepy thoughtful face",
+          "outfit": "deep wine-plum short-sleeve crop T-shirt with a tasteful high lower hem revealing a narrow underbust strip, clean solid matte plum fabric, bone-white low-rise pleated miniskirt, mid-thigh hem, hip-slung waistband, small side slit, accurate natural garment colors",
+          "exposure_target_percent": 55,
+          "pose_control": "FLP_v3_onjae_01.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((deep wine-plum short-sleeve crop T-shirt with a tasteful high lower hem revealing a narrow underbust strip, clean solid matte plum fabric, bone-white low-rise pleated miniskirt, mid-thigh hem, hip-slung waistband, small side slit, accurate natural garment colors:1.35)), (adult Arab woman, light warm olive-beige skin, clearly silver-white cloud curls, short nape undercut, one forehead curl, reddish-brown eyes, tall slender build, sleepy thoughtful face:1.15), (close portrait, sleepy thoughtful eyes sharpening into a tiny delighted smile, silver curls in focus, open repair arcade softly behind:1.3), (an open-sided neighborhood repair arcade with patched awnings, sunlit brick lane and distant water towers, Unbek isolated settlement, weathered stone, charcoal, muted olive and a small warm amber accent, neutral daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, sleepy thoughtfulness that sharpens into a tiny delighted smile when she notices a detail, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays, natural silver-white hair, deep plum-purple shirt and ivory skirt, soft neutral daylight, natural anime colors, smooth clean cel shading, plain unmarked clothing",
+          "negative": "balloon pants, harem pants, 2girls, multiple girls, extra person, duplicate woman, crowd, low quality, blurry, bad anatomy, malformed hands, extra fingers, extra limbs, multiple people, duplicate woman, text on clothes, fake lettering, logo, watermark, signage, badge, emblem, calligraphy, child, teenager, underage, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapon, sword, gun, inset image, collage",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult Arab woman, light warm olive-beige skin, clearly silver-white cloud curls, short nape undercut, one forehead curl, reddish-brown eyes, tall slender build, sleepy thoughtful face, sleepy thoughtfulness that sharpens into a tiny delighted smile when she notices a detail, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/사피야 하다드/face_detailer/사피야 하다드_01_seed_1295927064088712.png",
+          "original_image": "assets/follower-candidates-v4/사피야 하다드/original/사피야 하다드_01_seed_1295927064088712.png",
+          "prompt_id": "fb4ddc97-fc79-4a61-a06a-da45aaf5b1d0",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 11,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:41:59",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 3732973022729019,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 5804109865197193,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 4203009275673906,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1898459939971062,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1664482164746612,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 7011980981070392,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 5235721263379123,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 1878994208722204,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1243508,
+          "original_bytes": 1249277,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\사피야 하다드\\original\\사피야 하다드_01_seed_1295927064088712.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\사피야 하다드\\face_detailer\\사피야 하다드_01_seed_1295927064088712.png",
+          "completed_at": "2026-10-16 16:32:27",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 1,
+      "confirmed_at": "2026-10-16"
+    },
+    {
+      "id": "mijeong",
+      "name": "나디아 모로",
+      "card_name": "묵로 계약조정인 나디아 모로",
+      "english": "Nadia Moreau",
+      "faction": "unbek",
+      "faction_name": "언벡",
+      "age": 39,
+      "role": "시민 계약·수리권 조정인",
+      "personality": "서로의 사정을 듣되 수리권과 선택권만큼은 양보하지 않는 차분한 협상가다. 상대를 몰아붙이지 않고 핵심을 분명히 짚으며, 결정적인 순간엔 한 치도 물러서지 않는다.",
+      "department": "비서실",
+      "department_detail": "묵로공동조정회 · 계약수리권조정실",
+      "confirmed": true,
+      "variants": [
+        {
+          "number": 3,
+          "label": "상대의 사정을 끝까지 듣다",
+          "status": "confirmed",
+          "seed": 1857311156041171,
+          "detailer_seed": 3546768875406,
+          "composition": "close side portrait, attentive listening expression and one cheek dimple appearing in a small smile, brick arch softly behind",
+          "scene": "a rooftop citizens pavilion with low walls, garden beds and a clear view of the city",
+          "appearance": "adult human woman in her late thirties, light neutral-beige skin, smoky-lilac bob below ears, chestnut eyes, one cheek dimple, softly curvy build",
+          "outfit": "oversized lavender-blue button-up shirt worn open, rolled sleeves, hip-length untucked hem, black sleeveless straight midi dress underneath, below-knee mid-calf hem, one side slit to knee, smooth silhouette without waistband, plain unmarked fabric",
+          "exposure_target_percent": 58,
+          "pose_control": "FLP_v3_mijeong_03.png",
+          "positive": "masterpiece, best quality, amazing quality, very aesthetic, highres, anime coloring, 2d anime illustration, clean expressive lineart, refined cel shading, soft painterly depth, rich controlled colors, vertical trading card illustration, asymmetrical story composition, 1girl, solo, adult woman, ((oversized lavender-blue button-up shirt worn open, rolled sleeves, hip-length untucked hem, black sleeveless straight midi dress underneath, below-knee mid-calf hem, one side slit to knee, smooth silhouette without waistband, plain unmarked fabric:1.35)), (adult human woman in her late thirties, light neutral-beige skin, smoky-lilac bob below ears, chestnut eyes, one cheek dimple, softly curvy build:1.15), (close side portrait, attentive listening expression and one cheek dimple appearing in a small smile, brick arch softly behind:1.3), (a rooftop citizens pavilion with low walls, garden beds and a clear view of the city, Unbek isolated settlement, weathered stone, charcoal, muted olive and a small warm amber accent, neutral daylight, clear foreground, layered middle distance and far distance, detailed open environment, atmospheric perspective:1.12), the exact specified clothing silhouette, simple unbranded garments, preserve the full specified hem length and leg shape, calm listening, precise firm resolve, a small relieved dimpled smile after agreement, detailed open background, foreground and distant scenery, atmospheric perspective, natural ambient light, coherent perspective, clear silhouette, blank unprinted matte fabric, clean illustration without overlays",
+          "negative": "shorts, denim shorts, hot pants, bloomers, culottes, miniskirt, micro skirt, high-waist, high-waisted, high-rise, paperbag waist, balloon pants, harem pants, joggers, baggy pants, wide-leg pants, loose trousers, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, fake lettering, text on clothing, logo, watermark, inset image, split screen, collage, horns, halo, antlers, animal ears, wings, fantasy head features, headpiece, demon, monster, blue hair, cyan hair, duplicate woman, ghostly double",
+          "face_positive": "masterpiece, best quality, refined anime face, clean detailed lineart, one adult woman's face, adult human woman in her late thirties, light neutral-beige skin, smoky-lilac bob below ears, chestnut eyes, one cheek dimple, softly curvy build, calm listening, precise firm resolve, a small relieved dimpled smile after agreement, expressive natural eyes, preserve the specified hair and eye color, mature adult facial proportions, consistent polished anime character illustration",
+          "face_negative": "worst quality, low quality, blurry face, deformed face, asymmetrical eyes, duplicate face, changed hair color, changed eye color, adult woman, text, watermark, sexualized face",
+          "image": "assets/follower-candidates-v4/나디아 모로/face_detailer/나디아 모로_03_seed_1857311156041171.png",
+          "original_image": "assets/follower-candidates-v4/나디아 모로/original/나디아 모로_03_seed_1857311156041171.png",
+          "prompt_id": "bffe6ffd-4315-479b-bfc5-9a8ef852097c",
+          "error": null,
+          "metadata_verified": true,
+          "generation_attempt": 6,
+          "ocr_text_check": {
+            "clear": true,
+            "checked_at": "2026-10-16 16:42:02",
+            "detections": []
+          },
+          "ocr_retry_history": [
+            {
+              "seed": 7253104076464882,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 7131322331099092,
+              "reason": "visual QA"
+            },
+            {
+              "seed": 6243289615226317,
+              "reason": "visual QA"
+            }
+          ],
+          "size": {
+            "width": 832,
+            "height": 1216
+          },
+          "bytes": 1262340,
+          "original_bytes": 1270254,
+          "original_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\나디아 모로\\original\\나디아 모로_03_seed_1857311156041171.png",
+          "face_detailer_png": "D:\\캐릭터 일러스트\\FollowerRedesign_20261016_v4\\나디아 모로\\face_detailer\\나디아 모로_03_seed_1857311156041171.png",
+          "completed_at": "2026-10-16 15:51:23",
+          "selection": "user-confirmed"
+        }
+      ],
+      "confirmed_variant": 3,
+      "confirmed_at": "2026-10-16"
+    }
+  ],
+  "generation_jobs": [
+    {
+      "name": "장뤄안",
+      "number": 1,
+      "seed": 1862486444127324,
+      "attempt": 4
+    },
+    {
+      "name": "장뤄안",
+      "number": 2,
+      "seed": 3488780383795357,
+      "attempt": 1
+    },
+    {
+      "name": "장뤄안",
+      "number": 3,
+      "seed": 4146326401077812,
+      "attempt": 4
+    },
+    {
+      "name": "장뤄안",
+      "number": 4,
+      "seed": 5931142033997616,
+      "attempt": 3
+    },
+    {
+      "name": "장뤄안",
+      "number": 5,
+      "seed": 4172511261931991,
+      "attempt": 3
+    },
+    {
+      "name": "천서휘",
+      "number": 1,
+      "seed": 4509240348177319,
+      "attempt": 3
+    },
+    {
+      "name": "천서휘",
+      "number": 2,
+      "seed": 2954303072313959,
+      "attempt": 2
+    },
+    {
+      "name": "천서휘",
+      "number": 3,
+      "seed": 8164682184502741,
+      "attempt": 1
+    },
+    {
+      "name": "천서휘",
+      "number": 4,
+      "seed": 4168527036282113,
+      "attempt": 8
+    },
+    {
+      "name": "천서휘",
+      "number": 5,
+      "seed": 5814489434060021,
+      "attempt": 3
+    }
+  ],
+  "wardrobe_diversity": {
+    "policy": "Wardrobe diversity is the goal across the roster, not a ban on garments. Miniskirts, shorts, crop T-shirts, side-cutout and underbust-cut tops are valid selective choices. Avoid repeating the same outfit combination across characters.",
+    "outfit_map": {
+      "장뤄안": "현대 중국풍의 미니멀한 비취색 민소매 미니 원피스. 한쪽 어깨가 드러나는 비대칭 목선과 낮은 만다린 칼라, 옆구리의 작은 허리 컷아웃, 허벅지 중간까지 오는 매끈한 치마와 한쪽 옆트임. 장식 없는 무지 단색 원단.",
+      "천서휘": "현대 한국 도시복의 아이보리색 크롭 랩 블라우스. 둥글게 겹치는 저고리형 깃선과 오른쪽 옆선의 짧은 옷고름, 어깨를 덮는 짧은 소매. 안에는 가슴골과 허리가 드러나는 짙은 자주색 스퀘어넥 탑, 아래에는 발목까지 흐르는 푸른 먹색 하이웨이스트 테일러드 와이드 팬츠. 무지 단색 원단."
+    }
+  }
+}

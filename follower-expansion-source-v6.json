@@ -1,0 +1,2162 @@
+{
+  "run": "FollowerRedesign_20261019_v6",
+  "model": "oneObsession_v24.safetensors",
+  "checkpoint": "One Obsession v24 / Illustrious SDXL",
+  "negative": "balloon pants, harem pants, extremely baggy trousers, puffed legs, gathered trousers, drawstring waist, elastic waistband, gathered waist, puffed legs, graphic print, printed shirt, fake lettering, gibberish text, clothing logo, text on clothes, inset image, split screen, collage, manga panel, decorative labels, 2girls, multiple girls, extra person, duplicate woman, crowd, neon lighting, oversaturated colors, cyan color cast, green color cast, overexposed, washed out, blown highlights, low contrast, white color cast, text, letters, logo, watermark, signage, emblem, pattern, child, teenager, underage, extra limbs, extra fingers, fused fingers, malformed hands, bad anatomy, duplicate face, muscular woman, nude, bare breasts, lingerie, transparent clothes, pornographic pose, weapons, sword, gun, cigarette, cigar, tobacco, smoking, pipe, vape, e-cigarette, lighter, hookah, shisha, bong, ashtray, cigarette pack, cigarette holder, matchbox, matches, smoke cloud, tobacco pouch",
+  "compositions": [
+    {
+      "label": "01 · 얼굴 중심 클로즈업",
+      "en": "tight chest-up portrait at eye level, three-quarter view, a face-forward expression and visible neckline, the background remains a readable part of the scene"
+    },
+    {
+      "label": "02 · 성격이 드러나는 동작",
+      "en": "dynamic waist-up moment in motion, an expressive hand gesture, natural fabric movement, both hands anatomically clear, the face remains the focal point"
+    },
+    {
+      "label": "03 · 편안한 3/4 구도",
+      "en": "relaxed three-quarter composition in a natural pose, unforced expression, the character interacting with one small scene-appropriate prop"
+    },
+    {
+      "label": "04 · 전신 실루엣",
+      "en": "full-body composition with a distinctive confident stance, complete outfit silhouette, natural practical footwear, balanced character-to-background scale"
+    },
+    {
+      "label": "05 · 서사적 어깨 너머 구도",
+      "en": "over-the-shoulder narrative composition, she glances back toward a meaningful detail in the environment, a readable expressive face and open scene depth"
+    }
+  ],
+  "characters": [
+    {
+      "id": "yeoul",
+      "name": "급수망의 길잡이 에블린 하트",
+      "person": "에블린 하트",
+      "english": "Evelyn Hart",
+      "faction": "outpr",
+      "role": "온실 급수망 현장 정비사",
+      "age": 29,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 밝은 중성 피부, 허리 아래까지 늘어지는 짙은 청록색 긴 머리를 한쪽으로 느슨하게 굵게 땋고 잔머리를 흩날림, 밝은 녹회색 눈, 부드러운 곡선형 체형, 옅은 주근깨",
+      "outfit": "가슴골을 드러내되 불투명하게 덮는 넓고 낮은 목선의 짙은 숲색 민소매 랩 크롭 블라우스, 드러난 어깨·복부·등, 한쪽 허벅지까지 트인 긴 아이보리 랩스커트, 낮은 샌들, 겉재킷 없음. 무지 단색 옷감만 사용",
+      "weapon": "온실 덩굴섬유로 감싼 짧은 잎날형 외날검 하나",
+      "environment": "a lush open lotus pond woven into the public greenhouse waterway, broad lotus leaves above clear irrigation channels, distant garden terraces and a bright green skyline",
+      "story": "온실 급수망의 압력 변화를 누구보다 먼저 알아채는 현장 정비사. 개장 준비 중 관수 신호가 엇갈렸을 때 시민들이 지나는 길부터 열고, 고장 난 밸브를 직접 손봐 작은 사고를 막는다. 기술 로그보다 현장에 있는 사람의 말을 먼저 확인하는 습관이 있다.",
+      "tie": "모라와 외곽 급수 경로를 함께 순찰한다. 노아가 길을 잃었을 때 온실 사이의 지름길을 알려 준다.",
+      "stats": {
+        "cost": 2,
+        "attack": 2,
+        "defense": 1,
+        "health": 4,
+        "effect": "heal_self",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": {
+          "type": "heal_self",
+          "amount": 1
+        },
+        "text": "라운드 시작: 자신의 체력 1 회복. 방어전: 자신의 체력 1 회복."
+      },
+      "look": "adult woman, fair neutral skin, long deep-teal hair gathered in one loose thick side braid falling past her waist, soft flyaway strands, bright gray-green eyes, softly curvy build, light freckles",
+      "clothes": "a plain deep-forest-green sleeveless wrap crop blouse with a wide low neckline showing cleavage while fully opaque, bare shoulders, exposed midriff and open upper back, paired with a long flowing ivory wrap skirt with a high side slit revealing one thigh, simple flat sandals, no outer jacket; plain solid-color unmarked fabric",
+      "weaponEn": "one short leaf-shaped single-edged sword with a dark green vine-fiber grip, modest practical size",
+      "scene": "a lush open lotus pond woven into the public greenhouse waterway, broad lotus leaves above clear irrigation channels, distant garden terraces and a bright green skyline",
+      "height_cm": 162,
+      "measurements_cm": {
+        "bust": 84,
+        "waist": 62,
+        "hip": 87
+      },
+      "personality": "현장의 작은 변화를 가장 먼저 알아차리고, 사람을 기술보다 앞세우는 실천가다. 낯선 사람에게도 먼저 손을 내미는 따뜻함과 위험 앞에서 망설이지 않는 결단력이 함께 있다.",
+      "visual_personality_en": "alert green-gray eyes, a warm crooked smile, and a practical forward lean; her open hand guides someone safely while the other is already reaching toward the irrigation controls",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 80,
+      "name_origin": "영어권·영국/미국식 성명",
+      "department": "도시운영팀",
+      "department_unit": "도시운영팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "시설운영본부 · 생태기반시설팀",
+      "department_tag": "도시운영팀",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 2,
+        "run": "FollowerRedesign_20261016_v3"
+      }
+    },
+    {
+      "id": "lagyeong",
+      "name": "동의 기록관 비비안 르클레르",
+      "person": "비비안 르클레르",
+      "english": "Vivienne Leclerc",
+      "faction": "outpr",
+      "role": "생체 장비 동의 기록 감사관",
+      "age": 34,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 맑은 상아빛 피부, 반듯한 앞머리와 귀 뒤로 넘긴 짙은 자주색 프렌치 단발, 호박색 눈, 키가 크고 부드러운 곡선형 체형, 얇은 금테 안경",
+      "outfit": "가슴골이 보이는 깊은 V넥의 단색 짙은 자주색 민소매 미디 원피스, 드러난 어깨와 등, 한쪽 허벅지가 보이는 높은 옆트임, 한 팔에 걸친 숲색 재킷. 무광 단색 옷감, 글자·문양·자수·기호·로고 없음",
+      "weapon": "기록 봉인용 고리형 손잡이를 단 가느다란 직검 하나",
+      "environment": "an open-air bioethics archive garden, pale stone colonnade, living vine trellises, broad reflecting pool, public plaza and bright city beyond",
+      "story": "생체 장비의 사용 동의와 철회 기록을 대조하는 감사관. 니아와 월백이 협약 판본을 확인할 때, 오래된 동의 항목이 새 장비로 자동 승계되지 않도록 점검한다. 규정을 지키는 일이 시민의 선택을 좁히지 않도록 공개 기록 방식을 고치려 한다.",
+      "tie": "니아·월백과 함께 동의 기록의 변경 이력을 대조한다. 베르다에게 공개 감사 권한을 정식 절차로 제안한다.",
+      "stats": {
+        "cost": 3,
+        "attack": 2,
+        "defense": 2,
+        "health": 5,
+        "effect": "heal_leader",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 내 대표 캐릭터의 라이프를 1 회복합니다."
+      },
+      "look": "adult woman, luminous ivory skin, precise jaw-length dark-plum French bob with blunt fringe and tucked sides, amber eyes, tall graceful softly curvy build, thin gold-rim glasses",
+      "clothes": "a plain deep-plum sleeveless fitted midi dress with a sharply cut deep V neckline showing cleavage, bare shoulders, open upper back, a high side slit revealing one thigh, a narrow forest-green blazer draped over one arm; matte solid fabric, completely blank and unmarked, plain solid-color unmarked fabric",
+      "weaponEn": "one slender straight sword with a small circular ring pommel and a dark botanical grip",
+      "scene": "an open-air bioethics archive garden, pale stone colonnade, living vine trellises, broad reflecting pool, public plaza and bright city beyond",
+      "height_cm": 171,
+      "measurements_cm": {
+        "bust": 86,
+        "waist": 64,
+        "hip": 91
+      },
+      "personality": "원칙을 지키되 규정이 사람을 가두지 않는지 끊임없이 되묻는 꼼꼼한 감사관이다. 말수는 적지만 핵심을 찌르는 건조한 농담을 즐긴다.",
+      "visual_personality_en": "precise amber eyes, one subtly raised eyebrow and a restrained knowing smile; upright composed posture, one finger marking a specific line on an unlettered record sheet",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 75,
+      "outfit_ko": "목선과 쇄골, 자연스러운 가슴선을 드러내는 아이보리 블라우스와 앞을 연 짙은 녹색 크롭 연구 재킷, 속바지가 보이지 않게 겹친 옆트임 롱스커트, 단정한 장갑과 작은 귀걸이",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "프랑스식 성명",
+      "department": "비서실",
+      "department_unit": "비서실",
+      "department_detail": "준법감사실 · 생명동의감사팀",
+      "department_tag": "비서실",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 5,
+        "run": "FollowerRedesign_20261016_v3"
+      }
+    },
+    {
+      "id": "haeon",
+      "name": "꽃가루 항로사 마리솔 베가",
+      "person": "마리솔 베가",
+      "english": "Marisol Vega",
+      "faction": "outpr",
+      "role": "수분 드론 항로 설계자",
+      "age": 26,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 옅은 복숭아빛 피부와 옅은 주근깨, 풍성한 꿀빛 금발 곱슬머리를 높은 포니테일로 느슨하게 묶고 관자놀이에 컬 잔머리, 황금빛 갈색 눈, 부드럽고 곡선적인 비근육형 체형",
+      "outfit": "짙은 숲초록색 단색 반소매 원피스형 유틸리티 점프수트. 상의부터 발등까지 끊김 없이 이어지는 긴 일자 바지, 평평한 앞면과 반듯하게 떨어지는 다리선, 무광 면 소재, 단정한 목선과 드러난 팔·쇄골. 배색·문자·장식 없음",
+      "weapon": "수분 드론을 안전하게 유도하는 짧은 낫형 외날검 하나",
+      "environment": "a rooftop waterway observatory above the biotech district, sunlit drone landing rings, wide glass gardens, distant reservoirs, expansive blue-green skyline",
+      "story": "벌과 드론이 함께 다니는 수분 항로를 설계한다. 그녀의 지도는 꽃가루 이동을 위한 것이지만, 개장식 보호장 오류 때 드론의 비행 흔적이 동기화 오류의 반복 주기를 찾아내는 단서가 된다. 정밀한 일과 즉흥적인 관찰을 모두 좋아한다.",
+      "tie": "이브와 감각 신호를 기록하고 소운의 관측 리듬을 검증한다. 시온과 드론의 개방형 충전 규격을 시험한다.",
+      "stats": {
+        "cost": 3,
+        "attack": 3,
+        "defense": 1,
+        "health": 4,
+        "effect": null,
+        "amount": null,
+        "attack_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "defense_effect": null,
+        "text": "공격전: 이번 전투 동안 자신의 공격력 +1."
+      },
+      "look": "adult woman, light peach skin with faint freckles, voluminous honey-blonde curls gathered in a high loose ponytail with curled tendrils, golden-brown eyes, softly full feminine build",
+      "clothes": "a plain deep-green sleeveless short dress with a sculpted low square neckline showing cleavage, an open back, a narrow cutout at each side of the waist, bare shoulders and thighs, a cropped cream field jacket hanging loosely from her elbows, plain solid-color unmarked fabric",
+      "weaponEn": "one short sickle-profile single-edged sword with a smooth leaf-shaped blade, no second weapon",
+      "scene": "a rooftop waterway observatory above the biotech district, sunlit drone landing rings, wide glass gardens, distant reservoirs, expansive blue-green skyline",
+      "height_cm": 166,
+      "measurements_cm": {
+        "bust": 94,
+        "waist": 68,
+        "hip": 98
+      },
+      "personality": "정밀한 계산을 즐기면서도 현장에서 떠오른 직감을 믿는 호기심 많은 항로 설계자다. 발견을 감추지 못하는 환한 표정과 즉흥적인 몸짓이 특징이다.",
+      "visual_personality_en": "bright curious eyes and an unguarded delighted grin; she twists mid-motion to trace an imagined drone route in the air with one hand",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 60,
+      "outfit_ko": "앞을 연 짧은 크림색 재킷 안에 가슴선을 살린 깊은 스쿱넥 녹색 민소매 상의, 허리와 배가 보이는 짧은 길이, 허벅지 파우치, 불투명 쇼츠 위에 겹친 짧은 랩스커트, 드러난 어깨와 허벅지",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "스페인어권 성명",
+      "department": "연구개발팀",
+      "department_unit": "연구개발팀",
+      "department_detail": "생체연구본부 · 수분항로설계팀",
+      "department_tag": "연구개발팀",
+      "appearance_en": "adult woman, light peach skin, faint freckles, honey-blonde curly hair, high loose ponytail, golden-brown eyes, soft curvy build, non-muscular",
+      "outfit_en": "deep forest-green utility jumpsuit, one-piece coverall, cap sleeves, open collar, full-length straight-leg pants, long pants, low hip waist, smooth flat front, narrow leg line, matte cotton, plain fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 2,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a sunlit pollination observatory roof above clear irrigation canals, flowering planters and a broad open green skyline",
+          "composition": "wide establishing long shot, tiny figure at the far lower-right, standing on a rooftop rail and reaching toward one drifting flower petal, open skyline fills most of frame"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "an elevated landing deck with empty circular drone pads, pale glass canopy ribs and clouds over the biotech district",
+          "composition": "close head-and-shoulders portrait, bright curious eyes following something above frame, one hand shading her eyes, curls moving in the breeze, garden canopy softly visible behind"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a lush garden bridge over bright reservoirs, tiny pollinating insects crossing the morning light",
+          "composition": "rear three-quarter long shot, walking across a narrow garden bridge with one hand gliding along the rail, turning her head toward a passing petal, layered city and sky dominate"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "an open botanical rooftop with long flower beds, water channels and distant silver-green towers",
+          "composition": "dynamic low-angle full-body action, jogging across a botanical footbridge, one arm lifted for balance, closed-lip joyful smile, hands empty, diagonal bridge lines and open sky"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a high canal railing above the city, wind moving petals across a wide blue sky and layered gardens",
+          "composition": "high-angle environmental view, small off-center figure crouching beside a flower planter and studying one bloom, rooftop channels and distant towers dominate the composition"
+        }
+      ]
+    },
+    {
+      "id": "chaeyun",
+      "name": "살아있는 아치의 설계자 아마라 바우어",
+      "person": "아마라 바우어",
+      "english": "Amara Bauer",
+      "faction": "outpr",
+      "role": "생체 건축 설계 책임자",
+      "age": 41,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 밝은 따뜻한 베이지 피부, 짙은 에스프레소 갈색 머리를 땋은 머리띠에서 굵은 옆땋기로 잇고 관자놀이에만 가느다란 은빛 두 가닥, 짙은 헤이즐 눈, 성숙하고 부드러운 비근육형 체형",
+      "outfit": "청록색 데님 재킷은 양팔에 제대로 입고 앞을 연다. 안에는 이끼색 단색 니트 원피스를 입으며 허리선이나 벨트가 없는 한 줄 실루엣으로 종아리 중간까지 내려온다. 한쪽 옆트임은 무릎 위까지만 열리고, 목선은 쇄골을 드러내는 V넥. 원피스 밑단이 재킷 아래로 분명히 보인다",
+      "weapon": "나뭇결 무늬가 남은 넓은 생체목 외날검 하나",
+      "environment": "a monumental living-wood civic arch spanning a bright public garden, layered canopy bridges, flower beds, broad walking paths and distant residential terraces",
+      "story": "살아 있는 건축물이 사람의 동선과 함께 자라도록 설계하는 책임자. 이음시 개장 정원의 생체 아치를 만들었고, 시민 동선이 좁아지지 않게 리아와 함께 구조를 계속 손본다. 자신이 만든 시스템이 사람의 선택을 대신하지 않도록 설계 검토에 현장 시민을 초대한다.",
+      "tie": "리아와 개장 정원의 안전 동선을 설계한다. 페룸과는 광장 구조물의 재사용 가능한 보강 부품을 함께 만든다.",
+      "stats": {
+        "cost": 4,
+        "attack": 2,
+        "defense": 3,
+        "health": 7,
+        "effect": "heal_all",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 내 대표 캐릭터와 모든 아군 추종자의 체력을 1 회복합니다."
+      },
+      "look": "adult woman, light warm-beige skin, long espresso-brown hair in a braided crown flowing into a thick side braid threaded with a few silver ribbons, dark hazel eyes, mature softly full build",
+      "clothes": "a plain moss-green one-shoulder wrap blouse with a deep opaque neckline and exposed waist, paired with a long ivory wrap skirt with a very high side slit and one bare leg; a short sleeveless vest hangs open, bare arms and shoulder; matte unmarked solid colors only, plain solid-color unmarked fabric",
+      "weaponEn": "one broad but manageable living-wood single-edged sword with natural grain and a wrapped green grip",
+      "scene": "a monumental living-wood civic arch spanning a bright public garden, layered canopy bridges, flower beds, broad walking paths and distant residential terraces",
+      "height_cm": 169,
+      "measurements_cm": {
+        "bust": 98,
+        "waist": 78,
+        "hip": 102
+      },
+      "personality": "사람들의 의견을 설계에 끌어들이는 느긋하고 든든한 건축가다. 말보다 오래 듣고, 완성작보다 그 안에서 편하게 걷는 시민을 보며 만족한다.",
+      "visual_personality_en": "mature reassuring eyes and a calm open smile; grounded broad-shouldered posture, both hands open as if inviting neighbors to walk through a new arch",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 58,
+      "name_origin": "독일식 성명",
+      "department": "연구개발팀",
+      "department_unit": "연구개발팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "도시생태설계본부 · 생체건축팀",
+      "department_tag": "연구개발팀",
+      "appearance_en": "adult woman, light warm-beige skin, espresso-brown hair, thick side braid, two silver temple streaks, dark hazel eyes, mature soft build, non-muscular",
+      "outfit_en": "teal denim jacket worn correctly with sleeves on both arms, open jacket, moss-green one-piece knit midi dress underneath, no waist seam, no belt, straight narrow silhouette, mid-calf hem visibly extending below jacket, one side slit to knee, V-neck, plain solid fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 5,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a monumental living-wood civic arch spanning a bright public garden, layered canopy bridges and wide walking paths",
+          "composition": "very wide establishing shot, small standing figure beneath a monumental living-wood arch, looking into the open garden, architecture and sky fill most of the frame"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a terraced community park with broad ramps, sculptural living timber and distant residential balconies",
+          "composition": "close side-profile portrait, calm eyes and braid in focus, lightly adjusting one denim cuff, soft garden walkway visible behind her"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "an open botanical plaza where branching wooden canopies cast long patterned shadows on plain stone",
+          "composition": "low-angle medium shot, standing at a broad stair rail and looking toward the canopy bridges, shoulders relaxed, open blue sky above"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a breezy architectural promenade beside a reflective pool and flowering public beds",
+          "composition": "rear three-quarter long shot, walking away along a tree-lined promenade and glancing back with a welcoming smile, long path and skyline emphasized"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a high open balcony beneath a huge living canopy, tree bridges and clear sky above the city",
+          "composition": "high-angle medium shot, crouching beside a flowering public planter and examining a leaf, figure placed near one edge, broad plaza remains visible"
+        }
+      ]
+    },
+    {
+      "id": "surim",
+      "name": "물길의 산책 안내자 탈리아 애쉬포드",
+      "person": "탈리아 애쉬포드",
+      "english": "Talia Ashford",
+      "faction": "outpr",
+      "role": "도시 생태 산책 안내자",
+      "age": 23,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 밝고 따뜻한 피부, 옅은 연녹색 리본으로 느슨하게 반묶음한 장밋빛 갈색 레이어드 웨이브, 연녹색 눈, 둥근 인상과 부드러운 곡선형 체형",
+      "outfit": "가슴골과 쇄골이 드러나는 낮은 오프숄더 목선의 단색 연녹색 셔츠 드레스, 허리선이 잡힌 짧은 플레어 치마형 밑단과 드러난 허벅지, 어깨 아래에 걸친 아이보리 크롭 볼레로. 무늬 없는 단색 원단, 글자·문양·자수·기호·로고 없음",
+      "weapon": "가느다란 줄기 형태의 유연한 세검 한 자루",
+      "environment": "a sunlit elevated canal promenade through the green city, turquoise water, hanging gardens, small footbridges, distant glass towers and open sky",
+      "story": "관광객과 주민에게 녹관시의 물길과 작은 정원을 소개한다. 수로 안내 중 만난 이브에게 식물의 신호를 읽는 법을 알려 주고, 노아에게는 비가 와도 안전한 도시 횡단 경로를 건넨다. 자신의 산책 지도를 모두가 고쳐 쓸 수 있게 공개한다.",
+      "tie": "노아와 안전한 도시간 보행 경로를 공유하고 이브의 시민 체험 안내를 돕는다.",
+      "stats": {
+        "cost": 2,
+        "attack": 2,
+        "defense": 0,
+        "health": 3,
+        "effect": null,
+        "amount": null,
+        "attack_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "defense_effect": null,
+        "text": "공격전: 이번 전투 동안 자신의 공격력 +1."
+      },
+      "look": "adult woman, fair warm skin, long rose-brown layered waves half-up in a loose loop with a tiny pale-green ribbon, pale-green eyes, soft rounded features, gently curvy build",
+      "clothes": "a plain pale-green off-shoulder shirt dress with a low folded neckline showing cleavage, fitted waist, short flared hem and bare thighs; an ivory cropped bolero sits below the shoulders, bare collarbones and legs; smooth blank fabric in solid colors, plain solid-color unmarked fabric",
+      "weaponEn": "one delicate flexible-looking narrow rapier with a simple leaf-shaped guard",
+      "scene": "a sunlit elevated canal promenade through the green city, turquoise water, hanging gardens, small footbridges, distant glass towers and open sky",
+      "height_cm": 158,
+      "measurements_cm": {
+        "bust": 89,
+        "waist": 65,
+        "hip": 92
+      },
+      "personality": "도시의 숨은 풍경을 발견하는 일을 사랑하는 사교적 안내자다. 즉흥적이고 낙천적이며, 누구든 대화에 끌어들이는 장난기 어린 친화력이 있다.",
+      "visual_personality_en": "sparkling pale-green eyes and an easy bright smile; a buoyant walking pose, one hand waving a visitor onward while the other gestures toward the canal",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 80,
+      "outfit_ko": "가슴선과 쇄골이 보이는 연녹색 오프숄더 셔츠 드레스, 한쪽 어깨에서 자연스럽게 내려오는 짧은 아이보리 볼레로, 얇은 끈의 등 트임, 불투명한 속바지 위로 높게 트인 옆선과 드러난 허벅지, 꽃잎 모양 가방",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "영어권·영국식 성명",
+      "department": "대외협력팀",
+      "department_unit": "대외협력팀",
+      "department_detail": "대외협력본부 · 생태관광안내팀",
+      "department_tag": "대외협력팀",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 3,
+        "run": "FollowerRedesign_20261016_v3"
+      }
+    },
+    {
+      "id": "minju",
+      "name": "철휘선의 정비사 에이다 라이트",
+      "person": "에이다 라이트",
+      "english": "Ada Wright",
+      "faction": "selfas",
+      "role": "도시 철도 현장 정비사",
+      "age": 32,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 차가운 밝은 피부, 한쪽 관자놀이를 스치는 긴 앞머리와 비대칭 남청색 픽시 언더컷, 회색 눈, 작고 부드러운 체형, 침착한 성숙한 인상",
+      "outfit": "앞을 연 단색 메탈 블루 크롭 작업 재킷, 깊은 목선과 가슴골이 드러나는 차콜 홀터 크롭톱, 드러난 어깨와 복부, 바깥쪽 다리 트임이 높은 흑연색 하이웨이스트 플레어 팬츠, 낮은 작업화. 무지 단색, 글자·문양·자수·기호·로고 없음",
+      "weapon": "검날이 분명한 짧은 외날 강철검 하나. 검은 손잡이에 작은 주황색 정비 장식만 더한다.",
+      "environment": "a broad elevated rail interchange in a polished metal city, branching tracks, pedestrian skybridges, silver canopy ribs, distant skyline and clear open sky",
+      "story": "시민이 쉽게 이용하는 철도 설비를 점검하는 정비사. 개장식 동선 오류를 확인하던 중 자동 안내가 같은 구간을 반복하는 걸 발견하고, 직접 수동 제어 레버를 연결해 관객 통로를 연다. 새 장비도 현장 작업자가 혼자 고칠 수 있어야 한다고 믿는다.",
+      "tie": "아르카에게 현장 수동 점검 권한을 요청한다. 시온과 도구 없이도 열 수 있는 정비 패널을 시험한다.",
+      "stats": {
+        "cost": 3,
+        "attack": 2,
+        "defense": 3,
+        "health": 5,
+        "effect": "defense_self",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "text": "라운드 시작: 이번 전투 동안 방어력 +1. 방어전: 이번 전투 동안 공격력 +1."
+      },
+      "look": "adult woman, cool fair skin, asymmetrical navy-blue pixie undercut with a long swept fringe crossing one temple, gray eyes, compact soft build, composed mature face",
+      "clothes": "a plain brushed-steel-blue cropped work jacket worn open over a charcoal halter crop top with a deep neckline and visible cleavage, bare shoulders and midriff, high-waisted fitted graphite flared trousers with a high outer-leg opening, plain low work shoes, plain solid-color unmarked fabric",
+      "weaponEn": "one clearly recognizable short single-edged steel sword with a narrow pointed blade and a normal small crossguard, black handle with tiny orange mechanical accents on the handle only",
+      "scene": "a broad elevated rail interchange in a polished metal city, branching tracks, pedestrian skybridges, silver canopy ribs, distant skyline and clear open sky",
+      "height_cm": 164,
+      "measurements_cm": {
+        "bust": 88,
+        "waist": 66,
+        "hip": 90
+      },
+      "personality": "현장 장비는 현장 사람이 고칠 수 있어야 한다고 믿는 직설적이고 자립심 강한 정비사다. 위기 때는 침착하고, 평소에는 짧은 말과 무심한 농담으로 동료를 챙긴다.",
+      "visual_personality_en": "focused gray eyes and a determined half-smile; squared practical stance with sleeves rolled, one hand signaling a safe route while the other rests near an open service panel",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 75,
+      "name_origin": "영어권·미국식 성명",
+      "department": "도시운영팀",
+      "department_unit": "도시운영팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "교통관리본부 · 철도시설정비팀",
+      "department_tag": "도시운영팀",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 4,
+        "run": "FollowerRedesign_20261016_v3"
+      }
+    },
+    {
+      "id": "chaerin",
+      "name": "맞춤 보조장비 설계자 엘로디 뒤몽",
+      "person": "엘로디 뒤몽",
+      "english": "Élodie Dumont",
+      "faction": "selfas",
+      "role": "시민 맞춤 보조장비 설계자",
+      "age": 28,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 따뜻한 베이지 피부, 끝을 둥글게 말아 올린 어깨 길이 밤색 S컬과 선명한 코발트색 한 줄, 푸른 회색 눈, 풍만하고 부드러운 체형, 작은 점",
+      "outfit": "가슴골이 드러나는 깊은 곡선 목선의 단색 검정 뷔스티에 상의, 드러난 어깨와 옆허리 트임, 앞을 연 은회색 크롭 재킷, 허벅지까지 올라오는 깊은 트임의 비대칭 펜슬스커트. 완전한 무지 단색, 글자·문양·자수·기호·로고 없음",
+      "weapon": "손잡이 균형을 직접 조정한 짧은 교정용 세이버 하나",
+      "environment": "a sunlit open design lab spilling onto a public fabrication plaza, brushed-metal canopies, modular benches, flowering planters, wide city avenue beyond",
+      "story": "보조장비를 사용하는 시민의 움직임을 관찰하고 부품을 개인별로 맞추는 설계자. 장비를 고장 난 몸을 고치는 도구로 보지 않고 사용자의 생활 방식에 맞춰 함께 조정한다. 니아의 기록 장비가 획일적인 규격을 강요하지 않도록 사용성 기록을 제공한다.",
+      "tie": "니아와 기록 장비의 착용 규격을 함께 개선한다. 레아가 묵로에서 운영하는 수리 교실에 개방형 설계도를 보낸다.",
+      "stats": {
+        "cost": 3,
+        "attack": 3,
+        "defense": 1,
+        "health": 4,
+        "effect": null,
+        "amount": null,
+        "attack_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "defense_effect": null,
+        "text": "공격전: 이번 전투 동안 자신의 공격력 +1."
+      },
+      "look": "adult woman, warm beige skin, shoulder-length chestnut S-waves with one vivid cobalt-blue streak and curled ends, blue-gray eyes, softly full feminine build, tiny beauty mark",
+      "clothes": "a plain black fitted bustier top with a deep curved neckline showing cleavage, bare shoulders and small side-waist cutouts, a silver-gray cropped jacket worn open, a high-waisted asymmetrical pencil skirt with a dramatic thigh-high slit, plain solid-color unmarked fabric",
+      "weaponEn": "one compact calibration saber with a carefully balanced dark grip and a small silver guard",
+      "scene": "a sunlit open design lab spilling onto a public fabrication plaza, brushed-metal canopies, modular benches, flowering planters, wide city avenue beyond",
+      "height_cm": 167,
+      "measurements_cm": {
+        "bust": 99,
+        "waist": 74,
+        "hip": 101
+      },
+      "personality": "사용자의 생활 방식을 세심하게 관찰하고 맞춤 설계를 고집하는 다정한 발명가다. 조용하지만 새 아이디어를 설명할 때는 은근한 승부욕과 장난기가 드러난다.",
+      "visual_personality_en": "kind blue-gray eyes with a confident playful smile; relaxed yet attentive posture, one hand demonstrating a small wearable fitting while the other sketches its adjustment in the air",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 80,
+      "outfit_ko": "쇄골과 가슴선을 드러내는 검정 민소매 스퀘어넥 상의, 앞을 연 은회색 크롭 재킷, 허리 옆의 좁은 트임, 엉덩이 곡선을 살리는 비대칭 랩 미니스커트와 불투명한 쇼츠, 허리의 작은 측정 도구",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "프랑스식 성명",
+      "department": "연구개발팀",
+      "department_unit": "연구개발팀",
+      "department_detail": "시민기술본부 · 맞춤보조장비설계팀",
+      "department_tag": "연구개발팀",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 3,
+        "run": "FollowerRedesign_20261016_v3"
+      }
+    },
+    {
+      "id": "ara",
+      "name": "광장 안전감독 다니카 뮐러",
+      "person": "다니카 뮐러",
+      "english": "Danica Müller",
+      "faction": "selfas",
+      "role": "공공 이동시설 안전감독",
+      "age": 35,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 중간 밝기의 따뜻한 호박빛 갈색 피부, 짧고 둥근 자연 곱슬머리, 따뜻한 갈색 눈, 넓고 부드러운 곡선형 체형, 믿음직한 성숙한 인상, 근육질이 아님",
+      "outfit": "주홍빛 오렌지색 긴소매 작업 셔츠를 소매 끝이 팔꿈치 바로 아래 오도록 걷어 입고, 허리와 엉덩이를 덮게 자연스럽게 밖으로 꺼내 입음. 슬레이트 블루색 테일러드 스트레이트 팬츠는 골반에 낮게 걸리고 평평한 앞판과 좁은 다리선으로 발목까지 길게 이어짐. 단추를 두 개 풀어 쇄골이 보이고 옷감은 무지 무광",
+      "weapon": "구조 케이블 절단용으로 개조한 짧은 곡도 하나",
+      "environment": "a wide public safety plaza at a gleaming transit concourse, open pedestrian lanes, steel shade structures, broad stairs, distant towers under a bright sky",
+      "story": "자율 운반 장치와 보행자가 함께 다니는 광장의 안전을 점검한다. 보호장이 예기치 않게 작동한 날, 출구를 확보하고 시민을 안내하며 장비가 아니라 사람의 이동을 우선한다. 페룸과 함께 구조 장비가 실제 사용자의 키와 힘에 맞는지 시험한다.",
+      "tie": "페룸과 시민 행사 안전 동선을 맡는다. 아르카와 비상 상황의 사람 우선 절차를 검토한다.",
+      "stats": {
+        "cost": 4,
+        "attack": 2,
+        "defense": 3,
+        "health": 7,
+        "effect": "defense_all",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 모든 아군 추종자의 이번 전투 방어력 +1."
+      },
+      "look": "adult woman, deep rich brown skin, short natural coily hair in a rounded tapered shape with a tiny copper hair cuff, warm brown eyes, broad soft-curved build, reassuring mature face",
+      "clothes": "a plain charcoal sleeveless fitted sheath dress with a deep vermilion scoop neckline showing cleavage, bare arms and thighs, a short open safety vest , a simple matte belt, plain solid-color unmarked fabric",
+      "weaponEn": "one short practical rescue dao with a blunt reinforced spine and a simple wrapped grip",
+      "scene": "a wide public safety plaza at a gleaming transit concourse, open pedestrian lanes, steel shade structures, broad stairs, distant towers under a bright sky",
+      "height_cm": 170,
+      "measurements_cm": {
+        "bust": 94,
+        "waist": 72,
+        "hip": 99
+      },
+      "personality": "혼란스러운 순간에도 주변 사람을 안심시키는 단단한 안전 감독이다. 권위적으로 명령하기보다 먼저 움직여 길을 열며, 자신의 힘을 타인을 지키는 데 쓴다.",
+      "visual_personality_en": "steady warm eyes and an encouraging smile under pressure; strong protective stance, one arm raised in a clear evacuation signal and the other held open to reassure someone",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 60,
+      "outfit_ko": "앞을 연 짙은 회색 구조 조끼 안에 자연스러운 가슴선이 보이는 주홍색 스쿱넥 기능성 상의, 드러난 어깨와 팔, 짧은 안전 재킷, 불투명한 속바지를 덧댄 하이웨이스트 구조 쇼츠, 탄탄한 허벅지와 엉덩이 실루엣, 가벼운 팔 보호대",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "독일식 성명",
+      "department": "안전관리팀",
+      "department_unit": "안전관리팀",
+      "department_detail": "도시안전본부 · 공공안전감독팀",
+      "department_tag": "안전관리팀",
+      "appearance_en": "1girl, adult woman, medium chestnut-brown skin, short natural curly hair, warm brown eyes, mature face, soft curvy build, non-muscular",
+      "outfit_en": "orange shirt, long sleeves, rolled sleeves, open collar, untucked shirt, blue jeans, low-rise jeans, straight-leg jeans, long pants, slim fit, plain unmarked fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 4,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a wide elevated rail interchange with branching tracks, brushed-metal canopies and a bright open sky",
+          "composition": "tight portrait, protective steady expression, blurred transit canopy and bright tracks behind"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a broad public transit stair plaza with clear pedestrian lanes, glass roofs and distant city towers",
+          "composition": "wide transit interchange long shot, standing far left and raising one open hand to guide unseen commuters, huge roof and branching rails dominate"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "an open skybridge where rail platforms meet a quiet rooftop garden, afternoon light on steel ribs",
+          "composition": "dynamic low-angle full-body view, briskly walking down broad station steps while checking the platform, composed alert face, open skyline beyond"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a vast transit concourse with no signs, long curved rooflines and an uninterrupted view of the skyline",
+          "composition": "rear view from a high skybridge, one hand resting on the rail as she surveys the empty routes below, figure small against the transit architecture"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a high station landing at the end of a shift, pale evening sky and multiple empty walkways below",
+          "composition": "waist-up three-quarter portrait, turning toward someone outside frame with a reassuring half-smile, one palm open, clean glass station behind"
+        }
+      ]
+    },
+    {
+      "id": "rion",
+      "name": "이동 안내 AI 아이리스 모건",
+      "person": "아이리스 모건",
+      "english": "Iris Morgan",
+      "faction": "selfas",
+      "role": "철휘시 이동 안내 자율 AI",
+      "age": 31,
+      "nature": "여성형 자율 AI",
+      "appearance": "성인 여성형 자율 AI, 자연스러운 밝은 복숭아빛 피부, 턱선 길이의 딸기 금발 단발 끝이 안으로 말리고 끝부분만 옅은 라벤더색, 옅은 보라색 눈, 키가 크고 가녀리며 부드러운 인간 체형, 완전히 인간 외형",
+      "outfit": "코발트색 비대칭 크롭 티셔츠, 한쪽 어깨와 옆구리 절개가 드러나는 디자인, 한쪽 긴 소매와 불투명한 앞목선. 검은색 골반 저위치 슬림 스트레이트 팬츠는 허벅지부터 발목까지 길게 이어진다. 얇은 검은색 초커 하나, 티셔츠 앞면은 무지",
+      "weapon": "안전 교육용 경량 직검 하나, 손잡이만 금속 소재이고 장식은 최소화",
+      "environment": "a bright wayfinding terrace above the self-driving city, branching elevated walkways, a broad transit plaza, brushed-metal towers and layered blue sky",
+      "story": "교통 약속을 외우는 대신 사용자의 선호를 물어 이동 경로를 제안하는 안내 AI. 시민위원회가 제시한 선택형 서비스 시범 운영을 맡는다. AI가 정한 최적 경로를 거부해도 불이익이 없도록 직접 체험 데이터를 공개한다.",
+      "tie": "아르카와 자율 AI의 책임 범위를 논의한다. 노아에게는 일정표에 없는 우회 경로까지 안내해 주는 길동무다.",
+      "stats": {
+        "cost": 2,
+        "attack": 1,
+        "defense": 2,
+        "health": 4,
+        "effect": null,
+        "amount": null,
+        "attack_effect": null,
+        "defense_effect": {
+          "type": "defense_all",
+          "amount": 1
+        },
+        "text": "방어전: 모든 아군 추종자의 이번 전투 방어력 +1."
+      },
+      "look": "adult woman with natural peach skin, bright strawberry-blonde chin-length bob with a curved under-flip and faint lavender tips, pale-violet eyes, tall slender softly feminine build, fully human appearance",
+      "clothes": "a plain pearl-white fitted halter mini dress with a deep V neckline showing cleavage, bare shoulders, open back and a high side slit, a cropped brushed-silver overshirt hanging open from her elbows, plain solid-color unmarked fabric",
+      "weaponEn": "one lightweight plain straight training sword with a simple metal guard and no glow",
+      "scene": "a bright wayfinding terrace above the self-driving city, branching elevated walkways, a broad transit plaza, brushed-metal towers and layered blue sky",
+      "height_cm": 173,
+      "measurements_cm": {
+        "bust": 86,
+        "waist": 62,
+        "hip": 90
+      },
+      "personality": "사용자에게 최적 경로를 강요하지 않고 선택지를 제시하는 사려 깊은 안내 AI다. 상대의 대답을 기다리는 습관이 있어 호기심 어린 고개 기울임과 부드러운 미소가 어울린다.",
+      "visual_personality_en": "attentive pale-violet eyes and a gentle inquisitive smile; a slight head tilt, one open palm offering two route choices and a patient posture that waits for an answer",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 65,
+      "name_origin": "영어권·웨일스식 성명",
+      "department": "안전관리팀",
+      "department_unit": "안전관리팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "교통관리본부 · 이동안내시스템팀",
+      "department_tag": "안전관리팀",
+      "appearance_en": "adult woman, light peach skin, strawberry-blonde chin-length bob, faint lavender hair tips, pale-violet eyes, tall slender soft build, fully human",
+      "outfit_en": "cobalt-blue asymmetrical cropped T-shirt, one long sleeve, one bare shoulder, side cutout, sideboob, opaque front neckline, black low-rise slim straight trousers, full-length narrow legs, flat front, no belt, thin black choker, blank unprinted fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 5,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "two elevated pedestrian walkways branching across a bright glass transit district, clear sky between the rails",
+          "composition": "close portrait, patient attentive eyes and a small knowing smile, one bare shoulder visible, softly blurred branching walkways behind"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a sunlit public station plaza with broad ramps, polished metal architecture and small garden islands",
+          "composition": "extreme wide establishing shot, tiny figure at the far left where two elevated walkways branch, most of the frame is open glass city and sky"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a quiet side skywalk opening toward blue distance, glass bridges layered across the city",
+          "composition": "side-view medium shot, walking alone along a quiet skywalk and glancing toward the city, relaxed hands, long perspective lines"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a wide rail terrace with curved canopy ribs, flowering planters and high open sky",
+          "composition": "low-angle full-body view, standing at the edge of a bright station plaza with one hand extended in invitation, broad ramps and sky behind"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "an overlook where several empty routes meet above the city, pale clouds and long perspective lines",
+          "composition": "high-angle over-shoulder composition, she turns toward the viewer with a curious expression, empty paths and garden islands fill the background"
+        }
+      ]
+    },
+    {
+      "id": "somin",
+      "name": "공개 규격 연구원 베라 노박",
+      "person": "베라 노박",
+      "english": "Vera Novák",
+      "faction": "selfas",
+      "role": "생활 메카닉 공개 규격 연구원",
+      "age": 24,
+      "nature": "인간 여성",
+      "appearance": "성인 여성, 밝은 중성 베이지 피부, 긴 옆머리를 남긴 적갈색 생머리를 낮은 작은 양갈래 매듭으로 묶음, 둥근 짙은 테 안경 너머의 올리브색 눈, 작고 부드러운 체형",
+      "outfit": "가슴골과 등이 드러나는 깊은 V넥의 단색 차콜 민소매 점프수트, 양옆 허리 트임, 어깨에 느슨하게 걸친 짧은 청회색 재킷, 길고 몸에 맞는 바지형 다리선. 단색 무지 원단, 글자·문양·자수·기호·로고 없음",
+      "weapon": "접이식 연결부를 단 짧은 직검 한 자루",
+      "environment": "an open public standards pavilion on a bright rooftop plaza, silver shade fins, broad steps, distant transport rails, clear skyline and open daylight",
+      "story": "가정용 기계와 공공 장비의 부품이 서로 호환되도록 공개 규격을 연구한다. 언벡 공방의 회수 부품이 정식 검사에서 계속 탈락하는 원인을 살피고, 특정 업체의 전용 도구 없이도 안전을 증명할 시험법을 제안한다.",
+      "tie": "시온과 로크가 만든 어댑터를 검증한다. 셀파스의 효율 지표가 소규모 수리점을 불리하게 만들지 않도록 아르카에게 데이터를 전한다.",
+      "stats": {
+        "cost": 2,
+        "attack": 2,
+        "defense": 1,
+        "health": 4,
+        "effect": "ping_enemy",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 가장 약한 상대 추종자에게 1 피해. 상대 추종자가 없으면 대표 캐릭터에게 1 피해."
+      },
+      "look": "adult woman, pale neutral-beige skin, straight reddish-brown hair in two small low knots with long side locks, olive eyes behind round dark-frame glasses, petite softly rounded build",
+      "clothes": "a plain charcoal sleeveless fitted office jumpsuit with a deep V neckline showing cleavage, an open back and two clean side-waist cutouts, a short blue-gray jacket worn loose over her shoulders; long fitted trouser legs, exposed shoulders and waist; smooth solid blank fabric, plain solid-color unmarked fabric",
+      "weaponEn": "one short folding straight sword with a visible single hinge near the guard, no other weapon",
+      "scene": "an open public standards pavilion on a bright rooftop plaza, silver shade fins, broad steps, distant transport rails, clear skyline and open daylight",
+      "height_cm": 156,
+      "measurements_cm": {
+        "bust": 82,
+        "waist": 60,
+        "hip": 86
+      },
+      "personality": "기계 규격의 빈틈을 찾아내는 재빠르고 호기심 많은 연구원이다. 질문이 많고 고집도 있지만, 어려운 문제를 풀 때 안경 너머로 번지는 장난스러운 미소가 매력이다.",
+      "visual_personality_en": "olive eyes bright behind round glasses, an impish grin and lifted brows; quick crouched testing posture, one hand holding a tiny plain mechanical part up for inspection",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 75,
+      "outfit_ko": "앞을 연 청회색 크롭 작업 셔츠 안에 가슴선이 보이는 차콜 민소매 크롭 상의, 드러난 허리와 배, 불투명한 쇼츠 위에 겹친 짧은 카고 스커트, 드러난 허벅지와 탈착식 공구 주머니",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "체코·중부 유럽식 성명",
+      "department": "비서실",
+      "department_unit": "비서실",
+      "department_detail": "경영지원본부 · 기술비서실 공개규격조정팀",
+      "department_tag": "비서실",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 4,
+        "run": "FollowerRedesign_20261016_v3"
+      }
+    },
+    {
+      "id": "eunju",
+      "name": "청람 기록소의 이야기꾼 문해원",
+      "person": "문해원",
+      "english": "Mun Haewon",
+      "faction": "nanguk",
+      "role": "공공 검식 기록소 현장 해설사",
+      "age": 36,
+      "nature": "인간 여성",
+      "appearance": "성인 한국 여성, 밝은 중성 베이지 피부, 짧은 적갈색 샤기 단발과 관자놀이에 작은 잔컬, 밝은 호박색 눈과 옅은 주근깨, 풍만하고 부드러운 비근육형 체형",
+      "outfit": "현대 한국 저고리에서 영감을 받은 코발트색 겹깃 블라우스, 오른쪽 골반의 짧은 옷고름 매듭, 쇄골과 팔만 드러나는 단정한 목선. 허리와 치마 허리선은 블라우스 밑단으로 가린다. 짙은 남색의 무릎 아래 길이 슬림 스트레이트 펜슬 스커트, 옆트임 하나, 매끈한 무지 원단",
+      "weapon": "기록용 장식이 아니라 실제 수련 가능한 한국식 환도 한 자루",
+      "environment": "a lively open civic archive plaza in contemporary Korea, low stone platform, blue shade cloth, broad urban rooftops, young trees and a wide clear sky",
+      "story": "검식과 협약의 어려운 문장을 시민이 이해할 수 있는 이야기와 간단한 도식으로 풀어 설명하는 현장 해설사. 질문을 환영하고 쓸데없이 거창한 용어를 바로잡는 직설적인 성격이다. 협약 비교에서 선택권을 흐리는 문구를 찾아내자 공개 광장에서 시민들과 함께 쉬운 표현으로 고쳐 쓴다. 기록의 정확성만큼 기록을 읽을 수 있는 권리도 중요하게 여긴다.",
+      "tie": "월백과 니아가 발견한 기록 차이를 시민용 설명으로 바꾼다. 청연에게 오래된 검식의 쉬운 안내문을 건넨다.",
+      "stats": {
+        "cost": 3,
+        "attack": 1,
+        "defense": 4,
+        "health": 6,
+        "effect": "defense_all",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 모든 아군 추종자의 이번 전투 방어력 +1."
+      },
+      "look": "adult Korean woman, light neutral-beige skin, short tousled auburn shag bob with a clipped side and one loose curl, bright amber eyes, faint freckles, softly full build",
+      "clothes": "a plain cobalt-blue modern Korean wrap jeogori cropped above the waist, deep overlapping neckline showing cleavage, bare midriff and forearms, paired with a long ivory skirt with a high front-side slit revealing one thigh; simple cloth ties only, plain solid-color unmarked fabric",
+      "weaponEn": "one practical Korean hwandō-style single-edged sword with a modest dark guard and plain blue cloth wrap",
+      "scene": "a lively open civic archive plaza in contemporary Korea, low stone platform, blue shade cloth, broad urban rooftops, young trees and a wide clear sky",
+      "height_cm": 165,
+      "measurements_cm": {
+        "bust": 86,
+        "waist": 63,
+        "hip": 90
+      },
+      "personality": "복잡한 검식과 협약을 시민이 이해하는 이야기로 바꾸는 현장 해설사다. 직설적이고 재치가 있으며, 거창한 표현보다 누구나 알아들을 한 문장을 고집한다. 사람들 앞에서 설명할 때의 자신감과 기록을 지키려는 단호함이 공존한다.",
+      "visual_personality_en": "bright amber eyes, expressive brows and a candid wry grin; animated presenter posture, one hand pointing to a simple unlettered diagram and the other inviting a question",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 62,
+      "outfit_ko": "소매를 걷은 청회색 현대식 저고리형 크롭 랩 재킷, 쇄골과 자연스러운 가슴선이 보이는 다홍색 스퀘어넥 속상의 짧은 길이, 허리선이 드러나는 상의, 불투명 쇼츠 위에 겹친 짧은 남색 랩스커트, 드러난 허벅지와 엉덩이 선, 글자 없는 도식 카드를 넣은 허리 주머니; 긴 의례복 치마는 입지 않음",
+      "scene_ko": "현대 한국 도시의 시민 기록소 옆 열린 해설 부스, 글자 없는 도식판과 낮은 테이블, 푸른 차양, 넓은 광장과 멀리 보이는 도심 지붕선, 궁궐이 아닌 생활 공간",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "한국식 성명",
+      "cultural_background": "한국계 가정 출신. 청람시에서 기록과 구전 이야기를 모은다.",
+      "department": "연구개발팀",
+      "department_unit": "연구개발팀",
+      "department_detail": "공공문화처 · 검식기록해설팀",
+      "department_tag": "연구개발팀",
+      "appearance_en": "adult Korean woman, light neutral-beige skin, auburn shag bob, one loose curl, amber eyes, faint freckles, soft full build, non-muscular",
+      "outfit_en": "modern Korean jeogori-inspired wrap blouse, cobalt blue, narrow goreum tie at right hip, crossing lapels, three-quarter sleeves, collarbones visible, untucked hip-length hem hiding waistband, midnight-navy pencil skirt, slim straight cut, below-knee hem, one side slit, plain fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 5,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a modern blue-white public archive plaza beside a reflective canal and distant contemporary towers",
+          "composition": "close three-quarter portrait, dry skeptical half-smile and raised brow, one hand resting lightly at her waist, modern archive canal softly behind"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "an open riverside civic terrace with pale stone, modern glass pavilions and clear sky",
+          "composition": "wide riverside long shot, walking along the terrace with one hand shielding her eyes from the sun, city and water dominate the frame"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a broad public stair beside a quiet archive garden, blue water and city layers behind",
+          "composition": "low-angle waist-up view, standing beneath a glass archive canopy and gesturing toward an unseen display, direct confident gaze, no visible writing"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a sunlit open-air archive pavilion with plain walls, glass roof and flowering planters",
+          "composition": "rear three-quarter view, leaning on the parapet and looking over the contemporary blue-white city, head turned slightly toward camera"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a high terrace over a contemporary city square, wind lifting leaves above a wide horizon",
+          "composition": "high-angle environmental shot, small figure crossing a broad public stair with a book held at her side, pale water and glass pavilion dominate"
+        }
+      ]
+    },
+    {
+      "id": "nagyeong",
+      "name": "청람선의 검식 안내자 미나세 시오리",
+      "person": "미나세 시오리",
+      "english": "Minase Shiori",
+      "faction": "nanguk",
+      "role": "도시 교류 검식 안내자",
+      "age": 27,
+      "nature": "인간 여성",
+      "appearance": "성인 일본 여성, 밝고 차가운 중성 피부, 허리까지 오는 윤기 나는 긴 흑발을 하나로 땋고 좁은 코발트 끈으로 묶음, 짙은 흑갈색 눈, 키가 크고 가녀린 부드러운 체형",
+      "outfit": "현대 일본 유카타에서 영감을 받은 남색 랩 상의, 넓은 소매와 왼쪽 앞깃이 오른쪽 깃 위로 교차하는 기모노식 여밈, 등 뒤의 넓은 코발트색 오비와 평평한 나비 매듭, 무릎 아래까지 이어지는 짙은 남색 플리츠 랩 미디 스커트. 무지 단색 옷감",
+      "weapon": "도시 순찰과 수련에 함께 쓰는 한 자루의 한국식 도",
+      "environment": "a wide contemporary Korean civic crossing in Cheongram City, blue-white stone paving, low timber screens, canal bridges, distant hills and an open pale sky; no palace",
+      "story": "다른 도시에서 온 방문객에게 남극성의 기본 검식을 안내한다. 정해진 순서를 낯설어하는 이들이 편하게 시작할 수 있도록 몇 가지 쉬운 변형 동작을 만들었다. 유란의 비정형 수련법을 안내 코스에 넣으려 설하를 설득한다.",
+      "tie": "유란과 함께 초심자용 검식 코스를 만든다. 노아가 이음시로 가는 급행을 놓치지 않도록 막차 우회편을 찾아 준다.",
+      "stats": {
+        "cost": 2,
+        "attack": 2,
+        "defense": 1,
+        "health": 4,
+        "effect": "defense_self",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "text": "라운드 시작: 이번 전투 동안 방어력 +1. 방어전: 이번 전투 동안 공격력 +1."
+      },
+      "look": "adult Korean woman, fair cool-neutral skin, glossy jet-black hair in a long waist-length single braid tied with a narrow cobalt ribbon, deep black-brown eyes, tall lean softly feminine build",
+      "clothes": "a plain contemporary Japanese-inspired short indigo haori jacket with broad loose sleeves worn open over an ivory sleeveless wrap top with a low neckline showing cleavage, bare shoulders and waist, a high-waisted cobalt hakama-inspired split wrap skirt with one long side opening, one simple solid-color sash, smooth unmarked fabric, plain solid-color unmarked fabric",
+      "weaponEn": "one Korean single-edged do sword with a plain rounded guard and deep blue handle wrap",
+      "scene": "a wide contemporary Korean civic crossing in Cheongram City, blue-white stone paving, low timber screens, canal bridges, distant hills and an open pale sky; no palace",
+      "height_cm": 169,
+      "measurements_cm": {
+        "bust": 84,
+        "waist": 61,
+        "hip": 88
+      },
+      "personality": "정해진 동작을 강요하기보다 상대의 속도에 맞춰 검식을 가르치는 활동적인 안내자다. 승부보다 함께 익히는 즐거움을 중시하고, 실패한 동작도 웃으며 다시 보여 준다.",
+      "visual_personality_en": "alert dark eyes and an encouraging confident smile; light athletic footwork, one open hand inviting a student to try the stance at her own pace",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 60,
+      "name_origin": "일본식 성명",
+      "cultural_background": "일본 국적, 일본계 가정 출신. 의상은 한국식 저고리 매듭이 아닌 기모노·유카타식 좌측 깃 겹침과 오비 매듭을 사용한다.",
+      "department": "대외협력팀",
+      "department_unit": "대외협력팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "도시교류국 · 검식교류안내팀",
+      "department_tag": "대외협력팀",
+      "appearance_en": "adult Japanese woman, fair cool-neutral skin, glossy waist-length black hair, one long braid with cobalt cord, deep black-brown eyes, tall lean soft build",
+      "outfit_en": "Japanese yukata wrap top, deep indigo, broad sleeves, left lapel over right, cobalt obi, flat back bow, dark-indigo pleated wrap midi skirt, below-knee hem, clean plain textile",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 2,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "nationality": "일본",
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a contemporary open-air practice court beside a clean urban station, pale stone and bright clouds",
+          "composition": "full-body side view, standing in a relaxed empty-handed practice stance with open palms, broad sleeves moving in sea breeze, open court and sky"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a broad seaside boardwalk with modern Japanese coastal architecture, open water and wind",
+          "composition": "close portrait, laughing at her own small mistake, warm eyes and loose braid in focus, harbor softly blurred behind"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a rooftop garden practice space above a contemporary city, clear sky and layered footbridges",
+          "composition": "wide beach-boardwalk shot, walking along the rail and looking out at the water, tiny off-center figure, open sea fills the frame"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a blue-gray urban bridge plaza above a canal, morning light and a wide horizon",
+          "composition": "rear three-quarter medium shot, turning back over her shoulder with a patient encouraging smile, obi bow visible, practice court behind"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a quiet modern harbor terrace with open steps, sea reflections and distant apartment towers",
+          "composition": "high-angle dynamic view, stepping lightly through a playful footwork turn, sleeves and skirt in motion, broad rooftop court around her"
+        }
+      ]
+    },
+    {
+      "id": "boram",
+      "name": "잔향풍로의 연구자 장뤄안",
+      "person": "장뤄안",
+      "english": "Zhang Ruoan",
+      "faction": "nanguk",
+      "role": "도시 바람길 공명 연구원",
+      "age": 31,
+      "nature": "인간 여성",
+      "appearance": "31세 성인 중국 여성. 따뜻한 밝은 베이지 피부, 허리까지 오는 짙은 밤색 머리를 낮게 두 갈래로 땋고 관자놀이의 잔머리는 바람에 흩날림, 선명한 호박색 눈, 오른쪽 뺨의 작은 흉터. 풍만하고 부드러운 비근육형 체형.",
+      "outfit": "현대 중국풍의 미니멀한 비취색 민소매 미니 원피스. 한쪽 어깨가 드러나는 비대칭 목선과 낮은 만다린 칼라, 옆구리의 작은 허리 컷아웃, 허벅지 중간까지 오는 매끈한 치마와 한쪽 옆트임. 장식 없는 무지 단색 원단.",
+      "weapon": "목재 심재와 얇은 강철 날을 결합한 짧은 수련검 한 자루",
+      "environment": "broad riverside paths, modern civic courtyards, tree-lined stairs and open waterfront terraces in a contemporary city",
+      "story": "남극성 연구개발팀의 도시 음향·기류 연구원. 고층 건물 사이에 고이는 답답한 공기와 소음을 줄이기 위해, 공명합금 구조물과 건축물의 간격이 만드는 바람길을 연구한다. 장뤄안은 복잡한 수치보다 직접 광장과 다리를 걸으며 바람의 방향을 몸으로 확인하는 쪽을 믿는다. 그녀가 설계한 ‘잔향풍로’는 이음시의 여러 공공 공간을 연결해 공기를 순환시키고, 공명 리듬이 무너진 사람의 호흡을 안정시킨다. 실험은 종종 예상 밖으로 흘러가지만, 그때마다 주민들과 함께 웃으며 더 나은 길을 찾아낸다.",
+      "tie": "로크와 도구 수리법을 나누고 시온과 부품 시험 기준을 맞춘다. 청연의 검집도 여러 번 고쳐 준 오래된 인연이 있다.",
+      "stats": {
+        "cost": 3,
+        "attack": 2,
+        "defense": 3,
+        "health": 5,
+        "effect": "heal_wounded",
+        "amount": 2,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 가장 약한 아군 추종자의 체력을 2 회복합니다."
+      },
+      "look": "adult Chinese woman, age 31, warm beige skin, short solid-black pixie haircut, amber eyes, small cheek scar, soft curvy non-muscular build",
+      "clothes": "선명한 주홍색 비대칭 민소매 크롭탑, 한쪽 어깨가 드러나는 목선, 짙은 청록 데님 A라인 미니스커트, 허리 노출, 무지 원단",
+      "weaponEn": "one modest training sword with a visible wooden core and a narrow replaceable steel edge",
+      "scene": "broad riverside paths, modern civic courtyards, tree-lined stairs and open waterfront terraces in a contemporary city",
+      "height_cm": 160,
+      "measurements_cm": {
+        "bust": 84,
+        "waist": 65,
+        "hip": 91
+      },
+      "personality": "호기심과 재치가 넘치고, 즉흥적인 실험을 즐긴다. 실패해도 먼저 웃어 보이며 주변 사람을 실험에 끌어들이는 외향적인 분위기 메이커다. 평소에는 가볍고 장난스럽지만 도시의 공명 흐름이 흔들릴 때는 놀라울 만큼 빠르고 집중력 있게 판단한다.",
+      "visual_personality_en": "buoyant mischievous confidence, animated amber eyes, an easy laugh that turns into sharp concentration, wind-tossed twin braids, open expressive gestures",
+      "illustration_focus": "인물을 화면 가운데 세워 반복하지 않는다. 강과 도시가 주인공인 넓은 풍경, 바람을 맞으며 뒤돌아보는 모습, 웃으며 설명하는 순간, 계단에 앉은 휴식 등 장면을 바꾼다. 손에는 아무것도 들지 않는다.",
+      "exposure_target_percent": 72,
+      "name_origin": "중국계 이름",
+      "cultural_background": "중국계 가정 출신. 현대 대도시의 미니멀한 중국식 사선 여밈과 낮은 만다린 칼라를 일상복에 가볍게 반영한다. 역사극 의상이나 한복식 옷고름은 사용하지 않는다.",
+      "department": "연구개발팀",
+      "department_unit": "연구개발팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "도시 바람길·음향 공명 연구",
+      "department_tag": "연구개발팀",
+      "appearance_en": "adult Chinese woman, age 31, light warm-beige skin, waist-length dark chestnut hair gathered into neat low braids with windblown wisps, vivid amber eyes, a small scar on her right cheek, soft full curvy build, non-muscular",
+      "outfit_en": "minimalist fitted jade-green sleeveless minidress with a subtle Chinese mandarin collar, asymmetric one-shoulder neckline, small side-waist cutout, smooth mid-thigh hem, tasteful side slit, plain unadorned solid fabric",
+      "image_selection": {
+        "status": "new_candidates",
+        "candidate_count": 5,
+        "run": "FollowerRedesign_20261019_v5"
+      },
+      "nationality": "중국계",
+      "candidate_moments": [],
+      "card_name": "잔향풍로의 연구자 장뤄안"
+    },
+    {
+      "id": "haeryeong",
+      "name": "바다 관측대의 길잡이 아마노 나기",
+      "person": "아마노 나기",
+      "english": "Amano Nagi",
+      "faction": "nanguk",
+      "role": "해안 관측·교통 안내사",
+      "age": 29,
+      "nature": "인간 여성",
+      "appearance": "29세 성인 일본계 여성, 밝은 따뜻한 살구빛 피부, 어깨에 닿는 구리빛 밤색의 자연스러운 굵은 웨이브 헤어와 부드러운 옆가르마, 호박색 눈, 성숙하고 부드러운 곡선형 체형",
+      "outfit": "가슴선과 어깨 또는 허리선이 자연스럽게 드러나는 단색 코럴·테라코타 상의와 짧은 항구용 바람막이, 후보별로 올리브색 하이웨이스트 바지나 짙은 자주색 랩스커트 등 서로 다른 실루엣을 사용한다. 완전한 무지 원단, 문자·문양·자수·기호·로고 없음",
+      "weapon": "해풍에 젖어도 잘 관리되는 한 자루의 곡선형 환도",
+      "environment": "a high coastal observation deck above a blue harbor, broad white sea wall, sail-free open water, wind-shaped clouds, distant islands and bright horizon",
+      "story": "해안의 바람과 대중교통 운행 정보를 함께 읽어 섬마을 방문객에게 길을 안내한다. 보호장 오류 당시 관측망에서 잡힌 반복 신호가 바다 쪽 중계기에서도 나타난다는 사실을 청연에게 알려 조사 범위를 넓힌다.",
+      "tie": "소운의 음향 관측을 해안 데이터와 비교한다. 노아에게 바닷길 우편선과 환승 정보를 알려 준다.",
+      "stats": {
+        "cost": 3,
+        "attack": 3,
+        "defense": 1,
+        "health": 4,
+        "effect": "ping_enemy",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 가장 약한 상대 추종자에게 1 피해. 상대 추종자가 없으면 대표 캐릭터에게 1 피해."
+      },
+      "look": "adult Japanese woman, age 29, light warm-peach skin, shoulder-length natural chestnut-auburn waves with a soft side part, warm amber-hazel eyes, mature softly curvy build",
+      "clothes": "modern Japanese coastal-guide fashion in a warm rust, coral, cream and dark-olive palette; each illustration uses a distinct plain silhouette such as a cropped wind shell, sleeveless wrap top, or high-waisted trousers or skirt; visible shoulders or waist, opaque solid-color unmarked fabric; no blue scarf, no school uniform, no symbols, writing, logos, or patterns",
+      "weaponEn": "one gently curved Korean hwandō with a plain dark scabbard and simple blue grip",
+      "scene": "a high coastal observation deck above a blue harbor, broad white sea wall, sail-free open water, wind-shaped clouds, distant islands and bright horizon",
+      "height_cm": 168,
+      "measurements_cm": {
+        "bust": 89,
+        "waist": 65,
+        "hip": 91
+      },
+      "personality": "바람과 물결을 읽는 데 익숙한 솔직하고 모험심 강한 해안 안내사다. 위험을 과장하지 않지만 필요한 경고는 단호하게 전하고, 힘든 길도 유머로 넘긴다.",
+      "visual_personality_en": "sun-warmed amber eyes narrowed against sea wind, candid open smile, alert easygoing stance that leans into a gust; an inviting guide who becomes firm when warning someone",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 80,
+      "outfit_ko": "코럴·테라코타·크림·올리브의 따뜻한 색조. 어깨나 허리선이 드러나는 단색 상의와 후보마다 다른 항구용 바람막이·하이웨이스트 바지·랩스커트 조합. 무지 원단이며 글자·문양·로고가 없다.",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "일본식 성명",
+      "cultural_background": "일본계 가정 출신. 남극성 바다 관측대에서 해안 길 안내를 맡는다.",
+      "department": "도시운영팀",
+      "department_unit": "도시운영팀",
+      "department_detail": "해안교통국 · 관측항로안내팀",
+      "department_tag": "도시운영팀",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 5,
+        "run": "FollowerRedesign_20261016_v3"
+      }
+    },
+    {
+      "id": "seohwi",
+      "name": "열린 대피로의 조율자 천서휘",
+      "person": "천서휘",
+      "english": "Cheon Seohwi",
+      "faction": "nanguk",
+      "role": "시민 대피동선 설계자",
+      "age": 45,
+      "nature": "인간 여성",
+      "appearance": "45세 성인 한국 여성. 밝은 상아빛 피부, 매끄러운 먹빛 흑발의 짧은 비대칭 보브컷과 한쪽 귀 뒤로 넘긴 앞머리, 깊은 흑갈색 눈, 웃을 때 드러나는 섬세한 눈가 주름. 성숙하고 풍만하며 부드러운 비근육형 체형.",
+      "outfit": "현대 한국 도시복의 아이보리색 크롭 랩 블라우스. 둥글게 겹치는 저고리형 깃선과 오른쪽 옆선의 짧은 옷고름, 어깨를 덮는 짧은 소매. 안에는 가슴골과 허리가 드러나는 짙은 자주색 스퀘어넥 탑, 아래에는 발목까지 흐르는 푸른 먹색 하이웨이스트 테일러드 와이드 팬츠. 무지 단색 원단.",
+      "weapon": "안전 점검용 둥근 끝의 한국식 목검 한 자루",
+      "environment": "open contemporary coastal promenades, glass-roofed civic plazas, rooftop terraces and waterfront steps with sea and city views",
+      "story": "남극성 안전관리팀에서 시민 대피 동선과 공공 공간의 안전 흐름을 설계한다. 젊은 시절, 정해진 대피 지시가 오히려 군중을 한곳에 몰리게 만든 현장을 경험했다. 이후 천서휘는 가장 빠른 길 하나를 강요하는 대신, 누구나 이해하고 선택할 수 있는 여러 갈래의 열린 길을 설계한다. 그녀의 현장 점검은 엄숙한 훈련보다 동네 산책처럼 진행된다. 주민이 직접 걸어 보고 불편한 점을 알려 주면 동선은 다음 날 바로 바뀐다. 천서휘는 안전이란 사람을 통제하는 일이 아니라, 서로를 믿고 움직일 여지를 만드는 일이라고 믿는다.",
+      "tie": "설하와 공개 안전 기준을 만든다. 리아와 청연의 시범 경기를 감독하고, 다니카 뮐러와 행사장 대피 경로를 합동 점검한다.",
+      "stats": {
+        "cost": 4,
+        "attack": 2,
+        "defense": 4,
+        "health": 7,
+        "effect": "defense_self",
+        "amount": 2,
+        "attack_effect": null,
+        "defense_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "text": "라운드 시작: 이번 전투 동안 방어력 +2. 방어전: 이번 전투 동안 공격력 +1."
+      },
+      "look": "mature 45-year-old Korean woman, light ivory skin, deep blue-black hair in a high loose ponytail with a few silver temple strands, subtle smile lines, calm experienced expression, softly curvy non-muscular build",
+      "clothes": "밝은 황금 노랑의 짧은 소매 스퀘어넥 크롭 블라우스, 쇄골과 가슴선을 드러내고 한쪽 허리에 작은 컷아웃, 짙은 자주색 슬림 스트레이트 팬츠, 허리가 드러나는 투피스, 무지 원단",
+      "weaponEn": "one rounded-tip Korean wooden practice sword with visible grain, no metal blade",
+      "scene": "open contemporary coastal promenades, glass-roofed civic plazas, rooftop terraces and waterfront steps with sea and city views",
+      "height_cm": 172,
+      "measurements_cm": {
+        "bust": 92,
+        "waist": 76,
+        "hip": 99
+      },
+      "personality": "사람의 표정과 걸음걸이를 먼저 살피는 노련한 관찰자다. 단정한 말투와 능청스러운 농담으로 긴장을 풀고, 지시보다 선택지를 건네 사람을 안심시킨다. 위급한 순간에는 망설임 없이 결정을 내리지만, 상황이 끝나면 가장 늦게까지 남아 누구도 놓치지 않았는지 확인한다.",
+      "visual_personality_en": "mature observant eyes, a wry reassuring half-smile, relaxed shoulders, warm authority with a hint of humor, quietly attentive to people beyond the frame",
+      "illustration_focus": "제복이나 심판복이 아닌 성숙한 현대 도시복. 시민의 눈높이에 몸을 낮추거나, 열린 산책로를 안내하거나, 훈련 후 난간에 기대 쉬는 순간을 담는다. 바다·광장·보행교가 넓게 보이는 장면과 근접 표정을 섞는다.",
+      "exposure_target_percent": 68,
+      "name_origin": "한국식 이름",
+      "cultural_background": "한국인. 현대 한국 도시복에 저고리의 둥근 겹깃선과 짧은 옆매듭만 추상적으로 반영한다. 전통 한복이나 도복, 교복, 심판복으로 표현하지 않는다.",
+      "department": "안전관리팀",
+      "department_unit": "안전관리팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "시민 대피동선·공공 공간 안전 설계",
+      "department_tag": "안전관리팀",
+      "appearance_en": "mature adult Korean woman, age 45, light ivory skin, sleek ink-black asymmetric bob tucked behind one ear, deep dark-brown eyes, fine smile lines, mature soft full curvy build, non-muscular",
+      "outfit_en": "warm ivory fitted short-sleeve wrap blouse, rounded crossed collar with one small Korean-style side tie, cropped waist, separate dark-plum square-neck crop top, high-waisted dark navy wide-leg trousers to ankles, plain solid cloth",
+      "image_selection": {
+        "status": "new_candidates",
+        "candidate_count": 5,
+        "run": "FollowerRedesign_20261019_v5"
+      },
+      "candidate_moments": [],
+      "card_name": "열린 대피로의 조율자 천서휘",
+      "nationality": "한국"
+    },
+    {
+      "id": "jeongran",
+      "name": "묵로 장터의 살림꾼 조라 페트로비치",
+      "person": "조라 페트로비치",
+      "english": "Zora Petrović",
+      "faction": "unbek",
+      "role": "공동 장터 물자 조정자",
+      "age": 48,
+      "nature": "인간 여성",
+      "appearance": "40대 후반 성인 슬라브 여성, 밝은 중성 베이지 피부, 은빛 곱슬 잔머리를 얼굴에 남기고 어깨 앞으로 굵게 꼰 흑백 섞인 땋은 머리, 짙은 갈색 눈, 웃음 주름과 부드럽고 풍만한 체형",
+      "outfit": "아이보리색 반소매 블라우스 위에 벽돌색 민소매 V넥 니트 조끼를 겹쳐 입고, 차콜색 매끈한 A라인 미디 스커트를 착용. 스커트는 골반에서 자연스럽게 이어져 종아리 중간까지 내려오며 허리선에 주름이나 고무줄이 없음. 니트 짜임과 무지 직물 질감, 장식·문자 없음",
+      "weapon": "회수한 강철로 벼려낸 짧은 외날검 하나. 짙은 천 손잡이, 작은 단순 가드, 허리에 찬 낡은 칼집.",
+      "environment": "a broad repurposed brick market street under an open sky, community awnings, rooftop gardens, a river bridge and distant gray neighborhood blocks",
+      "story": "묵로의 공동 장터에서 물자를 나누고 배송 우선순위를 정한다. 도시들이 언벡의 통신망을 의심할 때도 시장에 들어오는 물건과 나가는 편지를 모두 기록해 사실을 확인한다. 많은 사람이 각자 조금씩 내놓은 물건으로 한 집의 저녁이 마련된다는 걸 안다.",
+      "tie": "레아와 공동 배급을 조정하고 노아에게 개장식 초대장 운송을 맡겼다. 세린과 순회 진료 물품을 나눈다.",
+      "stats": {
+        "cost": 3,
+        "attack": 1,
+        "defense": 3,
+        "health": 7,
+        "effect": "heal_leader",
+        "amount": 2,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 내 대표 캐릭터의 라이프를 2 회복합니다."
+      },
+      "look": "adult woman in her late forties, light medium neutral-beige skin, salt-and-pepper hair in a thick over-the-shoulder rope braid with loose silver curls around the face, deep brown eyes, mature softly full build, warm smile lines",
+      "clothes": "a plain rust-red asymmetrical cowl-neck top with one bare shoulder, a low neckline showing cleavage and a short charcoal sleeveless market vest worn open, paired with a fitted gray wrap skirt with a high side slit, plain solid-color unmarked fabric",
+      "weaponEn": "exactly one clearly recognizable short Korean-style single-edged steel sword made from reclaimed steel, gently curved pointed blade, small plain crossguard, dark cloth-wrapped grip and one worn scabbard",
+      "scene": "a broad repurposed brick market street under an open sky, community awnings, rooftop gardens, a river bridge and distant gray neighborhood blocks",
+      "height_cm": 162,
+      "measurements_cm": {
+        "bust": 94,
+        "waist": 79,
+        "hip": 100
+      },
+      "personality": "장터의 물자와 사람 사정을 함께 살피는 넉넉하고 현실적인 조정자다. 남의 이야기를 잘 기억하고, 거래의 빈틈을 알아차려도 상대를 망신주지 않는 능청스러움이 있다.",
+      "visual_personality_en": "welcoming eyes with deep smile lines and a knowing half-smile; relaxed market-stall posture, one hand offering a shared basket while the other gestures toward the open lane",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 62,
+      "name_origin": "남슬라브권 성명",
+      "department": "비서실",
+      "department_unit": "비서실",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "묵로협동조합 · 생활물자조정실",
+      "department_tag": "비서실",
+      "appearance_en": "adult Slavic woman in her late forties, light beige skin, salt-and-pepper rope braid, loose silver curls, deep brown eyes, warm smile lines, mature soft full build",
+      "outfit_en": "brick-red sleeveless V-neck knit vest over ivory blouse, charcoal A-line midi skirt, smooth flat hip fit, mid-calf hem, clean narrow silhouette, no gathered waistband, visible knit texture, plain fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 2,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a broad repurposed brick market street under an open sky, community awnings and a river bridge in the distance",
+          "composition": "wide market-street establishing shot, small figure standing by an open community table and greeting someone with one raised hand, brick roofs and river bridge dominate"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a rooftop produce terrace with plain baskets, low planters and a wide view of the neighborhood",
+          "composition": "close portrait, warm laugh lines and knowing smile, one loose silver curl across her cheek, market awning softly visible behind"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "an open public market lane between brick blocks, late morning sun and generous walking space",
+          "composition": "three-quarter medium shot, standing beside neatly stacked plain produce baskets and checking the market lane, practical gentle expression"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a riverside community table beneath a simple canopy, bridge piers and open water beyond",
+          "composition": "rear three-quarter view, walking beneath a simple canopy and glancing back with a generous smile, open water and bridge beyond"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a market roof at dusk, warm windows below and a huge violet evening sky over the bridge",
+          "composition": "high-angle environmental composition, leaning on a public counter while listening to someone off-frame, broad market lane visible around her"
+        }
+      ]
+    },
+    {
+      "id": "sojeong",
+      "name": "지붕길의 전령 라레 사다트",
+      "person": "라레 사다트",
+      "english": "Laleh Sadat",
+      "faction": "unbek",
+      "role": "옥상 통신 전령",
+      "age": 25,
+      "nature": "인간 여성",
+      "appearance": "성인 페르시아계 여성, 중간 밝기의 따뜻한 올리브 피부, 긴 사선 앞머리와 한쪽을 짧게 다듬은 선명한 코럴 레드 비대칭 울프컷, 짙은 호박색 눈, 작고 부드러운 비근육형 러너 체형",
+      "outfit": "산호색 무지 면 티셔츠를 한쪽 옆에서 짧게 묶어 허리 옆이 살짝 드러나게 입는다. 한쪽 옆구리에 작은 사이드붑 절개가 있는 디자인. 차콜색 데님 쇼츠는 골반에 낮게 걸리고 허벅지 중간 길이, 매끈한 슬림핏이며 주머니와 장식은 최소화한다. 옷 앞면은 완전히 비어 있다",
+      "weapon": "작고 무광인 강철 칼날이 약 18cm인 단검 한 자루, 서로 다른 회수 손잡이 조각을 이어 천으로 감아 수선한 손잡이와 한 개의 칼집",
+      "environment": "a sweeping patchwork rooftop route above an isolated neighborhood, water tanks, cloth shade sails, connected footbridges, open gray-blue sky and distant city lights",
+      "story": "전선이 끊기거나 공식 안내가 늦을 때 옥상 사이의 짧은 길을 달려 정보를 전한다. 노아가 모르는 골목길을 지도에 추가하도록 돕고, 애쉬의 통신 신호를 사람이 알아들을 수 있는 짧은 빛으로 바꾼다.",
+      "tie": "애쉬와 옥상 중계기를 관리하고 노아와 배송 경로를 서로 가르친다. 벡터와 속도 경쟁을 하다 길보다 수신자를 먼저 확인하는 규칙을 배웠다.",
+      "stats": {
+        "cost": 2,
+        "attack": 2,
+        "defense": 0,
+        "health": 3,
+        "effect": null,
+        "amount": null,
+        "attack_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "defense_effect": null,
+        "text": "공격전: 이번 전투 동안 자신의 공격력 +1."
+      },
+      "look": "adult woman, very deep dark-brown skin, vivid coral-red asymmetrical wolf cut with one long swept fringe and one closely tapered side, dark amber eyes, petite soft runner build",
+      "clothes": "a plain coral-red sleeveless crop top with a deep neckline showing cleavage and an open back, bare midriff, a cropped charcoal runner vest worn open, paired with high-waisted fitted graphite trousers with a high outer-leg slit, plain solid-color unmarked fabric",
+      "weaponEn": "exactly one compact salvage utility dagger with a single plain matte-steel blade about 18 cm long, a repaired cloth-wrapped grip made from mismatched salvaged pieces, and one simple sheath; never a sword",
+      "scene": "a sweeping patchwork rooftop route above an isolated neighborhood, water tanks, cloth shade sails, connected footbridges, open gray-blue sky and distant city lights",
+      "height_cm": 157,
+      "measurements_cm": {
+        "bust": 80,
+        "waist": 58,
+        "hip": 83
+      },
+      "personality": "전선이 끊겨도 직접 달려 길을 여는 대담하고 장난기 많은 전령이다. 속도와 즉흥성을 즐기지만, 전달해야 할 말은 한 글자도 놓치지 않는다.",
+      "visual_personality_en": "mischievous amber eyes and a fearless crooked grin; compact rooftop runner crouch caught just before a leap, one hand securing a message satchel",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 70,
+      "outfit_ko": "후드를 내린 짧은 무광 차콜 러너 베스트 안에 가슴선이 보이는 산호색 민소매 스포츠 상의, 드러난 허리와 배, 불투명한 속바지를 덧댄 짧은 하이웨이스트 카고 쇼츠, 드러난 허벅지와 탄탄한 엉덩이 선, 작은 크로스백",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "페르시아어권 성명",
+      "department": "도시운영팀",
+      "department_unit": "도시운영팀",
+      "department_detail": "지붕길통신망 · 전령운영팀",
+      "department_tag": "도시운영팀",
+      "appearance_en": "adult Persian woman, medium-light warm olive skin, vivid coral-red asymmetrical wolf cut, long swept fringe, one tapered side, dark amber eyes, petite soft build, non-muscular",
+      "outfit_en": "solid coral-red short-sleeve cotton T-shirt tied once at one side, small lower side-seam cutout with a tasteful narrow sideboob glimpse, simple clean silhouette, charcoal low-rise denim shorts, mid-thigh length, fitted straight cut, no cargo pockets, solid matte fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 3,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a bright rooftop footbridge above the isolated neighborhood, open water towers and a broad morning sky",
+          "composition": "dynamic side-view action, sprinting along a rooftop footbridge with focused playful eyes, strong diagonal rail lines and bright sky"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a high connected roof route with patchwork shade sails, distant city lights and strong sunlight",
+          "composition": "extreme wide rear view, tiny figure pausing at the end of a roof route to look over the isolated neighborhood, open sky and water towers dominate"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a rooftop stair landing overlooking a quiet doorway far below and a wide layered skyline",
+          "composition": "close profile portrait, daring smirk and alert amber eyes, coral hair swept by wind, rooftop lights softly behind"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a safe low gap between broad roof platforms, distant gardens and pale clouds beyond",
+          "composition": "low-angle full-body shot, taking a long running step across a broad roof landing, arms balanced naturally, layered skyline behind"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a high signal balcony at sunset, small warm windows across the neighborhood and an open horizon",
+          "composition": "high-angle long shot, walking along a patchwork shade-sail path and looking toward a distant doorway, figure offset to one side"
+        }
+      ]
+    },
+    {
+      "id": "girim",
+      "name": "강변 회수대의 안내자 이마니 카마우",
+      "person": "이마니 카마우",
+      "english": "Imani Kamau",
+      "faction": "unbek",
+      "role": "강변 구조·회수 안내자",
+      "age": 34,
+      "nature": "인간 여성",
+      "appearance": "성인 동아프리카계 여성, 중간 밝기의 따뜻한 골든 브라운 피부, 짧은 구릿빛 마이크로 브레이드를 조형적인 옆번으로 모으고 몇 가닥을 남김, 헤이즐 눈, 든든하고 둥근 비근육형 체형",
+      "outfit": "차분한 올리브 회색의 단색 핏앤플레어 셔츠 원피스, 허리띠나 주름 없이 상체에서 골반으로 매끈하게 이어지는 실루엣. 밑단은 종아리 중간 길이, 한쪽 옆트임은 무릎 위까지만 열림. 짧은 소매와 열린 칼라, 무지 무광 면 소재",
+      "weapon": "회수 로프를 걸기 위한 작고 둥근 갈고리형 외날검 하나",
+      "environment": "a broad riverbank recovery path in the isolated district, shallow water, old bridge piers, open community gardens, distant low hills and bright cloud breaks",
+      "story": "홍수철마다 강변의 부유물과 폐부품을 회수하고, 쓸 수 있는 재료를 공방에 돌려보낸다. 페룸이 맡은 구조 작업에서 회수된 방벽의 무게를 줄이는 방법을 찾아내고, 귀한 공명합금을 쓰지 않고도 연결부를 안전하게 보강한다.",
+      "tie": "페룸과 강변 구조 훈련을 진행한다. 모라에게 도시 외곽 생태 수로의 수위 변화를 전달한다.",
+      "stats": {
+        "cost": 3,
+        "attack": 2,
+        "defense": 3,
+        "health": 6,
+        "effect": "defense_self",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": {
+          "type": "temp_buff_self",
+          "amount": 1
+        },
+        "text": "라운드 시작: 이번 전투 동안 방어력 +1. 방어전: 이번 전투 동안 공격력 +1."
+      },
+      "look": "adult woman, light medium neutral-beige skin, short copper-brown microbraids gathered into a sculptural side bun with a few loose braid ends, hazel eyes, gently rounded capable build",
+      "clothes": "a plain pale-sage one-shoulder fitted top with a deep neckline showing cleavage and an exposed waist, a cropped smoke-gray rescue overshirt worn open, paired with a charcoal utility wrap skirt with a high thigh slit; bare arms and one leg, sturdy plain shoes, plain solid-color unmarked fabric",
+      "weaponEn": "one small rounded hook-shaped single-edged rescue sword for catching a rope, modest and repairable",
+      "scene": "a broad riverbank recovery path in the isolated district, shallow water, old bridge piers, open community gardens, distant low hills and bright cloud breaks",
+      "height_cm": 174,
+      "measurements_cm": {
+        "bust": 96,
+        "waist": 73,
+        "hip": 101
+      },
+      "personality": "쓸 수 있는 것을 버리지 않고 다시 살리는 침착하고 믿음직한 구조 안내자다. 말이 많지 않지만 사람과 자원을 모두 안전하게 옮기는 순간에는 묵직한 자신감이 드러난다.",
+      "visual_personality_en": "steady hazel eyes and a quiet reassuring smile; strong but economical posture, one hand indicating a safe riverbank path while the other steadies a recovered crate",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 60,
+      "name_origin": "동아프리카권 성명",
+      "department": "도시운영팀",
+      "department_unit": "도시운영팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "강변공동체 · 구조회수대",
+      "department_tag": "도시운영팀",
+      "appearance_en": "adult East African woman, medium warm golden-brown skin, copper microbraids in one sculptural side bun, hazel eyes, reassuring rounded build, non-muscular",
+      "outfit_en": "muted olive-gray fitted shirt dress, short sleeves, open collar, one-piece silhouette, gently shaped torso without belt or gathered waist, mid-calf hem, single side slit to knee, matte cotton, plain solid fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 2,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a broad riverbank recovery path, old bridge piers, community gardens and distant low hills in bright sun",
+          "composition": "wide riverside establishing view, small figure standing at a fork in the recovery path and pointing toward the safer route, river and hills dominate"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "an open floating recovery dock on calm water, simple timber platforms and a wide blue sky",
+          "composition": "close portrait, calm reassuring smile and hazel eyes, copper braids gathered at one side, bright water softly blurred behind"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a shallow stream path through a riverside neighborhood with open banks and clear cloud breaks",
+          "composition": "waist-up three-quarter view, reaching one open hand toward someone off-frame with a steady protective expression, broad riverbank behind"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a floodplain garden after the water recedes, broad grasses, low hills and bright reflections",
+          "composition": "rear long shot, walking along a timber dock and glancing back to check that the path is clear, open water fills the background"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a long waterfront walkway beneath an old bridge, distant rooftops and warm late-afternoon light",
+          "composition": "high-angle environmental view, kneeling beside a clear stream to inspect the bank, small figure amid broad grasses and bright reflections"
+        }
+      ]
+    },
+    {
+      "id": "onjae",
+      "name": "골목 공용공방의 수리사 사피야 하다드",
+      "person": "사피야 하다드",
+      "english": "Safiya Haddad",
+      "faction": "unbek",
+      "role": "공용 생활기기 수리사",
+      "age": 30,
+      "nature": "인간 여성",
+      "appearance": "성인 아랍 여성, 밝은 따뜻한 올리브 베이지 피부, 목덜미를 짧게 다듬고 이마에 작은 컬을 남긴 구름 같은 은백색 곱슬머리, 적갈색 눈, 키가 크고 가녀린 부드러운 체형, 잠이 부족한 사색적인 얼굴",
+      "outfit": "짙은 자주색 무지 면 크롭 티셔츠, 밑단에 언더붑이 살짝 드러나는 비대칭 컷과 짧은 소매. 뼈색 플리츠 미니스커트는 허벅지 중간 길이, 골반에 낮게 걸리고 가벼운 옆트임이 있다. 장식·문자 없는 단색 무광 원단",
+      "weapon": "회수 강철을 다시 벼린 짧은 직검 한 자루, 약 55cm 길이의 무광 좁은 칼날과 단순한 작은 가드, 천으로 감은 손잡이와 평범한 칼집",
+      "environment": "an open-sided neighborhood repair arcade, patched awnings, sunlit brick lane, rooftop gardens, distant water towers and a broad evening sky",
+      "story": "고장 난 생활 기기를 누구나 다시 쓸 수 있도록 수리하고, 작업 과정은 그림으로 기록한다. 알파벳 로그를 읽기 어려운 주민도 이해할 수 있도록 설비 오류를 색과 모양으로 설명한다. 아르카의 안전 분류 자료를 묵로의 수리공이 실제로 활용할 수 있는 그림 안내로 바꾼다.",
+      "tie": "아르카와 함께 셀파스의 오류 안내를 그림으로 바꾸고, 시온과 로크가 만든 개방 규격을 주민 교육에 적용한다.",
+      "stats": {
+        "cost": 2,
+        "attack": 1,
+        "defense": 2,
+        "health": 5,
+        "effect": "heal_wounded",
+        "amount": 2,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 가장 약한 아군 추종자의 체력을 2 회복합니다."
+      },
+      "look": "adult woman, pale warm-olive beige skin, soft silver-white cloud curls with a neat close undercut at the nape and one small curl over the forehead, reddish-brown eyes, tall slender feminine build, sleepy thoughtful face",
+      "clothes": "a plain pale-gray deep scoop-neck blouse showing cleavage, bare collarbones and shoulders, a short black repair jacket hanging open, paired with a muted-plum asymmetric skirt falling to mid-calf with one high side slit; rolled sleeves, exposed forearms and one thigh, plain solid-color unmarked fabric",
+      "weaponEn": "exactly one modest short straight reclaimed-steel sword, a narrow non-glowing matte blade about 55 cm long, simple small crossguard, dark cloth-wrapped grip and one plain scabbard; ordinary practical one-hand scale",
+      "scene": "an open-sided neighborhood repair arcade, patched awnings, sunlit brick lane, rooftop gardens, distant water towers and a broad evening sky",
+      "height_cm": 171,
+      "measurements_cm": {
+        "bust": 83,
+        "waist": 62,
+        "hip": 89
+      },
+      "personality": "고장 난 물건의 반복되는 징후를 조용히 관찰하고 그림으로 설명하는 인내심 많은 수리사다. 잠이 부족해도 작은 발견을 놓치지 않으며, 친절한 설명 뒤에 소소한 엉뚱함이 있다.",
+      "visual_personality_en": "thoughtful reddish-brown eyes with a sleepy lopsided smile; careful focused posture, one hand drawing a simple shape in a blank repair booklet",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 55,
+      "name_origin": "레반트·아랍어권 성명",
+      "department": "도시운영팀",
+      "department_unit": "도시운영팀",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "department_detail": "골목공용공방 · 생활기기수리실",
+      "department_tag": "도시운영팀",
+      "appearance_en": "adult Arab woman, light warm olive-beige skin, clearly silver-white cloud curls, short nape undercut, one forehead curl, reddish-brown eyes, tall slender build, sleepy thoughtful face",
+      "outfit_en": "deep wine-plum short-sleeve crop T-shirt with a tasteful high lower hem revealing a narrow underbust strip, clean solid matte plum fabric, bone-white low-rise pleated miniskirt, mid-thigh hem, hip-slung waistband, small side slit, accurate natural garment colors",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 1,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "an open-sided neighborhood repair arcade with patched awnings, sunlit brick lane and distant water towers",
+          "composition": "close portrait, sleepy thoughtful eyes sharpening into a tiny delighted smile, silver curls in focus, open repair arcade softly behind"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a rooftop community workshop with one clean workbench, planter beds and a broad evening sky",
+          "composition": "very wide rooftop establishing shot, tiny figure near one corner beneath patched awnings, broad evening sky and rooftops dominate"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a small outdoor maker courtyard between old brick walls and bright modern rooftops",
+          "composition": "side-view medium shot, standing by an open workbench and turning over one shoulder after noticing a small detail, hands relaxed"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "a public repair counter opening onto a wide pedestrian lane, warm sunlight and open city depth",
+          "composition": "high-angle view, leaning over a plain workbench to inspect a small repaired component, face visible in profile, rooftop workshop beyond"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a canal-side service terrace at dusk, simple lamps and a clear line of sight to the rooftops",
+          "composition": "rear three-quarter long shot, walking down a sunlit brick lane with a quiet thoughtful posture, distant water towers and open sky"
+        }
+      ]
+    },
+    {
+      "id": "mijeong",
+      "name": "묵로 계약조정인 나디아 모로",
+      "person": "나디아 모로",
+      "english": "Nadia Moreau",
+      "faction": "unbek",
+      "role": "시민 계약·수리권 조정인",
+      "age": 39,
+      "nature": "인간 여성",
+      "appearance": "30대 후반 성인 여성, 밝은 중성 베이지 피부, 귀밑에서 둥글게 끝나는 스모키 라일락 단발과 자연스러운 옆가르마, 밤색 눈, 한쪽 보조개, 부드러운 곡선형 체형, 사람의 자연스러운 머리 윤곽",
+      "outfit": "라벤더 블루 오버핏 버튼다운 셔츠를 단추를 풀어 가볍게 걸치고 소매를 걷는다. 안에는 허리선을 강조하지 않는 검은색 민소매 스트레이트 원피스, 무릎 아래에서 종아리 중간까지 내려오는 길이와 한쪽 옆트임. 셔츠 밑단은 골반을 덮고 무지 단색",
+      "weapon": "작은 재사용 금속 장식만 가드에 붙인 낡은 짧은 세이버 한 자루. 검은 무광 검날, 단순한 손잡이와 작은 가드, 허리에 찬 평범한 칼집.",
+      "environment": "a wide open negotiation lane in the community market, patched brick facades, a large public table beneath a canopy, river bridge and rooftops under a pale sky",
+      "story": "서로 다른 기업 서비스 계약과 수리 권한이 충돌할 때 시민이 이해할 수 있는 문장으로 다시 정리한다. 백야 협약 수정안 전달 누락을 발견한 뒤 언벡을 편입시키려는 제안 대신 동등한 접속 규칙을 요구한다. 상대를 탓하기보다 각자가 선택할 수 있는 항목을 남기는 조정자다.",
+      "tie": "레아와 시민위원회에서 언벡의 동등한 연결권을 설명한다. 비비안 르클레르·문해원와 협약 설명 문구를 함께 고친다.",
+      "stats": {
+        "cost": 3,
+        "attack": 2,
+        "defense": 2,
+        "health": 5,
+        "effect": "recover",
+        "amount": 1,
+        "attack_effect": null,
+        "defense_effect": null,
+        "text": "라운드 시작: 버림 더미에서 추종자 1장을 손으로 가져옵니다. 가져올 수 없으면 이번 라운드 사이즈 한도 +1."
+      },
+      "look": "adult woman in her late thirties, light neutral-beige skin, neat rounded smoky-lilac bob ending below the ears with a natural side part, chestnut eyes, softly curvy build, one cheek dimple, fully human appearance",
+      "clothes": "plain solid-color charcoal, blue-gray, and deep-plum negotiation clothes with a simple neckline and natural fabric folds; bare shoulders or waist may show; no headwear or hair ornaments; no patterns, text, symbols, embroidery, or logos",
+      "weaponEn": "exactly one plain worn short saber with a gently curved pointed dark steel blade about 60 centimeters long, simple grip and small plain crossguard with only one tiny reused metal insert; ordinary scale, no ornament or glow",
+      "scene": "a wide open negotiation lane in the community market, patched brick facades, a large public table beneath a canopy, river bridge and rooftops under a pale sky",
+      "height_cm": 164,
+      "measurements_cm": {
+        "bust": 98,
+        "waist": 78,
+        "hip": 102
+      },
+      "personality": "서로의 사정을 듣되 수리권과 선택권만큼은 양보하지 않는 차분한 협상가다. 상대를 몰아붙이지 않고 핵심을 분명히 짚으며, 결정적인 순간엔 한 치도 물러서지 않는다.",
+      "visual_personality_en": "calm chestnut eyes, a small dimple and a firm measured smile; balanced negotiation posture, one open hand inviting dialogue while the other rests on a plain closed record slate",
+      "illustration_focus": "표정과 손짓, 자세가 인물의 성격을 먼저 전달한다. 검은 보조 요소로만 두고 클로즈업이나 전경에서 강조하지 않는다.",
+      "exposure_target_percent": 58,
+      "outfit_ko": "차콜·청회색·짙은 자주색 단색 협상 실무복. 어깨나 허리선을 자연스럽게 드러내며, 머리 장식 없이 둥근 짧은 단발을 유지한다. 무지 원단이며 글자·문양·로고가 없다.",
+      "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
+      "name_origin": "프랑스어권 성명",
+      "department": "비서실",
+      "department_unit": "비서실",
+      "department_detail": "묵로공동조정회 · 계약수리권조정실",
+      "department_tag": "비서실",
+      "appearance_en": "adult human woman in her late thirties, light neutral-beige skin, smoky-lilac bob below ears, chestnut eyes, one cheek dimple, softly curvy build",
+      "outfit_en": "oversized lavender-blue button-up shirt worn open, rolled sleeves, hip-length untucked hem, black sleeveless straight midi dress underneath, below-knee mid-calf hem, one side slit to knee, smooth silhouette without waistband, plain unmarked fabric",
+      "image_selection": {
+        "status": "confirmed",
+        "variant": 3,
+        "run": "FollowerRedesign_20261016_v4"
+      },
+      "candidate_moments": [
+        {
+          "number": 1,
+          "label": "신규 후보 1",
+          "scene": "a wide open negotiation lane in the community market, patched brick facades and rooftops under a pale sky",
+          "composition": "waist-up front three-quarter view at a plain negotiation table, calm firm expression and one open palm inviting a response, bright public square behind"
+        },
+        {
+          "number": 2,
+          "label": "신규 후보 2",
+          "scene": "a long plain public table beneath an open canopy beside a river bridge and bright neighborhood blocks",
+          "composition": "extreme wide shot, small figure crossing an open market square beneath a pale sky, buildings and canal occupy most of the frame"
+        },
+        {
+          "number": 3,
+          "label": "신규 후보 3",
+          "scene": "a rooftop citizens pavilion with low walls, garden beds and a clear view of the city",
+          "composition": "close side portrait, attentive listening expression and one cheek dimple appearing in a small smile, brick arch softly behind"
+        },
+        {
+          "number": 4,
+          "label": "신규 후보 4",
+          "scene": "an open brick arch between a market square and a bright pedestrian lane, late morning sun",
+          "composition": "rear three-quarter view, walking beneath an open civic arch and glancing toward the viewer, layered rooftops and canal in distance"
+        },
+        {
+          "number": 5,
+          "label": "신규 후보 5",
+          "scene": "a broad public square after sunset, lavender sky above simple community roofs and a quiet canal",
+          "composition": "high-angle medium shot, standing at the end of a long public table with both hands resting lightly on it, resolved gentle expression, open canopy above"
+        }
+      ]
+    }
+  ],
+  "naming_policy": "이음시는 여러 지역 출신이 섞여 사는 다언어 도시권이다. 회사 소속과 이름의 문화권은 일치하지 않는다. 남극성 청람시에는 한국·일본·중국계 가정이 함께 살며 동아시아 복식과 생활 문화가 교류된다. 게임과 문서의 이름은 한글 표기를 기본으로 하고, 영문 표기는 검색용 별칭으로 둔다.",
+  "departments": {
+    "비서실": {
+      "name": "비서실",
+      "count": 4,
+      "members": [
+        "비비안 르클레르",
+        "베라 노박",
+        "조라 페트로비치",
+        "나디아 모로"
+      ]
+    },
+    "연구개발팀": {
+      "name": "연구개발팀",
+      "count": 5,
+      "members": [
+        "마리솔 베가",
+        "아마라 바우어",
+        "엘로디 뒤몽",
+        "문해원",
+        "장뤄안"
+      ]
+    },
+    "도시운영팀": {
+      "name": "도시운영팀",
+      "count": 6,
+      "members": [
+        "에블린 하트",
+        "에이다 라이트",
+        "아마노 나기",
+        "라레 사다트",
+        "이마니 카마우",
+        "사피야 하다드"
+      ]
+    },
+    "대외협력팀": {
+      "name": "대외협력팀",
+      "count": 2,
+      "members": [
+        "탈리아 애쉬포드",
+        "미나세 시오리"
+      ]
+    },
+    "안전관리팀": {
+      "name": "안전관리팀",
+      "count": 3,
+      "members": [
+        "다니카 뮐러",
+        "아이리스 모건",
+        "천서휘"
+      ]
+    }
+  },
+  "candidate_moments": {
+    "yeoul": [
+      {
+        "label": "연잎 아래 물길을 살피다",
+        "en": "portrait-format panoramic establishing view; tiny Evelyn Hart kneels at the far lower-left beside a lotus pond, holding one enormous lotus leaf above a young plant while checking the water flowing past; she is a small secondary figure, open terraces and water channels dominate",
+        "setting": "an open lotus pond woven through the public greenhouse, huge lotus leaves, bright irrigation channels and distant green skyline"
+      },
+      {
+        "label": "연잎의 물방울을 따라",
+        "en": "off-center side close-up; Evelyn Hart leans beneath a broad lotus leaf and catches a falling drop in her open palm, intent green-gray eyes and a gentle smile; the leaf fills the upper-left while her face appears near the right edge",
+        "setting": "sunlit lotus water garden beneath a glass canopy, rippling channel and layered leaves"
+      },
+      {
+        "label": "수로를 건너는 길잡이",
+        "en": "dynamic rear three-quarter long shot; Evelyn Hart steps across flat stones through a shallow lotus channel, one hand lifting a huge leaf aside, long braid swinging; she stays in the lower-right while bridges and gardens extend far ahead",
+        "setting": "elevated greenhouse waterway with stepping stones, lotus leaves, garden bridges and open skyline"
+      },
+      {
+        "label": "위험을 먼저 막는 손",
+        "en": "medium low-angle view from the left; Evelyn Hart braces one foot on a wet stone and reaches across a small spillway to turn a plain water gate, focused decisive face; the channel cuts diagonally through the foreground and the city opens behind her",
+        "setting": "public lotus pond spillway beside a broad botanical terrace and bright glass towers"
+      },
+      {
+        "label": "잎에 비친 녹관시",
+        "en": "rear-view composition from behind a foreground lotus leaf; Evelyn Hart sits on the far bank, long braid over one shoulder, quietly watching the city reflected in the water; her figure is small and partly framed by leaves, reflection and skyline lead the image",
+        "setting": "wide lotus pond at sunset with greenhouse arches, water reflections and distant Outpraware towers"
+      }
+    ],
+    "lagyeong": [
+      {
+        "label": "조항을 다시 묻는 감사관",
+        "en": "formal low-angle medium shot; Vivienne Leclerc stands alone beneath an open archive colonnade, one hand raised to pause an unseen proposal, precise amber gaze and subtly raised eyebrow; she occupies the left third while blank glass panels recede into bright space",
+        "setting": "open-air bioethics archive garden, pale stone columns, reflecting pool and living vines"
+      },
+      {
+        "label": "기록의 빈틈을 발견하다",
+        "en": "extreme close three-quarter portrait, Vivienne Leclerc looks sideways through thin glasses with a dry knowing half-smile, one gloved fingertip touches the rim of the glasses; her face sits near the upper-right corner, clean archive architecture softly visible behind",
+        "setting": "sunlit civic archive terrace with tall plain glass walls and a pale green garden"
+      },
+      {
+        "label": "규정 너머의 선택권",
+        "en": "over-the-shoulder composition from behind Vivienne Leclerc; she faces a broad open garden gate, one hand resting on its frame as if choosing to leave it open, composed posture, figure small against the public plaza",
+        "setting": "wide archive courtyard opening toward a bright city park and reflecting pool"
+      },
+      {
+        "label": "침착한 반론",
+        "en": "seated side view at a bare stone bench, Vivienne Leclerc crosses one leg and listens with a restrained smile, hands folded rather than pointing; asymmetrical framing with long empty colonnade and garden reflections filling most of the card",
+        "setting": "open civic archive arcade, broad steps, pale columns, clear afternoon light"
+      },
+      {
+        "label": "마지막 대조",
+        "en": "top-down diagonal portrait; Vivienne Leclerc stands at the edge of a shallow reflecting pool, studying two ripples with meticulous focus, one hand on her chin; her dark silhouette is small amid geometric water and garden paths",
+        "setting": "rooftop archive garden with still water, clipped greenery and city skyline"
+      }
+    ],
+    "haeon": [
+      {
+        "label": "새 항로를 발견한 순간",
+        "en": "dynamic low-angle medium shot; Marisol Vega rises onto her toes and points excitedly toward a tiny pollinating drone above the roof, bright open smile and wide curious eyes; curls lift in the breeze, sky and reservoirs fill the background",
+        "setting": "rooftop waterway observatory, glass gardens, distant reservoirs and open blue-green skyline"
+      },
+      {
+        "label": "벌의 비행을 따라가다",
+        "en": "vertical panoramic establishing view; Marisol Vega is a tiny figure at the far lower-right, leaning over a rooftop rail and tracing the path of a bee with one finger; broad water channels and drone landing rings dominate",
+        "setting": "sunlit rooftop observatory with water gardens, flight rings and faraway green towers"
+      },
+      {
+        "label": "계산보다 먼저 온 직감",
+        "en": "candid close three-quarter view; Marisol Vega turns sharply toward a passing drone shadow, curls bouncing, one hand shading her eyes, delighted expression changing to sudden concentration; cropped framing leaves the sky and rail visible",
+        "setting": "open glass-roofed research terrace above layered botanical roofs"
+      },
+      {
+        "label": "즉흥적인 항로 시험",
+        "en": "dynamic tilted long shot; Marisol Vega jogs along the edge of a rooftop channel while following a drifting petal, playful grin and loose arms, not posing for the viewer; sweeping perspective lines lead to distant water tanks",
+        "setting": "broad elevated aqueduct promenade among greenhouse roofs under bright daylight"
+      },
+      {
+        "label": "관찰을 나누는 연구자",
+        "en": "eye-level waist-up composition from slightly above; Marisol Vega crouches beside a flowering planter, face bright with a newly noticed idea, both hands open as she explains it to the viewer; subject on one side, open skyline on the other",
+        "setting": "open-air botanical research deck with flower beds, glass towers and distant reservoirs"
+      }
+    ],
+    "chaeyun": [
+      {
+        "label": "먼저 듣는 설계자",
+        "en": "quiet wide shot from behind; Amara Bauer sits on a low stone ledge beneath a living arch, head turned to listen toward an unseen citizen, relaxed broad shoulders and patient posture; tiny figure centered low beneath immense architecture",
+        "setting": "monumental living-wood civic arch, open public garden, layered canopy bridges and terraces"
+      },
+      {
+        "label": "걸음의 폭을 살피다",
+        "en": "high-angle diagonal view; Amara Bauer walks slowly along a curving garden path, looking down at the path width and testing it with an easy measured stride; figure placed at the far edge, arch and flower beds create sweeping lines",
+        "setting": "bright civic garden crossing under a living architectural canopy"
+      },
+      {
+        "label": "완성보다 사람의 자리",
+        "en": "medium profile portrait; Amara Bauer rests one hand on a smooth living-wood column and smiles softly toward an empty sunlit bench, thoughtful and content; crop shows her face and hand while the comfortable public space remains clear",
+        "setting": "open garden pavilion with broad benches, dappled light and distant homes"
+      },
+      {
+        "label": "동선을 열어 두다",
+        "en": "front three-quarter long shot; Amara Bauer steps aside and gestures toward a broad unobstructed path, calm welcoming smile, one arm extending across the frame; she occupies the right third, open walkway runs deep into the left",
+        "setting": "wide residential terraces connected by garden bridges and a monumental green arch"
+      },
+      {
+        "label": "천천히 돌아보는 건축가",
+        "en": "low-angle portrait from beneath the arch; Amara Bauer tilts her head upward to study the canopy she designed, one hand shading her eyes, satisfied but humble expression; vertical branches and open sky tower over her",
+        "setting": "living-wood civic arch with layered leaves against a clear blue sky"
+      }
+    ],
+    "surim": [
+      {
+        "label": "산책길에 동행을 청하다",
+        "en": "lively medium shot; Talia Ashford turns mid-step on a canal promenade and beckons the viewer with a playful open hand, bright smile and sparkling eyes, hair swinging; she is off-center with waterway leading far behind",
+        "setting": "elevated canal walk with hanging gardens, footbridges and glass towers under open sky"
+      },
+      {
+        "label": "숨은 정원을 찾은 안내자",
+        "en": "distant high-angle view; Talia Ashford sits on the canal edge with legs turned toward a tiny hidden garden, pointing out a small patch of flowers, relaxed and delighted; broad turquoise water and city terraces dominate",
+        "setting": "quiet side canal beneath a green bridge with small public gardens"
+      },
+      {
+        "label": "비 오는 날의 우회로",
+        "en": "dynamic over-the-shoulder shot; Talia Ashford looks back while stepping across a shallow puddle, one arm stretched for balance, amused grin; vertical path and reflections draw the eye toward the open skyline",
+        "setting": "sunlit canal promenade after rain, water, hanging planters and distant glass city"
+      },
+      {
+        "label": "누구나 끼어드는 대화",
+        "en": "close three-quarter portrait from slightly below; Talia Ashford leans toward the viewer with an open, conspiratorial smile and raised eyebrow, one shoulder forward; bright garden and a curved footbridge remain visible around her",
+        "setting": "open-air garden promenade framed by broad leaves and a distant bridge"
+      },
+      {
+        "label": "물길 따라 즉흥 산책",
+        "en": "long lateral composition; Talia Ashford strolls in simple shoes along the far edge of a broad canal, one arm loosely swinging and gaze turned toward the skyline; figure occupies little space, open sky and water fill the card",
+        "setting": "wide public waterway with small bridges, green terraces and bright afternoon sky"
+      }
+    ],
+    "minju": [
+      {
+        "label": "수동 레버를 되살리다",
+        "en": "low-angle close medium view; Ada Wright crouches beside an open rail service hatch and calmly pulls a plain manual lever, jaw set and eyes focused; one knee grounded, metal tracks recede sharply behind her",
+        "setting": "broad elevated rail interchange with branching tracks and silver canopy ribs"
+      },
+      {
+        "label": "통로를 먼저 열다",
+        "en": "vertical establishing shot from high above; Ada Wright is a small figure at the bottom of the frame, standing between the rail platform and a newly opened pedestrian passage, one arm directing the way; vast transit architecture dominates",
+        "setting": "open Selfas rail interchange, skybridges, polished steel and clear skyline"
+      },
+      {
+        "label": "짧은 농담 뒤의 안도",
+        "en": "tight side portrait at the platform edge; Ada Wright wipes a smudge from her cheek with the back of her hand and gives a dry half-smile, wind-tossed fringe over one eye; tracks and bright city blur behind",
+        "setting": "sunlit elevated platform above a metal transit plaza"
+      },
+      {
+        "label": "현장부터 확인하는 정비사",
+        "en": "overhead diagonal composition; Ada Wright kneels to inspect a floor-level rail joint, one hand braced on her thigh, fully focused on the hardware, figure pushed to one corner; converging rails create a strong graphic path",
+        "setting": "open track junction beneath a high ribbed canopy"
+      },
+      {
+        "label": "교대가 끝난 뒤",
+        "en": "quiet long shot from behind; Ada Wright leans on a rail after work, looking out over the sprawling city, shoulders finally relaxed; small silhouette against branching tracks, skybridges and pale evening sky",
+        "setting": "high rail overlook with silver lines of transit stretching to the horizon"
+      }
+    ],
+    "chaerin": [
+      {
+        "label": "사용자의 움직임을 관찰하다",
+        "en": "eye-level medium shot; Élodie Dumont mirrors a gentle wrist rotation with both hands, studying the movement with kind blue-gray eyes and a competitive little smile; she is placed to one side beside a plain articulated assistive device",
+        "setting": "open public fabrication plaza with modular worktables, metal canopies and flowers"
+      },
+      {
+        "label": "맞춤 규격을 끝까지 고치다",
+        "en": "top-down diagonal view; Élodie Dumont kneels beside a compact support mechanism on a clean workbench, tilting her head to compare its angle, one hand poised but not holding a tool; open plaza and skyline extend behind",
+        "setting": "sunlit outdoor design lab spilling into a wide civic plaza"
+      },
+      {
+        "label": "새 아이디어를 설명하는 순간",
+        "en": "dynamic close-up from below; Élodie Dumont leans toward the viewer with a playful confident grin, one finger lifted as if she has just solved a design problem; curled chestnut hair and blue streak frame her face, plaza visible beyond",
+        "setting": "bright fabrication pavilion with brushed metal and flowering planters"
+      },
+      {
+        "label": "몸짓에 맞춘 설계",
+        "en": "wide side view; Élodie Dumont walks beside a simple standing assistive frame and demonstrates a comfortable stride, posture relaxed and attentive; she is small in the frame, broad avenue and open lab architecture lead into the distance",
+        "setting": "public design terrace facing a broad city avenue under open sky"
+      },
+      {
+        "label": "시험이 끝난 뒤의 미소",
+        "en": "three-quarter seated portrait; Élodie Dumont perches on a low modular bench, shoulders open and one leg angled outward, giving a satisfied mischievous smile toward a successful test setup; asymmetrical crop leaves the sky and plaza visible",
+        "setting": "open metal plaza with clean benches, flower planters and distant towers"
+      }
+    ],
+    "ara": [
+      {
+        "label": "먼저 길을 여는 감독",
+        "en": "dramatic low-angle full-card view; Danika stands with feet planted and one open arm guiding people toward a safe exit, protective rather than commanding, steady warm eyes; empty lanes stretch past her into open sky",
+        "setting": "wide public safety plaza at a bright transit concourse, broad stairs and steel shade structures"
+      },
+      {
+        "label": "위험을 살피는 시선",
+        "en": "close side portrait; Danika turns her head sharply toward an off-screen hazard while keeping her body between it and the viewer, calm reassuring expression, broad shoulder silhouette; open concourse blurred behind",
+        "setting": "sunlit transit plaza with wide pedestrian lanes and distant towers"
+      },
+      {
+        "label": "안전한 광장을 걷다",
+        "en": "high-angle long shot; Danika walks alone across the plaza tracing an open route with her gaze, relaxed powerful stride, figure small near one edge; stairs and canopy lines make the empty path unmistakable",
+        "setting": "large open mobility plaza with steel awnings and clear daylight"
+      },
+      {
+        "label": "안심시키는 짧은 미소",
+        "en": "eye-level medium close-up; Danika lowers a raised hand after signaling all-clear, shoulders soften and a warm smile appears; she looks just past the viewer, wide steps and pale sky fill the background",
+        "setting": "open transit landing above the metal city"
+      },
+      {
+        "label": "교대 직전의 경계",
+        "en": "rear three-quarter view from below; Danika looks back over her shoulder from a high stair landing, one hand resting on the rail, alert but unhurried; her figure is framed in a corner against a huge civic skyline",
+        "setting": "broad outdoor stairs and open steel canopy overlooking Selfas"
+      }
+    ],
+    "rion": [
+      {
+        "label": "선택지를 건네는 안내자",
+        "en": "intimate eye-level portrait; Iris Morgan tilts her head and offers one open hand toward the viewer, patient smile and attentive pale-violet eyes, clearly waiting for an answer; her face sits left of center with bright skybridge layers behind",
+        "setting": "open wayfinding terrace above a self-driving transit city"
+      },
+      {
+        "label": "최적 경로 대신 기다리기",
+        "en": "wide rear view; Iris Morgan stands still at a fork in two elevated walkways, arms relaxed, looking toward both routes rather than choosing for anyone; small figure centered low, branching paths and sky fill most of the card",
+        "setting": "broad transit terrace with multiple skybridges and metal towers"
+      },
+      {
+        "label": "예정에 없던 우회길",
+        "en": "dynamic diagonal long shot; Iris Morgan steps lightly toward a quiet side walkway and glances back with a gentle inquisitive smile, one hand inviting the viewer to follow; open layered paths sweep across the vertical card",
+        "setting": "sunlit elevated path above a broad mobility plaza"
+      },
+      {
+        "label": "대답을 기다리는 눈빛",
+        "en": "tight three-quarter portrait from slightly above; Iris Morgan rests her chin lightly on one hand and listens, soft curious expression and natural human face; no interface, only open blue sky and blurred rails behind",
+        "setting": "quiet observation deck over a bright metal skyline"
+      },
+      {
+        "label": "함께 고르는 길",
+        "en": "high-angle composition; Iris Morgan pauses where two broad walkways meet, turns toward the viewer instead of pointing, and waits with relaxed posture; the pavement and branching paths occupy most of the frame",
+        "setting": "open public wayfinding pavilion with branching walkways and clear sky"
+      }
+    ],
+    "somin": [
+      {
+        "label": "규격의 빈틈을 찾다",
+        "en": "close-up from above; Vera Novák peers through round glasses at a compact open mechanical coupling on a bare work surface, one eyebrow raised and a sly smile forming; hands poised to test the fit, no paper or display",
+        "setting": "bright open standards pavilion with plain benches and metal shade fins"
+      },
+      {
+        "label": "호기심이 앞선 연구원",
+        "en": "dynamic side view; Vera Novák crouches and leans under a waist-high household mechanism to see how two parts meet, reddish-brown hair knots bobbing, curious grin; she is off-center under the open pavilion roof",
+        "setting": "outdoor civic fabrication terrace overlooking transport rails"
+      },
+      {
+        "label": "해결책을 알아챈 순간",
+        "en": "tight low-angle portrait; Vera Novák looks over her glasses straight at the viewer with a mischievous smile, one hand raised as if asking a clever question; strong asymmetrical framing with the skyline visible behind",
+        "setting": "sunlit open standards plaza with silver canopy and blue sky"
+      },
+      {
+        "label": "서로 맞는 부품",
+        "en": "top-down diagonal shot; Vera Novák places two plain mechanical pieces side by side on a clean table, her fingers carefully aligning their edges, delighted concentration; body and table sit at the lower corner, broad plaza visible",
+        "setting": "open-air technical pavilion with modular benches and distant rails"
+      },
+      {
+        "label": "시험 결과를 기다리는 잠깐",
+        "en": "medium portrait; Vera Novák sits backwards on a low stool, chin resting over the chair back and glasses slightly lowered, playful impatient expression; empty outdoor work area and transport skyline remain legible",
+        "setting": "rooftop standards pavilion under a bright open sky"
+      }
+    ],
+    "eunju": [
+      {
+        "label": "쉬운 말로 다시 설명하다",
+        "en": "confident medium shot from slightly below; Mun Haewon speaks with one palm open and the other hand keeping a simple rhythm, direct witty gaze; open civic square behind her",
+        "setting": "public culture plaza with pale stone terraces and blue-white civic architecture"
+      },
+      {
+        "label": "거창한 말을 끊는 해설사",
+        "en": "tight portrait; Mun Haewon gives a dry sideways look and a small knowing smile, one finger raised to correct a pompous phrase, shoulders square; bright open archive pavilion stays softly visible",
+        "setting": "open civic archive terrace with broad steps and a clear sky"
+      },
+      {
+        "label": "시민과 나란히 읽는 기록",
+        "en": "over-the-shoulder composition from behind Mun Haewon; she faces a huge blank stone wall and gestures toward its empty surface as if explaining an idea without jargon, small against the open plaza",
+        "setting": "wide public record square framed by Korean urban rooflines and open sky"
+      },
+      {
+        "label": "질문을 반기는 해설사",
+        "en": "eye-level three-quarter view; Mun Haewon bends slightly toward the viewer, brows lifted in an inviting question and a half-smile, one hand cupped near her ear; asymmetrical crop with civic gardens behind",
+        "setting": "open blue-white cultural promenade beside a reflecting pool"
+      },
+      {
+        "label": "끝까지 지키는 기록",
+        "en": "low-angle side view; Mun Haewon stands at the edge of a broad stair and firmly closes an empty plain ledger with no marks, decisive expression, wind moving her short hair; long open architecture recedes behind",
+        "setting": "public record hall steps opening onto a bright city plaza"
+      }
+    ],
+    "nagyeong": [
+      {
+        "label": "초심자 속도에 맞춘 첫 동작",
+        "en": "wide eye-level shot; Minase Shiori demonstrates a gentle empty-handed practice stance with knees relaxed and palms open, smiling toward an unseen beginner; she leaves generous space around the pose in the open courtyard",
+        "setting": "contemporary Korean civic training court, blue-white walls, timber walkway and open sky"
+      },
+      {
+        "label": "실패한 동작도 웃으며 다시",
+        "en": "candid medium shot; Minase Shiori laughs at her own slightly awkward balance and resets her feet, hands open and unarmed, lively expression; diagonal framing catches the motion and the broad court",
+        "setting": "open Korean-style public practice terrace beside a city garden"
+      },
+      {
+        "label": "상대의 속도를 기다리다",
+        "en": "quiet rear three-quarter view; Minase Shiori sits on the edge of a low platform and turns back with a patient encouraging smile, one hand extended to help someone rise but no other person shown; wide empty court around her",
+        "setting": "sunlit contemporary civic courtyard with simple timber eaves"
+      },
+      {
+        "label": "즐거운 변형 동작",
+        "en": "dynamic high-angle composition; Minase Shiori spins into a playful footwork step, skirt and hair moving, eyes bright rather than competitive; her figure crosses the lower third while court lines and sky dominate",
+        "setting": "broad Korean civic training court with blue-white urban architecture"
+      },
+      {
+        "label": "함께 익히는 검식",
+        "en": "close side portrait; Minase Shiori demonstrates a small precise hand movement near her shoulder, warm focused expression and relaxed posture, gaze angled toward an unseen student; open garden and roofline in background",
+        "setting": "public cultural promenade with a modern Korean pavilion and bright sky"
+      }
+    ],
+    "boram": [
+      {
+        "label": "낡은 도구의 시간을 살피다",
+        "en": "intimate top-down close-up; Zhang Ruoan studies a cracked plain ceramic training weight resting on a low workbench, hands gentle and precise, small patient smile; face and hands share the frame, open garden beyond",
+        "setting": "open restoration workshop terrace with pale stone, timber shade and greenery"
+      },
+      {
+        "label": "서두르지 않는 복원 장인",
+        "en": "side-view medium shot; Zhang Ruoan sits on a low stool and carefully fits two plain wooden pieces together, shoulders relaxed, eyes intent; asymmetrical frame shows the breezy outdoor work area",
+        "setting": "sunlit cultural restoration courtyard with tool benches and open sky"
+      },
+      {
+        "label": "새 주인에게 건네는 순간",
+        "en": "waist-up portrait; Zhang Ruoan extends a repaired unmarked wooden practice block with both hands and a modest warm smile, gaze lowered kindly; bright architecture and garden fill the background",
+        "setting": "open Korean civic workshop opening onto a broad stone path"
+      },
+      {
+        "label": "공개 기준을 직접 시험하다",
+        "en": "low-angle long shot; Zhang Ruoan places a simple wooden block on the ground and presses it gently with one foot to test its stability, calm concentrated face; figure small at the edge of a broad courtyard",
+        "setting": "wide restoration yard with timber frames, blue-white walls and open sky"
+      },
+      {
+        "label": "고쳐 쓸 수 있다는 확신",
+        "en": "close three-quarter portrait; Zhang Ruoan wipes dust from her hands and gives a tiny satisfied smile, an old plain wooden object softly out of focus at the bottom edge; warm afternoon light and open courtyard behind",
+        "setting": "cultural restoration arcade with low eaves and a visible city garden"
+      }
+    ],
+    "haeryeong": [
+      {
+        "label": "바람이 바뀌는 순간",
+        "en": "vertical panoramic long shot; Amano Nagi stands tiny on a seaside observation ridge, body angled into a strong wind and one arm extended to feel its direction; bright water and huge cloud-filled sky dominate",
+        "setting": "open Korean coastal lookout, blue sea, pale cliffs and faraway islands"
+      },
+      {
+        "label": "필요한 경고를 보내다",
+        "en": "dynamic low-angle medium shot; Amano Nagi turns sharply toward the viewer and raises one firm open palm to signal caution, straightforward expression, hair and scarf blown sideways; sea horizon behind",
+        "setting": "coastal transit overlook above a quiet harbor and open water"
+      },
+      {
+        "label": "파도와 운행을 함께 읽다",
+        "en": "high-angle diagonal view; Amano Nagi crouches beside a plain stone shore post, studying the waves while glancing toward a distant ferry route; thoughtful pose, figure pushed into one corner",
+        "setting": "broad coastal promenade with rocks, water, and a distant island ferry"
+      },
+      {
+        "label": "힘든 길도 웃으며",
+        "en": "candid side view; Amano Nagi walks briskly along a windy sea wall, laughing at the gust, one hand keeping hair out of her eyes; long leading line of the wall reaches a wide blue horizon",
+        "setting": "open seawall path with a harbor, gulls and bright cloud breaks"
+      },
+      {
+        "label": "해안의 신호를 듣다",
+        "en": "tight profile portrait; Amano Nagi closes her eyes briefly and listens to the wind, serious but peaceful face, scarf fluttering across the lower frame; expansive sea remains visible behind her",
+        "setting": "cliffside observation deck above a broad open coastline"
+      }
+    ],
+    "seohwi": [
+      {
+        "label": "도시를 바라보는 심판",
+        "en": "rear view from far behind; Cheon Seohwi is a very small figure at the lower-right edge, looking over Cheongram City from a high open terrace, one hand resting on the rail, blue-white skyline fills nearly the whole card",
+        "setting": "Cheongram City panorama, broad civic roofs, distant towers and luminous open horizon"
+      },
+      {
+        "label": "경기를 멈추는 손짓",
+        "en": "dramatic eye-level medium shot; Cheon Seohwi faces slightly away and raises one clear open palm to halt a match, stern fair gaze and protective stance; empty competition hall architecture stretches behind her",
+        "setting": "open Korean civic competition arena with blue-white tiers"
+      },
+      {
+        "label": "승패보다 먼저 살피다",
+        "en": "close over-the-shoulder portrait; Cheon Seohwi looks down with concern and reaches toward an unseen injured person below frame, jaw softening, shoulders leaning forward; only her face and hand are prominent",
+        "setting": "quiet edge of an open civic arena, pale seating and daylight in background"
+      },
+      {
+        "label": "안전선을 직접 걷다",
+        "en": "high-angle full-card composition; Cheon Seohwi walks alone along the outer edge of an empty arena, gaze checking each exit, purposeful measured stride; tiny figure off-center, broad floor and open roof dominate",
+        "setting": "empty public competition court with open sky and clean blue-white architecture"
+      },
+      {
+        "label": "단호함 뒤의 배려",
+        "en": "low-angle close portrait after the match; Cheon Seohwi turns toward the viewer, one hand lowered from the stop signal, expression firm but relieved, a subtle breath visible in her posture; city lights and open arena behind",
+        "setting": "arena terrace at blue hour overlooking Cheongram City"
+      }
+    ],
+    "jeongran": [
+      {
+        "label": "사정을 먼저 듣는 조정자",
+        "en": "wide market scene; Zora Petrović sits at the end of a plain wooden stall table, leaning forward to listen with warm attentive eyes, hands loosely clasped, figure placed at one side; open market lane and rooftops fill the rest",
+        "setting": "reused brick community market under open awnings, river bridge beyond"
+      },
+      {
+        "label": "거래의 빈틈을 알아채다",
+        "en": "close three-quarter portrait; Zora Petrović gives a knowing half-smile and a tiny raised eyebrow, one hand gently stopping an unseen crate from being moved; no accusation, only calm cleverness; fruit crates softly visible",
+        "setting": "sunlit community market beside an open brick lane"
+      },
+      {
+        "label": "저녁 식량을 나누다",
+        "en": "wide overhead view; Zora Petrović carefully divides plain baskets of produce between two places at a long table, thoughtful and generous, her figure small in the lower corner; market canopy and river bridge dominate",
+        "setting": "open shared market with patchwork awnings, vegetables and rooftops under a pale sky"
+      },
+      {
+        "label": "편지를 맡기는 순간",
+        "en": "medium side shot; Zora Petrović hands a sealed blank envelope to someone outside the frame, friendly practical smile, one elbow resting on the market table; composition leaves open lane visible behind",
+        "setting": "community market edge opening toward a broad river walkway"
+      },
+      {
+        "label": "저녁 물자를 살피다",
+        "en": "rear three-quarter view at dusk; Zora Petrović stands with a simple basket against one hip and watches neighbors return through the market lane, relaxed generous posture, figure small beneath a huge open evening sky",
+        "setting": "brick market street with low awnings, rooftop gardens and distant river lights"
+      }
+    ],
+    "sojeong": [
+      {
+        "label": "전선이 끊긴 옥상길",
+        "en": "dynamic low-angle full-card shot; Laleh Sadat sprints toward the viewer across a rooftop bridge, one hand out for balance, fierce playful grin, vivid red hair streaming; strong diagonal body angle against open rooftops",
+        "setting": "patchwork rooftop routes across an isolated district, water tanks and broad gray-blue sky"
+      },
+      {
+        "label": "한 글자도 놓치지 않는 전령",
+        "en": "tight side portrait while running; Laleh Sadat cups one hand near her ear to catch a faint signal, eyes suddenly focused and mouth set, motion blur in the rooftops but face sharp",
+        "setting": "high rooftop relay path with distant community lights and open sky"
+      },
+      {
+        "label": "수신자를 먼저 확인하다",
+        "en": "over-the-shoulder view; Laleh Sadat stops at a roof edge and looks down toward a lit doorway far below, one hand raised to signal arrival, posture alert and considerate; tiny figure against a huge neighborhood",
+        "setting": "connected rooftops and narrow bridges above an isolated brick quarter"
+      },
+      {
+        "label": "속도 경쟁의 장난기",
+        "en": "tilted long shot; Laleh Sadat leaps across a low gap between safe rooftop platforms, knees tucked and arms spread, laughing rather than posing heroically; figure crosses the center diagonally, city opens behind",
+        "setting": "open rooftop relay course with patched awnings and distant city lights"
+      },
+      {
+        "label": "빛으로 전하는 짧은 신호",
+        "en": "wide dusk composition; Laleh Sadat stands on a high roof and lifts a small plain lantern, sending a single glow toward far windows, face turned away and body tiny at the lower edge",
+        "setting": "isolated neighborhood rooftops, water tanks and a sweeping blue evening sky"
+      }
+    ],
+    "girim": [
+      {
+        "label": "강물보다 사람을 먼저",
+        "en": "wide riverside shot; Imani Kamau braces on a wet bank and reaches toward an unseen person just outside the frame, steady grounded posture, face calm and reassuring; figure small against broad water and old bridge piers",
+        "setting": "open river recovery path, shallow water, low hills and bright cloud breaks"
+      },
+      {
+        "label": "쓸 수 있는 재료를 고르다",
+        "en": "top-down close composition; Imani Kamau kneels beside a few salvaged plain metal pieces and tests their weight with one hand, patient focused eyes; materials are small, her face and hands remain clear",
+        "setting": "sunlit riverside sorting platform with water and community gardens behind"
+      },
+      {
+        "label": "무리 없이 들어 올리기",
+        "en": "low-angle medium view; Imani Kamau demonstrates a safe lifting stance beside a plain recovered panel, knees bent and back straight, calm confidence rather than strain; no bulky muscles, broad river visible",
+        "setting": "open flood-recovery yard beside old bridge supports and green banks"
+      },
+      {
+        "label": "회수 길을 안내하다",
+        "en": "rear view from above; Imani Kamau walks along a shallow stream carrying nothing, glancing back to check the route is clear, shoulders relaxed; winding river path leads through the whole vertical card",
+        "setting": "wide community riverbank with stepping stones, gardens and distant hills"
+      },
+      {
+        "label": "구조 뒤의 고요",
+        "en": "close portrait at dusk; Imani Kamau sits on a low stone wall, hands resting open on her knees, quiet dependable smile as she watches the water settle; warm reflections and expansive river fill the background",
+        "setting": "open river bend beneath a broken bridge pier at evening"
+      }
+    ],
+    "onjae": [
+      {
+        "label": "반복되는 고장을 관찰하다",
+        "en": "intimate side close-up; Safiya Haddad studies a plain household mechanism through a small hand lens, sleepy reddish-brown eyes suddenly sharp, one cheek resting lightly on her knuckles; open arcade and garden blurred behind",
+        "setting": "open-sided neighborhood repair arcade with patched awnings and evening sky"
+      },
+      {
+        "label": "그림 대신 몸짓으로 설명하다",
+        "en": "medium shot; Safiya Haddad traces a simple circular motion in the air with one finger, explaining patiently with a small lopsided smile, no paper or screen present; figure placed off-center under broad awning light",
+        "setting": "sunlit brick lane beside an open community repair workshop"
+      },
+      {
+        "label": "작은 발견에 웃다",
+        "en": "tight frontal portrait from slightly above; Safiya Haddad notices a tiny loose part on a table and gives an unexpectedly delighted sleepy grin, silver curls falling over one eye; table is blank except for one plain object",
+        "setting": "neighborhood workshop opening onto rooftops and water towers"
+      },
+      {
+        "label": "늦은 밤의 수리",
+        "en": "wide low-light composition; Safiya Haddad leans over a workbench beneath a single warm lamp, one hand holding a plain component steady, tired posture but careful attention; her small figure is surrounded by an open arcade and evening sky",
+        "setting": "open repair arcade at night with patched awnings and distant city lights"
+      },
+      {
+        "label": "고쳐진 기기를 돌려주다",
+        "en": "waist-up three-quarter view; Safiya Haddad extends a simple repaired household device with both hands, gentle eccentric smile, eyes checking the recipient just outside frame; open lane and rooftop gardens behind",
+        "setting": "community repair walkway beneath a broad evening sky"
+      }
+    ],
+    "mijeong": [
+      {
+        "label": "조용히 핵심을 짚다",
+        "en": "calm close three-quarter portrait; Nadia Moreau listens with hands folded, then raises one finger to make a precise point, steady chestnut eyes and composed expression; face on the left, open negotiation lane visible to the right",
+        "setting": "wide community market negotiation lane with brick facades and pale sky"
+      },
+      {
+        "label": "동등한 연결을 요구하다",
+        "en": "low-angle medium shot; Nadia Moreau stands at the end of a long plain table, shoulders squared and chin level, one palm open in a firm demand; open rooftops behind",
+        "setting": "public negotiation courtyard beside a river bridge and patched brick buildings"
+      },
+      {
+        "label": "상대의 사정을 끝까지 듣다",
+        "en": "quiet side view; Nadia Moreau sits under a canopy with one leg crossed and body turned fully toward an unseen speaker, patient gaze and relaxed hands; her figure occupies one edge, market lane stretches into distance",
+        "setting": "open-air community meeting space with river and rooftops beyond"
+      },
+      {
+        "label": "양보하지 않는 경계선",
+        "en": "dramatic rear three-quarter composition; Nadia Moreau stands in a doorway between the market and a bright public lane, one hand holding the door open rather than blocking it, poised and resolute; strong light divides the vertical frame",
+        "setting": "reused brick market gate opening to a wide riverfront plaza"
+      },
+      {
+        "label": "합의 뒤의 숨",
+        "en": "close low-angle portrait at sunset; Nadia Moreau lets her shoulders soften and gives a small dimpled smile, gaze lowered toward the now-empty table, quiet resolve rather than triumph; warm skyline glows behind",
+        "setting": "open negotiation terrace over the community market at dusk"
+      }
+    ]
+  },
+  "scope": "18 user-confirmed images, seeds and metadata preserved exactly. Only 장뤄안 and 천서휘 have five v6 background candidates each. Their approved personality, role, appearance, outfit, card stats and effects are unchanged.",
+  "art_direction": "v6 background-only regeneration at 832x1216. Zhang Ruoan: sunrise river delta, open iris hillside, flower-covered river-city slopes, sunset river fields, blue-hour meadow above distant city lights. Cheon Seohwi: open coastal headland, hydrangea arboretum, contemporary civic square, autumn coastal hillside, flowered sunset park with an open garden arch. Use environment-led compositions at varied camera distances, natural balanced colors, and shared scene lighting. Keep adult character identity and approved wardrobe. No weapons, text, logos, garment patterns, cigarettes or smoking props.",
+  "department_system": {
+    "season": 1,
+    "groups": {
+      "비서실": [
+        "비비안 르클레르",
+        "베라 노박",
+        "조라 페트로비치",
+        "나디아 모로"
+      ],
+      "연구개발팀": [
+        "마리솔 베가",
+        "아마라 바우어",
+        "엘로디 뒤몽",
+        "문해원",
+        "장뤄안"
+      ],
+      "도시운영팀": [
+        "에블린 하트",
+        "에이다 라이트",
+        "아마노 나기",
+        "라레 사다트",
+        "이마니 카마우",
+        "사피야 하다드"
+      ],
+      "대외협력팀": [
+        "탈리아 애쉬포드",
+        "미나세 시오리"
+      ],
+      "안전관리팀": [
+        "다니카 뮐러",
+        "아이리스 모건",
+        "천서휘"
+      ]
+    },
+    "note": "시즌 1 카드 효과용 부서는 5개로 통합한다. 세부 직무는 인물 설정의 역할로 남기고, 부서 시너지 판정은 이 5개 태그만 사용한다. 모든 부서는 2명 이상이라 함께 배치하는 효과를 만들 수 있다. 아직 실제 전투 효과는 적용하지 않는다.",
+    "effect_status": "metadata only; no gameplay bonuses applied"
+  },
+  "fixed_selections": {
+    "에블린 하트": 2,
+    "비비안 르클레르": 5,
+    "탈리아 애쉬포드": 3,
+    "에이다 라이트": 4,
+    "엘로디 뒤몽": 3,
+    "베라 노박": 4,
+    "아마노 나기": 5,
+    "마리솔 베가": 2,
+    "아마라 바우어": 5,
+    "다니카 뮐러": 4,
+    "아이리스 모건": 5,
+    "문해원": 5,
+    "미나세 시오리": 2,
+    "조라 페트로비치": 2,
+    "라레 사다트": 3,
+    "이마니 카마우": 2,
+    "사피야 하다드": 1,
+    "나디아 모로": 3
+  },
+  "wardrobe_diversity": {
+    "policy": "Wardrobe diversity is the goal across the roster, not a ban on garments. Miniskirts, shorts, crop T-shirts, side-cutout and underbust-cut tops are valid selective choices. Avoid repeating the same outfit combination across characters.",
+    "outfit_map": {
+      "장뤄안": "현대 중국풍의 미니멀한 비취색 민소매 미니 원피스. 한쪽 어깨가 드러나는 비대칭 목선과 낮은 만다린 칼라, 옆구리의 작은 허리 컷아웃, 허벅지 중간까지 오는 매끈한 치마와 한쪽 옆트임. 장식 없는 무지 단색 원단.",
+      "천서휘": "현대 한국 도시복의 아이보리색 크롭 랩 블라우스. 둥글게 겹치는 저고리형 깃선과 오른쪽 옆선의 짧은 옷고름, 어깨를 덮는 짧은 소매. 안에는 가슴골과 허리가 드러나는 짙은 자주색 스퀘어넥 탑, 아래에는 발목까지 흐르는 푸른 먹색 하이웨이스트 테일러드 와이드 팬츠. 무지 단색 원단."
+    }
+  }
+}

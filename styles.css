@@ -36,6 +36,7 @@ body[data-faction="unbek"] { --faction-color: #aaa5ad; }
 .nav-link { height: 100%; position: relative; padding: 0 2px; border: 0; background: transparent; color: #898990; font-size: 12px; letter-spacing: .035em; cursor: pointer; transition: color .2s; }
 .nav-link:hover, .nav-link.active { color: var(--ink); }
 .nav-link.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--gold); }
+.nav-art-link { display: flex; align-items: center; text-decoration: none; }
 .nav-count { margin-left: 5px; color: #8c877d; font-family: 'DM Mono', monospace; font-size: 10px; }
 .profile-chip { display: flex; align-items: center; gap: 8px; color: #9b9aa1; font-size: 11px; }
 .profile-chip b { margin-left: 6px; color: #c8c3b8; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; }
@@ -943,13 +944,13 @@ html { overflow-y: scroll; scrollbar-gutter: stable; }
 .versus-intro-scene .combat-stage-versus { flex-basis: clamp(42px, 6vw, 72px); font-size: clamp(18px, 3vw, 27px); }
 .coin-flip-scene { gap: clamp(15px, 3vh, 24px); }
 .coin-perspective { width: clamp(112px, 17vh, 148px); aspect-ratio: 1; perspective: 900px; }
-.initiative-coin { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; filter: drop-shadow(0 20px 28px rgba(0,0,0,.55)); }
-.initiative-coin::before { content: ''; position: absolute; z-index: 0; top: 5%; bottom: 5%; left: calc(50% - 5px); width: 10px; border: 1px solid #614519; border-radius: 7px; background: repeating-linear-gradient(0deg, #e1c379 0 2px, #8c682e 2px 4px, #c29d50 4px 5px); box-shadow: inset 0 0 2px rgba(255,239,181,.8), 0 0 2px #38260d; transform: rotateY(90deg); backface-visibility: visible; }
+.initiative-coin { position: relative; width: 100%; height: 100%; border-radius: 50%; transform-style: preserve-3d; box-shadow: 0 20px 28px rgba(0,0,0,.55); }
+.initiative-coin::before { content: ''; position: absolute; z-index: 0; top: 5%; bottom: 5%; left: calc(50% - 5px); width: 10px; border: 1px solid #090a0b; border-radius: 7px; background: repeating-linear-gradient(0deg, #070809 0 2px, #242628 2px 4px, #0c0d0e 4px 5px); box-shadow: inset 0 0 2px rgba(255,255,255,.08), 0 0 2px #000; transform: rotateY(90deg); backface-visibility: visible; }
 .coin-face { position: absolute; z-index: 1; inset: 0; display: grid; place-items: center; overflow: hidden; border: 6px double rgba(255,232,171,.8); border-radius: 50%; color: #f5dfaa; background: radial-gradient(circle at 31% 24%, rgba(255,247,208,.74), transparent 12%), radial-gradient(circle at 43% 37%, #d8ba70 0, #b18943 39%, #765323 76%, #38270f 100%); box-shadow: inset 0 0 0 2px rgba(65,45,17,.8), inset 0 0 0 5px rgba(239,209,139,.32), inset 0 0 24px rgba(255,235,176,.24); backface-visibility: hidden; }
 .coin-face::before { content: ''; position: absolute; inset: 9%; border: 1px solid rgba(255,235,177,.54); border-radius: 50%; box-shadow: inset 0 0 0 2px rgba(75,52,20,.36), 0 0 0 2px rgba(79,56,23,.36); }
 .coin-face::after { content: ''; position: absolute; inset: 15%; border: 1px dashed rgba(255,235,177,.32); border-radius: 50%; }
-.coin-face-player { transform: rotateY(0deg); }
-.coin-face-opponent { transform: rotateY(180deg); color: #edf8fc; border-color: rgba(222,242,248,.82); background: radial-gradient(circle at 31% 24%, rgba(247,253,255,.8), transparent 12%), radial-gradient(circle at 43% 37%, #bdcdd2 0, #718891 42%, #3d555e 77%, #17282f 100%); box-shadow: inset 0 0 0 2px rgba(18,38,45,.86), inset 0 0 0 5px rgba(199,229,237,.28), inset 0 0 24px rgba(221,243,248,.2); }
+.coin-face-player { transform: translateZ(5px); }
+.coin-face-opponent { transform: rotateY(180deg) translateZ(5px); color: #edf8fc; border-color: rgba(222,242,248,.82); background: radial-gradient(circle at 31% 24%, rgba(247,253,255,.8), transparent 12%), radial-gradient(circle at 43% 37%, #bdcdd2 0, #718891 42%, #3d555e 77%, #17282f 100%); box-shadow: inset 0 0 0 2px rgba(18,38,45,.86), inset 0 0 0 5px rgba(199,229,237,.28), inset 0 0 24px rgba(221,243,248,.2); }
 .coin-face-opponent::before { border-color: rgba(221,242,248,.55); }
 .coin-face-opponent::after { border-color: rgba(221,242,248,.34); }
 .coin-sword-mark { position: relative; z-index: 1; width: 55%; height: 66%; overflow: visible; filter: drop-shadow(0 2px 2px rgba(41,27,9,.8)); }
@@ -957,7 +958,7 @@ html { overflow-y: scroll; scrollbar-gutter: stable; }
 .coin-sword-edge { fill: none; stroke: rgba(255,249,220,.95); stroke-width: 2; stroke-linecap: round; }
 .coin-sword-guard { fill: #9b702b; stroke: #f3d88f; stroke-width: 2.5; stroke-linejoin: round; }
 .coin-sword-grip, .coin-sword-pommel { fill: #49331b; stroke: #e8ca7c; stroke-width: 2; stroke-linejoin: round; }
-.coin-wordmark { position: relative; z-index: 1; max-width: 86%; padding: 8% 4%; border-top: 1px solid rgba(235,248,252,.62); border-bottom: 1px solid rgba(235,248,252,.62); color: #f1fbff; font: 800 clamp(10px, 1.55vh, 15px) Georgia, 'Times New Roman', serif; letter-spacing: .12em; white-space: nowrap; text-shadow: 0 2px 5px rgba(8,19,24,.85); }
+.coin-wordmark { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; max-width: 86%; padding: 5% 12%; border-top: 1px solid rgba(235,248,252,.62); border-bottom: 1px solid rgba(235,248,252,.62); color: #f1fbff; font: 800 clamp(14px, 1.9vh, 18px) Georgia, 'Times New Roman', serif; letter-spacing: .14em; line-height: .95; text-shadow: 0 2px 5px rgba(8,19,24,.85); }
 .coin-flip-result { min-height: 1.4em; color: #f0dfb7; font: 600 clamp(15px, 2vw, 19px) 'Noto Sans KR', sans-serif; opacity: 0; transform: translateY(5px); transition: opacity .24s ease, transform .24s ease; text-shadow: 0 2px 12px #000; }
 .coin-flip-result[data-side="opponent"] { color: #d9edf3; }
 .coin-flip-result.revealed { opacity: 1; transform: translateY(0); }

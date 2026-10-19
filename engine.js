@@ -76,8 +76,8 @@
     const player = match.players[side];
     const enemySide = side === 'player' ? 'opponent' : 'player';
     const enemy = match.players[enemySide];
-    if (['defense_self', 'buff_self', 'quick_entry'].includes(type)) return unit ? [{ side, iid: unit.iid }] : [];
-    if (['heal_all', 'buff_all', 'defense_all', 'overclock', 'defense_draw'].includes(type)) return player.field.map(item => ({ side, iid: item.iid }));
+    if (['defense_self', 'buff_self', 'temp_buff_self', 'heal_self', 'quick_entry'].includes(type)) return unit ? [{ side, iid: unit.iid }] : [];
+    if (['heal_all', 'buff_all', 'defense_all', 'overclock', 'temp_buff_all', 'defense_draw'].includes(type)) return player.field.map(item => ({ side, iid: item.iid }));
     if (type === 'damage_all') return enemy.field.map(item => ({ side: enemySide, iid: item.iid }));
     if (['heal_wounded', 'repair', 'buff_weakest', 'buff_defense_weakest'].includes(type)) {
       const target = weakestUnit(player);
@@ -91,7 +91,7 @@
   }
 
   function effectScope(effect) {
-    return ['heal_all', 'buff_all', 'defense_all', 'overclock', 'damage_all', 'defense_draw'].includes(effectType(effect)) ? 'all' : 'single';
+    return ['heal_all', 'buff_all', 'defense_all', 'overclock', 'temp_buff_all', 'damage_all', 'defense_draw'].includes(effectType(effect)) ? 'all' : 'single';
   }
 
   function captureEffectTargets(match, targets = []) {
@@ -296,26 +296,45 @@
         target = weakestUnit(player);
         if (target) healUnit(target, effectAmount(effect, 2));
         break;
-      case 'defense_self': if (unit) unit.tempDefense += effectAmount(effect, 2); break;
+      case 'defense_self': if (unit) unit.tempDefense += effectAmount(effect, 1); break;
       case 'buff_self': if (unit) unit.attackBonus += amount; break;
+      case 'temp_buff_self': if (unit) unit.tempAttack += amount; break;
+      case 'heal_self': if (unit) healUnit(unit, amount); break;
       case 'quick_entry': if (unit) unit.ready = true; break;
       case 'draw': draw(match, side, effectAmount(effect, 1)); break;
+      case 'size_limit':
+        if (match.phase === 'deploy') player.sizeLimit = Math.min(12, player.sizeLimit + amount);
+        else player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + amount);
+        break;
       case 'ping_enemy':
         target = weakestUnit(enemy);
         if (target) {
           addDamageToUnit(target, amount);
           removeDefeated(match, enemySide);
-        }
+        } else applyDamageToLeader(match, enemySide, amount, unit ? cardOf(unit).name : '추종자 능력');
         break;
       case 'heal_all':
         healLeader(player, amount);
-        player.field.forEach(ally => healUnit(ally, 1));
+        player.field.forEach(ally => healUnit(ally, amount));
         break;
       case 'buff_all':
         player.field.forEach(ally => { ally.attackBonus += amount; ally.healthBonus += 2; });
         break;
       case 'defense_all': player.field.forEach(ally => { ally.tempDefense += amount; }); break;
       case 'overclock': player.field.forEach(ally => { ally.tempAttack += amount; }); break;
+      case 'temp_buff_all': player.field.forEach(ally => { ally.tempAttack += amount; }); break;
+      case 'recover': {
+        const index = player.hand.length < MAX_HAND_SIZE
+          ? player.discard.findIndex(id => cardById[id]?.type === 'unit')
+          : -1;
+        if (index >= 0) {
+          const cardId = player.discard.splice(index, 1)[0];
+          const handCard = addToHand(match, side, cardId);
+          if (handCard) emitVisual(match, { type: 'draw', side, cardId, from: 'discard', handId: handCard.iid });
+        } else if (match.phase === 'deploy') player.sizeLimit = Math.min(12, player.sizeLimit + 1);
+        else player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 1);
+        break;
+      }
     }
   }
 
@@ -358,16 +377,17 @@
           const handCard = addToHand(match, side, cardId);
           if (handCard) emitVisual(match, { type: 'draw', side, cardId, from: 'discard', handId: handCard.iid });
         }
-        else if (player.hand.length < MAX_HAND_SIZE) draw(match, side, 1);
+        else player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 1);
         break;
       }
       case 'draw_two':
         draw(match, side, 2);
+        player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 2);
         break;
       case 'buff_weakest':
         target = weakestUnit(player);
         if (target) { target.attackBonus += 2; target.healthBonus += 1; }
-        else draw(match, side, 1);
+        else player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 1);
         break;
       case 'overclock':
         player.field.forEach(unit => { unit.tempAttack += 2; });
@@ -383,6 +403,7 @@
       case 'defense_draw':
         player.field.forEach(unit => { unit.tempDefense += 1; });
         draw(match, side, 1);
+        player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 1);
         break;
       case 'return_weakest':
         target = weakestUnit(enemy);
@@ -402,7 +423,7 @@
       case 'buff_defense_weakest':
         target = weakestUnit(player);
         if (target) { target.attackBonus += 2; target.tempDefense += 2; }
-        else draw(match, side, 1);
+        else player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 1);
         break;
     }
     checkWinner(match);
@@ -426,7 +447,7 @@
           player.field.forEach(unit => { unit.tempDefense += 2; });
           targets = player.field.map(unit => ({ side, iid: unit.iid }));
         }
-        else if (player.hand.length < MAX_HAND_SIZE) draw(match, side, 1);
+        else player.sizeLimit = Math.min(12, player.sizeLimit + 1);
         break;
       case 'noa': {
         const index = player.hand.length < MAX_HAND_SIZE ? player.discard.findIndex(id => cardById[id]?.type === 'unit') : -1;
@@ -435,7 +456,7 @@
           const handCard = addToHand(match, side, cardId);
           if (handCard) emitVisual(match, { type: 'draw', side, cardId, from: 'discard', handId: handCard.iid });
         }
-        else if (player.hand.length < MAX_HAND_SIZE) draw(match, side, 1);
+        else player.sizeLimit = Math.min(12, player.sizeLimit + 1);
         break;
       }
     }
@@ -475,6 +496,57 @@
     });
   }
 
+  const DEPARTMENT_EFFECTS = {
+    '비서실': '비서실 시너지 · 소속 추종자 공격력·방어력 +1',
+    '연구개발팀': '연구개발팀 시너지 · 공격력 +1',
+    '도시운영팀': '도시운영팀 시너지 · 사이즈 한도 +1',
+    '대외협력팀': '대외협력팀 시너지 · 아군 공격력 +1',
+    '안전관리팀': '안전관리팀 시너지 · 방어력 +1'
+  };
+
+  function runDepartmentSynergies(match, side) {
+    const player = match.players[side];
+    const counts = new Map();
+    player.field.forEach(unit => {
+      const department = cardOf(unit).department;
+      if (department) counts.set(department, (counts.get(department) || 0) + 1);
+    });
+    for (const [department, count] of counts) {
+      if (count < 2) continue;
+      const members = player.field.filter(unit => cardOf(unit).department === department);
+      const targets = [];
+      const effectUnits = ['안전관리팀', '대외협력팀'].includes(department) ? player.field : members;
+      const beforeStates = snapshotEffectTargets(captureEffectTargets(match, effectUnits.map(unit => ({ side, iid: unit.iid }))));
+      switch (department) {
+        case '비서실':
+          members.forEach(unit => { unit.tempAttack += 1; unit.tempDefense += 1; targets.push({ side, iid: unit.iid }); });
+          break;
+        case '연구개발팀':
+          members.forEach(unit => { unit.tempAttack += 1; targets.push({ side, iid: unit.iid }); });
+          break;
+        case '도시운영팀':
+          player.sizeLimit = Math.min(12, player.sizeLimit + 1);
+          break;
+        case '대외협력팀':
+          player.field.forEach(unit => { unit.tempAttack += 1; targets.push({ side, iid: unit.iid }); });
+          break;
+        case '안전관리팀':
+          player.field.forEach(unit => { unit.tempDefense += 1; targets.push({ side, iid: unit.iid }); });
+          break;
+      }
+      log(match, DEPARTMENT_EFFECTS[department]);
+      if (targets.length) {
+        const captured = captureEffectTargets(match, targets);
+        emitVisual(match, {
+          type: 'effect', side, sourceType: 'department', sourceId: `${side}-${department}`,
+          targets, beforeStates, targetStates: snapshotEffectTargets(captured),
+          label: DEPARTMENT_EFFECTS[department], timing: 'department', scope: 'all'
+        });
+      }
+      checkWinner(match);
+    }
+  }
+
   function startRound(match, selectedInitiative = null) {
     if (match.gameOver) return;
     match.round += 1;
@@ -507,6 +579,9 @@
     });
     order.forEach(side => {
       if (!match.gameOver) runTurnStartEffects(match, side);
+    });
+    order.forEach(side => {
+      if (!match.gameOver) runDepartmentSynergies(match, side);
     });
     order.forEach(side => {
       if (!match.gameOver) draw(match, side, Math.max(0, MAX_HAND_SIZE - match.players[side].hand.length));

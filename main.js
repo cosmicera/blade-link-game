@@ -209,7 +209,7 @@
     playerFace.innerHTML = '<svg class="coin-sword-mark" viewBox="0 0 100 100" aria-hidden="true"><path class="coin-sword-blade" d="M50 9 62 33 57 64 50 74 43 64 38 33Z"/><path class="coin-sword-edge" d="M50 15v55"/><path class="coin-sword-guard" d="M29 62q21 11 42 0l-3 8q-18 8-36 0Z"/><path class="coin-sword-grip" d="M46 69h8v18h-8z"/><path class="coin-sword-pommel" d="M42 87h16v6H42z"/></svg>';
     const opponentFace = document.createElement('div');
     opponentFace.className = 'coin-face coin-face-opponent';
-    opponentFace.innerHTML = '<span class="coin-wordmark">BLADE LINK</span>';
+    opponentFace.innerHTML = '<span class="coin-wordmark"><span>Blade</span><span>Link</span></span>';
     coin.append(playerFace, opponentFace);
     perspective.append(coin);
 
@@ -278,6 +278,7 @@
     const { handId = '', selected = false, disabled = false, unit = null, compact = false } = options;
     const spell = card.type === 'spell';
     const typeName = spell ? '검식' : '추종자';
+    const departmentLabel = card.department?.replace(/팀$/, '') || '';
     const faction = DATA.factions[card.faction];
     const health = unit ? card.health + unit.healthBonus - unit.damage : card.health;
     const attack = card.attack + (unit?.attackBonus || 0) + (unit?.tempAttack || 0);
@@ -288,7 +289,7 @@
       : `<div class="card-art"><img src="${card.image}" alt="${card.name}" loading="lazy"><span class="art-shade"></span><span class="art-faction">${faction.short}</span></div>`;
     return `<button class="${classes}" ${handId ? `data-hand-id="${handId}"` : ''} ${unit ? `data-unit-id="${unit.iid}"` : ''} style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 코스트 ${card.cost}${card.type === 'unit' ? `, 공격 ${attack}, 방어 ${defense}, 체력 ${health}` : ''}">
       <span class="card-cost">${card.cost}</span>
-      <span class="card-topline"><small>${typeName}</small><b>${faction.short}</b></span>
+      <span class="card-topline"><small>${typeName}${!spell && departmentLabel ? ` · ${departmentLabel}` : ''}</small><b>${faction.short}</b></span>
       ${art}
       <span class="card-copy"><strong>${card.name}</strong><small>${card.text}</small></span>
       ${spell ? `<span class="card-spell-label">검식 카드 <i>·</i> 전투에서 발동</span>` : `<span class="card-stats"><b>⚔ ${attack}</b><b>⛨ ${defense}</b><b>♥ ${health}</b></span>`}
@@ -313,7 +314,7 @@
     const classes = ['unit-slot', 'occupied-slot', actionState, owner === 'opponent' ? 'enemy-unit' : ''].join(' ');
     return `<div class="${classes}" data-board-card data-side="${owner}" data-kind="unit" data-card-id="${item.iid}" data-card-template="${card.id}" data-inspect-attack="${card.attack + item.attackBonus + item.tempAttack}" data-inspect-defense="${RULES.unitDefense(item)}" data-inspect-health="${health}" data-inspect-max-health="${card.health + item.healthBonus}" role="button" tabindex="0" style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 사이즈 ${card.cost}, 공격 ${card.attack + item.attackBonus + item.tempAttack}, 방어 ${RULES.unitDefense(item)}, 체력 ${health}">
       <div class="unit-portrait"><img src="${card.image}" alt="" loading="lazy"><span class="unit-portrait-shade"></span><b class="unit-cost-label">◇ ${card.cost}</b></div>
-      <div class="unit-nameplate"><strong>${card.name}</strong><small>${card.role}</small></div>
+      <div class="unit-nameplate"><strong>${card.name}</strong><small>${card.department || card.role}</small></div>
       <div class="unit-numbers"><span>⚔ ${card.attack + item.attackBonus + item.tempAttack}</span><span>⛨ ${RULES.unitDefense(item)}</span><span>♥ ${health}</span></div>
     </div>`;
   }
@@ -367,8 +368,9 @@
           maxHealth: card.health + item.healthBonus
         } : inspectedBoardCard.stats || { attack: card.attack, defense: card.defense || 0, health: card.health, maxHealth: card.health };
         return `<div class="inspect-card-image"><img src="${card.image}" alt="${card.name}"></div>
-          <div class="inspect-title"><small>${DATA.factions[card.faction].name} · ${card.role}</small><strong>${card.name}</strong></div>
+          <div class="inspect-title"><small>${DATA.factions[card.faction].name} · ${card.department ? `${card.department} · ` : ''}${card.role}</small><strong>${card.name}</strong></div>
           <p class="inspect-description">${card.text}</p>
+          ${card.departmentEffect ? `<p class="inspect-note"><b>${card.department}</b> · ${card.departmentEffect}</p>` : ''}
           <div class="inspect-stats"><span>공격 <b>${stats.attack}</b></span><span>방어 <b>${stats.defense}</b></span><span>체력 <b>${stats.health} / ${stats.maxHealth}</b></span></div>
           <div class="inspect-cost"><span>사이즈</span><b>${card.cost}</b></div>`;
       }
@@ -379,8 +381,9 @@
   function inspectorCardMarkup(card) {
     const faction = DATA.factions[card.faction];
     return `<div class="inspect-card-image ${card.type === 'spell' ? 'inspect-spell-image' : ''}">${card.type === 'unit' ? `<img src="${card.image}" alt="${card.name}">` : `<span>${card.symbol}</span>`}</div>
-      <div class="inspect-title"><small>${faction.name} · ${card.type === 'unit' ? '추종자' : '검식'}</small><strong>${card.name}</strong></div>
+      <div class="inspect-title"><small>${faction.name} · ${card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : ''}` : '검식'}</small><strong>${card.name}</strong></div>
       <p class="inspect-description">${card.text}</p>
+      ${card.departmentEffect ? `<p class="inspect-note"><b>${card.department}</b> · ${card.departmentEffect}</p>` : ''}
       <div class="inspect-stats">${card.type === 'unit' ? `<span>공격 <b>${card.attack}</b></span><span>방어 <b>${card.defense || 0}</b></span><span>체력 <b>${card.health}</b></span>` : `<span>유형 <b>검식 배치</b></span>`}</div>
       <div class="inspect-cost"><span>사이즈</span><b>${card.cost}</b></div>`;
   }
@@ -454,7 +457,7 @@
     return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name} <b>${allCards.filter(card => card.faction === id).length}</b></button>`).join('')}</div>
       <div class="codex-grid">${cards.map(card => `<article class="codex-entry" style="--faction-color:${factionColor(card.faction)}">
         <div class="codex-art">${card.type === 'spell' ? `<span>${card.symbol}</span>` : `<img src="${card.image}" alt="${card.name}" loading="lazy">`}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
-        <div class="codex-copy"><small>${DATA.factions[card.faction].name} · ${card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? '추종자' : '검식'}</small><strong>${card.name}</strong><p>${card.text}</p>${card.type === 'unit' ? `<em>⚔ ${card.attack}　⛨ ${card.defense || 0}　♥ ${card.health}</em>` : card.type === 'leader' ? '<em>대표 캐릭터 카드</em>' : '<em>전투 중 발동</em>'}</div>
+        <div class="codex-copy"><small>${DATA.factions[card.faction].name} · ${card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : ''}` : '검식'}</small><strong>${card.name}</strong><p>${card.text}${card.departmentEffect ? `<br><b>${card.department} 시너지:</b> ${card.departmentEffect}` : ''}</p>${card.type === 'unit' ? `<em>⚔ ${card.attack}　⛨ ${card.defense || 0}　♥ ${card.health}</em>` : card.type === 'leader' ? '<em>대표 캐릭터 카드</em>' : '<em>전투 중 발동</em>'}</div>
       </article>`).join('')}</div>`;
   }
 
@@ -466,8 +469,9 @@
         <p class="rules-lead">소드걸스의 캐릭터·추종자·검식 카드 흐름과 전장 중심 화면 구성을 참고한 1인 훈련전입니다. 아래 수치는 세계관의 최종 규칙이 아니라 첫 플레이 테스트용 기본값입니다.</p>
         <div class="rules-step"><b>01</b><div><strong>대전 준비</strong><p>대표 캐릭터 1명과 같은 기업의 24장 덱으로 시작합니다. 시작 손패는 5장, 대표 캐릭터의 라이프는 30입니다.</p></div></div>
         <div class="rules-step"><b>02</b><div><strong>손패와 사이즈</strong><p>라운드 시작에 손패를 5장까지 채우고 코인 토스로 선공을 정합니다. 각 플레이어는 대전마다 손패 리셋권 2회를 받으며, 배치 단계에 현재 손패를 덱에 섞고 같은 장수만큼 다시 뽑을 수 있습니다. 추종자와 검식은 모두 최대 5칸의 전장에 배치하며, 전체 사이즈 한도는 기본 10입니다. 전장에 남은 추종자의 사이즈는 다음 라운드에도 계속 점유하고, 검식도 이번 라운드 배치 사이즈를 사용합니다. 배치 단계에는 내 카드를 더블클릭해 손패로 회수할 수 있습니다. 배치 시간은 30초이며 시간이 끝나면 전투가 자동으로 시작됩니다.</p></div></div>
-        <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>라운드 시작에 대표 캐릭터 효과가 선공 순으로 발동하고, 이어 추종자의 라운드 시작 능력이 슬롯 순서로 발동합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 벡터를 포함한 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
-        <div class="rules-step"><b>04</b><div><strong>승리</strong><p>추종자가 파괴되면 소유자의 라이프가 그 카드의 사이즈만큼 감소합니다. 상대 전장에 추종자가 없으면 공격 추종자가 사이즈만큼 상대 대표에게 직접 피해를 줍니다. 대표 캐릭터의 라이프가 0이 되거나 덱이 비면 패배합니다. 버림 더미는 이야기 속 사망을 뜻하지 않습니다.</p></div></div>
+        <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>라운드 시작에 대표 능력, 추종자 능력이 차례로 발동하고 부서 시너지를 확인합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
+        <div class="rules-step"><b>04</b><div><strong>기업 특성과 부서 시너지</strong><p>아웃프라웨어는 회복과 생장, 셀파스는 공격 가속과 장비 연계, 남극성은 방어와 반격, 언벡은 회수와 우회에 강합니다. 같은 부서 추종자 2명 이상이 전장에 있으면 라운드 시작마다 시너지가 발동합니다. 비서실은 소속 추종자의 공격력·방어력 +1, 연구개발팀은 소속 추종자의 공격력 +1, 도시운영팀은 이번 라운드 사이즈 한도 +1, 대외협력팀은 모든 아군 추종자 공격력 +1, 안전관리팀은 아군 전체 방어력 +1입니다. 부서 시너지는 각 카드의 개별 능력과 함께 작동합니다.</p></div></div>
+        <div class="rules-step"><b>05</b><div><strong>비용과 승리</strong><p>사이즈 4 추종자는 높은 공방체와 광역·반복 능력을 갖지만, 파괴될 때 대표 라이프도 4 감소합니다. 사이즈가 낮은 추종자는 빠른 전개와 부서 조합에 유리합니다. 추종자가 파괴되면 소유자의 라이프가 그 카드의 사이즈만큼 감소하고, 상대 전장에 추종자가 없으면 공격 추종자가 사이즈만큼 상대 대표에게 직접 피해를 줍니다. 대표 라이프가 0이 되거나 덱이 비면 패배합니다. 버림 더미는 이야기 속 사망을 뜻하지 않습니다.</p></div></div>
         <div class="rules-foot"><span>기본값</span> 24장 덱 · 손패 5장 · 리셋권 2회 · 라이프 30 · 전장 5칸 · 사이즈 한도 10 · 라운드당 최대 5장 배치</div>
       </div></section></div>`;
     }
@@ -1214,7 +1218,15 @@
   }
 
   function aiCardScore(card, ai, human) {
-    if (card.type === 'unit') return (RULES.canPlayCard(ai, card) ? 10 : -10) + card.attack * 0.7 + card.health * 0.25 - card.cost * 0.2;
+    if (card.type === 'unit') {
+      const matchingDepartment = card.department
+        ? ai.field.filter(unit => RULES.cardById[unit.cardId]?.department === card.department).length
+        : 0;
+      const abilityValue = card.attackEffect || card.defenseEffect ? 1.5 : card.effect ? 1 : 0;
+      return (RULES.canPlayCard(ai, card) ? 10 : -10)
+        + card.attack * 0.7 + card.defense * 0.2 + card.health * 0.25 - card.cost * 0.2
+        + abilityValue + (matchingDepartment ? 2.5 : 0);
+    }
     const effect = card.effect;
     if (effect === 'heal_all') return ai.hp < 19 || ai.field.some(unit => unit.damage > 0) ? 7 : -2;
     if (effect === 'buff_all' || effect === 'defense_all' || effect === 'repair') return ai.field.length ? 7 : -3;

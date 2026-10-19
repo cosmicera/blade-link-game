@@ -28,7 +28,7 @@ jobs:
       - name: Prepare game files
         run: |
           mkdir _site
-          cp index.html styles.css main.js engine.js data.js _site/
+          cp index.html styles.css main.js engine.js data.js follower-expansion.js art-selection.html _site/
           cp -R assets _site/assets
       - name: Upload game files
         uses: actions/upload-pages-artifact@v4
