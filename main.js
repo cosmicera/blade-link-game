@@ -1724,6 +1724,7 @@
   modalRoot.addEventListener('keydown', event => {
     if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('[data-codex-flip-card]')) {
       event.preventDefault();
+      event.stopPropagation();
       event.target.click();
     }
   });
