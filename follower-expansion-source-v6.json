@@ -80,7 +80,7 @@
         "variant": 2,
         "run": "FollowerRedesign_20261016_v3"
       },
-      "card_name": "에블린 하트"
+      "card_name": "에블린"
     },
     {
       "id": "lagyeong",
@@ -134,7 +134,7 @@
         "variant": 5,
         "run": "FollowerRedesign_20261016_v3"
       },
-      "card_name": "비비안 르클레르"
+      "card_name": "비비안"
     },
     {
       "id": "haeon",
@@ -225,7 +225,7 @@
           "composition": "high-angle environmental view, small off-center figure crouching beside a flower planter and studying one bloom, rooftop channels and distant towers dominate the composition"
         }
       ],
-      "card_name": "마리솔 베가"
+      "card_name": "마리솔"
     },
     {
       "id": "chaeyun",
@@ -312,7 +312,7 @@
           "composition": "high-angle medium shot, crouching beside a flowering public planter and examining a leaf, figure placed near one edge, broad plaza remains visible"
         }
       ],
-      "card_name": "아마라 바우어"
+      "card_name": "아마라"
     },
     {
       "id": "surim",
@@ -369,7 +369,7 @@
         "variant": 3,
         "run": "FollowerRedesign_20261016_v3"
       },
-      "card_name": "탈리아 애쉬포드"
+      "card_name": "탈리아"
     },
     {
       "id": "minju",
@@ -425,7 +425,7 @@
         "variant": 4,
         "run": "FollowerRedesign_20261016_v3"
       },
-      "card_name": "에이다 라이트"
+      "card_name": "에이다"
     },
     {
       "id": "chaerin",
@@ -482,7 +482,7 @@
         "variant": 3,
         "run": "FollowerRedesign_20261016_v3"
       },
-      "card_name": "엘로디 뒤몽"
+      "card_name": "엘로디"
     },
     {
       "id": "ara",
@@ -570,7 +570,7 @@
           "composition": "waist-up three-quarter portrait, turning toward someone outside frame with a reassuring half-smile, one palm open, clean glass station behind"
         }
       ],
-      "card_name": "다니카 뮐러"
+      "card_name": "다니카"
     },
     {
       "id": "rion",
@@ -660,7 +660,7 @@
           "composition": "high-angle over-shoulder composition, she turns toward the viewer with a curious expression, empty paths and garden islands fill the background"
         }
       ],
-      "card_name": "아이리스 모건"
+      "card_name": "아이리스"
     },
     {
       "id": "somin",
@@ -714,7 +714,7 @@
         "variant": 4,
         "run": "FollowerRedesign_20261016_v3"
       },
-      "card_name": "베라 노박"
+      "card_name": "베라"
     },
     {
       "id": "eunju",
@@ -804,7 +804,7 @@
           "composition": "high-angle environmental shot, small figure crossing a broad public stair with a book held at her side, pale water and glass pavilion dominate"
         }
       ],
-      "card_name": "문해원"
+      "card_name": "해원"
     },
     {
       "id": "nagyeong",
@@ -896,7 +896,7 @@
           "composition": "high-angle dynamic view, stepping lightly through a playful footwork turn, sleeves and skirt in motion, broad rooftop court around her"
         }
       ],
-      "card_name": "미나세 시오리"
+      "card_name": "시오리"
     },
     {
       "id": "boram",
@@ -954,7 +954,7 @@
       },
       "nationality": "중국계",
       "candidate_moments": [],
-      "card_name": "장뤄안"
+      "card_name": "뤄안"
     },
     {
       "id": "haeryeong",
@@ -1009,7 +1009,7 @@
         "variant": 5,
         "run": "FollowerRedesign_20261016_v3"
       },
-      "card_name": "아마노 나기"
+      "card_name": "나기"
     },
     {
       "id": "seohwi",
@@ -1069,7 +1069,7 @@
         "run": "FollowerRedesign_20261019_v5"
       },
       "candidate_moments": [],
-      "card_name": "천서휘",
+      "card_name": "서휘",
       "nationality": "한국"
     },
     {
@@ -1157,7 +1157,7 @@
           "composition": "high-angle environmental composition, leaning on a public counter while listening to someone off-frame, broad market lane visible around her"
         }
       ],
-      "card_name": "조라 페트로비치"
+      "card_name": "조라"
     },
     {
       "id": "sojeong",
@@ -1248,7 +1248,7 @@
           "composition": "high-angle long shot, walking along a patchwork shade-sail path and looking toward a distant doorway, figure offset to one side"
         }
       ],
-      "card_name": "라레 사다트"
+      "card_name": "라레"
     },
     {
       "id": "girim",
@@ -1338,7 +1338,7 @@
           "composition": "high-angle environmental view, kneeling beside a clear stream to inspect the bank, small figure amid broad grasses and bright reflections"
         }
       ],
-      "card_name": "이마니 카마우"
+      "card_name": "이마니"
     },
     {
       "id": "onjae",
@@ -1425,7 +1425,7 @@
           "composition": "rear three-quarter long shot, walking down a sunlit brick lane with a quiet thoughtful posture, distant water towers and open sky"
         }
       ],
-      "card_name": "사피야 하다드"
+      "card_name": "사피야"
     },
     {
       "id": "mijeong",
@@ -1513,7 +1513,7 @@
           "composition": "high-angle medium shot, standing at the end of a long public table with both hands resting lightly on it, resolved gentle expression, open canopy above"
         }
       ],
-      "card_name": "나디아 모로"
+      "card_name": "나디아"
     }
   ],
   "naming_policy": "스타룬데르의 이음 정착지는 여러 지구 출신이 함께 사는 다언어 개척지다. 회사 소속과 이름 문화권은 일치하지 않는다. 남극성 청람시에는 한국·일본·중국계 가정이 함께 살며 각 문화의 복식과 생활 방식이 교류된다. 게임과 문서의 이름은 한글 표기를 기본으로 하고 영문 표기는 검색용 별칭으로 둔다.",

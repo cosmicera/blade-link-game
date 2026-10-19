@@ -676,7 +676,7 @@
     emitVisual(match, {
       type: 'effect', side: 'system', sourceType: 'system', sourceId: 'round-expiry', targets,
       beforeStates, targetStates: snapshotEffectTargets(capturedTargets),
-      label: '이번 전투 한정 효과 종료', timing: 'roundEnd', scope: 'all'
+      label: '이번 턴 한정 효과 종료', timing: 'roundEnd', scope: 'all'
     });
     return true;
   }

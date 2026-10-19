@@ -12,7 +12,7 @@ window.GAME_DATA = {
       blurb: '피지컬 AI와 개척 기반 시설을 연결해 공격과 배치의 속도를 높입니다.', leader: 'arca'
     },
     nanguk: {
-      id: 'nanguk', name: '남극성', short: 'NAMGUK', logo: '❄', district: '청람시',
+      id: 'nanguk', name: '남극성', short: 'NAMGUK', badge: 'NAM', logo: '❄', district: '청람시',
       color: '#87aedd', accent: '#d4e8fb', style: '수비 · 반격 · 정교한 대응',
       blurb: '공명합금 검식과 차분한 방어로 상대의 공격을 반격의 기회로 바꿉니다.', leader: 'cheongyeon'
     },
@@ -23,10 +23,10 @@ window.GAME_DATA = {
     }
   },
   leaders: {
-    ria: { id: 'ria', faction: 'outpr', name: '새순의 기사 리아', epithet: '스타룬데르의 길잡이', image: 'assets/cards/ria.png', quote: '같이 가자. 이곳에 네가 쉴 자리도 만들게.', ability: '새순의 손길', abilityText: '라운드 시작 시 내 대표 라이프를 1, 가장 약한 아군 추종자의 체력을 1 회복합니다.', seed: '1566391587789165' },
-    arca: { id: 'arca', faction: 'selfas', name: '제1집행관 아르카', epithet: '개척 현장 안전 AI', image: 'assets/cards/arca.png', quote: '경로를 다시 계산합니다. 현장의 선택을 반영했습니다.', ability: '장비 재배치', abilityText: '라운드 시작 시 이번 라운드 사이즈 한도를 1 높입니다.', seed: '6424778036880785' },
-    cheongyeon: { id: 'cheongyeon', faction: 'nanguk', name: '푸른 제비 청연', epithet: '남극성 대표 검사', image: 'assets/cards/cheongyeon.png', quote: '다음 안전 구역은 내가 먼저 확인할게. 함께 갈래?', ability: '푸른 방어선', abilityText: '라운드 시작 시 아군 추종자의 이번 전투 방어력을 1 높입니다. 이 강화는 라운드 종료 시 사라집니다. 아군이 없으면 이번 라운드 사이즈 한도를 1 높입니다.', seed: '8426524219450097' },
-    noa: { id: 'noa', faction: 'unbek', name: '배달부 노아', epithet: '거점 사이를 잇는 전령', image: 'assets/cards/noa.png', quote: '거점이 멀어도 필요한 물건은 꼭 도착해야지.', ability: '골목길 지름', abilityText: '라운드 시작 시 버림 더미에서 추종자 1장을 손으로 가져옵니다. 가져올 수 없으면 이번 라운드 사이즈 한도를 1 높입니다.', seed: '8899084558523978' }
+    ria: { id: 'ria', faction: 'outpr', name: '리아', epithet: '스타룬데르의 길잡이', image: 'assets/cards/ria.png', quote: '같이 가자. 이곳에 네가 쉴 자리도 만들게.', ability: '새순의 손길', abilityText: '라운드 시작 시 내 대표 라이프를 1, 가장 약한 아군 추종자의 체력을 1 회복합니다.', seed: '1566391587789165' },
+    arca: { id: 'arca', faction: 'selfas', name: '아르카', epithet: '개척 현장 안전 AI', image: 'assets/cards/arca.png', quote: '경로를 다시 계산합니다. 현장의 선택을 반영했습니다.', ability: '장비 재배치', abilityText: '라운드 시작 시 이번 라운드 사이즈 한도를 1 높입니다.', seed: '6424778036880785' },
+    cheongyeon: { id: 'cheongyeon', faction: 'nanguk', name: '청연', epithet: '남극성 대표 검사', image: 'assets/cards/cheongyeon.png', quote: '다음 안전 구역은 내가 먼저 확인할게. 함께 갈래?', ability: '푸른 방어선', abilityText: '라운드 시작 시 아군 추종자의 이번 전투 방어력을 1 높입니다. 이 강화는 라운드 종료 시 사라집니다. 아군이 없으면 이번 라운드 사이즈 한도를 1 높입니다.', seed: '8426524219450097' },
+    noa: { id: 'noa', faction: 'unbek', name: '노아', epithet: '거점 사이를 잇는 전령', image: 'assets/cards/noa.png', quote: '거점이 멀어도 필요한 물건은 꼭 도착해야지.', ability: '골목길 지름', abilityText: '라운드 시작 시 버림 더미에서 추종자 1장을 손으로 가져옵니다. 가져올 수 없으면 이번 라운드 사이즈 한도를 1 높입니다.', seed: '8899084558523978' }
   },
   cards: [
     { id: 'verda', type: 'unit', faction: 'outpr', name: '베르다', role: '아웃프라웨어 대표·공동 테라포밍위원', position: '기업 총수', department: null, deckLimit: 1, image: 'assets/cards/verda.png', seed: '6155868119575495', cost: 4, attack: 3, defense: 3, health: 8, effect: { type: 'heal_wounded', amount: 1 }, text: '라운드 시작: 가장 약한 아군 추종자의 체력을 1 회복합니다.', flavorText: '베르다가 내린 첫 현장 지시는 생태 시험 구역의 안전부터 살피라는 것이었다. 스타룬데르의 생체 필터가 다시 맥박치자 동료들의 숨도 고르게 돌아온다.', symbol: '✦' },

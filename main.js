@@ -30,6 +30,8 @@
   const leaderOf = factionId => DATA.leaders[DATA.factions[factionId].leader];
   const titlePositions = new Set(['기업 총수', '기업 대표', '협동조합 대표']);
   const isTitleFollower = card => card?.type === 'unit' && titlePositions.has(card.position);
+  const cardOrganization = card => isTitleFollower(card) ? card.position : (card?.department || card?.position || '');
+  const factionBadge = faction => faction?.badge || faction?.short || '';
   const isHumanTurn = () => match && match.phase === 'deploy' && !match.gameOver && !aiThinking;
   const factionColor = factionId => DATA.factions[factionId]?.color || '#b8b2c0';
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
@@ -85,8 +87,9 @@
     const image = card.image
       ? `<img src="${escapeHTML(card.image)}" alt="${cardTitle}" />`
       : `<div class="codex-detail-symbol" style="--faction-color:${factionColor(card.faction)}"><span>${escapeHTML(faction.logo || '◇')}</span><small>${escapeHTML(faction.name)} · 검식</small></div>`;
-    const category = card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (card.position || card.department || '추종자') : '검식';
+    const category = card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (cardOrganization(card) || '추종자') : '검식';
     const role = card.type === 'unit' ? card.role : card.type === 'leader' ? card.epithet : '검식 카드';
+    const fullName = card.person && card.person !== card.name ? escapeHTML(card.person) : '';
     const stats = card.type === 'unit'
       ? `<span>사이즈 ${card.cost}</span><span>공격 ${card.attack}</span><span>방어 ${card.defense || 0}</span><span>체력 ${card.health}</span>${isTitleFollower(card) || card.deckLimit === 1 ? '<span>덱당 1장</span>' : ''}`
       : card.type === 'spell' ? `<span>사이즈 ${card.cost}</span><span>검식 카드</span>` : '<span>라이프 30</span><span>대표 능력</span>';
@@ -102,7 +105,7 @@
             <article class="codex-detail-face codex-detail-back" style="--faction-color:${factionColor(card.faction)}">
               <span class="codex-back-faction-mark" role="img" aria-label="${escapeHTML(faction.name)} 로고">${escapeHTML(faction.logo || '◇')}</span>
               <small>${escapeHTML(faction.name)} · ${escapeHTML(category)}</small><h3>${cardTitle}</h3>
-              <div class="codex-back-role">${escapeHTML(role)}</div><div class="codex-detail-stats">${stats}</div>
+              <div class="codex-back-role">${escapeHTML(role)}</div>${fullName ? `<small class="codex-back-person">${fullName}</small>` : ''}<div class="codex-detail-stats">${stats}</div>
               <p class="codex-back-effect">${escapeHTML(effectText)}</p><div class="codex-back-rule"></div>
               <small class="codex-back-label">${escapeHTML(back.label)}</small><blockquote>${escapeHTML(back.text)}</blockquote>
             </article>
@@ -200,12 +203,13 @@
         ? `<img src="${escapeHTML(card.image)}" alt="" loading="lazy">`
         : `<span class="deck-card-symbol">${escapeHTML(card.symbol || '◇')}</span>`;
       const category = card.type === 'unit' ? '추종자' : '검식';
+      const organization = cardOrganization(card);
       const stats = card.type === 'unit'
         ? `공 ${card.attack} · 방 ${card.defense || 0} · 체 ${card.health}`
         : `사이즈 ${card.cost}`;
       return `<article class="deck-pool-card" style="--faction-color:${faction.color}">
         <button class="deck-pool-art" type="button" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 상세 보기">${image}<b>${String(card.cost).padStart(2, '0')}</b></button>
-        <div class="deck-pool-copy"><small>${category}${card.department ? ` · ${escapeHTML(card.department)}` : card.position ? ` · ${escapeHTML(card.position)}` : ''}</small><button type="button" class="deck-card-name" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}">${escapeHTML(card.name)}</button><p>${escapeHTML(card.text || '')}</p><em>${stats}</em><small class="deck-owned-count">보유 ${copies}장 · 덱 ${count}장${copies === 1 ? ' · 덱당 1장' : ''}</small></div>
+        <div class="deck-pool-copy"><small>${category}${organization ? ` · ${escapeHTML(organization)}` : ''}</small><button type="button" class="deck-card-name" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}">${escapeHTML(card.name)}</button><p>${escapeHTML(card.text || '')}</p><em>${stats}</em><small class="deck-owned-count">보유 ${copies}장 · 덱 ${count}장${copies === 1 ? ' · 덱당 1장' : ''}</small></div>
         <button class="deck-add-button" type="button" data-deck-action="add" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 추가" ${addDisabled ? 'disabled' : ''}>＋</button>
       </article>`;
     }).join('');
@@ -449,18 +453,19 @@
     const { handId = '', selected = false, disabled = false, unit = null, compact = false } = options;
     const spell = card.type === 'spell';
     const typeName = spell ? '검식' : '추종자';
-    const departmentLabel = card.department?.replace(/팀$/, '') || card.position || '';
+    const departmentLabel = cardOrganization(card).replace(/팀$/, '');
     const faction = DATA.factions[card.faction];
+    const badge = factionBadge(faction);
     const health = unit ? card.health + unit.healthBonus - unit.damage : card.health;
     const attack = card.attack + (unit?.attackBonus || 0) + (unit?.tempAttack || 0);
     const defense = unit ? RULES.unitDefense(unit) : (card.defense || 0);
     const classes = ['game-card', spell ? 'spell-card' : 'unit-card', selected ? 'selected' : '', disabled ? 'disabled' : '', compact ? 'compact-card' : '', unit && !unit.ready ? 'exhausted' : ''].filter(Boolean).join(' ');
     const art = spell
-      ? `<div class="spell-art" style="--faction-color:${faction.color};--faction-accent:${faction.accent}"><span class="spell-glyph">${card.symbol}</span><i></i><b>${faction.short}</b></div>`
-      : `<div class="card-art"><img src="${card.image}" alt="${card.name}" loading="lazy"><span class="art-shade"></span><span class="art-faction">${faction.short}</span></div>`;
+      ? `<div class="spell-art" style="--faction-color:${faction.color};--faction-accent:${faction.accent}"><span class="spell-glyph">${card.symbol}</span><i></i><b>${badge}</b></div>`
+      : `<div class="card-art"><img src="${card.image}" alt="${card.name}" loading="lazy"><span class="art-shade"></span><span class="art-faction">${badge}</span></div>`;
     return `<button class="${classes}" ${handId ? `data-hand-id="${handId}"` : ''} ${unit ? `data-unit-id="${unit.iid}"` : ''} style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 코스트 ${card.cost}${card.type === 'unit' ? `, 공격 ${attack}, 방어 ${defense}, 체력 ${health}` : ''}">
       <span class="card-cost">${card.cost}</span>
-      <span class="card-topline"><small>${typeName}${!spell && departmentLabel ? ` · ${departmentLabel}` : ''}</small><b>${faction.short}</b></span>
+      <span class="card-topline"><small>${typeName}${!spell && departmentLabel ? ` · ${departmentLabel}` : ''}</small><b>${badge}</b></span>
       ${art}
       <span class="card-copy"><strong>${card.name}</strong><small>${card.text}</small></span>
       ${spell ? `<span class="card-spell-label">검식 카드 <i>·</i> 전투에서 발동</span>` : `<span class="card-stats"><b>⚔ ${attack}</b><b>⛨ ${defense}</b><b>♥ ${health}</b></span>`}
@@ -471,10 +476,11 @@
     if (!item) return `<div class="unit-slot empty-slot"><span>${String(index + 1).padStart(2, '0')}</span><i>전장 대기</i></div>`;
     const card = RULES.cardById[item.cardId];
     const faction = DATA.factions[card.faction];
+    const badge = factionBadge(faction);
     if (item.kind === 'spell') {
       const classes = ['unit-slot', 'occupied-slot', 'spell-slot', 'unit-ready', owner === 'opponent' ? 'enemy-unit' : ''].join(' ');
       return `<div class="${classes}" data-board-card data-side="${owner}" data-kind="spell" data-card-id="${item.iid}" data-card-template="${card.id}" role="button" tabindex="0" style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 검식, 코스트 ${card.cost}, 전투 중 발동">
-        <div class="spell-slot-art"><span>${card.symbol}</span><b>${faction.short}</b></div>
+        <div class="spell-slot-art"><span>${card.symbol}</span><b>${badge}</b></div>
         <div class="unit-nameplate"><strong>${card.name}</strong><small>검식 · 전투에서 발동</small></div>
         <div class="spell-slot-cost">◇ ${card.cost} 사이즈</div>
       </div>`;
@@ -491,7 +497,7 @@
     const classes = ['unit-slot', 'occupied-slot', actionState, owner === 'opponent' ? 'enemy-unit' : ''].join(' ');
     return `<div class="${classes}" data-board-card data-side="${owner}" data-kind="unit" data-card-id="${item.iid}" data-card-template="${card.id}" data-inspect-attack="${attack}" data-inspect-attack-base="${attackBase}" data-inspect-attack-temp="${attackTemp}" data-inspect-defense="${defense}" data-inspect-defense-base="${defenseBase}" data-inspect-defense-temp="${defenseTemp}" data-inspect-health="${health}" data-inspect-max-health="${card.health + item.healthBonus}" role="button" tabindex="0" style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 사이즈 ${card.cost}, 공격 ${attack}, 방어 ${defense}, 체력 ${health}">
       <div class="unit-portrait"><img src="${card.image}" alt="" loading="lazy"><span class="unit-portrait-shade"></span><b class="unit-cost-label">◇ ${card.cost}</b></div>
-      <div class="unit-nameplate"><strong>${card.name}</strong><small>${card.department || card.position || card.role}</small></div>
+      <div class="unit-nameplate"><strong>${card.name}</strong><small>${cardOrganization(card) || card.role}</small></div>
       <div class="unit-numbers">${formatUnitStat('⚔', attack, attackBase, attackTemp)}${formatUnitStat('⛨', defense, defenseBase, defenseTemp)}<span>♥ ${health}</span></div>
     </div>`;
   }
@@ -520,7 +526,7 @@
     const healthPct = Math.max(0, Math.min(100, (p.hp / p.maxHp) * 100));
     return `<div class="leader-banner ${enemy ? 'rival-leader' : 'your-leader'} inspectable-leader" data-leader-side="${side}" role="button" tabindex="0" aria-label="${leader.name} 대표 캐릭터 정보" style="--faction-color:${faction.color};--faction-accent:${faction.accent}">
       <div class="leader-avatar"><img src="${leader.image}" alt="${leader.name}" loading="lazy"><span class="avatar-ring"></span></div>
-      <div class="leader-name-block"><small>${enemy ? 'LEAGUE CHALLENGER' : 'YOUR REPRESENTATIVE'} <i>·</i> ${faction.short}</small><strong>${leader.name}</strong><em>${leader.epithet}</em></div>
+      <div class="leader-name-block"><small>${enemy ? 'LEAGUE CHALLENGER' : 'YOUR REPRESENTATIVE'} <i>·</i> ${factionBadge(faction)}</small><strong>${leader.name}</strong><em>${leader.epithet}</em></div>
       <div class="leader-health"><div class="health-label"><span>대표 라이프</span><b>${Math.max(0, p.hp)} <i>/ ${p.maxHp}</i></b></div><div class="health-track"><span style="width:${healthPct}%"></span></div></div>
       ${enemy ? `<div class="leader-piles"><span data-hand-pile="opponent">손패 <b>${p.hand.length}</b></span><span>덱 <b>${p.deck.length}</b></span><span class="opponent-discard-pile" data-discard-pile="opponent">버림 <b>${p.discard.length}</b></span></div>` : `<div class="leader-piles"><span>덱 <b>${p.deck.length}</b></span><span class="player-discard-count">버림 <b>${p.discard.length}</b></span></div>`}
     </div>`;
@@ -568,8 +574,10 @@
           defense: card.defense || 0, defenseBase: card.defense || 0, defenseTemp: 0,
           health: card.health, maxHealth: card.health
         };
+        const organization = cardOrganization(card);
+        const roleLabel = isTitleFollower(card) ? organization : [organization, card.role].filter(Boolean).join(' · ') || card.role;
         return `<div class="inspect-card-image"><img src="${card.image}" alt="${card.name}"></div>
-          <div class="inspect-title"><small>${DATA.factions[card.faction].name} · ${card.department || card.position || card.role}${card.role && (card.department || card.position) ? ` · ${card.role}` : ''}</small><strong>${card.name}</strong></div>
+          <div class="inspect-title"><small>${DATA.factions[card.faction].name} · ${roleLabel}</small><strong>${card.name}</strong></div>
           <p class="inspect-description">${card.text}</p>
           <div class="inspect-stats"><span>공격 <b>${formatStatBreakdown(stats.attack, stats.attackBase, stats.attackTemp)}</b></span><span>방어 <b>${formatStatBreakdown(stats.defense, stats.defenseBase, stats.defenseTemp)}</b></span><span>체력 <b>${stats.health} / ${stats.maxHealth}</b></span></div>
           <div class="inspect-cost"><span>사이즈</span><b>${card.cost}</b></div>`;
@@ -580,8 +588,9 @@
 
   function inspectorCardMarkup(card) {
     const faction = DATA.factions[card.faction];
+    const organization = cardOrganization(card);
     return `<div class="inspect-card-image ${card.type === 'spell' ? 'inspect-spell-image' : ''}">${card.type === 'unit' ? `<img src="${card.image}" alt="${card.name}">` : `<span>${card.symbol}</span>`}</div>
-      <div class="inspect-title"><small>${faction.name} · ${card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : card.position ? ` · ${card.position}` : ''}` : '검식'}</small><strong>${card.name}</strong></div>
+      <div class="inspect-title"><small>${faction.name} · ${card.type === 'unit' ? `추종자${organization ? ` · ${organization}` : ''}` : '검식'}</small><strong>${card.name}</strong></div>
       <p class="inspect-description">${card.text}</p>
       <div class="inspect-stats">${card.type === 'unit' ? `<span>공격 <b>${card.attack}</b></span><span>방어 <b>${card.defense || 0}</b></span><span>체력 <b>${card.health}</b></span>` : `<span>유형 <b>검식 배치</b></span>`}</div>
       <div class="inspect-cost"><span>사이즈</span><b>${card.cost}</b></div>`;
@@ -656,7 +665,7 @@
     return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name} <b>${allCards.filter(card => card.faction === id).length}</b></button>`).join('')}</div>
       <div class="codex-grid">${cards.map(card => `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
         <div class="codex-art">${card.type === 'spell' ? `<span>${escapeHTML(card.symbol || '◇')}</span>` : `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">`}</div>
-        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (card.position || card.department || '추종자') : '검식')}</small><strong>${escapeHTML(card.name)}</strong></div>
+        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (cardOrganization(card) || '추종자') : '검식')}</small><strong>${escapeHTML(card.name)}</strong></div>
       </button>`).join('')}</div>`;
   }
 
@@ -783,7 +792,7 @@
     }
   }
 
-  function updateCombatUnitStats(element, state, { pulse = true } = {}) {
+  function updateCombatUnitStats(element, state, { pulse = true, statsOnly = false } = {}) {
     if (!element || !state) return;
     const values = element.querySelectorAll('.unit-numbers span');
     const nextValues = [
@@ -792,6 +801,7 @@
       { total: state.health, base: state.health, temporary: 0, icon: '♥' }
     ];
     nextValues.forEach(({ total, base, temporary, icon }, index) => {
+      if (statsOnly && index === 2) return;
       const value = total;
       if (!Number.isFinite(value) || !values[index]) return;
       const safeValue = index === 2 ? Math.max(0, value) : value;
@@ -811,12 +821,13 @@
       maxHealth: state.maxHealth
     };
     Object.entries(inspectFields).forEach(([key, value]) => {
+      if (statsOnly && ['health', 'maxHealth'].includes(key)) return;
       if (!Number.isFinite(value)) return;
       const field = key[0].toUpperCase() + key.slice(1);
       element.dataset[`inspect${field}`] = String(value);
     });
     const name = element.querySelector('.unit-nameplate strong')?.textContent;
-    if (name) element.setAttribute('aria-label', `${name}, 공격 ${state.attack}, 방어 ${state.defense}, 체력 ${state.health} / ${state.maxHealth}`);
+    if (name) element.setAttribute('aria-label', `${name}, 공격 ${state.attack}, 방어 ${state.defense}, 체력 ${element.dataset.inspectHealth} / ${element.dataset.inspectMaxHealth}`);
   }
 
   function showEffectStatChanges(element, state, beforeState = null) {
@@ -1188,34 +1199,47 @@
     sweep.className = 'round-expiry-wave';
     table.append(sweep);
     const animation = sweep.animate?.([
-      { transform: 'translateX(-120%)', opacity: 0 },
-      { transform: 'translateX(-15%)', opacity: .9, offset: .18 },
-      { transform: 'translateX(180%)', opacity: 0 }
-    ], { duration: paced(820), easing: 'cubic-bezier(.2,.72,.22,1)', fill: 'forwards' });
-    if (animation) await animation.finished.catch(() => {});
-    else {
-      sweep.classList.add('round-expiry-wave-fallback');
-      await wait(820);
-    }
-    sweep.remove();
+      { opacity: 0 },
+      { opacity: 1, offset: .45 },
+      { opacity: 0 }
+    ], { duration: paced(820), easing: 'ease-in-out', fill: 'forwards' });
+    if (!animation) sweep.classList.add('round-expiry-wave-fallback');
+    await wait(370);
     states.forEach(state => {
       const element = boardElement(state.side, state.iid);
       if (element) updateCombatUnitStats(element, state, { pulse: false });
     });
+    if (animation) await animation.finished.catch(() => {});
+    else await wait(450);
+    sweep.remove();
+  }
+
+  // Combat triggers update the table; the duel keeps its attack/defense values fixed.
+  async function animateCombatTableEffect(event, { statsOnly = false } = {}) {
+    const states = event.targetStates || [];
+    const targets = states.map(state => ({ state, element: boardElement(state.side, state.iid) }))
+      .filter(item => item.element);
+    if (event.beneficial) {
+      const flights = targets.map(({ element }, index) => launchEffectMeteor(element, index, 'positive')).filter(Boolean);
+      await Promise.all(flights.map(flight => flight.finished));
+      flights.forEach(flight => flight.meteor.remove());
+    }
+    targets.forEach(({ state, element }) => updateCombatUnitStats(element, state, { pulse: false, statsOnly }));
+    await Promise.all(targets.map(({ element }) => applyFxClass(element, event.beneficial ? 'effect-positive-impact' : 'effect-target', 430)));
   }
 
   async function animateGlobalEffectEvent(event) {
+    if (event.timing === 'roundEnd') {
+      hideCombatStage();
+      await animateRoundExpiry(event.targetStates || []);
+      return;
+    }
     const focus = showGlobalEffectStage(event);
     if (!focus) return;
-    const roundExpiry = event.timing === 'roundEnd';
-    await wait(roundExpiry ? 560 : event.beneficial ? 500 : 680);
+    await wait(event.beneficial ? 500 : 680);
     hideCombatStage();
     await wait(90);
     const states = event.targetStates || [];
-    if (roundExpiry) {
-      await animateRoundExpiry(states);
-      return;
-    }
     if (event.beneficial) {
       await animateBeneficialTargets(states);
       return;
@@ -1377,8 +1401,7 @@
     try {
       if (event.type === 'attack') {
         const attackEffects = effects.filter(effect => effect.timing !== 'defense');
-        const defenseEffects = effects.filter(effect => effect.timing === 'defense');
-        for (const effect of attackEffects) await animateStepEffect(effect);
+        for (const effect of attackEffects) await animateCombatTableEffect(effect);
         await ensureFocus();
 
         const targetSide = event.side === 'player' ? 'opponent' : 'player';
@@ -1428,7 +1451,6 @@
           }
         }
 
-        for (const effect of defenseEffects) await animateStepEffect(effect);
         if (!event.directHit) {
           await ensureFocus();
           if (focus) {
@@ -1482,6 +1504,11 @@
       if (focus) hideCombatStage();
     }
 
+    if (event.type === 'attack') {
+      for (const effect of effects.filter(effect => effect.timing === 'defense')) {
+        await animateCombatTableEffect(effect, { statsOnly: true });
+      }
+    }
     await Promise.all((event.destroyedUnits || []).map((unit, index) => wait(index * 120).then(() => animateDeath(unit))));
     if (event.type === 'spell') {
       await flyCard(boardElement(event.side, event.spellId), destinationForDiscard(event.side));
