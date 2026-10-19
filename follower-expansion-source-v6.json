@@ -61,9 +61,9 @@
       "scene": "a lush open lotus pond woven into the public greenhouse waterway, broad lotus leaves above clear irrigation channels, distant garden terraces and a bright green skyline",
       "height_cm": 162,
       "measurements_cm": {
-        "bust": 84,
-        "waist": 62,
-        "hip": 87
+        "bust": 92,
+        "waist": 64,
+        "hip": 94
       },
       "personality": "현장의 작은 변화를 가장 먼저 알아차리고, 사람을 기술보다 앞세우는 실천가다. 낯선 사람에게도 먼저 손을 내미는 따뜻함과 위험 앞에서 망설이지 않는 결단력이 함께 있다.",
       "visual_personality_en": "alert green-gray eyes, a warm crooked smile, and a practical forward lean; her open hand guides someone safely while the other is already reaching toward the irrigation controls",
@@ -456,9 +456,9 @@
       "scene": "a sunlit open design lab spilling onto a public fabrication plaza, brushed-metal canopies, modular benches, flowering planters, wide city avenue beyond",
       "height_cm": 167,
       "measurements_cm": {
-        "bust": 99,
-        "waist": 74,
-        "hip": 101
+        "bust": 106,
+        "waist": 72,
+        "hip": 104
       },
       "personality": "사용자의 생활 방식을 세심하게 관찰하고 맞춤 설계를 고집하는 다정한 발명가다. 조용하지만 새 아이디어를 설명할 때는 은근한 승부욕과 장난기가 드러난다.",
       "visual_personality_en": "kind blue-gray eyes with a confident playful smile; relaxed yet attentive posture, one hand demonstrating a small wearable fitting while the other sketches its adjustment in the air",
@@ -830,9 +830,9 @@
       "scene": "a wide contemporary Korean civic crossing in Cheongram City, blue-white stone paving, low timber screens, canal bridges, distant hills and an open pale sky; no palace",
       "height_cm": 169,
       "measurements_cm": {
-        "bust": 84,
-        "waist": 61,
-        "hip": 88
+        "bust": 92,
+        "waist": 64,
+        "hip": 94
       },
       "personality": "정해진 동작을 강요하기보다 상대의 속도에 맞춰 검식을 가르치는 활동적인 안내자다. 승부보다 함께 익히는 즐거움을 중시하고, 실패한 동작도 웃으며 다시 보여 준다.",
       "visual_personality_en": "alert dark eyes and an encouraging confident smile; light athletic footwork, one open hand inviting a student to try the stance at her own pace",
@@ -918,9 +918,9 @@
       "scene": "broad riverside paths, modern civic courtyards, tree-lined stairs and open waterfront terraces in a contemporary city",
       "height_cm": 160,
       "measurements_cm": {
-        "bust": 84,
+        "bust": 94,
         "waist": 65,
-        "hip": 91
+        "hip": 96
       },
       "personality": "호기심과 재치가 넘치고, 즉흥적인 실험을 즐긴다. 실패해도 먼저 웃어 보이며 주변 사람을 실험에 끌어들이는 외향적인 분위기 메이커다. 평소에는 가볍고 장난스럽지만 도시의 공명 흐름이 흔들릴 때는 놀라울 만큼 빠르고 집중력 있게 판단한다.",
       "visual_personality_en": "buoyant mischievous confidence, animated amber eyes, an easy laugh that turns into sharp concentration, wind-tossed twin braids, open expressive gestures",
@@ -1092,8 +1092,8 @@
       "height_cm": 162,
       "measurements_cm": {
         "bust": 94,
-        "waist": 79,
-        "hip": 100
+        "waist": 72,
+        "hip": 98
       },
       "personality": "장터의 물자와 사람 사정을 함께 살피는 넉넉하고 현실적인 조정자다. 남의 이야기를 잘 기억하고, 거래의 빈틈을 알아차려도 상대를 망신주지 않는 능청스러움이 있다.",
       "visual_personality_en": "welcoming eyes with deep smile lines and a knowing half-smile; relaxed market-stall posture, one hand offering a shared basket while the other gestures toward the open lane",

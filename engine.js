@@ -6,7 +6,14 @@
   const MAX_ROUND_PLAYS = 5;
   const BASE_SIZE_LIMIT = 10;
   const HAND_RESETS_PER_MATCH = 2;
+  const DECK_SIZE = 30;
+  const UNIT_DECK_SIZE = 20;
+  const MAX_CARD_COPIES = 3;
   let instanceSeq = 1;
+
+  function cardCopyLimit(card) {
+    return Number.isInteger(card.deckLimit) ? card.deckLimit : MAX_CARD_COPIES;
+  }
 
   function shuffle(items) {
     const result = [...items];
@@ -21,19 +28,59 @@
     const units = data.cards.filter(card => card.type === 'unit' && card.faction === factionId);
     const spells = data.cards.filter(card => card.type === 'spell' && card.faction === factionId);
     const deck = [];
-    units.forEach((card, index) => {
-      const copies = Math.floor(16 / units.length) + (index < 16 % units.length ? 1 : 0);
-      for (let i = 0; i < copies; i += 1) deck.push(card.id);
-    });
-    const spellSlots = 24 - deck.length;
-    spells.forEach((card, index) => {
-      const copies = Math.floor(spellSlots / spells.length) + (index < spellSlots % spells.length ? 1 : 0);
-      for (let i = 0; i < copies; i += 1) deck.push(card.id);
-    });
+    const addBalancedCopies = (cards, slots) => {
+      const copies = new Map(cards.map(card => [card.id, 0]));
+      let remaining = slots;
+      while (remaining > 0) {
+        let added = 0;
+        cards.forEach(card => {
+          if (remaining <= 0) return;
+          const limit = cardCopyLimit(card);
+          if (copies.get(card.id) >= limit) return;
+          copies.set(card.id, copies.get(card.id) + 1);
+          remaining -= 1;
+          added += 1;
+        });
+        if (!added) throw new Error(factionId + ' 덱에 ' + slots + '장을 채울 수 없습니다. 카드별 덱 제한을 확인하세요.');
+      }
+      cards.forEach(card => {
+        for (let i = 0; i < copies.get(card.id); i += 1) deck.push(card.id);
+      });
+    };
+    addBalancedCopies(units, UNIT_DECK_SIZE);
+    addBalancedCopies(spells, DECK_SIZE - UNIT_DECK_SIZE);
     return shuffle(deck);
   }
 
-  function makePlayer(id, factionId) {
+  function makeCollection(factionId) {
+    return data.cards
+      .filter(card => card.faction === factionId)
+      .map(card => ({ card, copies: cardCopyLimit(card) }));
+  }
+
+  function validateDeck(deck, factionId) {
+    const fail = error => ({ ok: false, error, units: 0, spells: 0, total: Array.isArray(deck) ? deck.length : 0 });
+    if (!Array.isArray(deck)) return fail('덱 데이터가 없습니다.');
+    if (deck.length !== DECK_SIZE) return fail(`덱은 ${DECK_SIZE}장이어야 합니다. 현재 ${deck.length}장입니다.`);
+    const counts = new Map();
+    let units = 0;
+    let spells = 0;
+    for (const id of deck) {
+      const card = cardById[id];
+      if (!card) return fail(`보유 카드풀에 없는 카드가 포함되어 있습니다: ${id}`);
+      if (card.faction !== factionId) return fail('한 덱에는 같은 기업의 카드만 넣을 수 있습니다.');
+      counts.set(id, (counts.get(id) || 0) + 1);
+      if (counts.get(id) > cardCopyLimit(card)) return fail(`${card.name} 카드는 최대 ${cardCopyLimit(card)}장까지 넣을 수 있습니다.`);
+      if (card.type === 'unit') units += 1;
+      else if (card.type === 'spell') spells += 1;
+      else return fail(`${card.name} 카드는 덱에 넣을 수 없습니다.`);
+    }
+    if (units !== UNIT_DECK_SIZE) return fail(`추종자는 ${UNIT_DECK_SIZE}장이어야 합니다. 현재 ${units}장입니다.`);
+    if (spells !== DECK_SIZE - UNIT_DECK_SIZE) return fail(`검식은 ${DECK_SIZE - UNIT_DECK_SIZE}장이어야 합니다. 현재 ${spells}장입니다.`);
+    return { ok: true, error: '', units, spells, total: deck.length };
+  }
+
+  function makePlayer(id, factionId, deckOverride = null) {
     return {
       id,
       factionId,
@@ -49,7 +96,7 @@
       slotSequence: 0,
       handOrderSequence: 0,
       handResetsLeft: HAND_RESETS_PER_MATCH,
-      deck: makeDeck(factionId),
+      deck: shuffle(deckOverride || makeDeck(factionId)),
       hand: [],
       field: [],
       spellQueue: [],
@@ -76,6 +123,10 @@
     const player = match.players[side];
     const enemySide = side === 'player' ? 'opponent' : 'player';
     const enemy = match.players[enemySide];
+    if (type === 'department_synergy') {
+      if (!departmentSynergyActive(match, side, unit, effect)) return [];
+      return effectTargets(match, side, effect.effect, unit);
+    }
     if (['defense_self', 'buff_self', 'temp_buff_self', 'heal_self', 'quick_entry'].includes(type)) return unit ? [{ side, iid: unit.iid }] : [];
     if (['heal_all', 'buff_all', 'defense_all', 'overclock', 'temp_buff_all', 'defense_draw'].includes(type)) return player.field.map(item => ({ side, iid: item.iid }));
     if (type === 'damage_all') return enemy.field.map(item => ({ side: enemySide, iid: item.iid }));
@@ -87,11 +138,36 @@
       const target = weakestUnit(enemy);
       return target ? [{ side: enemySide, iid: target.iid }] : [];
     }
+    if (type === 'support_chairperson') {
+      return player.field
+        .filter(item => ['기업 총수', '협동조합 대표'].includes(cardOf(item).position))
+        .map(item => ({ side, iid: item.iid }));
+    }
     return [];
   }
 
   function effectScope(effect) {
+    if (effectType(effect) === 'department_synergy') return effectScope(effect.effect);
     return ['heal_all', 'buff_all', 'defense_all', 'overclock', 'temp_buff_all', 'damage_all', 'defense_draw'].includes(effectType(effect)) ? 'all' : 'single';
+  }
+
+  function departmentSynergyActive(match, side, unit, effect) {
+    if (!unit || !effect) return false;
+    const player = match.players[side];
+    const department = effect.department || cardOf(unit).department;
+    if (!department) return false;
+    const required = Math.max(1, Number(effect.requiredAllies) || 1);
+    const allies = player.field.filter(item => item.iid !== unit.iid && cardOf(item).department === department);
+    return allies.length >= required;
+  }
+
+  function effectIsActive(match, side, effect, unit = null) {
+    const type = effectType(effect);
+    if (type === 'department_synergy') return departmentSynergyActive(match, side, unit, effect);
+    if (type === 'support_chairperson') {
+      return match.players[side].field.some(item => ['기업 총수', '협동조합 대표'].includes(cardOf(item).position));
+    }
+    return true;
   }
 
   function captureEffectTargets(match, targets = []) {
@@ -285,6 +361,10 @@
 
   function applyUnitEffect(match, side, unit, effect) {
     const type = effectType(effect);
+    if (type === 'department_synergy') {
+      if (departmentSynergyActive(match, side, unit, effect)) applyUnitEffect(match, side, unit, effect.effect);
+      return;
+    }
     const player = match.players[side];
     const enemySide = side === 'player' ? 'opponent' : 'player';
     const enemy = match.players[enemySide];
@@ -316,6 +396,15 @@
       case 'heal_all':
         healLeader(player, amount);
         player.field.forEach(ally => healUnit(ally, amount));
+        break;
+      case 'support_chairperson':
+        player.field
+          .filter(ally => ['기업 총수', '협동조합 대표'].includes(cardOf(ally).position))
+          .forEach(ally => {
+            ally.tempAttack += Number(effect.attack) || 0;
+            ally.tempDefense += Number(effect.defense) || 0;
+            if (Number(effect.heal) > 0) healUnit(ally, Number(effect.heal));
+          });
         break;
       case 'buff_all':
         player.field.forEach(ally => { ally.attackBonus += amount; ally.healthBonus += 2; });
@@ -481,7 +570,7 @@
     [...player.field].sort((a, b) => a.slotOrder - b.slotOrder).forEach(unit => {
       if (match.gameOver) return;
       const effect = turnStartEffectOf(cardOf(unit));
-      if (!effect) return;
+      if (!effect || !effectIsActive(match, side, effect, unit)) return;
       const targets = effectTargets(match, side, effect, unit);
       const capturedTargets = captureEffectTargets(match, targets);
       const beforeStates = snapshotEffectTargets(capturedTargets);
@@ -494,57 +583,6 @@
       removeDefeated(match, side === 'player' ? 'opponent' : 'player');
       checkWinner(match);
     });
-  }
-
-  const DEPARTMENT_EFFECTS = {
-    '비서실': '비서실 시너지 · 소속 추종자 공격력·방어력 +1',
-    '연구개발팀': '연구개발팀 시너지 · 공격력 +1',
-    '도시운영팀': '도시운영팀 시너지 · 사이즈 한도 +1',
-    '대외협력팀': '대외협력팀 시너지 · 아군 공격력 +1',
-    '안전관리팀': '안전관리팀 시너지 · 방어력 +1'
-  };
-
-  function runDepartmentSynergies(match, side) {
-    const player = match.players[side];
-    const counts = new Map();
-    player.field.forEach(unit => {
-      const department = cardOf(unit).department;
-      if (department) counts.set(department, (counts.get(department) || 0) + 1);
-    });
-    for (const [department, count] of counts) {
-      if (count < 2) continue;
-      const members = player.field.filter(unit => cardOf(unit).department === department);
-      const targets = [];
-      const effectUnits = ['안전관리팀', '대외협력팀'].includes(department) ? player.field : members;
-      const beforeStates = snapshotEffectTargets(captureEffectTargets(match, effectUnits.map(unit => ({ side, iid: unit.iid }))));
-      switch (department) {
-        case '비서실':
-          members.forEach(unit => { unit.tempAttack += 1; unit.tempDefense += 1; targets.push({ side, iid: unit.iid }); });
-          break;
-        case '연구개발팀':
-          members.forEach(unit => { unit.tempAttack += 1; targets.push({ side, iid: unit.iid }); });
-          break;
-        case '도시운영팀':
-          player.sizeLimit = Math.min(12, player.sizeLimit + 1);
-          break;
-        case '대외협력팀':
-          player.field.forEach(unit => { unit.tempAttack += 1; targets.push({ side, iid: unit.iid }); });
-          break;
-        case '안전관리팀':
-          player.field.forEach(unit => { unit.tempDefense += 1; targets.push({ side, iid: unit.iid }); });
-          break;
-      }
-      log(match, DEPARTMENT_EFFECTS[department]);
-      if (targets.length) {
-        const captured = captureEffectTargets(match, targets);
-        emitVisual(match, {
-          type: 'effect', side, sourceType: 'department', sourceId: `${side}-${department}`,
-          targets, beforeStates, targetStates: snapshotEffectTargets(captured),
-          label: DEPARTMENT_EFFECTS[department], timing: 'department', scope: 'all'
-        });
-      }
-      checkWinner(match);
-    }
   }
 
   function startRound(match, selectedInitiative = null) {
@@ -581,9 +619,6 @@
       if (!match.gameOver) runTurnStartEffects(match, side);
     });
     order.forEach(side => {
-      if (!match.gameOver) runDepartmentSynergies(match, side);
-    });
-    order.forEach(side => {
       if (!match.gameOver) draw(match, side, Math.max(0, MAX_HAND_SIZE - match.players[side].hand.length));
     });
   }
@@ -608,10 +643,14 @@
   }
 
   function createMatch(playerFactionId, opponentFactionId, options = {}) {
+    if (options.playerDeck) {
+      const validation = validateDeck(options.playerDeck, playerFactionId);
+      if (!validation.ok) throw new Error(validation.error);
+    }
     instanceSeq = 1;
     const match = {
       players: {
-        player: makePlayer('player', playerFactionId),
+        player: makePlayer('player', playerFactionId, options.playerDeck || null),
         opponent: makePlayer('opponent', opponentFactionId)
       },
       currentPlayer: 'player',
@@ -708,7 +747,7 @@
   function triggerCombatEffect(match, side, unit, trigger) {
     const card = cardOf(unit);
     const effect = combatEffectOf(card, trigger);
-    if (!effect) return;
+    if (!effect || !effectIsActive(match, side, effect, unit)) return;
     const targets = effectTargets(match, side, effect, unit);
     const capturedTargets = captureEffectTargets(match, targets);
     const beforeStates = snapshotEffectTargets(capturedTargets);
@@ -882,8 +921,10 @@
 
   const api = {
     cardById,
-    limits: { hand: MAX_HAND_SIZE, field: MAX_FIELD_SIZE, playsPerTurn: MAX_ROUND_PLAYS, size: BASE_SIZE_LIMIT, handResetsPerMatch: HAND_RESETS_PER_MATCH },
+    limits: { hand: MAX_HAND_SIZE, field: MAX_FIELD_SIZE, playsPerTurn: MAX_ROUND_PLAYS, size: BASE_SIZE_LIMIT, handResetsPerMatch: HAND_RESETS_PER_MATCH, deck: DECK_SIZE, deckUnits: UNIT_DECK_SIZE, deckSpells: DECK_SIZE - UNIT_DECK_SIZE, copies: MAX_CARD_COPIES },
     makeDeck,
+    makeCollection,
+    validateDeck,
     createMatch,
     startFirstRound,
     playCard,

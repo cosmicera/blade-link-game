@@ -17,34 +17,26 @@ FACTION_NAMES = {
     'unbek': '언벡',
 }
 
-DEPARTMENT_EFFECTS = {
-    '비서실': '비서실 추종자가 2명 이상이면 비서실 추종자의 이번 전투 공격력과 방어력이 1 높아집니다.',
-    '연구개발팀': '연구개발팀 추종자가 2명 이상이면 해당 부서 추종자의 이번 전투 공격력이 1 높아집니다.',
-    '도시운영팀': '도시운영팀 추종자가 2명 이상이면 이번 라운드 사이즈 한도가 1 높아집니다.',
-    '대외협력팀': '대외협력팀 추종자가 2명 이상이면 모든 아군 추종자의 이번 전투 공격력이 1 높아집니다.',
-    '안전관리팀': '안전관리팀 추종자가 2명 이상이면 모든 아군의 이번 전투 방어력이 1 높아집니다.',
-}
-
 # The values below use a compact stat budget: 1-cost cards are narrow specialists,
 # 2-3-cost cards combine a role with a useful body, and 4-cost cards change the board.
 TUNING = {
     'yeoul':    {'cost': 2, 'attack': 2, 'defense': 1, 'health': 4, 'effect': {'type': 'heal_self', 'amount': 1}, 'defenseEffect': {'type': 'heal_self', 'amount': 1}, 'text': '라운드 시작: 자신의 체력 1 회복. 방어전: 자신의 체력 1 회복.'},
-    'lagyeong': {'cost': 3, 'attack': 2, 'defense': 2, 'health': 5, 'effect': {'type': 'heal_leader', 'amount': 1}, 'text': '라운드 시작: 내 대표 캐릭터의 라이프를 1 회복합니다.'},
-    'haeon':    {'cost': 3, 'attack': 3, 'defense': 1, 'health': 4, 'attackEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '공격전: 이번 전투 동안 자신의 공격력 +1.'},
+    'lagyeong': {'cost': 3, 'attack': 2, 'defense': 2, 'health': 5, 'effect': {'type': 'support_chairperson', 'attack': 1, 'defense': 1}, 'text': '라운드 시작: 아군 전장에 기업 총수·협동조합 대표 추종자가 있으면 이번 전투 동안 공격력과 방어력 +1.', 'flavorText': '동의 기록의 마지막 항목까지 확인한 뒤, 비비안은 총수의 판단을 뒷받침할 자료를 조용히 건넨다.'},
+    'haeon':    {'cost': 3, 'attack': 3, 'defense': 1, 'health': 4, 'attackEffect': {'type': 'department_synergy', 'requiredAllies': 1, 'effect': {'type': 'temp_buff_self', 'amount': 2}}, 'text': '연계 능력 · 공격전: 다른 연구개발팀 추종자가 있으면 이번 전투 동안 자신의 공격력 +2.'},
     'chaeyun':  {'cost': 4, 'attack': 2, 'defense': 3, 'health': 7, 'effect': {'type': 'heal_all', 'amount': 1}, 'text': '라운드 시작: 내 대표 캐릭터와 모든 아군 추종자의 체력을 1 회복합니다.'},
     'surim':    {'cost': 2, 'attack': 2, 'defense': 0, 'health': 3, 'attackEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '공격전: 이번 전투 동안 자신의 공격력 +1.'},
     'minju':    {'cost': 3, 'attack': 2, 'defense': 3, 'health': 5, 'effect': {'type': 'defense_self', 'amount': 1}, 'defenseEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '라운드 시작: 이번 전투 동안 방어력 +1. 방어전: 이번 전투 동안 공격력 +1.'},
     'chaerin':  {'cost': 3, 'attack': 3, 'defense': 1, 'health': 4, 'attackEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '공격전: 이번 전투 동안 자신의 공격력 +1.'},
-    'ara':      {'cost': 4, 'attack': 2, 'defense': 3, 'health': 7, 'effect': {'type': 'defense_all', 'amount': 1}, 'text': '라운드 시작: 모든 아군 추종자의 이번 전투 방어력 +1.'},
+    'ara':      {'cost': 4, 'attack': 2, 'defense': 3, 'health': 7, 'effect': {'type': 'department_synergy', 'department': '안전관리팀', 'requiredAllies': 1, 'effect': {'type': 'defense_all', 'amount': 1}}, 'text': '연계 능력 · 라운드 시작: 다른 안전관리팀 추종자가 있으면 모든 아군 추종자의 이번 전투 방어력 +1.'},
     'rion':     {'cost': 2, 'attack': 1, 'defense': 2, 'health': 4, 'defenseEffect': {'type': 'defense_all', 'amount': 1}, 'text': '방어전: 모든 아군 추종자의 이번 전투 방어력 +1.'},
     'somin':    {'cost': 2, 'attack': 2, 'defense': 1, 'health': 4, 'effect': {'type': 'ping_enemy', 'amount': 1}, 'text': '라운드 시작: 가장 약한 상대 추종자에게 1 피해. 상대 추종자가 없으면 대표 캐릭터에게 1 피해.'},
     'eunju':    {'cost': 3, 'attack': 1, 'defense': 4, 'health': 6, 'effect': {'type': 'defense_all', 'amount': 1}, 'text': '라운드 시작: 모든 아군 추종자의 이번 전투 방어력 +1.'},
     'nagyeong': {'cost': 2, 'attack': 2, 'defense': 1, 'health': 4, 'effect': {'type': 'defense_self', 'amount': 1}, 'defenseEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '라운드 시작: 이번 전투 동안 방어력 +1. 방어전: 이번 전투 동안 공격력 +1.'},
-    'boram':    {'cost': 3, 'attack': 2, 'defense': 3, 'health': 5, 'effect': {'type': 'heal_wounded', 'amount': 2}, 'text': '라운드 시작: 가장 약한 아군 추종자의 체력을 2 회복합니다.'},
+    'boram':    {'cost': 3, 'attack': 2, 'defense': 3, 'health': 5, 'effect': {'type': 'department_synergy', 'requiredAllies': 1, 'effect': {'type': 'heal_wounded', 'amount': 3}}, 'text': '연계 능력 · 라운드 시작: 다른 연구개발팀 추종자가 있으면 가장 약한 아군 추종자의 체력을 3 회복합니다.'},
     'haeryeong':{'cost': 3, 'attack': 3, 'defense': 1, 'health': 4, 'effect': {'type': 'ping_enemy', 'amount': 1}, 'text': '라운드 시작: 가장 약한 상대 추종자에게 1 피해. 상대 추종자가 없으면 대표 캐릭터에게 1 피해.'},
     'seohwi':   {'cost': 4, 'attack': 2, 'defense': 4, 'health': 7, 'effect': {'type': 'defense_self', 'amount': 2}, 'defenseEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '라운드 시작: 이번 전투 동안 방어력 +2. 방어전: 이번 전투 동안 공격력 +1.'},
-    'jeongran': {'cost': 3, 'attack': 1, 'defense': 3, 'health': 7, 'effect': {'type': 'heal_leader', 'amount': 2}, 'text': '라운드 시작: 내 대표 캐릭터의 라이프를 2 회복합니다.'},
-    'sojeong':  {'cost': 2, 'attack': 2, 'defense': 0, 'health': 3, 'attackEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '공격전: 이번 전투 동안 자신의 공격력 +1.'},
+    'jeongran': {'cost': 3, 'attack': 1, 'defense': 3, 'health': 7, 'effect': {'type': 'support_chairperson', 'defense': 1, 'heal': 1}, 'text': '라운드 시작: 아군 전장에 기업 총수·협동조합 대표 추종자가 있으면 이번 전투 방어력 +1, 체력 1 회복.', 'flavorText': '장터의 물자와 사람을 살핀 조라가 레아에게 필요한 보급을 올려보낸다. 대표의 판단은 묵로 사람들의 오늘과 맞닿아 있다.'},
+    'sojeong':  {'cost': 2, 'attack': 2, 'defense': 0, 'health': 3, 'attackEffect': {'type': 'department_synergy', 'requiredAllies': 1, 'effect': {'type': 'temp_buff_self', 'amount': 2}}, 'text': '연계 능력 · 공격전: 다른 도시운영팀 추종자가 있으면 이번 전투 동안 자신의 공격력 +2.'},
     'girim':    {'cost': 3, 'attack': 2, 'defense': 3, 'health': 6, 'effect': {'type': 'defense_self', 'amount': 1}, 'defenseEffect': {'type': 'temp_buff_self', 'amount': 1}, 'text': '라운드 시작: 이번 전투 동안 방어력 +1. 방어전: 이번 전투 동안 공격력 +1.'},
     'onjae':    {'cost': 2, 'attack': 1, 'defense': 2, 'health': 5, 'effect': {'type': 'heal_wounded', 'amount': 2}, 'text': '라운드 시작: 가장 약한 아군 추종자의 체력을 2 회복합니다.'},
     'mijeong':  {'cost': 3, 'attack': 2, 'defense': 2, 'health': 5, 'effect': {'type': 'recover', 'amount': 1}, 'text': '라운드 시작: 버림 더미에서 추종자 1장을 손으로 가져옵니다. 가져올 수 없으면 이번 라운드 사이즈 한도 +1.'},
@@ -113,7 +105,6 @@ def main():
             'factionName': FACTION_NAMES[character['faction']],
             'role': character['role'],
             'department': character['department'],
-            'departmentEffect': DEPARTMENT_EFFECTS[character['department']],
             'age': character.get('age', art_character.get('age', 0)),
             'height': character.get('height_cm', art_character.get('height', 0)),
             'measurements': character.get('measurements_cm', art_character.get('measurements', {'bust': 0, 'waist': 0, 'hip': 0})),
@@ -123,11 +114,16 @@ def main():
             'exposureTargetPercent': character.get('exposure_target_percent', character.get('exposureTargetPercent', 0)),
             'stats': {**stats, 'text': tuning['text']},
             'defaultVariant': selected_number,
+            'gameImage': {
+                'image': f"assets/cards/expansion/{character['id']}.png",
+                'seed': selected['seed'],
+                'number': selected_number,
+            },
             'variants': variants,
         }
         profiles.append(profile)
 
-    # Verify the five department effects are accessible to at least one season-one faction.
+    # Department names are tags only; card effects carry any explicit synergy conditions.
     department_counts = {}
     for character in source['characters']:
         key = (character['faction'], character['department'])
@@ -147,29 +143,27 @@ def main():
   try {{ localStorage.setItem(storageKey, JSON.stringify(selections)); }} catch (_) {{ /* art is still fixed by the defaults */ }}
   window.FOLLOWER_ART_STORAGE_KEY = storageKey;
   window.FOLLOWER_EXPANSION = profiles;
-  window.GAME_DATA.cards.forEach(card => {{
-    if (card.type === 'unit' && card.department) card.departmentEffect = DEPARTMENT_EFFECTS[card.department] || '';
-  }});
   window.GAME_DATA.cards.push(...profiles.map(profile => {{
     const selectedNumber = Number(selections[profile.id] || profile.defaultVariant);
     const art = profile.variants.find(variant => variant.number === selectedNumber) || profile.variants.find(variant => variant.number === profile.defaultVariant);
+    const gameArt = profile.gameImage || art;
     const tuning = TUNING[profile.id];
     return {{
       id: profile.id, type: 'unit', faction: profile.faction, name: profile.name,
       person: profile.person, role: profile.role, department: profile.department,
-      departmentEffect: profile.departmentEffect, image: art.image, seed: art.seed,
+      image: gameArt.image, seed: gameArt.seed,
       cost: profile.stats.cost, attack: profile.stats.attack, defense: profile.stats.defense,
       health: profile.stats.health, effect: tuning.effect || null,
       attackEffect: tuning.attackEffect || null, defenseEffect: tuning.defenseEffect || null,
       text: profile.stats.text, symbol: ['❋', '⚙', '雪', '⌂'][['outpr','selfas','nanguk','unbek'].indexOf(profile.faction)],
       story: profile.story, personality: profile.personality, expansion: true,
-      selectedArtVariant: art.number, selectedArtSeed: art.seed
+      selectedArtVariant: gameArt.number, selectedArtSeed: gameArt.seed
     }};
   }}));
 }})();
 '''
     # Keep the data tuning object in the generated browser file so its origin is explicit.
-    injected = f"const DEPARTMENT_EFFECTS = {json.dumps(DEPARTMENT_EFFECTS, ensure_ascii=False, separators=(',', ':'))};\n  const TUNING = {json.dumps(TUNING, ensure_ascii=False, separators=(',', ':'))};\n  const storageKey ="
+    injected = f"const TUNING = {json.dumps(TUNING, ensure_ascii=False, separators=(',', ':'))};\n  const storageKey ="
     output = output.replace("const storageKey =", injected, 1)
     OUTPUT.write_text(output, encoding='utf-8')
     print(f'Wrote {OUTPUT.name}: {len(profiles)} followers; {len(fixed)} fixed illustrations.')

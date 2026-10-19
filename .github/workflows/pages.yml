@@ -28,8 +28,10 @@ jobs:
       - name: Prepare game files
         run: |
           mkdir _site
-          cp index.html styles.css main.js engine.js data.js follower-expansion.js art-selection.html _site/
-          cp -R assets _site/assets
+          cp index.html styles.css main.js engine.js data.js follower-expansion.js _site/
+          mkdir -p _site/assets/cards/expansion
+          cp assets/cards/*.png _site/assets/cards/
+          cp assets/cards/expansion/*.png _site/assets/cards/expansion/
       - name: Upload game files
         uses: actions/upload-pages-artifact@v4
         with:

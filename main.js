@@ -20,16 +20,92 @@
   let deploymentDeadline = null;
   let lastHandCardClick = { id: null, at: 0 };
   let lastBoardCardClick = { key: null, at: 0 };
+  const deckCache = Object.create(null);
+  let deckDraft = null;
+  let deckDraftFaction = null;
+  let deckBuilderFilter = 'all';
   const DEPLOYMENT_LIMIT_MS = 30_000;
 
   const factionKeys = Object.keys(DATA.factions);
   const leaderOf = factionId => DATA.leaders[DATA.factions[factionId].leader];
   const isHumanTurn = () => match && match.phase === 'deploy' && !match.gameOver && !aiThinking;
   const factionColor = factionId => DATA.factions[factionId]?.color || '#b8b2c0';
+  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
   const collectionCards = () => [
     ...Object.values(DATA.leaders).map(leader => ({ ...leader, type: 'leader', role: '대표 캐릭터', cost: 0, text: leader.abilityText, symbol: '✦' })),
     ...DATA.cards
   ];
+
+  function codexBackCopy(card) {
+    if (card.quote) return { label: card.type === 'leader' ? '대표의 대화' : '추종자의 대화', text: `“${card.quote}”` };
+    if (card.flavorText) return { label: '장면 기록', text: card.flavorText };
+    if (card.story) {
+      const firstSentence = card.story.trim().split(/(?<=[.!?。])\s+/u)[0];
+      return { label: '장면 기록', text: firstSentence || card.story };
+    }
+
+    const rawEffect = card.effect?.type || card.effect || card.attackEffect?.type || card.defenseEffect?.type || '';
+    const effect = rawEffect === 'department_synergy' ? card.effect?.effect?.type : rawEffect;
+    const scenes = {
+      heal_leader: '그녀는 전열보다 먼저 시민들의 안부를 확인하고, 도시의 회복망을 다시 잇는다.',
+      heal_all: '회복 신호가 아군 전열을 타고 번지며, 모두가 다시 숨을 고른다.',
+      heal_wounded: '흔들린 동료를 발견한 그녀가 치료 물자를 들고 전선 안쪽으로 달려간다.',
+      heal_self: '잠깐의 틈을 찾아 상처를 정리한 뒤, 다시 동료들 곁으로 돌아선다.',
+      defense_self: '상대의 움직임을 읽고 자세를 낮춘다. 다음 충격을 흘려낼 준비가 끝났다.',
+      defense_all: '짧은 손짓에 맞춰 동료들이 간격을 좁힌다. 하나의 방어선이 만들어진다.',
+      size_limit: '도시의 장비망과 이동 경로를 재배치해 동료들이 움직일 여유를 만든다.',
+      recover: '끊겼던 신호가 다시 이어진다. 전장을 떠났던 동료에게 돌아올 길이 열린다.',
+      temp_buff_self: '상대의 빈틈을 읽은 순간, 한 박자 빠른 움직임으로 검을 올린다.',
+      ping_enemy: '전열에서 가장 흔들리는 지점을 포착해 짧고 정확한 신호를 보낸다.',
+      support_chairperson: '정돈된 보고가 대표의 결단을 뒷받침한다. 이번 전투의 호흡이 한층 단단해진다.',
+      damage_weakest: '검식의 신호가 상대 전열의 빈틈을 찾아들어간다.',
+      damage_all: '길게 이어진 검의 잔향이 상대 전열을 훑고 지나간다.',
+      buff_all: '공명 신호가 아군의 장비와 호흡을 한 박자로 묶는다.',
+      repair: '긴급 정비가 끝나자 망설이던 장비가 다시 움직이기 시작한다.',
+      defense_draw: '고른 호흡으로 전열을 다지고, 다음 대응을 위한 신호를 받아든다.',
+      return_weakest: '우회 검식이 상대의 발을 묶고, 전열의 빈자리를 드러낸다.',
+      stun_weakest: '짧은 봉인 신호가 상대의 움직임을 끊는다.',
+      draw_two: '저장된 기록을 펼쳐 다음 수를 준비한다. 아직 쓸 수 있는 선택지가 남아 있다.',
+      overclock: '기계친화 도시의 동력망이 맞물리며 아군의 움직임이 빨라진다.',
+      size_burst: '예비 공명 에너지가 축적된다. 다음 전개를 위한 여유가 생겼다.',
+      buff_weakest: '가장 지친 동료에게 힘을 모아 주고, 다시 설 수 있도록 손을 내민다.',
+      buff_defense_weakest: '흔들린 동료를 엄폐물 가까이 이끌어 안전하게 다음 수를 준비한다.'
+    };
+    if (scenes[effect]) return { label: card.type === 'spell' ? '검식 장면' : '장면 기록', text: scenes[effect] };
+    const faction = DATA.factions[card.faction];
+    return { label: '장면 기록', text: `${faction.district}의 전장에서 ${card.role || '동료'}로서 맡은 자리를 지키며, 다음 움직임을 살핀다.` };
+  }
+
+  function codexDetailMarkup(card) {
+    const faction = DATA.factions[card.faction];
+    const back = codexBackCopy(card);
+    const cardTitle = escapeHTML(card.name);
+    const image = card.image
+      ? `<img src="${escapeHTML(card.image)}" alt="${cardTitle}" />`
+      : `<div class="codex-detail-symbol" style="--faction-color:${factionColor(card.faction)}"><span>${escapeHTML(card.symbol || '✦')}</span><small>검식</small></div>`;
+    const category = card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : card.position ? ` · ${card.position}` : ''}` : '검식';
+    const stats = card.type === 'unit'
+      ? `<span>사이즈 ${card.cost}</span><span>공격 ${card.attack}</span><span>방어 ${card.defense || 0}</span><span>체력 ${card.health}</span>${card.deckLimit ? '<span>덱당 1장</span>' : ''}`
+      : card.type === 'spell' ? `<span>사이즈 ${card.cost}</span><span>검식 카드</span>` : '<span>라이프 30</span><span>대표 능력</span>';
+    return `<div class="codex-detail-overlay" data-codex-detail-overlay>
+      <button class="codex-detail-dismiss" data-codex-detail-dismiss aria-label="카드 상세 닫기">×</button>
+      <section class="codex-detail-dialog" role="dialog" aria-modal="true" aria-label="${cardTitle} 카드 상세">
+        <div class="codex-detail-flip-wrap">
+          <div class="codex-detail-flip">
+            <article class="codex-detail-face codex-detail-front" style="--faction-color:${factionColor(card.faction)}">
+              <div class="codex-detail-art">${image}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
+              <div class="codex-detail-copy"><small>${escapeHTML(faction.name)} · ${escapeHTML(category)}</small><h3>${cardTitle}</h3><div class="codex-detail-stats">${stats}</div><p>${escapeHTML(card.text || card.abilityText || '')}</p></div>
+            </article>
+            <article class="codex-detail-face codex-detail-back" style="--faction-color:${factionColor(card.faction)}">
+              <div class="codex-back-ornament">${escapeHTML(card.symbol || '✦')}</div><small>${escapeHTML(faction.name)} · ${escapeHTML(back.label)}</small><h3>${cardTitle}</h3>
+              <blockquote>${escapeHTML(back.text)}</blockquote><div class="codex-back-rule"></div><p>${escapeHTML(card.text || card.abilityText || '')}</p><div class="codex-detail-stats">${stats}</div>
+            </article>
+          </div>
+        </div>
+        <button class="codex-flip-button" data-codex-flip aria-pressed="false">뒷면 보기 <b>↻</b></button>
+      </section>
+    </div>`;
+  }
 
   function factionMarkup(id) {
     const faction = DATA.factions[id];
@@ -52,6 +128,9 @@
     $('#home-leader-epithet').textContent = leader.epithet;
     $('#home-quote').textContent = `“${leader.quote}”`;
     $('#faction-picker').innerHTML = factionKeys.map(factionMarkup).join('');
+    const deck = loadConfiguredDeck(selectedFaction);
+    const deckValidation = RULES.validateDeck(deck, selectedFaction);
+    $('#deck-summary').textContent = `${faction.name} 덱 · ${deckValidation.total}/30장 · 추종자 ${deckValidation.units} · 검식 ${deckValidation.spells}`;
     $('.nav-count').textContent = collectionCards().length;
     document.body.dataset.faction = selectedFaction;
   }
@@ -61,6 +140,85 @@
     selectedFaction = id;
     try { localStorage.setItem('blade-link-faction', id); } catch (_) { /* selection still works for this session */ }
     updateHome();
+  }
+
+  function deckStorageKey(factionId) {
+    return `blade-link-deck-v1-${factionId}`;
+  }
+
+  function saveConfiguredDeck(factionId, deck) {
+    deckCache[factionId] = [...deck];
+    try { localStorage.setItem(deckStorageKey(factionId), JSON.stringify(deck)); } catch (_) { /* keep this session's deck in memory */ }
+  }
+
+  function loadConfiguredDeck(factionId) {
+    if (deckCache[factionId]) return [...deckCache[factionId]];
+    try {
+      const saved = JSON.parse(localStorage.getItem(deckStorageKey(factionId)) || 'null');
+      if (RULES.validateDeck(saved, factionId).ok) {
+        deckCache[factionId] = [...saved];
+        return [...saved];
+      }
+    } catch (_) { /* initialize a valid deck if storage is unavailable or malformed */ }
+    const starterDeck = RULES.makeDeck(factionId);
+    saveConfiguredDeck(factionId, starterDeck);
+    return [...starterDeck];
+  }
+
+  function openDeckBuilder() {
+    if (match && !match.gameOver) {
+      notify('대전이 끝난 뒤 로비에서 덱을 편성할 수 있습니다.');
+      return;
+    }
+    deckDraftFaction = selectedFaction;
+    deckDraft = loadConfiguredDeck(deckDraftFaction);
+    deckBuilderFilter = 'all';
+    openModal('deck');
+  }
+
+  function deckBuilderMarkup() {
+    const faction = DATA.factions[deckDraftFaction];
+    const pool = RULES.makeCollection(deckDraftFaction);
+    const copyCounts = new Map();
+    deckDraft.forEach(id => copyCounts.set(id, (copyCounts.get(id) || 0) + 1));
+    const unitCount = deckDraft.reduce((n, id) => n + (RULES.cardById[id]?.type === 'unit' ? 1 : 0), 0);
+    const spellCount = deckDraft.reduce((n, id) => n + (RULES.cardById[id]?.type === 'spell' ? 1 : 0), 0);
+    const validation = RULES.validateDeck(deckDraft, deckDraftFaction);
+    const filteredPool = pool.filter(({ card }) => deckBuilderFilter === 'all' || card.type === deckBuilderFilter);
+    const cardRows = filteredPool.map(({ card, copies }) => {
+      const count = copyCounts.get(card.id) || 0;
+      const typeCount = card.type === 'unit' ? unitCount : spellCount;
+      const typeLimit = card.type === 'unit' ? RULES.limits.deckUnits : RULES.limits.deckSpells;
+      const addDisabled = deckDraft.length >= RULES.limits.deck || count >= copies || typeCount >= typeLimit;
+      const image = card.type === 'unit'
+        ? `<img src="${escapeHTML(card.image)}" alt="" loading="lazy">`
+        : `<span class="deck-card-symbol">${escapeHTML(card.symbol || '◇')}</span>`;
+      const category = card.type === 'unit' ? '추종자' : '검식';
+      const stats = card.type === 'unit'
+        ? `공 ${card.attack} · 방 ${card.defense || 0} · 체 ${card.health}`
+        : `사이즈 ${card.cost}`;
+      return `<article class="deck-pool-card" style="--faction-color:${faction.color}">
+        <button class="deck-pool-art" type="button" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 상세 보기">${image}<b>${String(card.cost).padStart(2, '0')}</b></button>
+        <div class="deck-pool-copy"><small>${category}${card.department ? ` · ${escapeHTML(card.department)}` : card.position ? ` · ${escapeHTML(card.position)}` : ''}</small><button type="button" class="deck-card-name" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}">${escapeHTML(card.name)}</button><p>${escapeHTML(card.text || '')}</p><em>${stats}</em><small class="deck-owned-count">보유 ${copies}장 · 덱 ${count}장${card.deckLimit ? ' · 덱당 1장' : ''}</small></div>
+        <button class="deck-add-button" type="button" data-deck-action="add" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 추가" ${addDisabled ? 'disabled' : ''}>＋</button>
+      </article>`;
+    }).join('');
+    const selectedRows = pool.flatMap(({ card }) => {
+      const count = copyCounts.get(card.id) || 0;
+      if (!count) return [];
+      return [`<div class="deck-selected-card"><span class="deck-selected-count">${count}</span><div><strong>${escapeHTML(card.name)}</strong><small>${card.type === 'unit' ? '추종자' : '검식'} · 사이즈 ${card.cost}</small></div><button type="button" data-deck-action="remove" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 한 장 빼기">−</button></div>`];
+    }).join('');
+    return `<div class="deck-builder" style="--faction-color:${faction.color};--faction-accent:${faction.accent}">
+      <div class="deck-builder-intro"><div><small>${faction.short} · ${faction.district}</small><h3>${faction.name} 보유 카드풀</h3><p>이 진영 카드 중 추종자 20장과 검식 10장, 총 30장을 골라 덱을 만듭니다. 일반 카드는 최대 3장, 대표 추종자는 1장까지 넣을 수 있습니다.</p></div><button type="button" class="deck-reset-button" data-deck-action="reset">기본 덱 불러오기</button></div>
+      <div class="deck-builder-columns">
+        <section class="deck-pool-panel"><div class="deck-section-heading"><div><small>OWNED CARDS</small><strong>카드 목록 <i>${pool.length}종</i></strong></div><div class="deck-type-tabs"><button type="button" data-deck-filter="all" class="${deckBuilderFilter === 'all' ? 'active' : ''}">전체</button><button type="button" data-deck-filter="unit" class="${deckBuilderFilter === 'unit' ? 'active' : ''}">추종자</button><button type="button" data-deck-filter="spell" class="${deckBuilderFilter === 'spell' ? 'active' : ''}">검식</button></div></div><div class="deck-pool-list">${cardRows}</div></section>
+        <aside class="deck-current-panel"><div class="deck-current-heading"><div><small>MY DECK</small><strong>현재 덱</strong></div><b class="deck-total-count ${deckDraft.length === RULES.limits.deck ? 'complete' : ''}">${deckDraft.length}<i>/30</i></b></div>
+          <div class="deck-progress-pair"><div><span>추종자 <b>${unitCount}/20</b></span><i><b style="width:${Math.min(100, unitCount / RULES.limits.deckUnits * 100)}%"></b></i></div><div><span>검식 <b>${spellCount}/10</b></span><i><b style="width:${Math.min(100, spellCount / RULES.limits.deckSpells * 100)}%"></b></i></div></div>
+          <div class="deck-selected-list">${selectedRows || '<p class="deck-empty">왼쪽 카드 목록에서 카드를 추가하세요.</p>'}</div>
+          <div class="deck-save-area"><p class="${validation.ok ? 'deck-valid' : ''}">${validation.ok ? '덱 구성이 완료되었습니다.' : escapeHTML(validation.error)}</p><button type="button" class="button button-primary deck-save-button" data-deck-action="save" ${validation.ok ? '' : 'disabled'}>덱 저장 <b>✓</b></button></div>
+        </aside>
+      </div>
+    </div>`;
   }
 
   function hideResult() {
@@ -244,7 +402,14 @@
     hideResult();
     const opponents = factionKeys.filter(id => id !== selectedFaction);
     const opponentFaction = opponents[Math.floor(Math.random() * opponents.length)];
-    match = RULES.createMatch(selectedFaction, opponentFaction, { deferStart: true });
+    const playerDeck = loadConfiguredDeck(selectedFaction);
+    const validation = RULES.validateDeck(playerDeck, selectedFaction);
+    if (!validation.ok) {
+      notify('저장된 덱이 규칙과 맞지 않습니다. 덱을 다시 편성해 주세요.');
+      openDeckBuilder();
+      return;
+    }
+    match = RULES.createMatch(selectedFaction, opponentFaction, { deferStart: true, playerDeck });
     selectedHandId = null;
     inspectedBoardCard = null;
     inspectedLeaderSide = null;
@@ -278,7 +443,7 @@
     const { handId = '', selected = false, disabled = false, unit = null, compact = false } = options;
     const spell = card.type === 'spell';
     const typeName = spell ? '검식' : '추종자';
-    const departmentLabel = card.department?.replace(/팀$/, '') || '';
+    const departmentLabel = card.department?.replace(/팀$/, '') || card.position || '';
     const faction = DATA.factions[card.faction];
     const health = unit ? card.health + unit.healthBonus - unit.damage : card.health;
     const attack = card.attack + (unit?.attackBonus || 0) + (unit?.tempAttack || 0);
@@ -314,7 +479,7 @@
     const classes = ['unit-slot', 'occupied-slot', actionState, owner === 'opponent' ? 'enemy-unit' : ''].join(' ');
     return `<div class="${classes}" data-board-card data-side="${owner}" data-kind="unit" data-card-id="${item.iid}" data-card-template="${card.id}" data-inspect-attack="${card.attack + item.attackBonus + item.tempAttack}" data-inspect-defense="${RULES.unitDefense(item)}" data-inspect-health="${health}" data-inspect-max-health="${card.health + item.healthBonus}" role="button" tabindex="0" style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 사이즈 ${card.cost}, 공격 ${card.attack + item.attackBonus + item.tempAttack}, 방어 ${RULES.unitDefense(item)}, 체력 ${health}">
       <div class="unit-portrait"><img src="${card.image}" alt="" loading="lazy"><span class="unit-portrait-shade"></span><b class="unit-cost-label">◇ ${card.cost}</b></div>
-      <div class="unit-nameplate"><strong>${card.name}</strong><small>${card.department || card.role}</small></div>
+      <div class="unit-nameplate"><strong>${card.name}</strong><small>${card.department || card.position || card.role}</small></div>
       <div class="unit-numbers"><span>⚔ ${card.attack + item.attackBonus + item.tempAttack}</span><span>⛨ ${RULES.unitDefense(item)}</span><span>♥ ${health}</span></div>
     </div>`;
   }
@@ -368,9 +533,8 @@
           maxHealth: card.health + item.healthBonus
         } : inspectedBoardCard.stats || { attack: card.attack, defense: card.defense || 0, health: card.health, maxHealth: card.health };
         return `<div class="inspect-card-image"><img src="${card.image}" alt="${card.name}"></div>
-          <div class="inspect-title"><small>${DATA.factions[card.faction].name} · ${card.department ? `${card.department} · ` : ''}${card.role}</small><strong>${card.name}</strong></div>
+          <div class="inspect-title"><small>${DATA.factions[card.faction].name} · ${card.department || card.position || card.role}${card.role && (card.department || card.position) ? ` · ${card.role}` : ''}</small><strong>${card.name}</strong></div>
           <p class="inspect-description">${card.text}</p>
-          ${card.departmentEffect ? `<p class="inspect-note"><b>${card.department}</b> · ${card.departmentEffect}</p>` : ''}
           <div class="inspect-stats"><span>공격 <b>${stats.attack}</b></span><span>방어 <b>${stats.defense}</b></span><span>체력 <b>${stats.health} / ${stats.maxHealth}</b></span></div>
           <div class="inspect-cost"><span>사이즈</span><b>${card.cost}</b></div>`;
       }
@@ -381,9 +545,8 @@
   function inspectorCardMarkup(card) {
     const faction = DATA.factions[card.faction];
     return `<div class="inspect-card-image ${card.type === 'spell' ? 'inspect-spell-image' : ''}">${card.type === 'unit' ? `<img src="${card.image}" alt="${card.name}">` : `<span>${card.symbol}</span>`}</div>
-      <div class="inspect-title"><small>${faction.name} · ${card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : ''}` : '검식'}</small><strong>${card.name}</strong></div>
+      <div class="inspect-title"><small>${faction.name} · ${card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : card.position ? ` · ${card.position}` : ''}` : '검식'}</small><strong>${card.name}</strong></div>
       <p class="inspect-description">${card.text}</p>
-      ${card.departmentEffect ? `<p class="inspect-note"><b>${card.department}</b> · ${card.departmentEffect}</p>` : ''}
       <div class="inspect-stats">${card.type === 'unit' ? `<span>공격 <b>${card.attack}</b></span><span>방어 <b>${card.defense || 0}</b></span><span>체력 <b>${card.health}</b></span>` : `<span>유형 <b>검식 배치</b></span>`}</div>
       <div class="inspect-cost"><span>사이즈</span><b>${card.cost}</b></div>`;
   }
@@ -455,24 +618,26 @@
     const allCards = collectionCards();
     const cards = allCards.filter(card => filter === 'all' || card.faction === filter);
     return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name} <b>${allCards.filter(card => card.faction === id).length}</b></button>`).join('')}</div>
-      <div class="codex-grid">${cards.map(card => `<article class="codex-entry" style="--faction-color:${factionColor(card.faction)}">
+      <div class="codex-grid">${cards.map(card => `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
         <div class="codex-art">${card.type === 'spell' ? `<span>${card.symbol}</span>` : `<img src="${card.image}" alt="${card.name}" loading="lazy">`}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
-        <div class="codex-copy"><small>${DATA.factions[card.faction].name} · ${card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : ''}` : '검식'}</small><strong>${card.name}</strong><p>${card.text}${card.departmentEffect ? `<br><b>${card.department} 시너지:</b> ${card.departmentEffect}` : ''}</p>${card.type === 'unit' ? `<em>⚔ ${card.attack}　⛨ ${card.defense || 0}　♥ ${card.health}</em>` : card.type === 'leader' ? '<em>대표 캐릭터 카드</em>' : '<em>전투 중 발동</em>'}</div>
-      </article>`).join('')}</div>`;
+        <div class="codex-copy"><small>${DATA.factions[card.faction].name} · ${card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : card.position ? ` · ${card.position}` : ''}` : '검식'}</small><strong>${card.name}</strong><p>${card.text}</p>${card.type === 'unit' ? `<em>⚔ ${card.attack}　⛨ ${card.defense || 0}　♥ ${card.health}</em>` : card.type === 'leader' ? '<em>대표 캐릭터 카드</em>' : '<em>전투 중 발동</em>'}</div>
+      </button>`).join('')}</div>`;
   }
 
   function openModal(kind, filter = 'all') {
-    if (kind === 'codex') {
+    if (kind === 'deck') {
+      modalRoot.innerHTML = `<div class="modal-backdrop deck-modal-backdrop" data-close-modal><section class="modal-panel deck-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><div><small>COLLECTION / DECK BUILDING</small><h2 id="modal-title">덱 편성 <i>30장</i></h2></div><button class="modal-close" data-close-modal aria-label="닫기">×</button></header><div id="deck-builder-body">${deckBuilderMarkup()}</div></section></div>`;
+    } else if (kind === 'codex') {
       modalRoot.innerHTML = `<div class="modal-backdrop" data-close-modal><section class="modal-panel codex-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><div><small>COLLECTION / 01</small><h2 id="modal-title">카드 도감 <i>${collectionCards().length}</i></h2></div><button class="modal-close" data-close-modal aria-label="닫기">×</button></header><div id="codex-body">${renderCardCollection(filter)}</div></section></div>`;
     } else {
       modalRoot.innerHTML = `<div class="modal-backdrop" data-close-modal><section class="modal-panel rules-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><div><small>PLAYTEST RULES / 01</small><h2 id="modal-title">시범 규칙 <i>초안</i></h2></div><button class="modal-close" data-close-modal aria-label="닫기">×</button></header><div class="rules-content">
         <p class="rules-lead">소드걸스의 캐릭터·추종자·검식 카드 흐름과 전장 중심 화면 구성을 참고한 1인 훈련전입니다. 아래 수치는 세계관의 최종 규칙이 아니라 첫 플레이 테스트용 기본값입니다.</p>
-        <div class="rules-step"><b>01</b><div><strong>대전 준비</strong><p>대표 캐릭터 1명과 같은 기업의 24장 덱으로 시작합니다. 시작 손패는 5장, 대표 캐릭터의 라이프는 30입니다.</p></div></div>
+        <div class="rules-step"><b>01</b><div><strong>대전 준비</strong><p>대표 캐릭터 1명과 같은 기업의 30장 덱으로 시작합니다. 로비의 덱 편성에서 보유 카드풀을 열어 추종자 20장과 검식 10장을 직접 선택합니다. 일반 카드는 덱당 최대 3장, 기업 총수·협동조합 대표 추종자는 1장만 넣을 수 있습니다. 시작 손패는 5장, 대표 캐릭터의 라이프는 30입니다.</p></div></div>
         <div class="rules-step"><b>02</b><div><strong>손패와 사이즈</strong><p>라운드 시작에 손패를 5장까지 채우고 코인 토스로 선공을 정합니다. 각 플레이어는 대전마다 손패 리셋권 2회를 받으며, 배치 단계에 현재 손패를 덱에 섞고 같은 장수만큼 다시 뽑을 수 있습니다. 추종자와 검식은 모두 최대 5칸의 전장에 배치하며, 전체 사이즈 한도는 기본 10입니다. 전장에 남은 추종자의 사이즈는 다음 라운드에도 계속 점유하고, 검식도 이번 라운드 배치 사이즈를 사용합니다. 배치 단계에는 내 카드를 더블클릭해 손패로 회수할 수 있습니다. 배치 시간은 30초이며 시간이 끝나면 전투가 자동으로 시작됩니다.</p></div></div>
-        <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>라운드 시작에 대표 능력, 추종자 능력이 차례로 발동하고 부서 시너지를 확인합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
-        <div class="rules-step"><b>04</b><div><strong>기업 특성과 부서 시너지</strong><p>아웃프라웨어는 회복과 생장, 셀파스는 공격 가속과 장비 연계, 남극성은 방어와 반격, 언벡은 회수와 우회에 강합니다. 같은 부서 추종자 2명 이상이 전장에 있으면 라운드 시작마다 시너지가 발동합니다. 비서실은 소속 추종자의 공격력·방어력 +1, 연구개발팀은 소속 추종자의 공격력 +1, 도시운영팀은 이번 라운드 사이즈 한도 +1, 대외협력팀은 모든 아군 추종자 공격력 +1, 안전관리팀은 아군 전체 방어력 +1입니다. 부서 시너지는 각 카드의 개별 능력과 함께 작동합니다.</p></div></div>
+        <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>라운드 시작에 대표 능력과 추종자 카드에 적힌 라운드 시작 능력이 차례로 발동합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
+        <div class="rules-step"><b>04</b><div><strong>기업 특성과 카드 연계 능력</strong><p>아웃프라웨어는 회복과 생장, 셀파스는 정비와 가속, 남극성은 방어와 반격, 언벡은 회수와 우회에 강합니다. 부서명은 인물의 소속을 나타내는 태그이며, 같은 부서 카드가 모였다고 자동 보너스가 생기지는 않습니다. 일부 카드에만 ‘연계 능력’이 적혀 있고, 해당 카드가 전장에 있을 때 같은 부서 동료가 함께 있으면 그 카드의 능력이 발동합니다. 비서실 추종자 일부는 전장에 나온 총수·협동조합 대표 추종자를 직접 지원합니다. 능력의 조건과 효과는 카드 설명을 확인하세요.</p></div></div>
         <div class="rules-step"><b>05</b><div><strong>비용과 승리</strong><p>사이즈 4 추종자는 높은 공방체와 광역·반복 능력을 갖지만, 파괴될 때 대표 라이프도 4 감소합니다. 사이즈가 낮은 추종자는 빠른 전개와 부서 조합에 유리합니다. 추종자가 파괴되면 소유자의 라이프가 그 카드의 사이즈만큼 감소하고, 상대 전장에 추종자가 없으면 공격 추종자가 사이즈만큼 상대 대표에게 직접 피해를 줍니다. 대표 라이프가 0이 되거나 덱이 비면 패배합니다. 버림 더미는 이야기 속 사망을 뜻하지 않습니다.</p></div></div>
-        <div class="rules-foot"><span>기본값</span> 24장 덱 · 손패 5장 · 리셋권 2회 · 라이프 30 · 전장 5칸 · 사이즈 한도 10 · 라운드당 최대 5장 배치</div>
+        <div class="rules-foot"><span>기본값</span> 직접 편성 30장(추종자 20 · 검식 10) · 카드당 최대 3장 · 대표 추종자 1장 · 손패 5장 · 리셋권 2회 · 라이프 30 · 전장 5칸 · 사이즈 한도 10 · 라운드당 최대 5장 배치</div>
       </div></section></div>`;
     }
   }
@@ -1219,13 +1384,17 @@
 
   function aiCardScore(card, ai, human) {
     if (card.type === 'unit') {
-      const matchingDepartment = card.department
+      const hasDepartmentSynergy = [card.effect, card.attackEffect, card.defenseEffect]
+        .some(effect => effect?.type === 'department_synergy');
+      const matchingDepartment = hasDepartmentSynergy && card.department
         ? ai.field.filter(unit => RULES.cardById[unit.cardId]?.department === card.department).length
         : 0;
+      const hasChairperson = ai.field.some(unit => ['기업 총수', '협동조합 대표'].includes(RULES.cardById[unit.cardId]?.position));
+      const chairpersonSupport = card.effect?.type === 'support_chairperson' ? (hasChairperson ? 4 : -4) : 0;
       const abilityValue = card.attackEffect || card.defenseEffect ? 1.5 : card.effect ? 1 : 0;
       return (RULES.canPlayCard(ai, card) ? 10 : -10)
         + card.attack * 0.7 + card.defense * 0.2 + card.health * 0.25 - card.cost * 0.2
-        + abilityValue + (matchingDepartment ? 2.5 : 0);
+        + abilityValue + (matchingDepartment ? 2.5 : 0) + chairpersonSupport;
     }
     const effect = card.effect;
     if (effect === 'heal_all') return ai.hp < 19 || ai.field.some(unit => unit.damage > 0) ? 7 : -2;
@@ -1320,7 +1489,8 @@
     if (button) chooseFaction(button.dataset.faction);
   });
   $('#start-match').addEventListener('click', startMatch);
-  $('#open-deck').addEventListener('click', () => openModal('codex', selectedFaction));
+  $('#open-deck').addEventListener('click', openDeckBuilder);
+  $('#nav-deckbuilder').addEventListener('click', openDeckBuilder);
   $('#nav-codex').addEventListener('click', () => openModal('codex'));
   $('#nav-rules').addEventListener('click', () => openModal('rules'));
   $('#nav-home').addEventListener('click', showHome);
@@ -1414,12 +1584,75 @@
 
   modalRoot.addEventListener('click', event => {
     if (event.target.matches('[data-close-modal]')) { modalRoot.innerHTML = ''; return; }
+    const deckAction = event.target.closest('[data-deck-action]');
+    if (deckAction) {
+      const action = deckAction.dataset.deckAction;
+      const cardId = deckAction.dataset.cardId;
+      if (action === 'inspect') {
+        const card = DATA.cards.find(item => item.id === cardId);
+        if (card) modalRoot.insertAdjacentHTML('beforeend', codexDetailMarkup(card));
+        return;
+      }
+      if (action === 'add') {
+        const card = RULES.cardById[cardId];
+        const current = deckDraft.filter(id => id === cardId).length;
+        const cap = RULES.makeCollection(deckDraftFaction).find(item => item.card.id === cardId)?.copies || 0;
+        const typeCount = deckDraft.reduce((count, id) => count + (RULES.cardById[id]?.type === card?.type ? 1 : 0), 0);
+        const typeLimit = card?.type === 'unit' ? RULES.limits.deckUnits : RULES.limits.deckSpells;
+        if (card && deckDraft.length < RULES.limits.deck && current < cap && typeCount < typeLimit) deckDraft.push(cardId);
+      } else if (action === 'remove') {
+        const index = deckDraft.lastIndexOf(cardId);
+        if (index >= 0) deckDraft.splice(index, 1);
+      } else if (action === 'reset') {
+        deckDraft = RULES.makeDeck(deckDraftFaction);
+      } else if (action === 'save') {
+        const validation = RULES.validateDeck(deckDraft, deckDraftFaction);
+        if (!validation.ok) { notify(validation.error); return; }
+        saveConfiguredDeck(deckDraftFaction, deckDraft);
+        modalRoot.innerHTML = '';
+        updateHome();
+        notify('덱을 저장했습니다. 다음 대전부터 적용됩니다.');
+        return;
+      }
+      $('#deck-builder-body').innerHTML = deckBuilderMarkup();
+      return;
+    }
+    const detailDismiss = event.target.closest('[data-codex-detail-dismiss]');
+    if (detailDismiss || event.target.matches('[data-codex-detail-overlay]')) {
+      modalRoot.querySelector('[data-codex-detail-overlay]')?.remove();
+      return;
+    }
+    const flipButton = event.target.closest('[data-codex-flip]');
+    if (flipButton) {
+      const flip = modalRoot.querySelector('.codex-detail-flip');
+      const isBack = flip.classList.toggle('is-back');
+      flipButton.setAttribute('aria-pressed', String(isBack));
+      flipButton.innerHTML = isBack ? '앞면 보기 <b>↻</b>' : '뒷면 보기 <b>↻</b>';
+      return;
+    }
+    const selectedCard = event.target.closest('[data-codex-card]');
+    if (selectedCard) {
+      const card = collectionCards().find(item => item.id === selectedCard.dataset.codexCard);
+      if (card) {
+        modalRoot.querySelector('[data-codex-detail-overlay]')?.remove();
+        modalRoot.insertAdjacentHTML('beforeend', codexDetailMarkup(card));
+      }
+      return;
+    }
     const filter = event.target.closest('[data-codex-filter]');
     if (filter) $('#codex-body').innerHTML = renderCardCollection(filter.dataset.codexFilter);
+    const deckFilter = event.target.closest('[data-deck-filter]');
+    if (deckFilter) {
+      deckBuilderFilter = deckFilter.dataset.deckFilter;
+      $('#deck-builder-body').innerHTML = deckBuilderMarkup();
+    }
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') modalRoot.innerHTML = '';
+    if (event.key === 'Escape') {
+      if (modalRoot.querySelector('[data-codex-detail-overlay]')) modalRoot.querySelector('[data-codex-detail-overlay]').remove();
+      else modalRoot.innerHTML = '';
+    }
     if (event.key === ' ' && isHumanTurn() && !handResetAnimating && !['BUTTON', 'INPUT'].includes(document.activeElement.tagName) && !document.activeElement.matches('[data-board-card], [data-leader-side]')) {
       event.preventDefault();
       beginClassicBattle();

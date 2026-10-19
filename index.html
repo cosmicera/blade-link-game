@@ -19,7 +19,7 @@
       <button class="nav-link active" id="nav-lobby">리그 로비</button>
       <button class="nav-link" id="nav-codex">카드 도감 <span class="nav-count">56</span></button>
       <button class="nav-link" id="nav-rules">시범 규칙</button>
-      <a class="nav-link nav-art-link" href="art-selection.html" target="_blank" rel="noreferrer">추종자 일러스트 선택</a>
+      <button class="nav-link" id="nav-deckbuilder">덱 편성</button>
     </nav>
     <div class="profile-chip"><span class="online-dot"></span><span>연습 계정</span><b>Lv. 01</b></div>
   </header>
@@ -34,7 +34,7 @@
         <div class="hero-quote"><span class="quote-rule"></span><span id="home-quote">“같이 가자. 네가 쉴 자리도 만들어 둘게.”</span></div>
         <div class="home-actions">
           <button class="button button-primary" id="start-match"><span>훈련 대전 시작</span><b>↗</b></button>
-          <button class="button button-quiet" id="open-deck">덱 구성 보기 <span>→</span></button>
+          <button class="button button-quiet" id="open-deck">덱 편성 <span>→</span></button>
         </div>
         <div class="prototype-note"><span>i</span> 현재 규칙과 카드 수치는 플레이 테스트용 초안입니다.</div>
       </div>
@@ -48,7 +48,7 @@
     </section>
 
     <section class="faction-select-section">
-      <div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR SIDE</p><h2>어느 도시의 이야기를 이을까요?</h2></div><span class="section-aside">대표 캐릭터 1명 · 24장 덱</span></div>
+      <div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR SIDE</p><h2>어느 도시의 이야기를 이을까요?</h2></div><span class="section-aside" id="deck-summary">보유 카드풀 · 추종자 20장 + 검식 10장</span></div>
       <div id="faction-picker" class="faction-picker"></div>
     </section>
     <footer class="home-footer"><span>BLADE LINK <i>©</i> PLAYTEST BUILD</span><span>캐릭터 일러스트와 세계관 설정을 사용한 개인 프로토타입</span></footer>
@@ -85,7 +85,7 @@
           </div>
           <div id="player-hand" class="hand-cards" aria-label="내 손패"></div>
           <div class="card-pile deck-pile" aria-label="아직 꺼내지 않은 카드 덱">
-            <span class="pile-caption">DRAW DECK</span><div class="pile-art"><i></i><i></i><b>◇</b></div><strong id="player-deck-count">24</strong><small>남은 덱</small>
+            <span class="pile-caption">DRAW DECK</span><div class="pile-art"><i></i><i></i><b>◇</b></div><strong id="player-deck-count">30</strong><small>남은 덱</small>
           </div>
         </div>
         <div class="hand-action-row"><button id="reset-hand" class="button button-hand-reset" type="button" title="판당 2회, 현재 손패를 덱에 섞고 같은 장수만큼 다시 뽑습니다."><span>손패 리셋</span><small id="hand-reset-count">2회 남음</small></button><button id="play-card" class="button button-play" disabled>카드 배치 <span>↗</span></button></div>
