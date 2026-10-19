@@ -2,22 +2,22 @@
 window.GAME_DATA = {
   factions: {
     outpr: {
-      id: 'outpr', name: '아웃프라웨어', short: 'OUTPR', logo: '✿', district: '녹관 생태권',
+      id: 'outpr', name: '아웃프라웨어', short: 'OUTPR', logo: '✿', district: '온실 거점',
       color: '#9dce8a', accent: '#d8efb8', style: '회복 · 생장 · 상호 보조',
       blurb: '생체 기술로 손실을 회복하고, 서로를 돌보며 전선을 오래 유지합니다.', leader: 'ria'
     },
     selfas: {
-      id: 'selfas', name: '셀파스', short: 'SELFAS', logo: '⚙', district: '철휘 산업권',
+      id: 'selfas', name: '셀파스', short: 'SELFAS', logo: '⚙', district: '제작 기지',
       color: '#aab7c1', accent: '#e0e8ed', style: '정비 · 가속 · 연쇄 행동',
       blurb: '피지컬 AI와 개척 기반 시설을 연결해 공격과 배치의 속도를 높입니다.', leader: 'arca'
     },
     nanguk: {
-      id: 'nanguk', name: '남극성', short: 'NAMGUK', logo: '❄', district: '청람 관측권',
+      id: 'nanguk', name: '남극성', short: 'NAMGUK', logo: '❄', district: '청람시',
       color: '#87aedd', accent: '#d4e8fb', style: '수비 · 반격 · 정교한 대응',
       blurb: '공명합금 검식과 차분한 방어로 상대의 공격을 반격의 기회로 바꿉니다.', leader: 'cheongyeon'
     },
     unbek: {
-      id: 'unbek', name: '언벡', short: 'UNBEK', logo: '⌁', district: '묵로 자치권',
+      id: 'unbek', name: '언벡', short: 'UNBEK', logo: '⌁', district: '공방 마을',
       color: '#c3a477', accent: '#e8d6b5', style: '회수 · 우회 · 끈질긴 재기',
       blurb: '부족한 장비를 되살리고 낮은 비용의 움직임으로 전장의 빈틈을 파고듭니다.', leader: 'noa'
     }
@@ -43,7 +43,7 @@ window.GAME_DATA = {
     { id: 'yuran', type: 'unit', faction: 'nanguk', name: '유란', role: '객원 검술 교사', department: '대외협력팀', image: 'assets/cards/yuran.png', seed: '5497937762652395', cost: 3, attack: 3, defense: 2, health: 4, attackEffect: { type: 'temp_buff_self', amount: 1 }, defenseEffect: { type: 'defense_self', amount: 1 }, text: '공격전: 이번 전투 동안 공격력 +1. 방어전: 이번 전투 동안 방어력 +1.', symbol: '☯' },
     { id: 'soun', type: 'unit', faction: 'nanguk', name: '소운', role: '음향 관측 견습생', department: '연구개발팀', image: 'assets/cards/soun.png', seed: '7785836849691659', cost: 1, attack: 1, defense: 1, health: 2, effect: { type: 'defense_self', amount: 1 }, text: '라운드 시작: 이번 전투 동안 자신의 방어력 +1.', symbol: '♪' },
 
-    { id: 'lea', type: 'unit', faction: 'unbek', name: '레아', role: '언벡 협동조합 대표·정착민 평의회 위원', position: '협동조합 대표', department: null, deckLimit: 1, image: 'assets/cards/lea.png', seed: '6368332127497987', cost: 3, attack: 3, defense: 4, health: 7, effect: { type: 'defense_all', amount: 1 }, text: '라운드 시작: 모든 아군 추종자의 이번 전투 방어력 +1.', flavorText: '돌아온 사람부터 챙기고 길을 묻는다. 레아가 전열에 서면 묵로 자치권의 사람들은 누구도 혼자 버려지지 않는다는 걸 안다.', symbol: '⌂' },
+    { id: 'lea', type: 'unit', faction: 'unbek', name: '레아', role: '언벡 협동조합 대표·정착민 평의회 위원', position: '협동조합 대표', department: null, deckLimit: 1, image: 'assets/cards/lea.png', seed: '6368332127497987', cost: 3, attack: 3, defense: 4, health: 7, effect: { type: 'defense_all', amount: 1 }, text: '라운드 시작: 모든 아군 추종자의 이번 전투 방어력 +1.', flavorText: '돌아온 사람부터 챙기고 길을 묻는다. 레아가 전열에 서면 공방 마을 사람들은 누구도 혼자 버려지지 않는다는 걸 안다.', symbol: '⌂' },
     { id: 'ash', type: 'unit', faction: 'unbek', name: '애쉬', role: '분산 AI 통신 관리자', department: '정착지운영팀', image: 'assets/cards/ash.png', seed: '1737601682837601', cost: 2, attack: 1, defense: 2, health: 4, effect: { type: 'recover', amount: 1 }, text: '라운드 시작: 버림 더미에서 추종자 1장을 손으로 가져옵니다. 가져올 수 없으면 사이즈 한도 +1.', symbol: '⌁' },
     { id: 'rook', type: 'unit', faction: 'unbek', name: '로크', role: '공용 장비 수리공', department: '정착지운영팀', image: 'assets/cards/rook.png', seed: '36688852601639', cost: 3, attack: 3, defense: 2, health: 4, attackEffect: { type: 'temp_buff_self', amount: 1 }, text: '공격전: 이번 전투 동안 자신의 공격력 +1.', symbol: '⚒' },
     { id: 'veil', type: 'unit', faction: 'unbek', name: '베일', role: '독립 호위 AI', department: '안전관리팀', image: 'assets/cards/veil.png', seed: '6356542998253242', cost: 4, attack: 4, defense: 1, health: 5, attackEffect: { type: 'ping_enemy', amount: 2 }, text: '공격전: 가장 약한 상대 추종자에게 2 피해. 상대 추종자가 없으면 대표 캐릭터에게 2 피해.', symbol: '◇' },

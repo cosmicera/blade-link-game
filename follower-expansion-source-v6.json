@@ -327,7 +327,7 @@
       "outfit": "가슴골과 쇄골이 드러나는 낮은 오프숄더 목선의 단색 연녹색 셔츠 드레스, 허리선이 잡힌 짧은 플레어 치마형 밑단과 드러난 허벅지, 어깨 아래에 걸친 아이보리 크롭 볼레로. 무늬 없는 단색 원단, 글자·문양·자수·기호·로고 없음",
       "weapon": "가느다란 줄기 형태의 유연한 세검 한 자루",
       "environment": "a sunlit elevated canal promenade through the green city, turquoise water, hanging gardens, small footbridges, distant glass towers and open sky",
-      "story": "정착민과 방문 기술자에게 녹관 생태권의 물길과 새로 열린 식생 시험 구역을 소개한다. 그녀의 공개 지도에는 장비 없이 걸어도 되는 길과 출입이 제한된 구역이 한눈에 표시된다.",
+      "story": "정착민과 방문 기술자에게 온실 거점의 물길과 새로 열린 식생 시험 구역을 소개한다. 그녀의 공개 지도에는 장비 없이 걸어도 되는 길과 출입이 제한된 구역이 한눈에 표시된다.",
       "tie": "노아와 거점 사이 안전 경로를 나누고 이브의 생태 관측 견학을 돕는다.",
       "stats": {
         "cost": 2,
@@ -373,7 +373,7 @@
     },
     {
       "id": "minju",
-      "name": "철휘선의 정비사 에이다 라이트",
+      "name": "제작 기지선의 정비사 에이다 라이트",
       "person": "에이다 라이트",
       "english": "Ada Wright",
       "faction": "selfas",
@@ -578,7 +578,7 @@
       "person": "아이리스 모건",
       "english": "Iris Morgan",
       "faction": "selfas",
-      "role": "철휘 산업권 이동 안내 자율 AI",
+      "role": "제작 기지 이동 안내 자율 AI",
       "age": 31,
       "nature": "여성형 자율 AI",
       "appearance": "성인 여성형 자율 AI, 자연스러운 밝은 복숭아빛 피부, 턱선 길이의 딸기 금발 단발 끝이 안으로 말리고 끝부분만 옅은 라벤더색, 옅은 보라색 눈, 키가 크고 가녀리며 부드러운 인간 체형, 완전히 인간 외형",
@@ -760,7 +760,7 @@
       "scene_ko": "현대 한국 도시의 시민 기록소 옆 열린 해설 부스, 글자 없는 도식판과 낮은 테이블, 푸른 차양, 넓은 광장과 멀리 보이는 도심 지붕선, 궁궐이 아닌 생활 공간",
       "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
       "name_origin": "한국식 성명",
-      "cultural_background": "한국계 가정 출신. 청람 관측권에서 기록과 구전 이야기를 모은다.",
+      "cultural_background": "한국계 가정 출신. 청람 관측소에서 기록과 구전 이야기를 모은다.",
       "department": "대외협력팀",
       "department_unit": "대외협력팀",
       "department_detail": "공공문화처 · 검식 기록 해설과 시민 교육",
@@ -1074,7 +1074,7 @@
     },
     {
       "id": "jeongran",
-      "name": "묵로 장터의 살림꾼 조라 페트로비치",
+      "name": "공방 마을 장터의 살림꾼 조라 페트로비치",
       "person": "조라 페트로비치",
       "english": "Zora Petrović",
       "faction": "unbek",
@@ -1085,7 +1085,7 @@
       "outfit": "아이보리색 반소매 블라우스 위에 벽돌색 민소매 V넥 니트 조끼를 겹쳐 입고, 차콜색 매끈한 A라인 미디 스커트를 착용. 스커트는 골반에서 자연스럽게 이어져 종아리 중간까지 내려오며 허리선에 주름이나 고무줄이 없음. 니트 짜임과 무지 직물 질감, 장식·문자 없음",
       "weapon": "회수한 강철로 벼려낸 짧은 외날검 하나. 짙은 천 손잡이, 작은 단순 가드, 허리에 찬 낡은 칼집.",
       "environment": "a broad repurposed brick market street under an open sky, community awnings, rooftop gardens, a river bridge and distant gray neighborhood blocks",
-      "story": "묵로 자치권의 공동 창고에서 식량과 정비 부품을 나누고 거점별 보급 우선순위를 맞춘다. 언벡 통신망이 의심받을 때에도 물자의 출발·도착 기록을 공개해 누가 무엇을 받았는지 확인한다.",
+      "story": "공방 마을의 공동 창고에서 식량과 정비 부품을 나누고 거점별 보급 우선순위를 맞춘다. 언벡 통신망이 의심받을 때에도 물자의 출발·도착 기록을 공개해 누가 무엇을 받았는지 확인한다.",
       "tie": "레아와 공동 배급을 조정하고 노아에게 첫 구역 검증용 모듈 운송을 맡긴다. 세린과 순회 진료 물품도 나눈다.",
       "stats": {
         "cost": 3,
@@ -1116,7 +1116,7 @@
       "department": "정착지운영팀",
       "department_unit": "정착지운영팀",
       "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
-      "department_detail": "묵로 협동조합 · 장터 물자 운영",
+      "department_detail": "공방 마을 협동조합 · 장터 물자 운영",
       "department_tag": "정착지운영팀",
       "appearance_en": "adult Slavic woman in her late forties, light beige skin, salt-and-pepper rope braid, loose silver curls, deep brown eyes, warm smile lines, mature soft full build",
       "outfit_en": "brick-red sleeveless V-neck knit vest over ivory blouse, charcoal A-line midi skirt, smooth flat hip fit, mid-calf hem, clean narrow silhouette, no gathered waistband, visible knit texture, plain fabric",
@@ -1297,7 +1297,7 @@
       "department": "안전관리팀",
       "department_unit": "안전관리팀",
       "pose_note_en": "Five different poses and framings are drawn from this character’s personality, work, and story.",
-      "department_detail": "묵로 공동체안전망 · 강변 구조와 회수",
+      "department_detail": "공방 마을 공동체안전망 · 강변 구조와 회수",
       "department_tag": "안전관리팀",
       "appearance_en": "adult East African woman, medium warm golden-brown skin, copper microbraids in one sculptural side bun, hazel eyes, reassuring rounded build, non-muscular",
       "outfit_en": "muted olive-gray fitted shirt dress, short sleeves, open collar, one-piece silhouette, gently shaped torso without belt or gathered waist, mid-calf hem, single side slit to knee, matte cotton, plain solid fabric",
@@ -1354,7 +1354,7 @@
       "weapon": "회수 강철을 다시 벼린 짧은 직검 한 자루, 약 55cm 길이의 무광 좁은 칼날과 단순한 작은 가드, 천으로 감은 손잡이와 평범한 칼집",
       "environment": "an open-sided neighborhood repair arcade, patched awnings, sunlit brick lane, rooftop gardens, distant water towers and a broad evening sky",
       "story": "고장 난 생활 설비를 누구나 다시 쓸 수 있도록 고친다. 글을 읽지 않아도 알아볼 수 있는 색과 도형 안내를 만들어 기압문, 급수 장치, 작업용 기기의 기본 점검법을 설명한다.",
-      "tie": "아르카의 안전 분류를 묵로 작업자가 쓸 수 있는 그림 안내로 바꾸고 로크와 회수 부품을 분류한다.",
+      "tie": "아르카의 안전 분류를 공방 마을 작업자가 쓸 수 있는 그림 안내로 바꾸고 로크와 회수 부품을 분류한다.",
       "stats": {
         "cost": 2,
         "attack": 1,
@@ -1429,7 +1429,7 @@
     },
     {
       "id": "mijeong",
-      "name": "묵로 계약조정인 나디아 모로",
+      "name": "공방 마을 계약조정인 나디아 모로",
       "person": "나디아 모로",
       "english": "Nadia Moreau",
       "faction": "unbek",
@@ -1472,7 +1472,7 @@
       "name_origin": "프랑스어권 성명",
       "department": "경영관리팀",
       "department_unit": "경영관리팀",
-      "department_detail": "묵로 공동조정회 · 시민 계약과 수리권 조정",
+      "department_detail": "공방 마을 공동조정회 · 시민 계약과 수리권 조정",
       "department_tag": "경영관리팀",
       "appearance_en": "adult human woman in her late thirties, light neutral-beige skin, smoky-lilac bob below ears, chestnut eyes, one cheek dimple, softly curvy build",
       "outfit_en": "oversized lavender-blue button-up shirt worn open, rolled sleeves, hip-length untucked hem, black sleeveless straight midi dress underneath, below-knee mid-calf hem, one side slit to knee, smooth silhouette without waistband, plain unmarked fabric",
@@ -1516,7 +1516,7 @@
       "card_name": "나디아 모로"
     }
   ],
-  "naming_policy": "스타룬데르의 이음 정착지는 여러 지구 출신이 함께 사는 다언어 개척지다. 회사 소속과 이름 문화권은 일치하지 않는다. 남극성 청람 관측권에는 한국·일본·중국계 가정이 함께 살며 각 문화의 복식과 생활 방식이 교류된다. 게임과 문서의 이름은 한글 표기를 기본으로 하고 영문 표기는 검색용 별칭으로 둔다.",
+  "naming_policy": "스타룬데르의 이음 정착지는 여러 지구 출신이 함께 사는 다언어 개척지다. 회사 소속과 이름 문화권은 일치하지 않는다. 남극성 청람시에는 한국·일본·중국계 가정이 함께 살며 각 문화의 복식과 생활 방식이 교류된다. 게임과 문서의 이름은 한글 표기를 기본으로 하고 영문 표기는 검색용 별칭으로 둔다.",
   "departments": {
     "경영관리팀": {
       "name": "경영관리팀",
@@ -1592,7 +1592,7 @@
         "setting": "public lotus pond spillway beside a broad botanical terrace and bright glass towers"
       },
       {
-        "label": "잎에 비친 녹관 생태권",
+        "label": "잎에 비친 온실 거점",
         "en": "rear-view composition from behind a foreground lotus leaf; Evelyn Hart sits on the far bank, long braid over one shoulder, quietly watching the city reflected in the water; her figure is small and partly framed by leaves, reflection and skyline lead the image",
         "setting": "wide lotus pond at sunset with greenhouse arches, water reflections and distant Outpraware towers"
       }
