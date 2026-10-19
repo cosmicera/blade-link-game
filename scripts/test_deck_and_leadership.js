@@ -110,6 +110,7 @@ function matchWith(faction, units) {
   const match = rules.createMatch(faction, faction, { deferStart: true });
   match.players.player.field = units;
   rules.startFirstRound(match, 'player');
+  rules.beginCombat(match);
   return match;
 }
 
@@ -119,6 +120,7 @@ const riaOther = unit('chaeyun', 'ria-other', 1, 1);
 balanceMatch.players.player.field = [riaTarget, riaOther];
 balanceMatch.players.player.hp = 25;
 rules.startFirstRound(balanceMatch, 'player');
+rules.beginCombat(balanceMatch);
 assert.equal(balanceMatch.players.player.hp, 26, 'Ria should restore one leader life');
 assert.equal(rules.unitHealth(riaTarget), 3, 'Ria should heal one point on the weakest ally');
 assert.equal(rules.unitHealth(riaOther), 6, 'Ria should not heal every follower at once');

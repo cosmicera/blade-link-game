@@ -365,6 +365,8 @@
         player.discard.push(unit.cardId);
         log(match, card.name + ' 파괴 · 소유자의 라이프 ' + card.cost + ' 감소');
         player.hp -= card.cost;
+        emitVisual(match, { type: 'death', side, sourceId: unit.iid,
+          leaderLife: Math.max(0, player.hp), leaderMaxLife: player.maxHp });
       } else kept.push(unit);
     });
     player.field = kept;
@@ -652,14 +654,21 @@
     if (match.gameOver) return;
     log(match, '코인 토스 · ' + (match.initiativeSide === 'player' ? '내가' : '상대가') + ' 이번 라운드 선공');
     order.forEach(side => {
+      if (!match.gameOver) draw(match, side, Math.max(0, MAX_HAND_SIZE - match.players[side].hand.length));
+    });
+  }
+
+  function beginCombat(match) {
+    if (match.gameOver || match.phase !== 'deploy') return { ok: false };
+    match.phase = 'resolving';
+    const order = [match.initiativeSide, match.initiativeSide === 'player' ? 'opponent' : 'player'];
+    order.forEach(side => {
       if (!match.gameOver) runLeaderAbility(match, side);
     });
     order.forEach(side => {
       if (!match.gameOver) runTurnStartEffects(match, side);
     });
-    order.forEach(side => {
-      if (!match.gameOver) draw(match, side, Math.max(0, MAX_HAND_SIZE - match.players[side].hand.length));
-    });
+    return { ok: true };
   }
 
   function expireRoundBonuses(match) {
@@ -808,7 +817,9 @@
 
   async function resolveRound(match, onStep = () => {}) {
     if (match.gameOver || match.phase !== 'deploy') return { ok: false, error: '전투를 시작할 수 없습니다.' };
-    match.phase = 'resolving';
+    const beforeStart = captureField(match);
+    beginCombat(match);
+    await onStep({ type: 'roundStart', visuals: takeVisualEvents(match), destroyedUnits: removedFromField(beforeStart, match) });
     log(match, '라운드 ' + match.round + ' 전투 시작');
     const otherSide = side => side === 'player' ? 'opponent' : 'player';
     let actingSide = match.initiativeSide;
@@ -978,6 +989,7 @@
     boardCards,
     unitDefense,
     resolveRound,
+    beginCombat,
     startNextRound,
     takeVisualEvents,
     draw,

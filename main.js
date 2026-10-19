@@ -679,7 +679,7 @@
         <p class="rules-lead">소드걸스의 캐릭터·추종자·검식 카드 흐름과 전장 중심 화면 구성을 참고한 1인 훈련전입니다. 아래 수치는 세계관의 최종 규칙이 아니라 첫 플레이 테스트용 기본값입니다.</p>
         <div class="rules-step"><b>01</b><div><strong>대전 준비</strong><p>대표 캐릭터 1명과 같은 기업의 30장 덱으로 시작합니다. 로비의 덱 편성에서 보유 카드풀을 열어 추종자 20장과 검식 10장을 직접 선택합니다. 일반 카드는 덱당 최대 3장, 기업 총수·기업 대표·협동조합 대표 추종자는 1장만 넣을 수 있습니다. 덱 편성에서 현재 목록을 비운 뒤 보유 카드풀에서 새 구성을 만들 수도 있습니다. 시작 손패는 5장, 대표 캐릭터의 라이프는 30입니다.</p></div></div>
         <div class="rules-step"><b>02</b><div><strong>손패와 사이즈</strong><p>라운드 시작에 손패를 5장까지 채우고 코인 토스로 선공을 정합니다. 각 플레이어는 대전마다 손패 리셋권 2회를 받으며, 배치 단계에 현재 손패를 덱에 섞고 같은 장수만큼 다시 뽑을 수 있습니다. 추종자와 검식은 모두 최대 5칸의 전장에 배치하며, 전체 사이즈 한도는 기본 10입니다. 전장에 남은 추종자의 사이즈는 다음 라운드에도 계속 점유하고, 검식도 이번 라운드 배치 사이즈를 사용합니다. 배치 단계에는 내 카드를 더블클릭해 손패로 회수할 수 있습니다. 배치 시간은 30초이며 시간이 끝나면 전투가 자동으로 시작됩니다.</p></div></div>
-        <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>라운드 시작에 대표 능력과 추종자 카드에 적힌 라운드 시작 능력이 차례로 발동합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
+        <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>양측이 손패를 보충하고 배치를 마치면 대표 능력과 추종자의 라운드 시작 능력이 차례로 발동합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
         <div class="rules-step"><b>04</b><div><strong>기업 특성과 카드 연계 능력</strong><p>아웃프라웨어는 회복과 생장, 셀파스는 정비와 가속, 남극성은 방어와 반격, 언벡은 회수와 우회에 강합니다. 부서명은 인물의 소속을 나타내는 태그이며, 같은 부서 카드가 모였다고 자동 보너스가 생기지는 않습니다. 일부 카드에만 ‘연계 능력’이 적혀 있고, 해당 카드가 전장에 있을 때 같은 부서 동료가 함께 있으면 그 카드의 능력이 발동합니다. 대표 지원 효과를 가진 추종자는 총수·기업 대표·협동조합 대표 추종자가 전장에 있을 때 해당 카드를 직접 지원합니다. 능력의 조건과 효과는 카드 설명을 확인하세요.</p></div></div>
         <div class="rules-step"><b>05</b><div><strong>비용과 승리</strong><p>사이즈 4 추종자는 높은 공방체와 광역·반복 능력을 갖지만, 파괴될 때 대표 라이프도 4 감소합니다. 사이즈가 낮은 추종자는 빠른 전개와 부서 조합에 유리합니다. 추종자가 파괴되면 소유자의 라이프가 그 카드의 사이즈만큼 감소하고, 상대 전장에 추종자가 없으면 공격 추종자가 사이즈만큼 상대 대표에게 직접 피해를 줍니다. 대표 라이프가 0이 되거나 덱이 비면 패배합니다. 버림 더미는 이야기 속 사망을 뜻하지 않습니다.</p></div></div>
         <div class="rules-foot"><span>기본값</span> 직접 편성 30장(추종자 20 · 검식 10) · 카드당 최대 3장 · 대표 추종자 1장 · 손패 5장 · 리셋권 2회 · 라이프 30 · 전장 5칸 · 사이즈 한도 10 · 라운드당 최대 5장 배치</div>
@@ -776,7 +776,9 @@
   function updateCombatHealth(element, current, maximum) {
     if (!element || !Number.isFinite(current)) return;
     const health = Math.max(0, current);
-    const unitHealth = element.querySelector('.unit-numbers span:last-child');
+    const unitHealth = element.querySelector('.unit-numbers > span:last-child');
+    element.dataset.inspectHealth = String(health);
+    if (Number.isFinite(maximum)) element.dataset.inspectMaxHealth = String(maximum);
     const leaderHealth = element.querySelector('.health-label b');
     if (unitHealth) {
       unitHealth.textContent = `♥ ${health}`;
@@ -794,7 +796,7 @@
 
   function updateCombatUnitStats(element, state, { pulse = true, statsOnly = false } = {}) {
     if (!element || !state) return;
-    const values = element.querySelectorAll('.unit-numbers span');
+    const values = element.querySelectorAll('.unit-numbers > span');
     const nextValues = [
       { total: state.attack, base: state.attackBase, temporary: state.attackTemp, icon: '⚔' },
       { total: state.defense, base: state.defenseBase, temporary: state.defenseTemp, icon: '⛨' },
@@ -805,7 +807,7 @@
       const value = total;
       if (!Number.isFinite(value) || !values[index]) return;
       const safeValue = index === 2 ? Math.max(0, value) : value;
-      const nextMarkup = formatUnitStat(icon, safeValue, base, temporary);
+      const nextMarkup = formatUnitStat(icon, safeValue, base, temporary).replace(/^<span>|<\/span>$/g, '');
       if (values[index].innerHTML === nextMarkup) return;
       values[index].innerHTML = nextMarkup;
       if (pulse) pulseCombatHealth(values[index]);
@@ -832,7 +834,7 @@
 
   function showEffectStatChanges(element, state, beforeState = null) {
     if (!element) return;
-    const values = [...element.querySelectorAll('.unit-numbers span')];
+    const values = [...element.querySelectorAll('.unit-numbers > span')];
     const before = beforeState
       ? [beforeState.attack, beforeState.defense, beforeState.health]
       : values.map(value => Number.parseInt(value.textContent.match(/-?\d+/)?.[0], 10));
@@ -1344,8 +1346,9 @@
     await Promise.all(draws.map((event, index) => wait(index * 75).then(() => flyDrawCard(event))));
   }
 
-  async function animateDeath(unit) {
+  async function animateDeath(unit, death = null) {
     const element = boardElement(unit.side, unit.iid);
+    if (death) updateCombatHealth(leaderElement(unit.side), death.leaderLife, death.leaderMaxLife);
     if (!element) return;
     element.classList.add('death-cut');
     const slash = showSlash(element);
@@ -1444,11 +1447,6 @@
           const hitMaxHealth = Number.isFinite(event.targetMaxHealthAfterHit) ? event.targetMaxHealthAfterHit : event.targetMaxHealth;
           updateCombatHealth(target, hitHealth, hitMaxHealth);
           if (boardTarget !== target) updateCombatHealth(boardTarget, hitHealth, hitMaxHealth);
-          if (event.destroyedUnits?.some(unit => unit.side === targetSide)) {
-            const hitLeaderLife = Number.isFinite(event.targetOwnerLeaderLifeAfterHit) ? event.targetOwnerLeaderLifeAfterHit : event.targetOwnerLeaderLifeAfterAttack;
-            const hitLeaderMax = Number.isFinite(event.targetOwnerLeaderMaxLifeAfterHit) ? event.targetOwnerLeaderMaxLifeAfterHit : event.targetOwnerLeaderMaxLife;
-            updateCombatHealth(leaderElement(targetSide), hitLeaderLife, hitLeaderMax);
-          }
         }
 
         if (!event.directHit) {
@@ -1459,9 +1457,6 @@
           }
           updateCombatHealth(focus?.targetCard || target, event.targetHealthAfterAttack, event.targetMaxHealth);
           if (boardTarget !== (focus?.targetCard || target)) updateCombatHealth(boardTarget, event.targetHealthAfterAttack, event.targetMaxHealth);
-          if (event.destroyedUnits?.some(unit => unit.side === targetSide)) {
-            updateCombatHealth(leaderElement(targetSide), event.targetOwnerLeaderLifeAfterAttack, event.targetOwnerLeaderMaxLife);
-          }
         }
       }
       else {
@@ -1495,9 +1490,6 @@
         updateCombatHealth(counterTarget, event.attackerHealthAfterRetaliation, event.attackerMaxHealth);
         const boardCounterTarget = boardElement(event.side, event.attackerId);
         if (boardCounterTarget !== counterTarget) updateCombatHealth(boardCounterTarget, event.attackerHealthAfterRetaliation, event.attackerMaxHealth);
-        if (event.destroyedUnits?.some(unit => unit.side === event.side)) {
-          updateCombatHealth(leaderElement(event.side), event.attackerOwnerLeaderLifeAfterRetaliation, event.attackerOwnerLeaderMaxLife);
-        }
       }
       if (focus) await wait(300);
     } finally {
@@ -1509,7 +1501,7 @@
         await animateCombatTableEffect(effect, { statsOnly: true });
       }
     }
-    await Promise.all((event.destroyedUnits || []).map((unit, index) => wait(index * 120).then(() => animateDeath(unit))));
+    await Promise.all((event.destroyedUnits || []).map((unit, index) => wait(index * 120).then(() => animateDeath(unit, (event.visuals || []).find(item => item.type === 'death' && item.side === unit.side && item.sourceId === unit.iid)))));
     if (event.type === 'spell') {
       await flyCard(boardElement(event.side, event.spellId), destinationForDiscard(event.side));
     }

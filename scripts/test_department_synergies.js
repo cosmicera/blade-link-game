@@ -17,6 +17,7 @@ function matchWith(playerFaction, units, hp = 30) {
   match.players.player.field = units;
   match.players.player.hp = hp;
   rules.startFirstRound(match, 'player');
+  rules.beginCombat(match);
   return match;
 }
 
