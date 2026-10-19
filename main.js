@@ -97,7 +97,7 @@
     return `<div class="codex-detail-overlay" data-codex-detail-overlay>
       <button class="codex-detail-dismiss" data-codex-detail-dismiss aria-label="카드 상세 닫기">×</button>
       <section class="codex-detail-dialog" role="dialog" aria-modal="true" aria-label="${cardTitle} 카드 상세">
-        <div class="codex-detail-flip-wrap">
+        <div class="codex-detail-flip-wrap" data-codex-flip-card role="button" tabindex="0" aria-label="카드 뒤집기" aria-pressed="false">
           <div class="codex-detail-flip">
             <article class="codex-detail-face codex-detail-front" style="--faction-color:${factionColor(card.faction)}">
               <div class="codex-detail-art">${image}</div>
@@ -661,11 +661,13 @@
 
   function renderCardCollection(filter = 'all') {
     const allCards = collectionCards();
-    const cards = allCards.filter(card => filter === 'all' || card.faction === filter);
+    const typeOrder = { leader: 0, unit: 1, spell: 2 };
+    const cards = allCards.filter(card => filter === 'all' || card.faction === filter)
+      .sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
     return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name} <b>${allCards.filter(card => card.faction === id).length}</b></button>`).join('')}</div>
       <div class="codex-grid">${cards.map(card => `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
-        <div class="codex-art">${card.type === 'spell' ? `<span>${escapeHTML(card.symbol || '◇')}</span>` : `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">`}</div>
-        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (cardOrganization(card) || '추종자') : '검식')}</small><strong>${escapeHTML(card.name)}</strong></div>
+        <div class="codex-art">${card.type === 'spell' ? `<span>${escapeHTML(card.symbol || '◇')}</span>` : `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">`}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
+        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${cardOrganization(card) ? ` · ${cardOrganization(card)}` : ''}` : '검식')}</small><strong>${escapeHTML(card.name)}</strong><p>${escapeHTML(card.text || card.abilityText || '')}</p><em>${card.type === 'unit' ? `공 ${card.attack}　방 ${card.defense || 0}　체 ${card.health}` : card.type === 'leader' ? '라이프 30' : '전투 중 발동'}</em></div>
       </button>`).join('')}</div>`;
   }
 
@@ -1719,6 +1721,13 @@
     }
   });
 
+  modalRoot.addEventListener('keydown', event => {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('[data-codex-flip-card]')) {
+      event.preventDefault();
+      event.target.click();
+    }
+  });
+
   modalRoot.addEventListener('click', event => {
     if (event.target.matches('[data-close-modal]')) { modalRoot.innerHTML = ''; return; }
     const deckAction = event.target.closest('[data-deck-action]');
@@ -1761,12 +1770,12 @@
       modalRoot.querySelector('[data-codex-detail-overlay]')?.remove();
       return;
     }
-    const flipButton = event.target.closest('[data-codex-flip]');
+    const flipButton = event.target.closest('[data-codex-flip], [data-codex-flip-card]');
     if (flipButton) {
       const flip = modalRoot.querySelector('.codex-detail-flip');
       const isBack = flip.classList.toggle('is-back');
-      flipButton.setAttribute('aria-pressed', String(isBack));
-      flipButton.innerHTML = isBack ? '앞면 보기 <b>↻</b>' : '뒷면 보기 <b>↻</b>';
+      modalRoot.querySelectorAll('[data-codex-flip], [data-codex-flip-card]').forEach(control => control.setAttribute('aria-pressed', String(isBack)));
+      modalRoot.querySelector('[data-codex-flip]').innerHTML = isBack ? '앞면 보기 <b>↻</b>' : '뒷면 보기 <b>↻</b>';
       return;
     }
     const selectedCard = event.target.closest('[data-codex-card]');

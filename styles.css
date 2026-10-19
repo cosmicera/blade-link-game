@@ -298,13 +298,20 @@ body[data-faction="unbek"] { --faction-color: #c3a477; }
 .codex-filter { padding: 7px 10px; border: 1px solid var(--line); background: transparent; color: #aaa7a1; font-size: 9px; cursor: pointer; }
 .codex-filter.active { border-color: rgba(218,204,169,.52); color: #e1d3b0; background: rgba(214,196,152,.08); }
 .codex-filter b { margin-left: 4px; color: #8d897e; font: 9px 'DM Mono', monospace; }
-.codex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); gap: 8px; }
-.codex-entry { --faction-color: #aab7c1; display: flex; min-height: 0; width: 100%; flex-direction: column; padding: 0; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.025); color: inherit; font: inherit; text-align: left; cursor: pointer; transition: border-color .16s ease, background .16s ease, transform .16s ease; }
+.codex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 295px), 1fr)); gap: 12px; }
+.codex-entry { --faction-color: #aab7c1; display: grid; grid-template-columns: 104px minmax(0, 1fr); min-height: 152px; width: 100%; padding: 0; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.025); color: inherit; font: inherit; text-align: left; cursor: pointer; transition: border-color .16s ease, background .16s ease, transform .16s ease; }
 .codex-entry:hover, .codex-entry:focus-visible { border-color: color-mix(in srgb, var(--faction-color) 60%, white 10%); background: rgba(255,255,255,.07); transform: translateY(-1px); outline: none; }
-.codex-art { position: relative; display: grid; width: 100%; aspect-ratio: 832 / 1216; max-height: 300px; place-items: center; overflow: hidden; background: #101115; }
-.codex-art img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.codex-art { position: relative; min-height: 152px; overflow: hidden; background: #101115; }
+.codex-art img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 24%; }
+.codex-art > b { position: absolute; top: 6px; left: 6px; display: grid; min-width: 25px; height: 25px; padding: 0 3px; place-items: center; border-radius: 50%; background: rgba(18,19,22,.9); color: white; font: 11px 'DM Mono', monospace; }
+.codex-copy p { margin: 3px 0; color: #bdb8b1; line-height: 1.55; }
+.codex-copy em { color: #e2d6bd; font-style: normal; }
+.codex-detail-flip-wrap[data-codex-flip-card] { cursor: pointer; }
+.codex-detail-flip-wrap:focus-visible { outline: 2px solid #e1d3b0; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .codex-detail-flip { transition-duration: .01ms; } }
+
 .codex-art > span { display: grid; height: 100%; place-items: center; color: var(--faction-color); background: radial-gradient(circle, color-mix(in srgb, var(--faction-color) 20%, transparent), transparent 70%), #25262c; font-size: 29px; }
-.codex-copy { display: grid; gap: 4px; min-height: 52px; align-content: center; padding: 7px 9px; }
+.codex-copy { display: grid; gap: 4px; min-width: 0; align-content: center; padding: 12px 13px; }
 .codex-copy small { color: var(--faction-color); font-size: 8px; }
 .codex-copy strong { display: block; overflow: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 10px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .codex-detail-overlay { position: fixed; z-index: 45; inset: 0; display: grid; place-items: center; padding: 52px 20px 22px; background: rgba(7,8,11,.89); backdrop-filter: blur(10px); animation: fade-in .18s ease-out; }
@@ -1134,3 +1141,9 @@ html { overflow-y: scroll; scrollbar-gutter: stable; }
   .deck-save-area { grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 6px 8px; }
   .deck-save-button { min-width: 100px; min-height: 32px; }
 }
+
+/* Readable collection rows at every viewport size. */
+.codex-entry .codex-copy small { font-size: 11px; }
+.codex-entry .codex-copy strong { font-size: 15px; white-space: normal; }
+.codex-entry .codex-copy p { font-size: 12px; }
+.codex-entry .codex-copy em { font-size: 12px; }
