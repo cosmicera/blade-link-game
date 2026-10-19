@@ -28,6 +28,8 @@
 
   const factionKeys = Object.keys(DATA.factions);
   const leaderOf = factionId => DATA.leaders[DATA.factions[factionId].leader];
+  const titlePositions = new Set(['기업 총수', '기업 대표', '협동조합 대표']);
+  const isTitleFollower = card => card?.type === 'unit' && titlePositions.has(card.position);
   const isHumanTurn = () => match && match.phase === 'deploy' && !match.gameOver && !aiThinking;
   const factionColor = factionId => DATA.factions[factionId]?.color || '#b8b2c0';
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
@@ -47,13 +49,13 @@
     const rawEffect = card.effect?.type || card.effect || card.attackEffect?.type || card.defenseEffect?.type || '';
     const effect = rawEffect === 'department_synergy' ? card.effect?.effect?.type : rawEffect;
     const scenes = {
-      heal_leader: '그녀는 전열보다 먼저 시민들의 안부를 확인하고, 도시의 회복망을 다시 잇는다.',
+      heal_leader: '그녀는 전열보다 먼저 시민들의 안부를 확인하고, 거점의 생명 유지망을 다시 잇는다.',
       heal_all: '회복 신호가 아군 전열을 타고 번지며, 모두가 다시 숨을 고른다.',
       heal_wounded: '흔들린 동료를 발견한 그녀가 치료 물자를 들고 전선 안쪽으로 달려간다.',
       heal_self: '잠깐의 틈을 찾아 상처를 정리한 뒤, 다시 동료들 곁으로 돌아선다.',
       defense_self: '상대의 움직임을 읽고 자세를 낮춘다. 다음 충격을 흘려낼 준비가 끝났다.',
       defense_all: '짧은 손짓에 맞춰 동료들이 간격을 좁힌다. 하나의 방어선이 만들어진다.',
-      size_limit: '도시의 장비망과 이동 경로를 재배치해 동료들이 움직일 여유를 만든다.',
+      size_limit: '거점의 장비망과 운송 경로를 재배치해 동료들이 움직일 여유를 만든다.',
       recover: '끊겼던 신호가 다시 이어진다. 전장을 떠났던 동료에게 돌아올 길이 열린다.',
       temp_buff_self: '상대의 빈틈을 읽은 순간, 한 박자 빠른 움직임으로 검을 올린다.',
       ping_enemy: '전열에서 가장 흔들리는 지점을 포착해 짧고 정확한 신호를 보낸다.',
@@ -66,7 +68,7 @@
       return_weakest: '우회 검식이 상대의 발을 묶고, 전열의 빈자리를 드러낸다.',
       stun_weakest: '짧은 봉인 신호가 상대의 움직임을 끊는다.',
       draw_two: '저장된 기록을 펼쳐 다음 수를 준비한다. 아직 쓸 수 있는 선택지가 남아 있다.',
-      overclock: '기계친화 도시의 동력망이 맞물리며 아군의 움직임이 빨라진다.',
+      overclock: '셀파스의 동력망과 현장 장비가 맞물리며 아군의 움직임이 빨라진다.',
       size_burst: '예비 공명 에너지가 축적된다. 다음 전개를 위한 여유가 생겼다.',
       buff_weakest: '가장 지친 동료에게 힘을 모아 주고, 다시 설 수 있도록 손을 내민다.',
       buff_defense_weakest: '흔들린 동료를 엄폐물 가까이 이끌어 안전하게 다음 수를 준비한다.'
@@ -82,23 +84,27 @@
     const cardTitle = escapeHTML(card.name);
     const image = card.image
       ? `<img src="${escapeHTML(card.image)}" alt="${cardTitle}" />`
-      : `<div class="codex-detail-symbol" style="--faction-color:${factionColor(card.faction)}"><span>${escapeHTML(card.symbol || '✦')}</span><small>검식</small></div>`;
-    const category = card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : card.position ? ` · ${card.position}` : ''}` : '검식';
+      : `<div class="codex-detail-symbol" style="--faction-color:${factionColor(card.faction)}"><span>${escapeHTML(faction.logo || '◇')}</span><small>${escapeHTML(faction.name)} · 검식</small></div>`;
+    const category = card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (card.position || card.department || '추종자') : '검식';
+    const role = card.type === 'unit' ? card.role : card.type === 'leader' ? card.epithet : '검식 카드';
     const stats = card.type === 'unit'
-      ? `<span>사이즈 ${card.cost}</span><span>공격 ${card.attack}</span><span>방어 ${card.defense || 0}</span><span>체력 ${card.health}</span>${card.deckLimit ? '<span>덱당 1장</span>' : ''}`
+      ? `<span>사이즈 ${card.cost}</span><span>공격 ${card.attack}</span><span>방어 ${card.defense || 0}</span><span>체력 ${card.health}</span>${isTitleFollower(card) || card.deckLimit === 1 ? '<span>덱당 1장</span>' : ''}`
       : card.type === 'spell' ? `<span>사이즈 ${card.cost}</span><span>검식 카드</span>` : '<span>라이프 30</span><span>대표 능력</span>';
+    const effectText = card.text || card.abilityText || '';
     return `<div class="codex-detail-overlay" data-codex-detail-overlay>
       <button class="codex-detail-dismiss" data-codex-detail-dismiss aria-label="카드 상세 닫기">×</button>
       <section class="codex-detail-dialog" role="dialog" aria-modal="true" aria-label="${cardTitle} 카드 상세">
         <div class="codex-detail-flip-wrap">
           <div class="codex-detail-flip">
             <article class="codex-detail-face codex-detail-front" style="--faction-color:${factionColor(card.faction)}">
-              <div class="codex-detail-art">${image}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
-              <div class="codex-detail-copy"><small>${escapeHTML(faction.name)} · ${escapeHTML(category)}</small><h3>${cardTitle}</h3><div class="codex-detail-stats">${stats}</div><p>${escapeHTML(card.text || card.abilityText || '')}</p></div>
+              <div class="codex-detail-art">${image}</div>
             </article>
             <article class="codex-detail-face codex-detail-back" style="--faction-color:${factionColor(card.faction)}">
-              <div class="codex-back-ornament">${escapeHTML(card.symbol || '✦')}</div><small>${escapeHTML(faction.name)} · ${escapeHTML(back.label)}</small><h3>${cardTitle}</h3>
-              <blockquote>${escapeHTML(back.text)}</blockquote><div class="codex-back-rule"></div><p>${escapeHTML(card.text || card.abilityText || '')}</p><div class="codex-detail-stats">${stats}</div>
+              <span class="codex-back-faction-mark" role="img" aria-label="${escapeHTML(faction.name)} 로고">${escapeHTML(faction.logo || '◇')}</span>
+              <small>${escapeHTML(faction.name)} · ${escapeHTML(category)}</small><h3>${cardTitle}</h3>
+              <div class="codex-back-role">${escapeHTML(role)}</div><div class="codex-detail-stats">${stats}</div>
+              <p class="codex-back-effect">${escapeHTML(effectText)}</p><div class="codex-back-rule"></div>
+              <small class="codex-back-label">${escapeHTML(back.label)}</small><blockquote>${escapeHTML(back.text)}</blockquote>
             </article>
           </div>
         </div>
@@ -111,7 +117,7 @@
     const faction = DATA.factions[id];
     const leader = leaderOf(id);
     return `<button class="faction-choice ${id === selectedFaction ? 'selected' : ''}" data-faction="${id}" style="--faction-color:${faction.color};--faction-accent:${faction.accent}">
-      <span class="faction-symbol">${{ outpr: '✿', selfas: '⚙', nanguk: '❄', unbek: '⌁' }[id]}</span>
+      <span class="faction-symbol">${escapeHTML(faction.logo || '◇')}</span>
       <span class="faction-info"><small>${faction.short} <i>·</i> ${faction.district}</small><strong>${faction.name}</strong><em>${faction.style}</em></span>
       <span class="faction-check">${id === selectedFaction ? '✓' : '↗'}</span>
       <span class="faction-leader-name">${leader.name}</span>
@@ -199,7 +205,7 @@
         : `사이즈 ${card.cost}`;
       return `<article class="deck-pool-card" style="--faction-color:${faction.color}">
         <button class="deck-pool-art" type="button" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 상세 보기">${image}<b>${String(card.cost).padStart(2, '0')}</b></button>
-        <div class="deck-pool-copy"><small>${category}${card.department ? ` · ${escapeHTML(card.department)}` : card.position ? ` · ${escapeHTML(card.position)}` : ''}</small><button type="button" class="deck-card-name" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}">${escapeHTML(card.name)}</button><p>${escapeHTML(card.text || '')}</p><em>${stats}</em><small class="deck-owned-count">보유 ${copies}장 · 덱 ${count}장${card.deckLimit ? ' · 덱당 1장' : ''}</small></div>
+        <div class="deck-pool-copy"><small>${category}${card.department ? ` · ${escapeHTML(card.department)}` : card.position ? ` · ${escapeHTML(card.position)}` : ''}</small><button type="button" class="deck-card-name" data-deck-action="inspect" data-card-id="${escapeHTML(card.id)}">${escapeHTML(card.name)}</button><p>${escapeHTML(card.text || '')}</p><em>${stats}</em><small class="deck-owned-count">보유 ${copies}장 · 덱 ${count}장${copies === 1 ? ' · 덱당 1장' : ''}</small></div>
         <button class="deck-add-button" type="button" data-deck-action="add" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 추가" ${addDisabled ? 'disabled' : ''}>＋</button>
       </article>`;
     }).join('');
@@ -209,7 +215,7 @@
       return [`<div class="deck-selected-card"><span class="deck-selected-count">${count}</span><div><strong>${escapeHTML(card.name)}</strong><small>${card.type === 'unit' ? '추종자' : '검식'} · 사이즈 ${card.cost}</small></div><button type="button" data-deck-action="remove" data-card-id="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 한 장 빼기">−</button></div>`];
     }).join('');
     return `<div class="deck-builder" style="--faction-color:${faction.color};--faction-accent:${faction.accent}">
-      <div class="deck-builder-intro"><div><small>${faction.short} · ${faction.district}</small><h3>${faction.name} 보유 카드풀</h3><p>이 진영 카드 중 추종자 20장과 검식 10장, 총 30장을 골라 덱을 만듭니다. 일반 카드는 최대 3장, 대표 추종자는 1장까지 넣을 수 있습니다.</p></div><button type="button" class="deck-reset-button" data-deck-action="reset">기본 덱 불러오기</button></div>
+      <div class="deck-builder-intro"><div><small>${faction.short} · ${faction.district}</small><h3>${faction.name} 보유 카드풀</h3><p>이 진영 카드 중 추종자 20장과 검식 10장, 총 30장을 골라 덱을 만듭니다. 같은 일반 카드는 최대 3장, 총수·기업 대표·협동조합 대표 추종자는 1장까지 넣을 수 있습니다.</p></div><div class="deck-builder-actions"><button type="button" class="deck-reset-button deck-clear-button" data-deck-action="clear" ${deckDraft.length ? '' : 'disabled'}>덱 비우기</button><button type="button" class="deck-reset-button" data-deck-action="reset">기본 덱 불러오기</button></div></div>
       <div class="deck-builder-columns">
         <section class="deck-pool-panel"><div class="deck-section-heading"><div><small>OWNED CARDS</small><strong>카드 목록 <i>${pool.length}종</i></strong></div><div class="deck-type-tabs"><button type="button" data-deck-filter="all" class="${deckBuilderFilter === 'all' ? 'active' : ''}">전체</button><button type="button" data-deck-filter="unit" class="${deckBuilderFilter === 'unit' ? 'active' : ''}">추종자</button><button type="button" data-deck-filter="spell" class="${deckBuilderFilter === 'spell' ? 'active' : ''}">검식</button></div></div><div class="deck-pool-list">${cardRows}</div></section>
         <aside class="deck-current-panel"><div class="deck-current-heading"><div><small>MY DECK</small><strong>현재 덱</strong></div><b class="deck-total-count ${deckDraft.length === RULES.limits.deck ? 'complete' : ''}">${deckDraft.length}<i>/30</i></b></div>
@@ -474,14 +480,36 @@
       </div>`;
     }
     const health = RULES.unitHealth(item);
+    const attackBase = card.attack + item.attackBonus;
+    const attackTemp = item.tempAttack;
+    const attack = attackBase + attackTemp;
+    const defenseBase = (card.defense || 0) + (item.defenseBonus || 0);
+    const defenseTemp = item.tempDefense;
+    const defense = defenseBase + defenseTemp;
     const ready = item.ready && item.stunnedRound !== match.round;
     const actionState = ready ? 'unit-ready' : 'unit-exhausted';
     const classes = ['unit-slot', 'occupied-slot', actionState, owner === 'opponent' ? 'enemy-unit' : ''].join(' ');
-    return `<div class="${classes}" data-board-card data-side="${owner}" data-kind="unit" data-card-id="${item.iid}" data-card-template="${card.id}" data-inspect-attack="${card.attack + item.attackBonus + item.tempAttack}" data-inspect-defense="${RULES.unitDefense(item)}" data-inspect-health="${health}" data-inspect-max-health="${card.health + item.healthBonus}" role="button" tabindex="0" style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 사이즈 ${card.cost}, 공격 ${card.attack + item.attackBonus + item.tempAttack}, 방어 ${RULES.unitDefense(item)}, 체력 ${health}">
+    return `<div class="${classes}" data-board-card data-side="${owner}" data-kind="unit" data-card-id="${item.iid}" data-card-template="${card.id}" data-inspect-attack="${attack}" data-inspect-attack-base="${attackBase}" data-inspect-attack-temp="${attackTemp}" data-inspect-defense="${defense}" data-inspect-defense-base="${defenseBase}" data-inspect-defense-temp="${defenseTemp}" data-inspect-health="${health}" data-inspect-max-health="${card.health + item.healthBonus}" role="button" tabindex="0" style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 사이즈 ${card.cost}, 공격 ${attack}, 방어 ${defense}, 체력 ${health}">
       <div class="unit-portrait"><img src="${card.image}" alt="" loading="lazy"><span class="unit-portrait-shade"></span><b class="unit-cost-label">◇ ${card.cost}</b></div>
       <div class="unit-nameplate"><strong>${card.name}</strong><small>${card.department || card.position || card.role}</small></div>
-      <div class="unit-numbers"><span>⚔ ${card.attack + item.attackBonus + item.tempAttack}</span><span>⛨ ${RULES.unitDefense(item)}</span><span>♥ ${health}</span></div>
+      <div class="unit-numbers">${formatUnitStat('⚔', attack, attackBase, attackTemp)}${formatUnitStat('⛨', defense, defenseBase, defenseTemp)}<span>♥ ${health}</span></div>
     </div>`;
+  }
+
+  function formatStatBreakdown(total, base, temporary) {
+    const safeTotal = Number.isFinite(total) ? total : 0;
+    const safeBase = Number.isFinite(base) ? base : safeTotal;
+    const safeTemporary = Number.isFinite(temporary) ? temporary : 0;
+    if (!safeTemporary) return String(safeTotal);
+    return `${safeTotal} (${safeBase}${safeTemporary > 0 ? '+' : ''}${safeTemporary})`;
+  }
+
+  function formatUnitStat(icon, total, base, temporary) {
+    const breakdown = formatStatBreakdown(total, base, temporary);
+    const split = breakdown.indexOf(' (');
+    const number = split < 0 ? breakdown : breakdown.slice(0, split);
+    const detail = split < 0 ? '' : ` <i>${breakdown.slice(split + 1).trim()}</i>`;
+    return `<span>${icon} ${number}${detail}</span>`;
   }
 
   function bannerMarkup(side) {
@@ -528,14 +556,22 @@
         }
         const stats = item ? {
           attack: card.attack + item.attackBonus + item.tempAttack,
+          attackBase: card.attack + item.attackBonus,
+          attackTemp: item.tempAttack,
           defense: RULES.unitDefense(item),
+          defenseBase: (card.defense || 0) + (item.defenseBonus || 0),
+          defenseTemp: item.tempDefense,
           health: RULES.unitHealth(item),
           maxHealth: card.health + item.healthBonus
-        } : inspectedBoardCard.stats || { attack: card.attack, defense: card.defense || 0, health: card.health, maxHealth: card.health };
+        } : inspectedBoardCard.stats || {
+          attack: card.attack, attackBase: card.attack, attackTemp: 0,
+          defense: card.defense || 0, defenseBase: card.defense || 0, defenseTemp: 0,
+          health: card.health, maxHealth: card.health
+        };
         return `<div class="inspect-card-image"><img src="${card.image}" alt="${card.name}"></div>
           <div class="inspect-title"><small>${DATA.factions[card.faction].name} · ${card.department || card.position || card.role}${card.role && (card.department || card.position) ? ` · ${card.role}` : ''}</small><strong>${card.name}</strong></div>
           <p class="inspect-description">${card.text}</p>
-          <div class="inspect-stats"><span>공격 <b>${stats.attack}</b></span><span>방어 <b>${stats.defense}</b></span><span>체력 <b>${stats.health} / ${stats.maxHealth}</b></span></div>
+          <div class="inspect-stats"><span>공격 <b>${formatStatBreakdown(stats.attack, stats.attackBase, stats.attackTemp)}</b></span><span>방어 <b>${formatStatBreakdown(stats.defense, stats.defenseBase, stats.defenseTemp)}</b></span><span>체력 <b>${stats.health} / ${stats.maxHealth}</b></span></div>
           <div class="inspect-cost"><span>사이즈</span><b>${card.cost}</b></div>`;
       }
     }
@@ -619,8 +655,8 @@
     const cards = allCards.filter(card => filter === 'all' || card.faction === filter);
     return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name} <b>${allCards.filter(card => card.faction === id).length}</b></button>`).join('')}</div>
       <div class="codex-grid">${cards.map(card => `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
-        <div class="codex-art">${card.type === 'spell' ? `<span>${card.symbol}</span>` : `<img src="${card.image}" alt="${card.name}" loading="lazy">`}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
-        <div class="codex-copy"><small>${DATA.factions[card.faction].name} · ${card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${card.department ? ` · ${card.department}` : card.position ? ` · ${card.position}` : ''}` : '검식'}</small><strong>${card.name}</strong><p>${card.text}</p>${card.type === 'unit' ? `<em>⚔ ${card.attack}　⛨ ${card.defense || 0}　♥ ${card.health}</em>` : card.type === 'leader' ? '<em>대표 캐릭터 카드</em>' : '<em>전투 중 발동</em>'}</div>
+        <div class="codex-art">${card.type === 'spell' ? `<span>${escapeHTML(card.symbol || '◇')}</span>` : `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">`}</div>
+        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (card.position || card.department || '추종자') : '검식')}</small><strong>${escapeHTML(card.name)}</strong></div>
       </button>`).join('')}</div>`;
   }
 
@@ -632,10 +668,10 @@
     } else {
       modalRoot.innerHTML = `<div class="modal-backdrop" data-close-modal><section class="modal-panel rules-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><div><small>PLAYTEST RULES / 01</small><h2 id="modal-title">시범 규칙 <i>초안</i></h2></div><button class="modal-close" data-close-modal aria-label="닫기">×</button></header><div class="rules-content">
         <p class="rules-lead">소드걸스의 캐릭터·추종자·검식 카드 흐름과 전장 중심 화면 구성을 참고한 1인 훈련전입니다. 아래 수치는 세계관의 최종 규칙이 아니라 첫 플레이 테스트용 기본값입니다.</p>
-        <div class="rules-step"><b>01</b><div><strong>대전 준비</strong><p>대표 캐릭터 1명과 같은 기업의 30장 덱으로 시작합니다. 로비의 덱 편성에서 보유 카드풀을 열어 추종자 20장과 검식 10장을 직접 선택합니다. 일반 카드는 덱당 최대 3장, 기업 총수·협동조합 대표 추종자는 1장만 넣을 수 있습니다. 시작 손패는 5장, 대표 캐릭터의 라이프는 30입니다.</p></div></div>
+        <div class="rules-step"><b>01</b><div><strong>대전 준비</strong><p>대표 캐릭터 1명과 같은 기업의 30장 덱으로 시작합니다. 로비의 덱 편성에서 보유 카드풀을 열어 추종자 20장과 검식 10장을 직접 선택합니다. 일반 카드는 덱당 최대 3장, 기업 총수·기업 대표·협동조합 대표 추종자는 1장만 넣을 수 있습니다. 덱 편성에서 현재 목록을 비운 뒤 보유 카드풀에서 새 구성을 만들 수도 있습니다. 시작 손패는 5장, 대표 캐릭터의 라이프는 30입니다.</p></div></div>
         <div class="rules-step"><b>02</b><div><strong>손패와 사이즈</strong><p>라운드 시작에 손패를 5장까지 채우고 코인 토스로 선공을 정합니다. 각 플레이어는 대전마다 손패 리셋권 2회를 받으며, 배치 단계에 현재 손패를 덱에 섞고 같은 장수만큼 다시 뽑을 수 있습니다. 추종자와 검식은 모두 최대 5칸의 전장에 배치하며, 전체 사이즈 한도는 기본 10입니다. 전장에 남은 추종자의 사이즈는 다음 라운드에도 계속 점유하고, 검식도 이번 라운드 배치 사이즈를 사용합니다. 배치 단계에는 내 카드를 더블클릭해 손패로 회수할 수 있습니다. 배치 시간은 30초이며 시간이 끝나면 전투가 자동으로 시작됩니다.</p></div></div>
         <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>라운드 시작에 대표 능력과 추종자 카드에 적힌 라운드 시작 능력이 차례로 발동합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
-        <div class="rules-step"><b>04</b><div><strong>기업 특성과 카드 연계 능력</strong><p>아웃프라웨어는 회복과 생장, 셀파스는 정비와 가속, 남극성은 방어와 반격, 언벡은 회수와 우회에 강합니다. 부서명은 인물의 소속을 나타내는 태그이며, 같은 부서 카드가 모였다고 자동 보너스가 생기지는 않습니다. 일부 카드에만 ‘연계 능력’이 적혀 있고, 해당 카드가 전장에 있을 때 같은 부서 동료가 함께 있으면 그 카드의 능력이 발동합니다. 비서실 추종자 일부는 전장에 나온 총수·협동조합 대표 추종자를 직접 지원합니다. 능력의 조건과 효과는 카드 설명을 확인하세요.</p></div></div>
+        <div class="rules-step"><b>04</b><div><strong>기업 특성과 카드 연계 능력</strong><p>아웃프라웨어는 회복과 생장, 셀파스는 정비와 가속, 남극성은 방어와 반격, 언벡은 회수와 우회에 강합니다. 부서명은 인물의 소속을 나타내는 태그이며, 같은 부서 카드가 모였다고 자동 보너스가 생기지는 않습니다. 일부 카드에만 ‘연계 능력’이 적혀 있고, 해당 카드가 전장에 있을 때 같은 부서 동료가 함께 있으면 그 카드의 능력이 발동합니다. 대표 지원 효과를 가진 추종자는 총수·기업 대표·협동조합 대표 추종자가 전장에 있을 때 해당 카드를 직접 지원합니다. 능력의 조건과 효과는 카드 설명을 확인하세요.</p></div></div>
         <div class="rules-step"><b>05</b><div><strong>비용과 승리</strong><p>사이즈 4 추종자는 높은 공방체와 광역·반복 능력을 갖지만, 파괴될 때 대표 라이프도 4 감소합니다. 사이즈가 낮은 추종자는 빠른 전개와 부서 조합에 유리합니다. 추종자가 파괴되면 소유자의 라이프가 그 카드의 사이즈만큼 감소하고, 상대 전장에 추종자가 없으면 공격 추종자가 사이즈만큼 상대 대표에게 직접 피해를 줍니다. 대표 라이프가 0이 되거나 덱이 비면 패배합니다. 버림 더미는 이야기 속 사망을 뜻하지 않습니다.</p></div></div>
         <div class="rules-foot"><span>기본값</span> 직접 편성 30장(추종자 20 · 검식 10) · 카드당 최대 3장 · 대표 추종자 1장 · 손패 5장 · 리셋권 2회 · 라이프 30 · 전장 5칸 · 사이즈 한도 10 · 라운드당 최대 5장 배치</div>
       </div></section></div>`;
@@ -747,17 +783,37 @@
     }
   }
 
-  function updateCombatUnitStats(element, state) {
+  function updateCombatUnitStats(element, state, { pulse = true } = {}) {
     if (!element || !state) return;
     const values = element.querySelectorAll('.unit-numbers span');
-    const nextValues = [state.attack, state.defense, state.health];
-    const icons = ['⚔', '⛨', '♥'];
-    nextValues.forEach((value, index) => {
+    const nextValues = [
+      { total: state.attack, base: state.attackBase, temporary: state.attackTemp, icon: '⚔' },
+      { total: state.defense, base: state.defenseBase, temporary: state.defenseTemp, icon: '⛨' },
+      { total: state.health, base: state.health, temporary: 0, icon: '♥' }
+    ];
+    nextValues.forEach(({ total, base, temporary, icon }, index) => {
+      const value = total;
       if (!Number.isFinite(value) || !values[index]) return;
-      const nextText = `${icons[index]} ${Math.max(0, value)}`;
-      if (values[index].textContent === nextText) return;
-      values[index].textContent = nextText;
-      pulseCombatHealth(values[index]);
+      const safeValue = index === 2 ? Math.max(0, value) : value;
+      const nextMarkup = formatUnitStat(icon, safeValue, base, temporary);
+      if (values[index].innerHTML === nextMarkup) return;
+      values[index].innerHTML = nextMarkup;
+      if (pulse) pulseCombatHealth(values[index]);
+    });
+    const inspectFields = {
+      attack: state.attack,
+      attackBase: state.attackBase,
+      attackTemp: state.attackTemp,
+      defense: state.defense,
+      defenseBase: state.defenseBase,
+      defenseTemp: state.defenseTemp,
+      health: state.health,
+      maxHealth: state.maxHealth
+    };
+    Object.entries(inspectFields).forEach(([key, value]) => {
+      if (!Number.isFinite(value)) return;
+      const field = key[0].toUpperCase() + key.slice(1);
+      element.dataset[`inspect${field}`] = String(value);
     });
     const name = element.querySelector('.unit-nameplate strong')?.textContent;
     if (name) element.setAttribute('aria-label', `${name}, 공격 ${state.attack}, 방어 ${state.defense}, 체력 ${state.health} / ${state.maxHealth}`);
@@ -1004,7 +1060,7 @@
       clone.dataset.inspectKind = source.dataset.kind;
       clone.dataset.inspectIid = source.dataset.cardId;
       clone.dataset.inspectCardId = source.dataset.cardTemplate;
-      ['attack', 'defense', 'health', 'maxHealth'].forEach(stat => {
+      ['attack', 'attackBase', 'attackTemp', 'defense', 'defenseBase', 'defenseTemp', 'health', 'maxHealth'].forEach(stat => {
         if (source.dataset[`inspect${stat[0].toUpperCase()}${stat.slice(1)}`] !== undefined) {
           clone.dataset[`inspect${stat[0].toUpperCase()}${stat.slice(1)}`] = source.dataset[`inspect${stat[0].toUpperCase()}${stat.slice(1)}`];
         }
@@ -1045,9 +1101,9 @@
     const heading = document.createElement('div');
     heading.className = 'combat-stage-heading';
     const title = document.createElement('strong');
-    title.textContent = roundExpiry ? '라운드 종료' : '전체 효과 발동';
+    title.textContent = roundExpiry ? '라운드 종료' : event.beneficial ? '강화 적용' : '전체 효과 발동';
     const subtitle = document.createElement('small');
-    subtitle.textContent = event.label || '전체 효과';
+    subtitle.textContent = event.label || (event.beneficial ? '아군 강화' : '전체 효과');
     heading.append(title, subtitle);
     const frame = document.createElement('div');
     frame.className = 'global-effect-focus-frame';
@@ -1068,8 +1124,8 @@
     return { stage, card };
   }
 
-  async function animateMeteorToTarget(target, state, index, beforeState = null, roundExpiry = false) {
-    if (!target) return;
+  function launchEffectMeteor(target, index, variant = 'positive') {
+    if (!target) return null;
     const targetRect = target.getBoundingClientRect();
     const endX = targetRect.left + targetRect.width / 2;
     const endY = targetRect.top + targetRect.height * .34;
@@ -1079,7 +1135,7 @@
     const dx = endX - startX;
     const dy = endY - startY;
     const meteor = document.createElement('i');
-    meteor.className = `effect-meteor${roundExpiry ? ' effect-expiry-mote' : ''}`;
+    meteor.className = `effect-meteor${variant === 'expiry' ? ' effect-expiry-mote' : variant === 'positive' ? ' effect-positive-mote' : ''}`;
     meteor.style.left = `${startX - 8}px`;
     meteor.style.top = `${startY - 8}px`;
     meteor.style.setProperty('--meteor-angle', `${Math.atan2(dy, dx) * 180 / Math.PI}deg`);
@@ -1090,38 +1146,92 @@
       { transform: `translate(${dx}px, ${dy}px) scale(1.1) rotate(240deg)`, opacity: 1, offset: .88 },
       { transform: `translate(${dx}px, ${dy}px) scale(.12) rotate(300deg)`, opacity: 0 }
     ], { duration: paced(580), easing: 'cubic-bezier(.2,.72,.25,1)', fill: 'forwards' });
-    if (animation) await animation.finished.catch(() => {});
-    else await wait(580);
-    meteor.remove();
-    target.classList.remove('effect-impact', 'effect-expiry-impact');
+    const finished = animation ? animation.finished.catch(() => {}) : wait(580);
+    return { meteor, finished };
+  }
+
+  async function animateMeteorToTarget(target, state, index, beforeState = null) {
+    const flight = launchEffectMeteor(target, index, 'impact');
+    if (!flight) return;
+    await flight.finished;
+    flight.meteor.remove();
+    target.classList.remove('effect-impact');
     void target.offsetWidth;
-    target.classList.add(roundExpiry ? 'effect-expiry-impact' : 'effect-impact');
+    target.classList.add('effect-impact');
     showEffectStatChanges(target, state, beforeState);
     updateCombatUnitStats(target, state);
     await wait(410);
-    target.classList.remove('effect-impact', 'effect-expiry-impact');
+    target.classList.remove('effect-impact');
+  }
+
+  async function animateBeneficialTargets(states) {
+    const targets = states.map((state, index) => ({ state, index, element: boardElement(state.side, state.iid) }))
+      .filter(item => item.element);
+    if (!targets.length) return;
+    const flights = targets.map(item => launchEffectMeteor(item.element, item.index, 'positive')).filter(Boolean);
+    await Promise.all(flights.map(flight => flight.finished));
+    flights.forEach(flight => flight.meteor.remove());
+    targets.forEach(({ state, element }) => {
+      element.classList.remove('effect-impact', 'effect-positive-impact');
+      void element.offsetWidth;
+      element.classList.add('effect-positive-impact');
+      updateCombatUnitStats(element, state, { pulse: false });
+    });
+    await wait(430);
+    targets.forEach(({ element }) => element.classList.remove('effect-positive-impact'));
+  }
+
+  async function animateRoundExpiry(states) {
+    const table = $('.table-area');
+    if (!table) return;
+    const sweep = document.createElement('i');
+    sweep.className = 'round-expiry-wave';
+    table.append(sweep);
+    const animation = sweep.animate?.([
+      { transform: 'translateX(-120%)', opacity: 0 },
+      { transform: 'translateX(-15%)', opacity: .9, offset: .18 },
+      { transform: 'translateX(180%)', opacity: 0 }
+    ], { duration: paced(820), easing: 'cubic-bezier(.2,.72,.22,1)', fill: 'forwards' });
+    if (animation) await animation.finished.catch(() => {});
+    else {
+      sweep.classList.add('round-expiry-wave-fallback');
+      await wait(820);
+    }
+    sweep.remove();
+    states.forEach(state => {
+      const element = boardElement(state.side, state.iid);
+      if (element) updateCombatUnitStats(element, state, { pulse: false });
+    });
   }
 
   async function animateGlobalEffectEvent(event) {
     const focus = showGlobalEffectStage(event);
     if (!focus) return;
     const roundExpiry = event.timing === 'roundEnd';
-    await wait(680);
+    await wait(roundExpiry ? 560 : event.beneficial ? 500 : 680);
     hideCombatStage();
     await wait(90);
     const states = event.targetStates || [];
+    if (roundExpiry) {
+      await animateRoundExpiry(states);
+      return;
+    }
+    if (event.beneficial) {
+      await animateBeneficialTargets(states);
+      return;
+    }
     for (let index = 0; index < states.length; index += 1) {
       const state = states[index];
       const target = boardElement(state.side, state.iid);
       if (!target) continue;
       const beforeState = event.beforeStates?.find(item => item.side === state.side && item.iid === state.iid) || null;
-      await animateMeteorToTarget(target, state, index, beforeState, roundExpiry);
+      await animateMeteorToTarget(target, state, index, beforeState);
       await wait(95);
     }
   }
 
   async function animateEffectEvent(event, focus = null) {
-    if (event.scope === 'all') return animateGlobalEffectEvent(event);
+    if (event.scope === 'all' || event.beneficial) return animateGlobalEffectEvent(event);
     const source = event.sourceType === 'leader' ? leaderElement(event.side) : boardElement(event.side, event.sourceId);
     const targetStates = event.targetStates?.length
       ? event.targetStates
@@ -1189,7 +1299,7 @@
     for (const event of effects) {
       const hasTargets = (event.targetStates?.length || event.targets?.length || 0) > 0;
       if (!hasTargets) continue;
-      if (event.scope === 'all') {
+      if (event.scope === 'all' || event.beneficial) {
         await animateGlobalEffectEvent(event);
         continue;
       }
@@ -1235,7 +1345,7 @@
       return focus;
     };
     const animateStepEffect = async effect => {
-      if (effect.scope === 'all') {
+      if (effect.scope === 'all' || effect.beneficial) {
         if (focus) {
           hideCombatStage();
           focus = null;
@@ -1389,7 +1499,7 @@
       const matchingDepartment = hasDepartmentSynergy && card.department
         ? ai.field.filter(unit => RULES.cardById[unit.cardId]?.department === card.department).length
         : 0;
-      const hasChairperson = ai.field.some(unit => ['기업 총수', '협동조합 대표'].includes(RULES.cardById[unit.cardId]?.position));
+      const hasChairperson = ai.field.some(unit => titlePositions.has(RULES.cardById[unit.cardId]?.position));
       const chairpersonSupport = card.effect?.type === 'support_chairperson' ? (hasChairperson ? 4 : -4) : 0;
       const abilityValue = card.attackEffect || card.defenseEffect ? 1.5 : card.effect ? 1 : 0;
       return (RULES.canPlayCard(ai, card) ? 10 : -10)
@@ -1520,7 +1630,11 @@
       } else {
         const stats = {
           attack: Number(focusCard.dataset.inspectAttack),
+          attackBase: Number(focusCard.dataset.inspectAttackBase),
+          attackTemp: Number(focusCard.dataset.inspectAttackTemp),
           defense: Number(focusCard.dataset.inspectDefense),
+          defenseBase: Number(focusCard.dataset.inspectDefenseBase),
+          defenseTemp: Number(focusCard.dataset.inspectDefenseTemp),
           health: Number(focusCard.dataset.inspectHealth),
           maxHealth: Number(focusCard.dataset.inspectMaxHealth)
         };
@@ -1567,7 +1681,11 @@
     if (boardCard && match) {
       const stats = {
         attack: Number(boardCard.dataset.inspectAttack),
+        attackBase: Number(boardCard.dataset.inspectAttackBase),
+        attackTemp: Number(boardCard.dataset.inspectAttackTemp),
         defense: Number(boardCard.dataset.inspectDefense),
+        defenseBase: Number(boardCard.dataset.inspectDefenseBase),
+        defenseTemp: Number(boardCard.dataset.inspectDefenseTemp),
         health: Number(boardCard.dataset.inspectHealth),
         maxHealth: Number(boardCard.dataset.inspectMaxHealth)
       };
@@ -1603,6 +1721,8 @@
       } else if (action === 'remove') {
         const index = deckDraft.lastIndexOf(cardId);
         if (index >= 0) deckDraft.splice(index, 1);
+      } else if (action === 'clear') {
+        deckDraft = [];
       } else if (action === 'reset') {
         deckDraft = RULES.makeDeck(deckDraftFaction);
       } else if (action === 'save') {

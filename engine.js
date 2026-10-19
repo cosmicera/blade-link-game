@@ -9,10 +9,17 @@
   const DECK_SIZE = 30;
   const UNIT_DECK_SIZE = 20;
   const MAX_CARD_COPIES = 3;
+  const TITLE_POSITIONS = new Set(['기업 총수', '기업 대표', '협동조합 대표']);
   let instanceSeq = 1;
 
+  function isTitleUnit(card) {
+    return card?.type === 'unit' && TITLE_POSITIONS.has(card.position);
+  }
+
   function cardCopyLimit(card) {
-    return Number.isInteger(card.deckLimit) ? card.deckLimit : MAX_CARD_COPIES;
+    if (isTitleUnit(card)) return 1;
+    if (!Number.isInteger(card.deckLimit)) return MAX_CARD_COPIES;
+    return Math.max(0, Math.min(card.deckLimit, MAX_CARD_COPIES));
   }
 
   function shuffle(items) {
@@ -130,7 +137,7 @@
     if (['defense_self', 'buff_self', 'temp_buff_self', 'heal_self', 'quick_entry'].includes(type)) return unit ? [{ side, iid: unit.iid }] : [];
     if (['heal_all', 'buff_all', 'defense_all', 'overclock', 'temp_buff_all', 'defense_draw'].includes(type)) return player.field.map(item => ({ side, iid: item.iid }));
     if (type === 'damage_all') return enemy.field.map(item => ({ side: enemySide, iid: item.iid }));
-    if (['heal_wounded', 'repair', 'buff_weakest', 'buff_defense_weakest'].includes(type)) {
+    if (['heal_wounded', 'heal_focus', 'defense_weakest', 'repair', 'buff_weakest', 'buff_defense_weakest'].includes(type)) {
       const target = weakestUnit(player);
       return target ? [{ side, iid: target.iid }] : [];
     }
@@ -140,7 +147,7 @@
     }
     if (type === 'support_chairperson') {
       return player.field
-        .filter(item => ['기업 총수', '협동조합 대표'].includes(cardOf(item).position))
+        .filter(item => isTitleUnit(cardOf(item)))
         .map(item => ({ side, iid: item.iid }));
     }
     return [];
@@ -165,7 +172,7 @@
     const type = effectType(effect);
     if (type === 'department_synergy') return departmentSynergyActive(match, side, unit, effect);
     if (type === 'support_chairperson') {
-      return match.players[side].field.some(item => ['기업 총수', '협동조합 대표'].includes(cardOf(item).position));
+      return match.players[side].field.some(item => isTitleUnit(cardOf(item)));
     }
     return true;
   }
@@ -180,15 +187,30 @@
   function snapshotEffectTargets(captured = []) {
     return captured.map(({ side, iid, unit }) => {
       const card = cardOf(unit);
+      const attackBase = card.attack + unit.attackBonus;
+      const defenseBase = (card.defense || 0) + (unit.defenseBonus || 0);
       return {
         side,
         iid,
         cardId: unit.cardId,
-        attack: card.attack + unit.attackBonus + unit.tempAttack,
+        attack: attackBase + unit.tempAttack,
+        attackBase,
+        attackTemp: unit.tempAttack,
         defense: unitDefense(unit),
+        defenseBase,
+        defenseTemp: unit.tempDefense,
         health: Math.max(0, unitHealth(unit)),
         maxHealth: card.health + unit.healthBonus
       };
+    });
+  }
+
+  function effectImprovesTargets(beforeStates = [], targetStates = []) {
+    return targetStates.some(after => {
+      const before = beforeStates.find(item => item.side === after.side && item.iid === after.iid);
+      return before && ['attack', 'defense', 'health', 'maxHealth'].some(key =>
+        Number.isFinite(after[key]) && Number.isFinite(before[key]) && after[key] > before[key]
+      );
     });
   }
 
@@ -376,6 +398,10 @@
         target = weakestUnit(player);
         if (target) healUnit(target, effectAmount(effect, 2));
         break;
+      case 'defense_weakest':
+        target = weakestUnit(player);
+        if (target) target.tempDefense += amount;
+        break;
       case 'defense_self': if (unit) unit.tempDefense += effectAmount(effect, 1); break;
       case 'buff_self': if (unit) unit.attackBonus += amount; break;
       case 'temp_buff_self': if (unit) unit.tempAttack += amount; break;
@@ -399,7 +425,7 @@
         break;
       case 'support_chairperson':
         player.field
-          .filter(ally => ['기업 총수', '협동조합 대표'].includes(cardOf(ally).position))
+          .filter(ally => isTitleUnit(cardOf(ally)))
           .forEach(ally => {
             ally.tempAttack += Number(effect.attack) || 0;
             ally.tempDefense += Number(effect.defense) || 0;
@@ -433,12 +459,13 @@
     const enemy = match.players[enemySide];
     let target;
     switch (card.effect) {
-      case 'heal_all':
-        healLeader(player, 4);
-        player.field.forEach(unit => healUnit(unit, 1));
+      case 'heal_focus':
+        healLeader(player, 3);
+        target = weakestUnit(player);
+        if (target) healUnit(target, 1);
         break;
       case 'buff_all':
-        player.field.forEach(unit => { unit.attackBonus += 1; unit.healthBonus += 2; });
+        player.field.forEach(unit => { unit.attackBonus += 1; unit.healthBonus += 1; });
         break;
       case 'repair':
         target = weakestUnit(player);
@@ -453,7 +480,7 @@
         } else applyDamageToLeader(match, enemySide, 3, card.name);
         break;
       case 'defense_all':
-        player.field.forEach(unit => { unit.tempDefense += 2; });
+        player.field.forEach(unit => { unit.tempDefense += 1; });
         break;
       case 'damage_all':
         enemy.field.forEach(unit => addDamageToUnit(unit, 2));
@@ -472,6 +499,10 @@
       case 'draw_two':
         draw(match, side, 2);
         player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 2);
+        break;
+      case 'draw_reserve':
+        draw(match, side, 1);
+        player.sizeBonusNextRound = Math.min(2, player.sizeBonusNextRound + 1);
         break;
       case 'buff_weakest':
         target = weakestUnit(player);
@@ -524,16 +555,21 @@
     let targets = [];
     switch (player.leaderId) {
       case 'ria':
-        healLeader(player, 2);
-        player.field.forEach(unit => healUnit(unit, 1));
-        targets = player.field.map(unit => ({ side, iid: unit.iid }));
+        healLeader(player, 1);
+        {
+          const target = weakestUnit(player);
+          if (target) {
+            healUnit(target, 1);
+            targets = [{ side, iid: target.iid }];
+          }
+        }
         break;
       case 'arca':
         player.sizeLimit = Math.min(12, player.sizeLimit + 1);
         break;
       case 'cheongyeon':
         if (player.field.length) {
-          player.field.forEach(unit => { unit.tempDefense += 2; });
+          player.field.forEach(unit => { unit.tempDefense += 1; });
           targets = player.field.map(unit => ({ side, iid: unit.iid }));
         }
         else player.sizeLimit = Math.min(12, player.sizeLimit + 1);
@@ -551,12 +587,13 @@
     }
     player.skillUsed = true;
     log(match, data.leaders[player.leaderId].ability + ' 발동');
+    const targetStates = snapshotEffectTargets(captureEffectTargets(match, targets));
+    const beforeStates = beforeFieldStates.filter(state => targets.some(target => target.side === state.side && target.iid === state.iid));
     emitVisual(match, {
       type: 'effect', side, sourceType: 'leader', sourceId: player.leaderId, targets,
-      targetStates: snapshotEffectTargets(captureEffectTargets(match, targets)),
-      beforeStates: beforeFieldStates.filter(state => targets.some(target => target.side === state.side && target.iid === state.iid)),
+      targetStates, beforeStates, beneficial: effectImprovesTargets(beforeStates, targetStates),
       label: data.leaders[player.leaderId].ability, timing: 'leader',
-      scope: targets.length && ['ria', 'cheongyeon'].includes(player.leaderId) ? 'all' : 'single'
+      scope: targets.length && player.leaderId === 'cheongyeon' ? 'all' : 'single'
     });
     checkWinner(match);
   }
@@ -575,10 +612,12 @@
       const capturedTargets = captureEffectTargets(match, targets);
       const beforeStates = snapshotEffectTargets(capturedTargets);
       applyUnitEffect(match, side, unit, effect);
+      const targetStates = snapshotEffectTargets(capturedTargets);
       log(match, cardOf(unit).name + ' · 라운드 시작 능력');
       emitVisual(match, {
         type: 'effect', side, sourceType: 'unit', sourceId: unit.iid, targets,
-        targetStates: snapshotEffectTargets(capturedTargets), beforeStates, label: cardOf(unit).name, timing: 'turnStart', scope: effectScope(effect)
+        targetStates, beforeStates, beneficial: effectImprovesTargets(beforeStates, targetStates),
+        label: cardOf(unit).name, timing: 'turnStart', scope: effectScope(effect)
       });
       removeDefeated(match, side === 'player' ? 'opponent' : 'player');
       checkWinner(match);
@@ -752,10 +791,12 @@
     const capturedTargets = captureEffectTargets(match, targets);
     const beforeStates = snapshotEffectTargets(capturedTargets);
     applyUnitEffect(match, side, unit, effect);
+    const targetStates = snapshotEffectTargets(capturedTargets);
     log(match, card.name + (trigger === 'attack' ? ' · 공격전 능력' : ' · 방어전 능력'));
     emitVisual(match, {
       type: 'effect', side, sourceType: 'unit', sourceId: unit.iid, targets,
-      targetStates: snapshotEffectTargets(capturedTargets), beforeStates, label: card.name, timing: trigger, scope: effectScope(effect)
+      targetStates, beforeStates, beneficial: effectImprovesTargets(beforeStates, targetStates),
+      label: card.name, timing: trigger, scope: effectScope(effect)
     });
     removeDefeated(match, side === 'player' ? 'opponent' : 'player');
     removeDefeated(match, side);
@@ -789,10 +830,12 @@
       match.currentPlayer = actingSide;
       applySpell(match, actingSide, card);
       match.players[actingSide].discard.push(card.id);
+      const targetStates = snapshotEffectTargets(capturedTargets);
       log(match, card.name + ' 발동 · 검식 종료');
       emitVisual(match, {
         type: 'effect', side: actingSide, sourceType: 'spell', sourceId: spell.iid, targets,
-        targetStates: snapshotEffectTargets(capturedTargets), beforeStates, label: card.name, timing: 'spell', scope: effectScope(card.effect)
+        targetStates, beforeStates, beneficial: effectImprovesTargets(beforeStates, targetStates),
+        label: card.name, timing: 'spell', scope: effectScope(card.effect)
       });
       const visuals = takeVisualEvents(match);
       const returnedIds = new Set(visuals.filter(item => ['return', 'discard'].includes(item.type)).map(item => item.sourceId));

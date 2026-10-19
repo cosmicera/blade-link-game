@@ -39,16 +39,17 @@ assert.equal(match.players.player.field[1].tempAttack, 0);
 assert.equal(match.players.player.field[0].tempDefense, 0);
 
 // Danica's named card ability fires only when another Safety Management ally is present.
-match = matchWith('selfas', [unit('ara', 'u1'), unit('rion', 'u2')]);
-assert.equal(match.players.player.field[0].tempDefense, 1);
-assert.equal(match.players.player.field[1].tempDefense, 1);
-match = matchWith('selfas', [unit('ara', 'u1')]);
+match = matchWith('selfas', [unit('ara', 'u1'), unit('veil', 'u2')]);
+assert.equal(match.players.player.field[0].tempAttack, 1);
+assert.equal(match.players.player.field[1].tempAttack, 1);
 assert.equal(match.players.player.field[0].tempDefense, 0);
+match = matchWith('selfas', [unit('ara', 'u1')]);
+assert.equal(match.players.player.field[0].tempAttack, 0);
 
-// Ru-an's healing is also card-owned and requires a separate R&D ally.
+// Ru-an's healing requires a separate R&D ally; Haewon's public-outreach tag does not qualify.
 match = matchWith('nanguk', [unit('boram', 'u1'), unit('eunju', 'u2', 2)]);
-assert.equal(match.players.player.field[1].damage, 0);
-match = matchWith('nanguk', [unit('boram', 'u1'), unit('soun', 'u2', 2)]);
 assert.equal(match.players.player.field[1].damage, 2);
+match = matchWith('nanguk', [unit('boram', 'u1'), unit('soun', 'u2', 2)]);
+assert.equal(match.players.player.field[1].damage, 0);
 
 console.log('PASS: department tags have no automatic bonus; four named card effects carry explicit ally conditions.');
