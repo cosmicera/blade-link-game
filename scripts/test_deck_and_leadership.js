@@ -29,6 +29,10 @@ assert.equal(rules.cardById.lea.deckLimit, 1);
 assert.equal(rules.cardById.seolha.position, '기업 총수');
 assert.equal(rules.cardById.seolha.department, null);
 assert.equal(rules.cardById.seolha.deckLimit, 1);
+assert.equal(rules.cardById.matilda.position, '기업 총수');
+assert.equal(rules.cardById.matilda.deckLimit, 1);
+assert.deepEqual([rules.cardById.matilda.cost, rules.cardById.matilda.attack, rules.cardById.matilda.defense, rules.cardById.matilda.health], [5, 5, 2, 6]);
+assert.equal(rules.cardById.matilda.attackEffect.amount, 1);
 assert.equal(rules.limits.copies, 3, 'ordinary cards should have a three-copy deck limit');
 assert.ok(data.cards.every(card => card.name.length <= 9), 'display names should stay concise on small card frames');
 assert.ok(Object.values(data.leaders).every(leader => leader.name.length <= 9), 'leader names should also fit small card frames');
@@ -72,6 +76,7 @@ function deckWithTooManyCopies(factionId, cardId, invalidCount) {
 }
 assert.equal(rules.validateDeck(deckWithTooManyCopies('outpr', 'serin', 4), 'outpr').ok, false, 'ordinary cards should reject a fourth copy');
 assert.equal(rules.validateDeck(deckWithTooManyCopies('nanguk', 'seolha', 2), 'nanguk').ok, false, 'title followers should reject a second copy');
+assert.equal(rules.validateDeck(deckWithTooManyCopies('selfas', 'matilda', 2), 'selfas').ok, false, 'Matilda should be limited to one copy');
 const enterpriseRepresentative = { ...rules.cardById.nia, id: 'test-enterprise-representative', name: 'Test enterprise representative', position: '기업 대표' };
 const ordinaryHighLimit = { ...rules.cardById.nia, id: 'test-high-copy-limit', name: 'Test ordinary follower', position: undefined, deckLimit: 9 };
 data.cards.push(enterpriseRepresentative);

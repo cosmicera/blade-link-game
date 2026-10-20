@@ -1,6 +1,6 @@
 {
   "project": "블레이드 링크",
-  "generatedAt": "2026-10-15",
+  "generatedAt": "2026-10-20",
   "leaders": [
     {
       "card": "ria",
@@ -70,9 +70,11 @@
     {
       "card": "veil",
       "image": "cards/veil.png",
-      "seed": "6356542998253242",
-      "selection": "추종자 최신 통합본의 첫 번째 FaceDetailer 결과",
-      "source": "Veil_01_seed_6356542998253242_00001_.png"
+      "seed": "6340882444433260",
+      "selection": "사용자 최종 선택 · 2026-10-20 후보 3",
+      "source": "veil-candidates-20261020/face_detailer/Veil_03_seed_6340882444433260.png",
+      "detailerSeed": "8072365169874529",
+      "selectedAt": "2026-10-20"
     },
     {
       "card": "vector",
@@ -143,6 +145,15 @@
       "seed": "7997616779099543",
       "selection": "추종자 최신 통합본의 세 번째 FaceDetailer 결과",
       "source": "Ferrum_03_seed_7997616779099543_00001_.png"
+    },
+    {
+      "card": "matilda",
+      "image": "cards/matilda.png",
+      "seed": "9530126552056036",
+      "selection": "사용자 최종 선택 · 2026-10-20 후보 4",
+      "source": "character-concepts/matilda-kroeger/matilda_skirt_long_hair_candidates_v14_20261020/Matilda_04_skirt_hair_00001_.png",
+      "detailerSeed": "7562417950086905",
+      "selectedAt": "2026-10-20"
     }
   ]
 }
