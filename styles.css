@@ -336,7 +336,7 @@ body[data-faction="unbek"] { --faction-color: #c3a477; }
 .codex-detail-back { align-content: center; justify-items: center; gap: 8px; padding: clamp(18px, 5vw, 38px); text-align: center; transform: rotateY(180deg); }
 .codex-back-role { color: #aaa69e; font-size: 10px; line-height: 1.5; }
 .codex-back-person { color: #d3c9b6; font-size: 11px; letter-spacing: .025em; }
-.codex-back-effect { max-width: 390px; margin: 4px 0 0; color: #eee7d9; font: 500 clamp(13px, 2vw, 16px)/1.75 'Noto Sans KR',sans-serif; }
+.codex-back-effect { max-width: 390px; margin: 4px 0 0; color: #eee7d9; font: 500 clamp(10.5px, var(--codex-effect-size, 16px), 16px)/1.6 'Noto Sans KR',sans-serif; overflow-wrap: anywhere; }
 .codex-back-label { margin-top: 2px; color: var(--faction-color); font-size: 9px; }
 .codex-back-ornament { display: grid; width: 68px; height: 68px; margin-bottom: 25px; place-items: center; border: 1px solid color-mix(in srgb, var(--faction-color) 58%, transparent); border-radius: 50%; color: var(--faction-color); font-size: 29px; box-shadow: inset 0 0 24px color-mix(in srgb, var(--faction-color) 13%, transparent), 0 0 24px color-mix(in srgb, var(--faction-color) 10%, transparent); }
 .codex-detail-back blockquote { max-width: 380px; margin: 0; color: #c9c2b5; font: 400 clamp(11px, 1.8vw, 13px)/1.65 'Noto Sans KR',sans-serif; }
@@ -1145,7 +1145,7 @@ html { overflow-y: scroll; scrollbar-gutter: stable; }
 /* Readable collection rows at every viewport size. */
 .codex-entry .codex-copy small { font-size: 11px; }
 .codex-entry .codex-copy strong { font-size: 15px; white-space: normal; }
-.codex-entry .codex-copy p { font-size: 12px; }
+.codex-entry .codex-copy p { display: -webkit-box; overflow: hidden; font-size: clamp(9.5px, var(--codex-effect-size, 12px), 12px); line-height: 1.5; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 .codex-entry .codex-copy em { font-size: 12px; }
 
 /* Four persistent company columns, with horizontal scrolling on narrow screens. */

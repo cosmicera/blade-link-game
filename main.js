@@ -31,6 +31,10 @@
   const titlePositions = new Set(['기업 총수', '기업 대표', '협동조합 대표']);
   const isTitleFollower = card => card?.type === 'unit' && titlePositions.has(card.position);
   const cardOrganization = card => isTitleFollower(card) ? card.position : (card?.department || card?.position || '');
+  const fittedTextSize = (text, max, min, softLimit, shrinkPerCharacter) => {
+    const length = Array.from(String(text ?? '')).length;
+    return Math.max(min, max - Math.max(0, length - softLimit) * shrinkPerCharacter).toFixed(1);
+  };
   const factionBadge = faction => faction?.badge || faction?.short || '';
   const isHumanTurn = () => match && match.phase === 'deploy' && !match.gameOver && !aiThinking;
   const factionColor = factionId => DATA.factions[factionId]?.color || '#b8b2c0';
@@ -94,6 +98,7 @@
       ? `<span>사이즈 ${card.cost}</span><span>공격 ${card.attack}</span><span>방어 ${card.defense || 0}</span><span>체력 ${card.health}</span>${isTitleFollower(card) || card.deckLimit === 1 ? '<span>덱당 1장</span>' : ''}`
       : card.type === 'spell' ? `<span>사이즈 ${card.cost}</span><span>검식 카드</span>` : '<span>라이프 30</span><span>대표 능력</span>';
     const effectText = card.text || card.abilityText || '';
+    const effectSize = fittedTextSize(effectText, 16, 10.5, 42, 0.09);
     return `<div class="codex-detail-overlay" data-codex-detail-overlay>
       <button class="codex-detail-dismiss" data-codex-detail-dismiss aria-label="카드 상세 닫기">×</button>
       <section class="codex-detail-dialog" role="dialog" aria-modal="true" aria-label="${cardTitle} 카드 상세">
@@ -106,7 +111,7 @@
               <span class="codex-back-faction-mark" role="img" aria-label="${escapeHTML(faction.name)} 로고">${escapeHTML(faction.logo || '◇')}</span>
               <small>${escapeHTML(faction.name)} · ${escapeHTML(category)}</small><h3>${cardTitle}</h3>
               <div class="codex-back-role">${escapeHTML(role)}</div>${fullName ? `<small class="codex-back-person">${fullName}</small>` : ''}<div class="codex-detail-stats">${stats}</div>
-              <p class="codex-back-effect">${escapeHTML(effectText)}</p><div class="codex-back-rule"></div>
+              <p class="codex-back-effect" style="--codex-effect-size:${effectSize}px">${escapeHTML(effectText)}</p><div class="codex-back-rule"></div>
               <small class="codex-back-label">${escapeHTML(back.label)}</small><blockquote>${escapeHTML(back.text)}</blockquote>
             </article>
           </div>
@@ -663,11 +668,15 @@
     const allCards = collectionCards();
     const typeOrder = { leader: 0, unit: 1, spell: 2 };
     const cards = allCards.filter(card => filter === 'all' || card.faction === filter)
-      .sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
-    const entry = card => `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
+      .sort((a, b) => typeOrder[a.type] - typeOrder[b.type] || Number(isTitleFollower(b)) - Number(isTitleFollower(a)));
+    const entry = card => {
+      const effectText = card.text || card.abilityText || '';
+      const effectSize = fittedTextSize(effectText, 12, 9.5, 38, 0.055);
+      return `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
         <div class="codex-art">${card.type === 'spell' ? `<span>${escapeHTML(card.symbol || '◇')}</span>` : `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">`}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
-        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${cardOrganization(card) ? ` · ${cardOrganization(card)}` : ''}` : '검식')}</small><strong>${escapeHTML(card.name)}</strong><p>${escapeHTML(card.text || card.abilityText || '')}</p><em>${card.type === 'unit' ? `공 ${card.attack}　방 ${card.defense || 0}　체 ${card.health}` : card.type === 'leader' ? '라이프 30' : '전투 중 발동'}</em></div>
+        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${cardOrganization(card) ? ` · ${cardOrganization(card)}` : ''}` : '검식')}</small><strong>${escapeHTML(card.name)}</strong><p style="--codex-effect-size:${effectSize}px">${escapeHTML(effectText)}</p><em>${card.type === 'unit' ? `공 ${card.attack}　방 ${card.defense || 0}　체 ${card.health}` : card.type === 'leader' ? '라이프 30' : '전투 중 발동'}</em></div>
       </button>`;
+    };
     const columns = factionKeys.filter(id => filter === 'all' || id === filter);
     return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name}</button>`).join('')}</div>
       <div class="codex-company-columns">${columns.map(id => `<section class="codex-company-column" style="--faction-color:${factionColor(id)}"><h3>${escapeHTML(DATA.factions[id].logo)} ${escapeHTML(DATA.factions[id].name)}</h3><div class="codex-company-cards">${cards.filter(card => card.faction === id).map(entry).join('')}</div></section>`).join('')}</div>`;

@@ -19,6 +19,9 @@ for (const factionId of Object.keys(data.factions)) {
     const limit = rules.cardById[id].deckLimit;
     if (limit) assert.ok(counts.get(id) <= limit, `${id} exceeds its deck copy limit`);
   });
+  data.cards
+    .filter(card => card.faction === factionId && ['기업 총수', '기업 대표', '협동조합 대표'].includes(card.position))
+    .forEach(card => assert.equal(counts.get(card.id), 1, `${card.id} should appear once in the default deck`));
 }
 
 assert.equal(rules.limits.deck, 30);

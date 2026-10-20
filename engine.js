@@ -32,7 +32,9 @@
   }
 
   function makeDeck(factionId) {
-    const units = data.cards.filter(card => card.type === 'unit' && card.faction === factionId);
+    const units = data.cards
+      .filter(card => card.type === 'unit' && card.faction === factionId)
+      .sort((a, b) => Number(isTitleUnit(b)) - Number(isTitleUnit(a)));
     const spells = data.cards.filter(card => card.type === 'spell' && card.faction === factionId);
     const deck = [];
     const addBalancedCopies = (cards, slots) => {
