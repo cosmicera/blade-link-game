@@ -170,6 +170,11 @@
     try {
       const saved = JSON.parse(localStorage.getItem(deckStorageKey(factionId)) || 'null');
       if (RULES.validateDeck(saved, factionId).ok) {
+        const refreshedStarter = RULES.migrateLegacyStarterDeck(factionId, saved);
+        if (refreshedStarter) {
+          saveConfiguredDeck(factionId, refreshedStarter);
+          return [...refreshedStarter];
+        }
         deckCache[factionId] = [...saved];
         return [...saved];
       }

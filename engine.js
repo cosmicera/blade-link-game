@@ -67,6 +67,40 @@
       .map(card => ({ card, copies: cardCopyLimit(card) }));
   }
 
+  function balancedCardIds(cards, slots) {
+    const counts = new Map(cards.map(({ card }) => [card.id, 0]));
+    let remaining = slots;
+    while (remaining > 0) {
+      let added = 0;
+      cards.forEach(({ card, copies }) => {
+        if (remaining <= 0 || counts.get(card.id) >= copies) return;
+        counts.set(card.id, counts.get(card.id) + 1);
+        remaining -= 1;
+        added += 1;
+      });
+      if (!added) return [];
+    }
+    return cards.flatMap(({ card }) => Array.from({ length: counts.get(card.id) }, () => card.id));
+  }
+
+  function sameDeckComposition(first, second) {
+    const counts = deck => deck.reduce((result, id) => result.set(id, (result.get(id) || 0) + 1), new Map());
+    const firstCounts = counts(first);
+    const secondCounts = counts(second);
+    return firstCounts.size === secondCounts.size && [...firstCounts].every(([id, count]) => secondCounts.get(id) === count);
+  }
+
+  function migrateLegacyStarterDeck(factionId, deck) {
+    if (factionId !== 'selfas' || !validateDeck(deck, factionId).ok || deck.includes('matilda')) return null;
+    const previousPool = makeCollection(factionId).filter(({ card }) => card.id !== 'matilda');
+    const previousDefault = [
+      ...balancedCardIds(previousPool.filter(({ card }) => card.type === 'unit'), UNIT_DECK_SIZE),
+      ...balancedCardIds(previousPool.filter(({ card }) => card.type === 'spell'), DECK_SIZE - UNIT_DECK_SIZE)
+    ];
+    if (previousDefault.length !== DECK_SIZE || !sameDeckComposition(deck, previousDefault)) return null;
+    return makeDeck(factionId);
+  }
+
   function validateDeck(deck, factionId) {
     const fail = error => ({ ok: false, error, units: 0, spells: 0, total: Array.isArray(deck) ? deck.length : 0 });
     if (!Array.isArray(deck)) return fail('덱 데이터가 없습니다.');
@@ -985,6 +1019,7 @@
     limits: { hand: MAX_HAND_SIZE, field: MAX_FIELD_SIZE, playsPerTurn: MAX_ROUND_PLAYS, size: BASE_SIZE_LIMIT, handResetsPerMatch: HAND_RESETS_PER_MATCH, deck: DECK_SIZE, deckUnits: UNIT_DECK_SIZE, deckSpells: DECK_SIZE - UNIT_DECK_SIZE, copies: MAX_CARD_COPIES },
     makeDeck,
     makeCollection,
+    migrateLegacyStarterDeck,
     validateDeck,
     createMatch,
     startFirstRound,

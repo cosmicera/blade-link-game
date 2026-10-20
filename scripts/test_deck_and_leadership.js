@@ -36,6 +36,20 @@ assert.equal(rules.cardById.matilda.position, '기업 총수');
 assert.equal(rules.cardById.matilda.deckLimit, 1);
 assert.deepEqual([rules.cardById.matilda.cost, rules.cardById.matilda.attack, rules.cardById.matilda.defense, rules.cardById.matilda.health], [5, 5, 2, 6]);
 assert.equal(rules.cardById.matilda.attackEffect.amount, 1);
+const previousSelfasStarter = [
+  ...Array(3).fill('vector'), ...Array(3).fill('nia'), ...Array(3).fill('sion'), ...Array(3).fill('minju'),
+  ...Array(2).fill('chaerin'), ...Array(2).fill('ara'), ...Array(2).fill('rion'), ...Array(2).fill('somin'),
+  ...Array(3).fill('selfas_repair'), ...Array(3).fill('selfas_orbit'),
+  ...Array(2).fill('selfas_overclock'), ...Array(2).fill('selfas_reserve')
+];
+assert.equal(rules.validateDeck(previousSelfasStarter, 'selfas').ok, true, 'the previous Selphas starter deck should still be a valid saved deck');
+const upgradedSelfasStarter = rules.migrateLegacyStarterDeck('selfas', previousSelfasStarter);
+assert.equal(upgradedSelfasStarter.filter(id => id === 'matilda').length, 1, 'the previous starter deck should gain one Matilda');
+assert.equal(rules.validateDeck(upgradedSelfasStarter, 'selfas').ok, true, 'the migrated starter deck should remain valid');
+const customizedSelfasDeck = [...previousSelfasStarter];
+customizedSelfasDeck[customizedSelfasDeck.indexOf('vector')] = 'somin';
+assert.equal(rules.validateDeck(customizedSelfasDeck, 'selfas').ok, true, 'the customized legacy deck should remain a valid deck');
+assert.equal(rules.migrateLegacyStarterDeck('selfas', customizedSelfasDeck), null, 'custom decks should not be overwritten by the starter migration');
 assert.equal(rules.limits.copies, 3, 'ordinary cards should have a three-copy deck limit');
 assert.ok(data.cards.every(card => card.name.length <= 9), 'display names should stay concise on small card frames');
 assert.ok(Object.values(data.leaders).every(leader => leader.name.length <= 9), 'leader names should also fit small card frames');
