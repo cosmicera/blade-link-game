@@ -1,6 +1,6 @@
 (function (root) {
   const data = root.GAME_DATA;
-  const cardById = Object.fromEntries(data.cards.map(card => [card.id, card]));
+  const cardById = Object.fromEntries([...data.cards, ...(data.pveCards || [])].map(card => [card.id, card]));
   const MAX_HAND_SIZE = 5;
   const MAX_FIELD_SIZE = 5;
   const MAX_ROUND_PLAYS = 5;
@@ -123,13 +123,14 @@
     return { ok: true, error: '', units, spells, total: deck.length };
   }
 
-  function makePlayer(id, factionId, deckOverride = null) {
+  function makePlayer(id, factionId, deckOverride = null, overrides = {}) {
     return {
       id,
       factionId,
-      leaderId: data.factions[factionId].leader,
-      hp: 30,
-      maxHp: 30,
+      leaderId: overrides.leaderId || data.factions[factionId].leader,
+      hp: overrides.health || 30,
+      maxHp: overrides.maxHealth || 30,
+      bossPhaseUsed: false,
       sizeLimit: BASE_SIZE_LIMIT,
       sizeUsedThisTurn: 0,
       sizeBonusNextRound: 0,
@@ -389,6 +390,21 @@
     const player = match.players[side];
     player.hp -= amount;
     log(match, source + ' · ' + amount + ' 라이프 피해');
+    const leader = data.leaders[player.leaderId];
+    const ability = leader?.pveAbility;
+    if (player.hp > 0 && !player.bossPhaseUsed && ability?.trigger === 'boss_hp_at_most' && player.hp <= ability.threshold) {
+      player.bossPhaseUsed = true;
+      const targets = player.field.map(unit => ({ side, iid: unit.iid }));
+      const captured = captureEffectTargets(match, targets);
+      const beforeStates = snapshotEffectTargets(captured);
+      if (ability.effect === 'team_temp_attack') player.field.forEach(unit => { unit.tempAttack += ability.amount || 1; });
+      const targetStates = snapshotEffectTargets(captured);
+      log(match, leader.name + ' · 심부 공명 단계');
+      emitVisual(match, {
+        type: 'effect', side, sourceType: 'leader', sourceId: player.leaderId, targets,
+        beforeStates, targetStates, beneficial: true, label: '심부 공명 단계', timing: 'leader', scope: 'all'
+      });
+    }
     checkWinner(match);
   }
 
@@ -593,6 +609,67 @@
 
   function runLeaderAbility(match, side) {
     const player = match.players[side];
+    const leader = data.leaders[player.leaderId];
+    const pveAbility = leader?.pveAbility;
+    if (pveAbility && pveAbility.trigger !== 'round_start') return;
+    if (pveAbility?.trigger === 'round_start' && !player.skillUsed) {
+      const enemySide = side === 'player' ? 'opponent' : 'player';
+      const enemy = match.players[enemySide];
+      let targets = [];
+      if (pveAbility.effect === 'defense_weakest_ally') {
+        const target = weakestUnit(player);
+        if (target) targets = [{ side, iid: target.iid }];
+      } else if (pveAbility.effect === 'damage_weakest_enemy' || pveAbility.effect === 'weaken_weakest_enemy_attack') {
+        const target = weakestUnit(enemy);
+        if (target) targets = [{ side: enemySide, iid: target.iid }];
+      } else if (pveAbility.effect === 'buff_weakest_ally_temp_attack') {
+        const target = weakestUnit(player);
+        if (target) targets = [{ side, iid: target.iid }];
+      } else if (['team_temp_attack', 'team_temp_defense'].includes(pveAbility.effect)) {
+        targets = player.field.map(unit => ({ side, iid: unit.iid }));
+      }
+      const captured = captureEffectTargets(match, targets);
+      const beforeStates = snapshotEffectTargets(captured);
+      const amount = pveAbility.amount || 1;
+      switch (pveAbility.effect) {
+        case 'defense_weakest_ally': {
+          const target = weakestUnit(player);
+          if (target) target.tempDefense += amount;
+          break;
+        }
+        case 'damage_weakest_enemy': {
+          const target = weakestUnit(enemy);
+          if (target) {
+            addDamageToUnit(target, amount);
+            removeDefeated(match, enemySide);
+          } else applyDamageToLeader(match, enemySide, amount, leader.name);
+          break;
+        }
+        case 'team_temp_attack': player.field.forEach(unit => { unit.tempAttack += amount; }); break;
+        case 'team_temp_defense': player.field.forEach(unit => { unit.tempDefense += amount; }); break;
+        case 'weaken_weakest_enemy_attack': {
+          const target = weakestUnit(enemy);
+          if (target) target.tempAttack -= amount;
+          break;
+        }
+        case 'buff_weakest_ally_temp_attack': {
+          const target = weakestUnit(player);
+          if (target) target.tempAttack += amount;
+          break;
+        }
+      }
+      player.skillUsed = true;
+      log(match, leader.ability + ' 발동');
+      emitVisual(match, {
+        type: 'effect', side, sourceType: 'leader', sourceId: player.leaderId, targets,
+        beforeStates, targetStates: snapshotEffectTargets(captured),
+        beneficial: !['weaken_weakest_enemy_attack', 'damage_weakest_enemy'].includes(pveAbility.effect),
+        label: leader.ability, timing: 'leader',
+        scope: ['team_temp_attack', 'team_temp_defense'].includes(pveAbility.effect) ? 'all' : 'single'
+      });
+      checkWinner(match);
+      return;
+    }
     const beforeFieldStates = snapshotEffectTargets(captureEffectTargets(match, player.field.map(unit => ({ side, iid: unit.iid }))));
     let targets = [];
     switch (player.leaderId) {
@@ -740,7 +817,11 @@
     const match = {
       players: {
         player: makePlayer('player', playerFactionId, options.playerDeck || null),
-        opponent: makePlayer('opponent', opponentFactionId)
+        opponent: makePlayer('opponent', opponentFactionId, options.opponentDeck || null, {
+          leaderId: options.opponentLeaderId,
+          health: options.opponentHealth,
+          maxHealth: options.opponentMaxHealth
+        })
       },
       currentPlayer: 'player',
       initiativeSide: 'player',
@@ -942,7 +1023,10 @@
           targetLeaderMaxLife = enemy.maxHp;
           log(match, attackerCard.name + ' 직접 공격 · 사이즈 ' + attackerCard.cost);
         } else {
-          defender = randomItem(defenders);
+          const attackerLeader = data.leaders[match.players[actingSide].leaderId];
+          defender = attackerLeader?.pveAbility?.effect === 'target_lowest_defense'
+            ? [...defenders].sort((a, b) => unitDefense(a) - unitDefense(b))[0]
+            : randomItem(defenders);
           targetId = defender.iid;
           damage = combatDamage(attackerCard.attack + attacker.attackBonus + attacker.tempAttack, defender);
           addDamageToUnit(defender, damage);

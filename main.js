@@ -5,6 +5,7 @@
   const $ = selector => document.querySelector(selector);
   const homeScreen = $('#home-screen');
   const battleScreen = $('#battle-screen');
+  const campaignScreen = $('#campaign-screen');
   const modalRoot = $('#modal-root');
   const toast = $('#toast');
   let selectedFaction = 'outpr';
@@ -26,7 +27,7 @@
   let deckBuilderFilter = 'all';
   const DEPLOYMENT_LIMIT_MS = 30_000;
 
-  const factionKeys = Object.keys(DATA.factions);
+  const factionKeys = Object.keys(DATA.factions).filter(id => id !== 'cave');
   const leaderOf = factionId => DATA.leaders[DATA.factions[factionId].leader];
   const titlePositions = new Set(['기업 총수', '기업 대표', '협동조합 대표']);
   const isTitleFollower = card => card?.type === 'unit' && titlePositions.has(card.position);
@@ -41,7 +42,8 @@
   const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
   const collectionCards = () => [
     ...Object.values(DATA.leaders).map(leader => ({ ...leader, type: 'leader', role: '대표 캐릭터', cost: 0, text: leader.abilityText, symbol: '✦' })),
-    ...DATA.cards
+    ...DATA.cards,
+    ...(DATA.pveCards || [])
   ];
 
   function codexBackCopy(card) {
@@ -51,6 +53,7 @@
       const firstSentence = card.story.trim().split(/(?<=[.!?。])\s+/u)[0];
       return { label: '장면 기록', text: firstSentence || card.story };
     }
+    if (card.faction === 'cave' && card.visualConcept) return { label: '생태 기록', text: card.visualConcept };
 
     const rawEffect = card.effect?.type || card.effect || card.attackEffect?.type || card.defenseEffect?.type || '';
     const effect = rawEffect === 'department_synergy' ? card.effect?.effect?.type : rawEffect;
@@ -93,10 +96,13 @@
       : `<div class="codex-detail-symbol" style="--faction-color:${factionColor(card.faction)}"><span>${escapeHTML(faction.logo || '◇')}</span><small>${escapeHTML(faction.name)} · 검식</small></div>`;
     const category = card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? (cardOrganization(card) || '추종자') : '검식';
     const role = card.type === 'unit' ? card.role : card.type === 'leader' ? card.epithet : '검식 카드';
+    const habitat = card.faction === 'cave' && card.habitat
+      ? `<div class="codex-back-habitat"><b>서식지</b><span>${escapeHTML(card.habitat)}</span></div>`
+      : '';
     const fullName = card.person && card.person !== card.name ? escapeHTML(card.person) : '';
     const stats = card.type === 'unit'
       ? `<span>사이즈 ${card.cost}</span><span>공격 ${card.attack}</span><span>방어 ${card.defense || 0}</span><span>체력 ${card.health}</span>${isTitleFollower(card) || card.deckLimit === 1 ? '<span>덱당 1장</span>' : ''}`
-      : card.type === 'spell' ? `<span>사이즈 ${card.cost}</span><span>검식 카드</span>` : '<span>라이프 30</span><span>대표 능력</span>';
+      : card.type === 'spell' ? `<span>사이즈 ${card.cost}</span><span>검식 카드</span>` : `<span>라이프 ${card.health || 30}</span><span>대표 능력</span>`;
     const effectText = card.text || card.abilityText || '';
     const effectSize = fittedTextSize(effectText, 16, 10.5, 42, 0.09);
     return `<div class="codex-detail-overlay" data-codex-detail-overlay>
@@ -110,7 +116,7 @@
             <article class="codex-detail-face codex-detail-back" style="--faction-color:${factionColor(card.faction)}">
               <span class="codex-back-faction-mark" role="img" aria-label="${escapeHTML(faction.name)} 로고">${escapeHTML(faction.logo || '◇')}</span>
               <small>${escapeHTML(faction.name)} · ${escapeHTML(category)}</small><h3>${cardTitle}</h3>
-              <div class="codex-back-role">${escapeHTML(role)}</div>${fullName ? `<small class="codex-back-person">${fullName}</small>` : ''}<div class="codex-detail-stats">${stats}</div>
+              <div class="codex-back-role">${escapeHTML(role)}</div>${fullName ? `<small class="codex-back-person">${fullName}</small>` : ''}${habitat}<div class="codex-detail-stats">${stats}</div>
               <p class="codex-back-effect" style="--codex-effect-size:${effectSize}px">${escapeHTML(effectText)}</p><div class="codex-back-rule"></div>
               <small class="codex-back-label">${escapeHTML(back.label)}</small><blockquote>${escapeHTML(back.text)}</blockquote>
             </article>
@@ -316,15 +322,114 @@
     aiThinking = false;
     handResetAnimating = false;
     battleScreen.classList.add('hidden');
+    campaignScreen.classList.add('hidden');
     homeScreen.classList.remove('hidden');
+    activeCampaignFloor = null;
+    $('#nav-campaign').classList.remove('active');
     $('#nav-lobby').classList.add('active');
     updateHome();
   }
 
+  let activeCampaignFloor = null;
+  let selectedCampaignFloor = 1;
+
+  function showCampaign() {
+    stopDeploymentTimer();
+    hideCombatStage();
+    hideResult();
+    match = null;
+    selectedHandId = null;
+    inspectedBoardCard = null;
+    inspectedLeaderSide = null;
+    aiThinking = false;
+    activeCampaignFloor = null;
+    battleScreen.classList.add('hidden');
+    homeScreen.classList.add('hidden');
+    campaignScreen.classList.remove('hidden');
+    $('#nav-lobby').classList.remove('active');
+    $('#nav-campaign').classList.add('active');
+    renderCampaignScreen();
+  }
+
+  function renderCampaignScreen() {
+    const campaign = window.PVE_CAMPAIGN;
+    const floor = campaign.progression.find(item => item.floor === selectedCampaignFloor) || campaign.progression[0];
+    const boss = DATA.leaders[floor.bossId];
+    const deck = campaign.decks.find(item => item.id === floor.deckId);
+    $('#campaign-floor-list').innerHTML = campaign.progression.map(item => {
+      const leader = DATA.leaders[item.bossId];
+      return `<button type="button" class="campaign-floor ${item.floor === selectedCampaignFloor ? 'selected' : ''}" data-floor-select="${item.floor}" style="--floor-color:${item.floor === 10 ? '#ddb67d' : '#9ccab7'}">
+        <span class="campaign-floor-number">${String(item.floor).padStart(2, '0')}</span><span class="campaign-floor-art"><img src="${escapeHTML(leader.image)}" alt="" loading="lazy"></span>
+        <span class="campaign-floor-copy"><small>${escapeHTML(item.difficultyLabel)} · 보스 라이프 ${item.bossHealth}</small><strong>${escapeHTML(item.name)}</strong><em>${escapeHTML(leader.name)}</em></span><b class="campaign-floor-arrow">↗</b>
+      </button>`;
+    }).join('');
+    $('#campaign-floor-art').src = boss.image;
+    $('#campaign-floor-art').alt = boss.name;
+    $('#campaign-floor-kicker').textContent = `FLOOR ${String(floor.floor).padStart(2, '0')} · ${floor.difficultyLabel}`;
+    $('#campaign-floor-title').textContent = `${floor.name} · ${boss.name}`;
+    $('#campaign-floor-environment').textContent = floor.environment;
+    $('#campaign-floor-story').textContent = floor.scenario;
+    $('#campaign-floor-ability').textContent = boss.abilityText;
+    $('#campaign-deck-summary').textContent = `적 덱 ${deck.deckSize}장 · 추종자 ${deck.unitCount} · 효과 ${deck.spellCount} · 보스 라이프 ${floor.bossHealth}`;
+    $('#campaign-start-floor').textContent = `${floor.floor}층 탐사 시작`;
+  }
+
+  async function startCampaignFloor(floorNumber = selectedCampaignFloor) {
+    stopDeploymentTimer();
+    hideCombatStage();
+    hideResult();
+    const campaign = window.PVE_CAMPAIGN;
+    const floor = campaign.progression.find(item => item.floor === Number(floorNumber));
+    if (!floor) return notify('선택한 탐사 층을 찾을 수 없습니다.');
+    const playerDeck = loadConfiguredDeck(selectedFaction);
+    const validation = RULES.validateDeck(playerDeck, selectedFaction);
+    if (!validation.ok) return notify('플레이어 덱을 먼저 30장으로 편성해 주세요.');
+    const enemyDeck = campaign.decks.find(item => item.id === floor.deckId);
+    const opponentDeck = Object.entries(enemyDeck.counts).flatMap(([id, count]) => Array(count).fill(id));
+    const boss = DATA.leaders[floor.bossId];
+    if (opponentDeck.length !== 30 || !boss) return notify('해당 층의 카드 데이터가 올바르지 않습니다.');
+    selectedCampaignFloor = floor.floor;
+    activeCampaignFloor = floor.floor;
+    match = RULES.createMatch(selectedFaction, 'cave', {
+      deferStart: true, playerDeck, opponentDeck,
+      opponentLeaderId: boss.id, opponentHealth: floor.bossHealth, opponentMaxHealth: floor.bossHealth
+    });
+    selectedHandId = null;
+    inspectedBoardCard = null;
+    inspectedLeaderSide = null;
+    aiThinking = true;
+    handResetAnimating = false;
+    campaignScreen.classList.add('hidden');
+    showBattle();
+    renderBattle();
+    showVersusIntro();
+    await wait(1050);
+    hideCombatStage();
+    const coinFace = Math.random() < 0.5 ? 'front' : 'back';
+    const initiativeSide = coinFace === 'front' ? 'player' : 'opponent';
+    await showInitiativeCoinFlip(coinFace);
+    hideCombatStage();
+    RULES.startFirstRound(match, initiativeSide);
+    const openingVisuals = RULES.takeVisualEvents(match);
+    aiThinking = openingVisuals.some(event => event.type === 'draw' && event.side === 'player');
+    renderBattle();
+    if (aiThinking) {
+      $('#player-hand').classList.add('opening-deal');
+      playVisualEvents(openingVisuals).catch(() => {}).finally(() => {
+        $('#player-hand').classList.remove('opening-deal');
+        aiThinking = false;
+        renderBattle();
+        startDeploymentTimer();
+      });
+    } else startDeploymentTimer();
+  }
+
   function showBattle() {
     homeScreen.classList.add('hidden');
+    campaignScreen.classList.add('hidden');
     battleScreen.classList.remove('hidden');
     $('#nav-lobby').classList.remove('active');
+    $('#nav-campaign').classList.toggle('active', Boolean(activeCampaignFloor));
   }
 
   function showVersusIntro() {
@@ -337,7 +442,7 @@
     const title = document.createElement('strong');
     title.textContent = '대전 시작';
     const subtitle = document.createElement('small');
-    subtitle.textContent = '대표 캐릭터 대면';
+    subtitle.textContent = activeCampaignFloor ? '개척 탐사대 · 토착 생물 대표' : '대표 캐릭터 대면';
     heading.append(title, subtitle);
 
     const pair = document.createElement('div');
@@ -420,6 +525,7 @@
     stopDeploymentTimer();
     hideCombatStage();
     hideResult();
+    activeCampaignFloor = null;
     const opponents = factionKeys.filter(id => id !== selectedFaction);
     const opponentFaction = opponents[Math.floor(Math.random() * opponents.length)];
     const playerDeck = loadConfiguredDeck(selectedFaction);
@@ -471,7 +577,7 @@
     const defense = unit ? RULES.unitDefense(unit) : (card.defense || 0);
     const classes = ['game-card', spell ? 'spell-card' : 'unit-card', selected ? 'selected' : '', disabled ? 'disabled' : '', compact ? 'compact-card' : '', unit && !unit.ready ? 'exhausted' : ''].filter(Boolean).join(' ');
     const art = spell
-      ? `<div class="spell-art" style="--faction-color:${faction.color};--faction-accent:${faction.accent}"><span class="spell-glyph">${card.symbol}</span><i></i><b>${badge}</b></div>`
+      ? `<div class="spell-art ${card.image ? 'spell-art-illustrated' : ''}" style="--faction-color:${faction.color};--faction-accent:${faction.accent}">${card.image ? `<img src="${card.image}" alt="${card.name}" loading="lazy">` : `<span class="spell-glyph">${card.symbol}</span>`}<i></i><b>${badge}</b></div>`
       : `<div class="card-art"><img src="${card.image}" alt="${card.name}" loading="lazy"><span class="art-shade"></span><span class="art-faction">${badge}</span></div>`;
     return `<button class="${classes}" ${handId ? `data-hand-id="${handId}"` : ''} ${unit ? `data-unit-id="${unit.iid}"` : ''} style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 코스트 ${card.cost}${card.type === 'unit' ? `, 공격 ${attack}, 방어 ${defense}, 체력 ${health}` : ''}">
       <span class="card-cost">${card.cost}</span>
@@ -490,7 +596,7 @@
     if (item.kind === 'spell') {
       const classes = ['unit-slot', 'occupied-slot', 'spell-slot', 'unit-ready', owner === 'opponent' ? 'enemy-unit' : ''].join(' ');
       return `<div class="${classes}" data-board-card data-side="${owner}" data-kind="spell" data-card-id="${item.iid}" data-card-template="${card.id}" role="button" tabindex="0" style="--faction-color:${faction.color};--faction-accent:${faction.accent}" aria-label="${card.name}, 검식, 코스트 ${card.cost}, 전투 중 발동">
-        <div class="spell-slot-art"><span>${card.symbol}</span><b>${badge}</b></div>
+        <div class="spell-slot-art">${card.image ? `<img src="${card.image}" alt="" loading="lazy">` : `<span>${card.symbol}</span>`}<b>${badge}</b></div>
         <div class="unit-nameplate"><strong>${card.name}</strong><small>검식 · 전투에서 발동</small></div>
         <div class="spell-slot-cost">◇ ${card.cost} 사이즈</div>
       </div>`;
@@ -534,9 +640,10 @@
     const faction = DATA.factions[p.factionId];
     const enemy = side === 'opponent';
     const healthPct = Math.max(0, Math.min(100, (p.hp / p.maxHp) * 100));
+    const campaignLabel = enemy && activeCampaignFloor ? `FLOOR ${String(activeCampaignFloor).padStart(2, '0')} GUARDIAN` : enemy ? 'LEAGUE CHALLENGER' : 'YOUR REPRESENTATIVE';
     return `<div class="leader-banner ${enemy ? 'rival-leader' : 'your-leader'} inspectable-leader" data-leader-side="${side}" role="button" tabindex="0" aria-label="${leader.name} 대표 캐릭터 정보" style="--faction-color:${faction.color};--faction-accent:${faction.accent}">
       <div class="leader-avatar"><img src="${leader.image}" alt="${leader.name}" loading="lazy"><span class="avatar-ring"></span></div>
-      <div class="leader-name-block"><small>${enemy ? 'LEAGUE CHALLENGER' : 'YOUR REPRESENTATIVE'} <i>·</i> ${factionBadge(faction)}</small><strong>${leader.name}</strong><em>${leader.epithet}</em></div>
+      <div class="leader-name-block"><small>${campaignLabel} <i>·</i> ${factionBadge(faction)}</small><strong>${leader.name}</strong><em>${leader.epithet}</em></div>
       <div class="leader-health"><div class="health-label"><span>대표 라이프</span><b>${Math.max(0, p.hp)} <i>/ ${p.maxHp}</i></b></div><div class="health-track"><span style="width:${healthPct}%"></span></div></div>
       ${enemy ? `<div class="leader-piles"><span data-hand-pile="opponent">손패 <b>${p.hand.length}</b></span><span>덱 <b>${p.deck.length}</b></span><span class="opponent-discard-pile" data-discard-pile="opponent">버림 <b>${p.discard.length}</b></span></div>` : `<div class="leader-piles"><span>덱 <b>${p.deck.length}</b></span><span class="player-discard-count">버림 <b>${p.discard.length}</b></span></div>`}
     </div>`;
@@ -564,7 +671,7 @@
       const card = RULES.cardById[item?.cardId || inspectedBoardCard.cardId];
       if (card) {
         if (inspectedBoardCard.kind === 'spell') {
-          return `<div class="inspect-card-image inspect-spell-image"><span>${card.symbol}</span></div>
+          return `<div class="inspect-card-image inspect-spell-image">${card.image ? `<img src="${card.image}" alt="${card.name}">` : `<span>${card.symbol}</span>`}</div>
             <div class="inspect-title"><small>${DATA.factions[card.faction].name} · 검식</small><strong>${card.name}</strong></div>
             <p class="inspect-description">${card.text}</p>
             <div class="inspect-stats"><span>유형 <b>검식</b></span><span>발동 <b>추종자보다 먼저</b></span></div>
@@ -599,7 +706,7 @@
   function inspectorCardMarkup(card) {
     const faction = DATA.factions[card.faction];
     const organization = cardOrganization(card);
-    return `<div class="inspect-card-image ${card.type === 'spell' ? 'inspect-spell-image' : ''}">${card.type === 'unit' ? `<img src="${card.image}" alt="${card.name}">` : `<span>${card.symbol}</span>`}</div>
+    return `<div class="inspect-card-image ${card.type === 'spell' ? 'inspect-spell-image' : ''}">${card.image ? `<img src="${card.image}" alt="${card.name}">` : `<span>${card.symbol}</span>`}</div>
       <div class="inspect-title"><small>${faction.name} · ${card.type === 'unit' ? `추종자${organization ? ` · ${organization}` : ''}` : '검식'}</small><strong>${card.name}</strong></div>
       <p class="inspect-description">${card.text}</p>
       <div class="inspect-stats">${card.type === 'unit' ? `<span>공격 <b>${card.attack}</b></span><span>방어 <b>${card.defense || 0}</b></span><span>체력 <b>${card.health}</b></span>` : `<span>유형 <b>검식 배치</b></span>`}</div>
@@ -617,6 +724,9 @@
     const myTurn = isHumanTurn();
     updateDeploymentClock();
     $('.table-area').style.setProperty('--faction-color', DATA.factions[player.factionId].color);
+    $('#battle-mode-label').textContent = activeCampaignFloor ? `STARUNDER DEEP EXPEDITION · FLOOR ${String(activeCampaignFloor).padStart(2, '0')}` : 'FIELD TRIAL SIMULATION';
+    $('#battle-mode-title').textContent = activeCampaignFloor ? `심층 탐사 · ${window.PVE_CAMPAIGN.progression[activeCampaignFloor - 1].name}` : '스타룬데르 개척 리그';
+    $('#leave-match').innerHTML = activeCampaignFloor ? '탐사 층 선택 <span>↗</span>' : '로비로 나가기 <span>↗</span>';
     const priorityName = match.initiativeSide === 'player' ? '내 선공' : '상대 선공';
     const phaseName = match.phase === 'intro' ? '대전 준비' : match.phase === 'deploy' ? '배치' : match.phase === 'resolving' ? '전투' : match.phase === 'roundEnd' ? '종료' : '종료';
     $('#round-label').textContent = match.phase === 'intro' ? '대전 준비 · VS' : `라운드 ${match.round} · ${priorityName} · ${phaseName}`;
@@ -665,26 +775,43 @@
     const result = $('#game-result');
     const won = match.gameOver.winnerId === 'player';
     const draw = match.gameOver.winnerId === 'draw';
-    result.innerHTML = `<div class="result-card ${draw ? 'draw' : won ? 'victory' : 'defeat'}"><span class="result-emblem">${draw ? '◇' : won ? '✦' : '◇'}</span><small>TRAINING MATCH COMPLETE</small><h2>${draw ? '무승부' : won ? '승리' : '패배'}</h2><p>${match.gameOver.reason}</p><div class="result-actions"><button class="button button-primary" data-result="replay">다시 대전 <b>↻</b></button><button class="button button-quiet" data-result="home">로비로</button></div></div>`;
+    const isCampaign = Boolean(activeCampaignFloor);
+    const nextFloor = isCampaign && won && activeCampaignFloor < 10;
+    const actions = isCampaign
+      ? `${nextFloor ? `<button class="button button-primary" data-result="next-floor">다음 층 도전 <b>↗</b></button>` : ''}<button class="button ${nextFloor ? 'button-quiet' : 'button-primary'}" data-result="replay">${won ? '이 층 다시 도전' : '다시 도전'} <b>↻</b></button><button class="button button-quiet" data-result="campaign">탐사 층 선택</button>`
+      : `<button class="button button-primary" data-result="replay">다시 대전 <b>↻</b></button><button class="button button-quiet" data-result="home">로비로</button>`;
+    result.innerHTML = `<div class="result-card ${draw ? 'draw' : won ? 'victory' : 'defeat'}"><span class="result-emblem">${draw ? '◇' : won ? '✦' : '◇'}</span><small>${isCampaign ? `STARUNDER DEEP EXPEDITION · FLOOR ${String(activeCampaignFloor).padStart(2, '0')}` : 'TRAINING MATCH COMPLETE'}</small><h2>${draw ? '무승부' : won ? '승리' : '패배'}</h2><p>${match.gameOver.reason}${isCampaign ? ' · 다음 층은 플레이어 라이프 30으로 새로 시작합니다.' : ''}</p><div class="result-actions">${actions}</div></div>`;
     result.classList.remove('hidden');
   }
 
   function renderCardCollection(filter = 'all') {
     const allCards = collectionCards();
     const typeOrder = { leader: 0, unit: 1, spell: 2 };
-    const cards = allCards.filter(card => filter === 'all' || card.faction === filter)
+    const monsters = allCards.filter(card => card.faction === 'cave');
+    const pveCreatures = monsters.filter(card => card.type !== 'spell');
+    const pveEffects = monsters.filter(card => card.type === 'spell');
+    const cards = allCards.filter(card => filter === 'all' || card.faction === filter || (filter === 'monsters' && card.faction === 'cave') || (filter === 'pve-effects' && card.faction === 'cave' && card.type === 'spell'))
       .sort((a, b) => typeOrder[a.type] - typeOrder[b.type] || Number(isTitleFollower(b)) - Number(isTitleFollower(a)));
     const entry = card => {
       const effectText = card.text || card.abilityText || '';
       const effectSize = fittedTextSize(effectText, 12, 9.5, 38, 0.055);
+      const faction = DATA.factions[card.faction];
+      const kind = card.faction === 'cave' ? (card.type === 'leader' ? `${card.floor}층 대표 캐릭터` : card.type === 'unit' ? '몬스터 추종자' : '몬스터 효과') : (card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${cardOrganization(card) ? ` · ${cardOrganization(card)}` : ''}` : '검식');
+      const art = card.image ? `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">` : `<span>${escapeHTML(card.symbol || '◇')}</span>`;
       return `<button class="codex-entry" type="button" data-codex-card="${escapeHTML(card.id)}" aria-label="${escapeHTML(card.name)} 카드 상세 보기" style="--faction-color:${factionColor(card.faction)}">
-        <div class="codex-art">${card.type === 'spell' ? `<span>${escapeHTML(card.symbol || '◇')}</span>` : `<img src="${escapeHTML(card.image)}" alt="${escapeHTML(card.name)}" loading="lazy">`}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
-        <div class="codex-copy"><small>${escapeHTML(DATA.factions[card.faction].name)} · ${escapeHTML(card.type === 'leader' ? '대표 캐릭터' : card.type === 'unit' ? `추종자${cardOrganization(card) ? ` · ${cardOrganization(card)}` : ''}` : '검식')}</small><strong>${escapeHTML(card.name)}</strong><p style="--codex-effect-size:${effectSize}px">${escapeHTML(effectText)}</p><em>${card.type === 'unit' ? `공 ${card.attack}　방 ${card.defense || 0}　체 ${card.health}` : card.type === 'leader' ? '라이프 30' : '전투 중 발동'}</em></div>
+        <div class="codex-art">${art}<b>${card.type === 'leader' ? '대표' : String(card.cost).padStart(2, '0')}</b></div>
+        <div class="codex-copy"><small>${escapeHTML(faction.name)} · ${escapeHTML(kind)}</small><strong>${escapeHTML(card.name)}</strong><p style="--codex-effect-size:${effectSize}px">${escapeHTML(effectText)}</p><em>${card.type === 'unit' ? `공 ${card.attack}　방 ${card.defense || 0}　체 ${card.health}` : card.type === 'leader' ? `라이프 ${card.health || 30}` : '전투 중 발동'}</em></div>
       </button>`;
     };
     const columns = factionKeys.filter(id => filter === 'all' || id === filter);
-    return `<div class="codex-filter-row"><button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name}</button>`).join('')}</div>
-      <div class="codex-company-columns">${columns.map(id => `<section class="codex-company-column" style="--faction-color:${factionColor(id)}"><h3>${escapeHTML(DATA.factions[id].logo)} ${escapeHTML(DATA.factions[id].name)}</h3><div class="codex-company-cards">${cards.filter(card => card.faction === id).map(entry).join('')}</div></section>`).join('')}</div>`;
+    const filters = `<button class="codex-filter ${filter === 'all' ? 'active' : ''}" data-codex-filter="all">전체 <b>${allCards.length}</b></button>${factionKeys.map(id => `<button class="codex-filter ${filter === id ? 'active' : ''}" data-codex-filter="${id}">${DATA.factions[id].name}</button>`).join('')}<button class="codex-filter ${filter === 'monsters' ? 'active' : ''}" data-codex-filter="monsters">몬스터 <b>${monsters.length}</b></button><button class="codex-filter ${filter === 'pve-effects' ? 'active' : ''}" data-codex-filter="pve-effects">탐사 효과 <b>${pveEffects.length}</b></button>`;
+    const companyMarkup = `<div class="codex-company-columns">${columns.map(id => `<section class="codex-company-column" style="--faction-color:${factionColor(id)}"><h3>${escapeHTML(DATA.factions[id].logo)} ${escapeHTML(DATA.factions[id].name)}</h3><div class="codex-company-cards">${cards.filter(card => card.faction === id).map(entry).join('')}</div></section>`).join('')}</div>`;
+    const pveMarkup = filter === 'monsters'
+      ? `<section class="codex-pve-section"><h3>층 대표 캐릭터 <span>${cards.filter(card => card.type === 'leader').length}</span></h3><div class="codex-pve-grid">${cards.filter(card => card.type === 'leader').map(entry).join('')}</div></section><section class="codex-pve-section"><h3>몬스터 추종자 <span>${cards.filter(card => card.type === 'unit').length}</span></h3><div class="codex-pve-grid">${cards.filter(card => card.type === 'unit').map(entry).join('')}</div></section><section class="codex-pve-section"><h3>몬스터 효과 <span>${cards.filter(card => card.type === 'spell').length}</span></h3><div class="codex-pve-grid">${cards.filter(card => card.type === 'spell').map(entry).join('')}</div></section>`
+      : filter === 'pve-effects' ? `<section class="codex-pve-section"><h3>탐사 효과 카드 <span>${pveEffects.length}</span></h3><div class="codex-pve-grid">${cards.map(entry).join('')}</div></section>`
+      : filter === 'all' ? `<section class="codex-pve-section"><h3>심층 탐사 생물 <span>${pveCreatures.length}</span></h3><div class="codex-pve-grid">${pveCreatures.map(entry).join('')}</div></section><section class="codex-pve-section"><h3>탐사 효과 <span>${pveEffects.length}</span></h3><div class="codex-pve-grid">${pveEffects.map(entry).join('')}</div></section>`
+      : '';
+    return `<div class="codex-filter-row">${filters}</div>${filter === 'monsters' || filter === 'pve-effects' ? pveMarkup : companyMarkup + pveMarkup}`;
   }
 
   function openModal(kind, filter = 'all') {
@@ -694,12 +821,13 @@
       modalRoot.innerHTML = `<div class="modal-backdrop" data-close-modal><section class="modal-panel codex-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><div><small>COLLECTION / 01</small><h2 id="modal-title">카드 도감 <i>${collectionCards().length}</i></h2></div><button class="modal-close" data-close-modal aria-label="닫기">×</button></header><div id="codex-body">${renderCardCollection(filter)}</div></section></div>`;
     } else {
       modalRoot.innerHTML = `<div class="modal-backdrop" data-close-modal><section class="modal-panel rules-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><div><small>PLAYTEST RULES / 01</small><h2 id="modal-title">시범 규칙 <i>초안</i></h2></div><button class="modal-close" data-close-modal aria-label="닫기">×</button></header><div class="rules-content">
-        <p class="rules-lead">소드걸스의 캐릭터·추종자·검식 카드 흐름과 전장 중심 화면 구성을 참고한 1인 훈련전입니다. 아래 수치는 세계관의 최종 규칙이 아니라 첫 플레이 테스트용 기본값입니다.</p>
+        <p class="rules-lead">소드걸스의 캐릭터·추종자·검식 카드 흐름과 전장 중심 화면 구성을 참고한 연습전 및 10층 탐사 캠페인입니다. 아래 수치는 세계관의 최종 규칙이 아니라 첫 플레이 테스트용 기본값입니다.</p>
         <div class="rules-step"><b>01</b><div><strong>대전 준비</strong><p>대표 캐릭터 1명과 같은 기업의 30장 덱으로 시작합니다. 로비의 덱 편성에서 보유 카드풀을 열어 추종자 20장과 검식 10장을 직접 선택합니다. 일반 카드는 덱당 최대 3장, 기업 총수·기업 대표·협동조합 대표 추종자는 1장만 넣을 수 있습니다. 덱 편성에서 현재 목록을 비운 뒤 보유 카드풀에서 새 구성을 만들 수도 있습니다. 시작 손패는 5장, 대표 캐릭터의 라이프는 30입니다.</p></div></div>
         <div class="rules-step"><b>02</b><div><strong>손패와 사이즈</strong><p>라운드 시작에 손패를 5장까지 채우고 코인 토스로 선공을 정합니다. 각 플레이어는 대전마다 손패 리셋권 2회를 받으며, 배치 단계에 현재 손패를 덱에 섞고 같은 장수만큼 다시 뽑을 수 있습니다. 추종자와 검식은 모두 최대 5칸의 전장에 배치하며, 전체 사이즈 한도는 기본 10입니다. 전장에 남은 추종자의 사이즈는 다음 라운드에도 계속 점유하고, 검식도 이번 라운드 배치 사이즈를 사용합니다. 배치 단계에는 내 카드를 더블클릭해 손패로 회수할 수 있습니다. 배치 시간은 30초이며 시간이 끝나면 전투가 자동으로 시작됩니다.</p></div></div>
         <div class="rules-step"><b>03</b><div><strong>검식과 전투</strong><p>양측이 손패를 보충하고 배치를 마치면 대표 능력과 추종자의 라운드 시작 능력이 차례로 발동합니다. 전투를 시작하면 양쪽 검식이 추종자보다 먼저 발동하고 버림 더미로 이동합니다. 그 뒤 양측 추종자가 번갈아 무작위 순서로 공격하며, 대상도 무작위로 정합니다. 대상 추종자는 살아남으면 방어전 능력을 발동하고 반격합니다. 방어력은 받는 전투 피해를 줄입니다(최소 1). 모든 추종자는 배치한 라운드의 전투에 참여합니다.</p></div></div>
         <div class="rules-step"><b>04</b><div><strong>기업 특성과 카드 연계 능력</strong><p>아웃프라웨어는 회복과 생장, 셀파스는 정비와 가속, 남극성은 방어와 반격, 언벡은 회수와 우회에 강합니다. 부서명은 인물의 소속을 나타내는 태그이며, 같은 부서 카드가 모였다고 자동 보너스가 생기지는 않습니다. 일부 카드에만 ‘연계 능력’이 적혀 있고, 해당 카드가 전장에 있을 때 같은 부서 동료가 함께 있으면 그 카드의 능력이 발동합니다. 대표 지원 효과를 가진 추종자는 총수·기업 대표·협동조합 대표 추종자가 전장에 있을 때 해당 카드를 직접 지원합니다. 능력의 조건과 효과는 카드 설명을 확인하세요.</p></div></div>
         <div class="rules-step"><b>05</b><div><strong>비용과 승리</strong><p>사이즈 4 추종자는 높은 공방체와 광역·반복 능력을 갖지만, 파괴될 때 대표 라이프도 4 감소합니다. 사이즈가 낮은 추종자는 빠른 전개와 부서 조합에 유리합니다. 추종자가 파괴되면 소유자의 라이프가 그 카드의 사이즈만큼 감소하고, 상대 전장에 추종자가 없으면 공격 추종자가 사이즈만큼 상대 대표에게 직접 피해를 줍니다. 대표 라이프가 0이 되거나 덱이 비면 패배합니다. 버림 더미는 이야기 속 사망을 뜻하지 않습니다.</p></div></div>
+        <div class="rules-step"><b>06</b><div><strong>심층 탐사 캠페인</strong><p>총 10개 층에서 각 층을 독립 전투로 선택해 도전합니다. 매 전투에서 플레이어 라이프는 30으로 새로 시작하고, 보스 라이프는 1~4층 20, 5~9층 25, 10층 30입니다. 층 사이에 라이프·손패·필드·버림 더미를 이월하지 않습니다. 전투 결과와 상관없이 원하는 층을 바로 선택할 수 있으며, 탐사대의 서사만 1층부터 10층까지 이어집니다. 카드 도감의 ‘몬스터’ 탭에서 층 대표 캐릭터·몬스터 추종자·탐사 효과를 함께 확인하고, 카드 뒷면에서 서식지 정보를 볼 수 있습니다.</p></div></div>
         <div class="rules-foot"><span>기본값</span> 직접 편성 30장(추종자 20 · 검식 10) · 카드당 최대 3장 · 대표 추종자 1장 · 손패 5장 · 리셋권 2회 · 라이프 30 · 전장 5칸 · 사이즈 한도 10 · 라운드당 최대 5장 배치</div>
       </div></section></div>`;
     }
@@ -1646,11 +1774,23 @@
   $('#start-match').addEventListener('click', startMatch);
   $('#open-deck').addEventListener('click', openDeckBuilder);
   $('#nav-deckbuilder').addEventListener('click', openDeckBuilder);
+  $('#nav-campaign').addEventListener('click', showCampaign);
+  $('#open-campaign').addEventListener('click', showCampaign);
+  $('#campaign-build-deck').addEventListener('click', openDeckBuilder);
   $('#nav-codex').addEventListener('click', () => openModal('codex'));
   $('#nav-rules').addEventListener('click', () => openModal('rules'));
   $('#nav-home').addEventListener('click', showHome);
   $('#nav-lobby').addEventListener('click', showHome);
-  $('#leave-match').addEventListener('click', showHome);
+  $('#leave-match').addEventListener('click', () => activeCampaignFloor ? showCampaign() : showHome());
+  $('#campaign-screen').addEventListener('click', event => {
+    const floorButton = event.target.closest('[data-floor-select]');
+    if (floorButton) {
+      selectedCampaignFloor = Number(floorButton.dataset.floorSelect);
+      renderCampaignScreen();
+      return;
+    }
+    if (event.target.closest('#campaign-start-floor')) void startCampaignFloor(selectedCampaignFloor);
+  });
   $('#play-card').addEventListener('click', useSelectedCard);
   $('#reset-hand').addEventListener('click', useHandReset);
   $('#end-turn').addEventListener('click', beginClassicBattle);
@@ -1663,8 +1803,10 @@
 
   battleScreen.addEventListener('click', event => {
     const resultAction = event.target.closest('[data-result]')?.dataset.result;
-    if (resultAction === 'replay') { startMatch(); return; }
+    if (resultAction === 'replay') { activeCampaignFloor ? void startCampaignFloor(activeCampaignFloor) : void startMatch(); return; }
     if (resultAction === 'home') { showHome(); return; }
+    if (resultAction === 'campaign') { showCampaign(); return; }
+    if (resultAction === 'next-floor') { void startCampaignFloor(activeCampaignFloor + 1); return; }
     const focusCard = event.target.closest('[data-inspect-side], [data-inspect-leader-side]');
     if (focusCard) {
       if (focusCard.dataset.inspectLeaderSide) {

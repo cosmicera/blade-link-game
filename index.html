@@ -17,6 +17,7 @@
     </button>
     <nav class="main-nav" aria-label="주 메뉴">
       <button class="nav-link active" id="nav-lobby">리그 로비</button>
+      <button class="nav-link" id="nav-campaign">PvE 탐사</button>
       <button class="nav-link" id="nav-codex">카드 도감 <span class="nav-count">57</span></button>
       <button class="nav-link" id="nav-rules">시범 규칙</button>
       <button class="nav-link" id="nav-deckbuilder">덱 편성</button>
@@ -35,6 +36,7 @@
         <div class="home-actions">
           <button class="button button-primary" id="start-match"><span>훈련 대전 시작</span><b>↗</b></button>
           <button class="button button-quiet" id="open-deck">덱 편성 <span>→</span></button>
+          <button class="button button-quiet" id="open-campaign">심층 탐사 <span>→</span></button>
         </div>
         <div class="prototype-note"><span>i</span> 현재 규칙과 카드 수치는 플레이 테스트용 초안입니다.</div>
       </div>
@@ -53,9 +55,28 @@
     <footer class="home-footer"><span>BLADE LINK <i>©</i> PLAYTEST BUILD</span><span>캐릭터 일러스트와 세계관 설정을 사용한 개인 프로토타입</span></footer>
   </main>
 
+  <main id="campaign-screen" class="screen campaign-screen hidden">
+    <div class="campaign-kicker"><span class="kicker-line"></span> STARUNDER · DEEP EXPEDITION <i>·</i> SEASON 01</div>
+    <section class="campaign-hero">
+      <div class="campaign-intro">
+        <p class="eyebrow">공명 신호 아래 잠들어 있던 생태권</p>
+        <h1>심층 탐사<br><em>10개 층의 기록</em></h1>
+        <p>테라포밍 굴착 중 드러난 지하 생태계를 조사합니다. 토착 생물은 침략자가 아니라 서식지를 지키는 존재입니다. 전투의 목표는 공명 신호를 진정시키고 안전한 통로를 확보하는 것입니다.</p>
+        <div class="campaign-rule-note"><b>독립 대전</b><span>층을 시작할 때마다 내 라이프 30 · 손패·전장·덱을 새로 시작합니다. 스토리만 다음 층으로 이어집니다.</span></div>
+      </div>
+      <div class="campaign-feature-art"><img id="campaign-floor-art" src="pve-cave-test-v1/images/01_석갑굴왕_v2.png" alt="층 대표 생물"><span id="campaign-floor-kicker">FLOOR 01 · 입문</span></div>
+    </section>
+    <section class="campaign-current-panel">
+      <div><small id="campaign-floor-environment">환경</small><h2 id="campaign-floor-title">층을 선택하세요</h2><p id="campaign-floor-story"></p><div class="campaign-boss-ability"><b>대표 능력</b><span id="campaign-floor-ability"></span></div></div>
+      <div class="campaign-start-panel"><span id="campaign-deck-summary"></span><button class="button button-primary" id="campaign-start-floor">탐사 시작 <b>↗</b></button><button class="button button-quiet" id="campaign-build-deck">내 덱 편성 <span>→</span></button></div>
+    </section>
+    <section class="campaign-floor-section"><div class="section-heading"><div><p class="eyebrow">EXPEDITION ROUTE</p><h2>탐사 층 선택</h2></div><span class="section-aside">10개 층은 모두 독립적으로 도전할 수 있습니다.</span></div><div id="campaign-floor-list" class="campaign-floor-list"></div></section>
+    <footer class="home-footer"><span>STARUNDER DEEP EXPEDITION <i>©</i> PLAYTEST BUILD</span><span>각 층 전투는 플레이어 라이프 30으로 새로 시작</span></footer>
+  </main>
+
   <main id="battle-screen" class="screen battle-screen hidden">
     <div class="battle-topline">
-      <div class="match-title"><span class="league-mark">✦</span><span><small>FIELD TRIAL SIMULATION</small><strong>스타룬데르 개척 리그</strong></span></div>
+      <div class="match-title"><span class="league-mark">✦</span><span><small id="battle-mode-label">FIELD TRIAL SIMULATION</small><strong id="battle-mode-title">스타룬데르 개척 리그</strong></span></div>
       <div class="round-chip"><span class="round-dot"></span><span id="round-label">라운드 1 · 배치</span><span class="round-separator">/</span><span>클래식</span></div>
       <button class="text-button" id="leave-match">로비로 나가기 <span>↗</span></button>
     </div>
@@ -110,6 +131,7 @@
 
   <script src="data.js"></script>
   <script src="follower-expansion.js"></script>
+  <script src="pve-campaign-data.js"></script>
   <script src="engine.js"></script>
   <script src="main.js"></script>
 </body>
